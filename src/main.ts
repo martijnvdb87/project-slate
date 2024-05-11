@@ -1,11 +1,13 @@
-import "@/lib";
+import { loadComponents } from "@/lib";
 import "@/lib/css/reset.css";
-import "@/css/style.css";
+import "@/src/css/style.css";
 
-import { html } from "./lib/util/syntax";
+import { html } from "@/lib/util/syntax";
+
+loadComponents();
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = html`
-    Design System
+    <p>Design System</p>
 
-    <ds-button>Button</ds-button>
+    <p><ds-button>Button</ds-button></p>
 `;

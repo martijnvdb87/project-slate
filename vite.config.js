@@ -1,20 +1,30 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
     build: {
         lib: {
-            entry: resolve(__dirname, "./src/lib"),
-            formats: ["es"],
+            entry: resolve(__dirname, "lib/index.ts"),
+            name: "ProjectSlate",
+            fileName: "index",
+        },
+        minify: {
+            keep_classnames: true,
         },
     },
-    plugins: [cssInjectedByJsPlugin()],
+    plugins: [
+        cssInjectedByJsPlugin(),
+        dts({
+            rollupTypes: true,
+        }),
+    ],
     resolve: {
         alias: [
             {
                 find: "@",
-                replacement: resolve(__dirname, "./src"),
+                replacement: resolve(__dirname, "./"),
             },
         ],
     },
