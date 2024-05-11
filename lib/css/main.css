@@ -1,0 +1,15 @@
+:host {
+    --font-family: var(--ds-font-family, Inter, sans-serif);
+
+    --font-weight-thin: var(--ds-font-weight-thin, 100);
+    --font-weight-extralight: var(--ds-font-weight-extralight, 200);
+    --font-weight-light: var(--ds-font-weight-light, 300);
+    --font-weight-regular: var(--ds-font-weight-regular, 400);
+    --font-weight-medium: var(--ds-font-weight-medium, 500);
+    --font-weight-semibold: var(--ds-font-weight-semibold, 600);
+    --font-weight-bold: var(--ds-font-weight-bold, 700);
+    --font-weight-extrabold: var(--ds-font-weight-extrabold, 800);
+    --font-weight-black: var(--ds-font-weight-black, 900);
+
+    --size-px: var(--ds--size-px, 1px);
+}

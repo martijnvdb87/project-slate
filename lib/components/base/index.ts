@@ -14,7 +14,7 @@ export default abstract class BaseElement extends HTMLElement {
         template.innerHTML = this.template();
 
         const style = document.createElement("style");
-        style.textContent = this.styles();
+        style.innerHTML = this.styles();
 
         const mainStyle = document.createElement("style");
         mainStyle.innerHTML = `${main}`;
