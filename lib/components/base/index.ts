@@ -14,7 +14,13 @@ export default abstract class BaseElement extends HTMLElement {
         template.innerHTML = this.template();
 
         const style = document.createElement("style");
-        style.innerHTML = this.styles();
+        style.innerHTML = (() => {
+            const styleRules = this.styles();
+
+            return Array.isArray(styleRules)
+                ? styleRules.join("\n")
+                : styleRules;
+        })();
 
         const mainStyle = document.createElement("style");
         mainStyle.innerHTML = `${main}`;
@@ -26,5 +32,5 @@ export default abstract class BaseElement extends HTMLElement {
     }
 
     protected abstract template(): string;
-    protected abstract styles(): string;
+    protected abstract styles(): string | string[];
 }
