@@ -1,2 +1,1 @@
-import "@/lib/css/fonts.css";
-export { loadComponents } from "@/lib/components";
+import "@/lib/components/button";

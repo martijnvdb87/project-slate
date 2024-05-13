@@ -1,6 +1,5 @@
-import { defineConfig } from "vite";
 import { resolve } from "path";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
@@ -10,16 +9,8 @@ export default defineConfig({
             name: "ProjectSlate",
             fileName: "index",
         },
-        minify: {
-            keep_classnames: true,
-        },
     },
-    plugins: [
-        cssInjectedByJsPlugin(),
-        dts({
-            rollupTypes: true,
-        }),
-    ],
+    plugins: [dts({})],
     resolve: {
         alias: [
             {
@@ -27,9 +18,5 @@ export default defineConfig({
                 replacement: resolve(__dirname, "./"),
             },
         ],
-    },
-    server: {
-        host: "127.0.0.1",
-        port: 3000,
     },
 });
