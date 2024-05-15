@@ -1,31 +1,17 @@
 :host {
-    --border-radius: 0.25rem;
-
     --default-color: var(--gray-150);
     --default-color-hover: var(--gray-200);
     --default-color-active: var(--gray-250);
-    --default-accent: var(--gray-900);
-    --default-accent-hover: var(--gray-900);
-    --default-accent-active: var(--gray-900);
+    --default-accent: var(--gray-750);
+    --default-accent-hover: var(--gray-750);
+    --default-accent-active: var(--gray-750);
 
     --primary-color: var(--blue);
     --primary-color-hover: var(--blue-500);
     --primary-color-active: var(--blue-550);
-    --primary-accent: var(--blue-50);
-    --primary-accent-hover: var(--blue-50);
-    --primary-accent-active: var(--blue-50);
+    --primary-accent: var(--white);
+    --primary-accent-hover: var(--white);
+    --primary-accent-active: var(--white);
 
     --font-family: Inter, sans-serif;
-
-    --font-weight-thin: 100;
-    --font-weight-extralight: 200;
-    --font-weight-light: 300;
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --font-weight-extrabold: 800;
-    --font-weight-black: 900;
-
-    --size-px: var(--ds--size-px, 1px);
 }

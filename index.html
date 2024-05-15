@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./src/index.css" />
         <script type="module" src="/lib/components/button.ts"></script>
         <style>
-            ds-button.custom {
+            ds-button[color="custom"] {
                 --background: var(--indigo);
                 --background-hover: var(--indigo-500);
                 --background-active: var(--indigo-550);
@@ -20,7 +20,10 @@
     </head>
     <body>
         <ds-button>Default</ds-button>
-        <ds-button class="primary">Primary</ds-button>
-        <ds-button class="custom">Primary</ds-button>
+        <ds-button shape="pill">Pill</ds-button>
+        <ds-button shape="rect" color="primary" type="ghost">Primary</ds-button>
+        <ds-button color="primary">Primary</ds-button>
+        <ds-button color="custom">Custom</ds-button>
+        <ds-button type="ghost">Ghost</ds-button>
     </body>
 </html>
