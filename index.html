@@ -4,11 +4,23 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/vite.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite + Lit + TS</title>
+        <title>Design System</title>
         <link rel="stylesheet" href="./src/index.css" />
         <script type="module" src="/lib/components/button.ts"></script>
+        <style>
+            ds-button.custom {
+                --background: var(--indigo);
+                --background-hover: var(--indigo-500);
+                --background-active: var(--indigo-550);
+                --color: var(--indigo-50);
+                --color-hover: var(--indigo-50);
+                --color-active: var(--indigo-50);
+            }
+        </style>
     </head>
     <body>
-        <ds-button>Button</ds-button>
+        <ds-button>Default</ds-button>
+        <ds-button class="primary">Primary</ds-button>
+        <ds-button class="custom">Primary</ds-button>
     </body>
 </html>

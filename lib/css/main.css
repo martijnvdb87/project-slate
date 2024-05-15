@@ -1,15 +1,31 @@
 :host {
-    --font-family: var(--ds-font-family, Inter, sans-serif);
+    --border-radius: 0.25rem;
 
-    --font-weight-thin: var(--ds-font-weight-thin, 100);
-    --font-weight-extralight: var(--ds-font-weight-extralight, 200);
-    --font-weight-light: var(--ds-font-weight-light, 300);
-    --font-weight-regular: var(--ds-font-weight-regular, 400);
-    --font-weight-medium: var(--ds-font-weight-medium, 500);
-    --font-weight-semibold: var(--ds-font-weight-semibold, 600);
-    --font-weight-bold: var(--ds-font-weight-bold, 700);
-    --font-weight-extrabold: var(--ds-font-weight-extrabold, 800);
-    --font-weight-black: var(--ds-font-weight-black, 900);
+    --default-color: var(--gray-150);
+    --default-color-hover: var(--gray-200);
+    --default-color-active: var(--gray-250);
+    --default-accent: var(--gray-900);
+    --default-accent-hover: var(--gray-900);
+    --default-accent-active: var(--gray-900);
+
+    --primary-color: var(--blue);
+    --primary-color-hover: var(--blue-500);
+    --primary-color-active: var(--blue-550);
+    --primary-accent: var(--blue-50);
+    --primary-accent-hover: var(--blue-50);
+    --primary-accent-active: var(--blue-50);
+
+    --font-family: Inter, sans-serif;
+
+    --font-weight-thin: 100;
+    --font-weight-extralight: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
 
     --size-px: var(--ds--size-px, 1px);
 }
