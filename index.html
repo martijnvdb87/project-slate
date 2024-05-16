@@ -6,24 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Design System</title>
         <link rel="stylesheet" href="./src/index.css" />
-        <script type="module" src="/lib/components/button.ts"></script>
+        <script type="module" src="/lib/index.ts"></script>
         <style>
-            ds-button[color="custom"] {
-                --background: var(--indigo);
-                --background-hover: var(--indigo-500);
-                --background-active: var(--indigo-550);
-                --color: var(--indigo-50);
-                --color-hover: var(--indigo-50);
-                --color-active: var(--indigo-50);
+            :root {
+                --ds-primary-color-h: 206;
+                --ds-primary-color-s: 84%;
+                --ds-primary-color-l: 55%;
             }
         </style>
     </head>
     <body>
         <ds-button>Default</ds-button>
-        <ds-button shape="pill">Pill</ds-button>
-        <ds-button shape="rect" color="primary" type="ghost">Primary</ds-button>
-        <ds-button color="primary">Primary</ds-button>
-        <ds-button color="custom">Custom</ds-button>
+        <ds-button type="primary">Primary</ds-button>
+        <ds-button type="secondary">Secondary</ds-button>
         <ds-button type="ghost">Ghost</ds-button>
+        <ds-button type="link">Link</ds-button>
+        <ds-input>Input</ds-input>
     </body>
 </html>

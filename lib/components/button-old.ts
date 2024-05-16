@@ -29,6 +29,16 @@ export class Button extends LitElement {
             --letter-spacing: 0.025em;
             --cursor: pointer;
             --transition: all 200ms ease-in-out;
+            --transform: none;
+            --transform-hover: none;
+            --transform-active: scale(0.95);
+
+            --background: var(--default-color);
+            --background-hover: var(--default-color-hover);
+            --background-active: var(--default-color-active);
+            --color: var(--default-accent);
+            --color-hover: var(--default-accent-hover);
+            --color-active: var(--default-accent-active);
         }
 
         button {
@@ -39,16 +49,8 @@ export class Button extends LitElement {
             font-family: var(--font-family);
             font-weight: var(--font-weight);
             letter-spacing: var(--letter-spacing);
-            background: hsl(
-                var(--default-color-h),
-                var(--default-color-s),
-                var(--default-color-l)
-            );
-            color: hsl(
-                var(--default-accent-h),
-                var(--default-accent-s),
-                var(--default-accent-l)
-            );
+            background: var(--background);
+            color: var(--color);
             border-style: var(--border-style);
             border-width: var(--border-width);
             border-color: var(--border-color);
@@ -58,76 +60,32 @@ export class Button extends LitElement {
         }
 
         button:hover {
-            background: hsl(
-                var(--default-color-h),
-                var(--default-color-s),
-                calc(var(--default-color-l) - 5%)
-            );
+            background: var(--background-hover);
+            color: var(--color-hover);
+            transform: var(--transform-hover);
         }
 
         button:active {
-            background: hsl(
-                var(--default-color-h),
-                var(--default-color-s),
-                calc(var(--default-color-l) - 10%)
-            );
+            background: var(--background-active);
+            color: var(--color-active);
+            transform: var(--transform-active);
         }
 
-        :host([type="primary"]) button {
-            background: hsl(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                var(--primary-color-l)
-            );
-            color: hsl(
-                var(--primary-accent-h),
-                var(--primary-accent-s),
-                var(--primary-accent-l)
-            );
+        :host([shape="pill"]) button {
+            border-radius: 9999px;
         }
 
-        :host([type="primary"]) button:hover {
-            background: hsl(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                calc(var(--primary-color-l) - 5%)
-            );
+        :host([shape="rect"]) button {
+            border-radius: 0;
         }
 
-        :host([type="primary"]) button:active {
-            background: hsl(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                calc(var(--primary-color-l) - 10%)
-            );
-        }
-
-        :host([type="secondary"]) button {
-            background: hsl(
-                var(--secondary-color-h),
-                var(--secondary-color-s),
-                var(--secondary-color-l)
-            );
-            color: hsl(
-                var(--secondary-accent-s),
-                var(--secondary-accent-l) var(--secondary-accent-h)
-            );
-        }
-
-        :host([type="secondary"]) button:hover {
-            background: hsl(
-                var(--secondary-color-h),
-                var(--secondary-color-s),
-                calc(var(--secondary-color-l) - 5%)
-            );
-        }
-
-        :host([type="secondary"]) button:active {
-            background: hsl(
-                var(--secondary-color-h),
-                var(--secondary-color-s),
-                calc(var(--secondary-color-l) - 10%)
-            );
+        :host([color="primary"]) {
+            --background: var(--primary-color);
+            --background-hover: var(--primary-color-hover);
+            --background-active: var(--primary-color-active);
+            --color: var(--primary-accent);
+            --color-hover: var(--primary-accent-hover);
+            --color-active: var(--primary-accent-active);
         }
 
         :host([type="ghost"]) {
@@ -148,18 +106,18 @@ export class Button extends LitElement {
             --border-color: var(--default-color-active);
         }
 
-        :host([type="ghost"]) {
+        :host([type="ghost"][color="primary"]) {
             --color: var(--primary-color);
             --color-hover: var(--primary-color-hover);
             --color-active: var(--primary-color-active);
             --border-color: var(--primary-color);
         }
 
-        :host([type="ghost"]) button:hover {
+        :host([type="ghost"][color="primary"]) button:hover {
             --border-color: var(--primary-color-hover);
         }
 
-        :host([type="ghost"]) button:active {
+        :host([type="ghost"][color="primary"]) button:active {
             --border-color: var(--primary-color-active);
         }
     `;
@@ -167,6 +125,6 @@ export class Button extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "ds-button": Button;
+        "ds-button-old": Button;
     }
 }
