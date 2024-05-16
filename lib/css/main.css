@@ -27,15 +27,15 @@
 
     --primary-accent-h: var(--ds-primary-accent-h, 206);
     --primary-accent-s: var(--ds-primary-accent-s, 84%);
-    --primary-accent-l: var(--ds-primary-accent-l, 95%);
+    --primary-accent-l: var(--ds-primary-accent-l, 100%);
 
-    --secondary-color-h: var(--ds-secondary-color-h, 206);
-    --secondary-color-s: var(--ds-secondary-color-s, 84%);
-    --secondary-color-l: var(--ds-secondary-color-l, 55%);
+    --secondary-color-h: var(--ds-secondary-color-h, 220);
+    --secondary-color-s: var(--ds-secondary-color-s, 8%);
+    --secondary-color-l: var(--ds-secondary-color-l, 30%);
 
-    --secondary-accent-h: var(--ds-secondary-accent-h, 206);
-    --secondary-accent-s: var(--ds-secondary-accent-s, 84%);
-    --secondary-accent-l: var(--ds-secondary-accent-l, 95%);
+    --secondary-accent-h: var(--ds-secondary-accent-h, 220);
+    --secondary-accent-s: var(--ds-secondary-accent-s, 8%);
+    --secondary-accent-l: var(--ds-secondary-accent-l, 100%);
 
     --font-family: Inter, sans-serif;
 }

@@ -20,22 +20,25 @@ export class Button extends LitElement {
         :host {
             --display: inline-flex;
             --border-radius: 0.25rem;
-            --border-style: solid;
-            --border-color: transparent;
-            --border-width: 1px;
-            --padding: 0.875rem 1.75rem;
-            --font-size: 1rem;
+            --border-size: 1px;
+            --height: 2.875rem;
+            --padding: 0rem 1.5rem;
+            --font-size: 0.875rem;
+            --font-size: 0.9375rem;
             --font-weight: 600;
             --letter-spacing: 0.025em;
-            --cursor: pointer;
+            --transform: none;
+            --transform-hover: none;
+            --transform-active: scale(0.95);
             --transition: all 200ms ease-in-out;
         }
 
         button {
             display: var(--display);
+            align-items: center;
+            height: var(--height);
             padding: var(--padding);
             font-size: var(--font-size);
-            border-radius: var(--border-radius);
             font-family: var(--font-family);
             font-weight: var(--font-weight);
             letter-spacing: var(--letter-spacing);
@@ -49,10 +52,9 @@ export class Button extends LitElement {
                 var(--default-accent-s),
                 var(--default-accent-l)
             );
-            border-style: var(--border-style);
-            border-width: var(--border-width);
-            border-color: var(--border-color);
-            cursor: var(--cursor);
+            border: var(--border-size) solid transparent;
+            border-radius: var(--border-radius);
+            cursor: pointer;
             transition: var(--transition);
             transform: var(--transform);
         }
@@ -61,8 +63,9 @@ export class Button extends LitElement {
             background: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 5%)
+                calc(var(--default-color-l) - 8%)
             );
+            transform: var(--transform-hover);
         }
 
         button:active {
@@ -71,6 +74,7 @@ export class Button extends LitElement {
                 var(--default-color-s),
                 calc(var(--default-color-l) - 10%)
             );
+            transform: var(--transform-active);
         }
 
         :host([type="primary"]) button {
@@ -90,15 +94,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--primary-color-h),
                 var(--primary-color-s),
-                calc(var(--primary-color-l) - 5%)
-            );
-        }
-
-        :host([type="primary"]) button:active {
-            background: hsl(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                calc(var(--primary-color-l) - 10%)
+                calc(var(--primary-color-l) - 8%)
             );
         }
 
@@ -109,8 +105,9 @@ export class Button extends LitElement {
                 var(--secondary-color-l)
             );
             color: hsl(
+                var(--secondary-accent-h),
                 var(--secondary-accent-s),
-                var(--secondary-accent-l) var(--secondary-accent-h)
+                var(--secondary-accent-l)
             );
         }
 
@@ -118,49 +115,57 @@ export class Button extends LitElement {
             background: hsl(
                 var(--secondary-color-h),
                 var(--secondary-color-s),
-                calc(var(--secondary-color-l) - 5%)
+                calc(var(--secondary-color-l) - 8%)
             );
         }
 
-        :host([type="secondary"]) button:active {
-            background: hsl(
-                var(--secondary-color-h),
-                var(--secondary-color-s),
-                calc(var(--secondary-color-l) - 10%)
+        :host([type="ghost"]) button {
+            background: transparent;
+            border-color: hsl(
+                var(--default-color-h),
+                var(--default-color-s),
+                var(--default-color-l)
             );
         }
 
-        :host([type="ghost"]) {
-            --background: transparent;
-            --background-hover: transparent;
-            --background-active: transparent;
-            --color: var(--default-accent);
-            --color-hover: var(--default-accent);
-            --color-active: var(--default-accent);
-            --border-color: var(--default-color);
-        }
-
         :host([type="ghost"]) button:hover {
-            --border-color: var(--default-color-hover);
+            border-color: hsl(
+                var(--default-color-h),
+                var(--default-color-s),
+                calc(var(--default-color-l) - 16%)
+            );
         }
 
-        :host([type="ghost"]) button:active {
-            --border-color: var(--default-color-active);
+        :host([type="link"]) button {
+            background: transparent;
+            color: hsl(
+                var(--default-accent-h),
+                var(--default-accent-s),
+                var(--default-accent-l)
+            );
         }
 
-        :host([type="ghost"]) {
-            --color: var(--primary-color);
-            --color-hover: var(--primary-color-hover);
-            --color-active: var(--primary-color-active);
-            --border-color: var(--primary-color);
+        :host([type="link"]) button:hover {
+            background: hsla(
+                var(--default-color-h),
+                var(--default-color-s),
+                var(--default-color-l),
+                0.5
+            );
         }
 
-        :host([type="ghost"]) button:hover {
-            --border-color: var(--primary-color-hover);
+        :host([shape="square"]) button {
+            border-radius: 0;
         }
 
-        :host([type="ghost"]) button:active {
-            --border-color: var(--primary-color-active);
+        :host([shape="pill"]) button {
+            border-radius: 999rem;
+        }
+
+        :host([shape="circle"]) button {
+            border-radius: 50%;
+            width: var(--height);
+            padding: 0;
         }
     `;
 }
