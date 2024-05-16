@@ -22,22 +22,21 @@ export class Button extends LitElement {
             --border-radius: 0.25rem;
             --border-size: 1px;
             --height: 2.875rem;
-            --padding: 0rem 1.5rem;
+            --padding: 1.5rem;
             --font-size: 0.875rem;
             --font-size: 0.9375rem;
             --font-weight: 600;
             --letter-spacing: 0.025em;
-            --transform: none;
-            --transform-hover: none;
-            --transform-active: scale(0.95);
             --transition: all 200ms ease-in-out;
         }
 
         button {
             display: var(--display);
             align-items: center;
+            justify-content: center;
+            vertical-align: middle;
             height: var(--height);
-            padding: var(--padding);
+            padding: 0 var(--padding);
             font-size: var(--font-size);
             font-family: var(--font-family);
             font-weight: var(--font-weight);
@@ -56,16 +55,14 @@ export class Button extends LitElement {
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition);
-            transform: var(--transform);
         }
 
         button:hover {
             background: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 8%)
+                calc(var(--default-color-l) - 6%)
             );
-            transform: var(--transform-hover);
         }
 
         button:active {
@@ -74,7 +71,6 @@ export class Button extends LitElement {
                 var(--default-color-s),
                 calc(var(--default-color-l) - 10%)
             );
-            transform: var(--transform-active);
         }
 
         :host([type="primary"]) button {
@@ -95,6 +91,14 @@ export class Button extends LitElement {
                 var(--primary-color-h),
                 var(--primary-color-s),
                 calc(var(--primary-color-l) - 8%)
+            );
+        }
+
+        :host([type="primary"]) button:active {
+            background: hsl(
+                var(--primary-color-h),
+                var(--primary-color-s),
+                calc(var(--primary-color-l) - 12%)
             );
         }
 
@@ -119,6 +123,14 @@ export class Button extends LitElement {
             );
         }
 
+        :host([type="secondary"]) button:active {
+            background: hsl(
+                var(--secondary-color-h),
+                var(--secondary-color-s),
+                calc(var(--secondary-color-l) - 12%)
+            );
+        }
+
         :host([type="ghost"]) button {
             background: transparent;
             border-color: hsl(
@@ -133,6 +145,14 @@ export class Button extends LitElement {
                 var(--default-color-h),
                 var(--default-color-s),
                 calc(var(--default-color-l) - 16%)
+            );
+        }
+
+        :host([type="ghost"]) button:active {
+            border-color: hsl(
+                var(--default-color-h),
+                var(--default-color-s),
+                calc(var(--default-color-l) - 20%)
             );
         }
 
@@ -154,6 +174,15 @@ export class Button extends LitElement {
             );
         }
 
+        :host([type="link"]) button:active {
+            background: hsla(
+                var(--default-color-h),
+                var(--default-color-s),
+                var(--default-color-l),
+                0.75
+            );
+        }
+
         :host([shape="square"]) button {
             border-radius: 0;
         }
@@ -166,6 +195,24 @@ export class Button extends LitElement {
             border-radius: 50%;
             width: var(--height);
             padding: 0;
+        }
+
+        :host([size="small"]) button {
+            height: calc(var(--height) - 0.875rem);
+            padding: 0 calc(var(--padding) - 0.75em);
+            font-size: calc(var(--font-size) - 0.0625rem);
+        }
+
+        :host([size="large"]) button {
+            height: calc(var(--height) + 0.875rem);
+            padding: 0 calc(var(--padding) + 0.75rem);
+            font-size: calc(var(--font-size) + 0.75rem);
+            font-weight: 500;
+        }
+
+        :host([width="full"]) button {
+            display: flex;
+            width: 100%;
         }
     `;
 }
