@@ -21,7 +21,7 @@ export class Button extends LitElement {
             --display: inline-flex;
             --border-radius: 0.25rem;
             --border-size: 1px;
-            --height: 2.875rem;
+            --height: 2.75rem;
             --padding: 1.5rem;
             --font-size: 0.875rem;
             --font-size: 0.9375rem;
