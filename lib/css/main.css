@@ -1,18 +1,4 @@
 :host {
-    --default-color: var(--gray-150);
-    --default-color-hover: var(--gray-200);
-    --default-color-active: var(--gray-250);
-    --default-accent: var(--gray-750);
-    --default-accent-hover: var(--gray-750);
-    --default-accent-active: var(--gray-750);
-
-    --primary-color: var(--blue);
-    --primary-color-hover: var(--blue-500);
-    --primary-color-active: var(--blue-550);
-    --primary-accent: var(--white);
-    --primary-accent-hover: var(--white);
-    --primary-accent-active: var(--white);
-
     --default-color-h: var(--ds-default-color-h, 220);
     --default-color-s: var(--ds-default-color-s, 8%);
     --default-color-l: var(--ds-default-color-l, 91%);
@@ -23,7 +9,7 @@
 
     --primary-color-h: var(--ds-primary-color-h, 206);
     --primary-color-s: var(--ds-primary-color-s, 84%);
-    --primary-color-l: var(--ds-primary-color-l, 55%);
+    --primary-color-l: var(--ds-primary-color-l, 51%);
 
     --primary-accent-h: var(--ds-primary-accent-h, 206);
     --primary-accent-s: var(--ds-primary-accent-s, 84%);

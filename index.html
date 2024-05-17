@@ -8,12 +8,6 @@
         <link rel="stylesheet" href="./src/index.css" />
         <script type="module" src="/lib/index.ts"></script>
         <style>
-            :root {
-                --ds-primary-color-h: 206;
-                --ds-primary-color-s: 84%;
-                --ds-primary-color-l: 55%;
-            }
-
             hr {
                 margin: 2rem 0;
             }
@@ -36,15 +30,16 @@
         <ds-button shape="square">Square</ds-button>
         <ds-button shape="circle">C</ds-button>
         <hr />
-        <ds-button type="primary" width="full">Block</ds-button>
+        <ds-button type="primary" width="full">Full width</ds-button>
         <hr />
         <ds-button type="primary" shadow>Primary</ds-button>
         <ds-button type="secondary" shadow>Secondary</ds-button>
-        <ds-button shadow>Default</ds-button>
-        <ds-button type="ghost" shadow>Ghost</ds-button>
-        <ds-button type="link" shadow>Link</ds-button>
         <hr />
-        <ds-input placeholder="Placeholder..." value=""></ds-input>
+        <ds-input
+            label="Label"
+            placeholder="Placeholder..."
+            value=""
+        ></ds-input>
         <ds-button>Button</ds-button>
     </body>
 </html>

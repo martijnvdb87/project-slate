@@ -23,7 +23,8 @@ export class Button extends LitElement {
         }
 
         button {
-            display: inline-flex;
+            display: flex;
+            flex: auto;
             align-items: center;
             justify-content: center;
             height: 2.5rem;
@@ -42,7 +43,7 @@ export class Button extends LitElement {
                 var(--default-accent-l)
             );
             border: 0 solid transparent;
-            border-radius: 0.25rem;
+            border-radius: 0.375rem;
             cursor: pointer;
             transition: all 120ms ease-in-out;
         }
@@ -59,7 +60,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 12%)
+                calc(var(--default-color-l) - 8%)
             );
         }
 
@@ -88,7 +89,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--primary-color-h),
                 var(--primary-color-s),
-                calc(var(--primary-color-l) - 12%)
+                calc(var(--primary-color-l) - 8%)
             );
         }
 
@@ -117,7 +118,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--secondary-color-h),
                 var(--secondary-color-s),
-                calc(var(--secondary-color-l) - 12%)
+                calc(var(--secondary-color-l) - 8%)
             );
         }
 
@@ -197,24 +198,23 @@ export class Button extends LitElement {
         :host([size="small"]) button {
             height: 2rem;
             padding: 0 0.75em;
-            font-size: 1rem;
+            font-size: 0.875rem;
         }
 
         :host([size="large"]) button {
             height: 3rem;
-            padding: 0 1.25rem;
+            padding: 0 1.5rem;
             font-size: 1.5rem;
         }
 
         :host([size="huge"]) button {
             height: 3.75rem;
-            padding: 0 1.5rem;
+            padding: 0 1.75rem;
             font-size: 1.75rem;
         }
 
-        :host([width="full"]) button {
+        :host([width="full"]) {
             display: flex;
-            width: 100%;
         }
 
         :host([type="primary"][shadow]) button {
