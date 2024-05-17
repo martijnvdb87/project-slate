@@ -20,14 +20,13 @@ export class Button extends LitElement {
         :host {
             --display: inline-flex;
             --border-radius: 0.25rem;
-            --border-size: 1px;
-            --height: 2.75rem;
-            --padding: 1.5rem;
-            --font-size: 0.875rem;
+            --border-width: 1px;
+            --height: 2.5rem;
+            --padding: 1rem;
             --font-size: 0.9375rem;
             --font-weight: 600;
             --letter-spacing: 0.025em;
-            --transition: all 200ms ease-in-out;
+            --transition: all 120ms ease-in-out;
         }
 
         button {
@@ -51,7 +50,7 @@ export class Button extends LitElement {
                 var(--default-accent-s),
                 var(--default-accent-l)
             );
-            border: var(--border-size) solid transparent;
+            border: 0 solid transparent;
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition);
@@ -61,7 +60,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 6%)
+                calc(var(--default-color-l) - 4%)
             );
         }
 
@@ -69,7 +68,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 10%)
+                calc(var(--default-color-l) - 12%)
             );
         }
 
@@ -90,7 +89,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--primary-color-h),
                 var(--primary-color-s),
-                calc(var(--primary-color-l) - 8%)
+                calc(var(--primary-color-l) - 4%)
             );
         }
 
@@ -119,7 +118,7 @@ export class Button extends LitElement {
             background: hsl(
                 var(--secondary-color-h),
                 var(--secondary-color-s),
-                calc(var(--secondary-color-l) - 8%)
+                calc(var(--secondary-color-l) - 4%)
             );
         }
 
@@ -133,6 +132,7 @@ export class Button extends LitElement {
 
         :host([type="ghost"]) button {
             background: transparent;
+            border-width: var(--border-width);
             border-color: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
@@ -144,7 +144,7 @@ export class Button extends LitElement {
             border-color: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 16%)
+                calc(var(--default-color-l) - 8%)
             );
         }
 
@@ -152,7 +152,7 @@ export class Button extends LitElement {
             border-color: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
-                calc(var(--default-color-l) - 20%)
+                calc(var(--default-color-l) - 24%)
             );
         }
 
@@ -213,6 +213,26 @@ export class Button extends LitElement {
         :host([width="full"]) button {
             display: flex;
             width: 100%;
+        }
+
+        :host([type="primary"][shadow]) button {
+            box-shadow: 0 0.25rem 1rem 0.125rem
+                hsl(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    calc(var(--primary-color-l) - 25%),
+                    0.25
+                );
+        }
+
+        :host([type="secondary"][shadow]) button {
+            box-shadow: 0 0.25rem 1rem 0.125rem
+                hsl(
+                    var(--secondary-color-h),
+                    var(--secondary-color-s),
+                    calc(var(--secondary-color-l) - 25%),
+                    0.25
+                );
         }
     `;
 }

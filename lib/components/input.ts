@@ -29,8 +29,9 @@ export class Input extends LitElement {
             --display: inline-flex;
             --border-radius: 0.25rem;
             --border-size: 1px;
-            --height: 2.75rem;
-            --padding: 0.75rem;
+            --height: 2.5rem;
+            --padding: 0.5rem;
+            --font-size: 1rem;
         }
 
         input {
@@ -49,7 +50,7 @@ export class Input extends LitElement {
             );
             background: var(--background);
             font-family: var(--font-family);
-            font-size: 1rem;
+            font-size: var(--font-size);
             font-weight: var(--font-weight);
             letter-spacing: var(--letter-spacing);
             line-height: var(--line-height);
