@@ -18,28 +18,19 @@ export class Button extends LitElement {
         ${mainCss()}
 
         :host {
-            --display: inline-flex;
-            --border-radius: 0.25rem;
-            --border-width: 1px;
-            --height: 2.5rem;
-            --padding: 1rem;
-            --font-size: 0.9375rem;
-            --font-weight: 600;
-            --letter-spacing: 0.025em;
-            --transition: all 120ms ease-in-out;
+            display: inline-flex;
+            vertical-align: bottom;
         }
 
         button {
-            display: var(--display);
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            vertical-align: middle;
-            height: var(--height);
-            padding: 0 var(--padding);
-            font-size: var(--font-size);
+            height: 2.5rem;
+            padding: 0 1rem;
+            font-size: 0.9375rem;
             font-family: var(--font-family);
-            font-weight: var(--font-weight);
-            letter-spacing: var(--letter-spacing);
+            font-weight: 500;
             background: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
@@ -51,9 +42,9 @@ export class Button extends LitElement {
                 var(--default-accent-l)
             );
             border: 0 solid transparent;
-            border-radius: var(--border-radius);
+            border-radius: 0.25rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 120ms ease-in-out;
         }
 
         button:hover {
@@ -132,7 +123,7 @@ export class Button extends LitElement {
 
         :host([type="ghost"]) button {
             background: transparent;
-            border-width: var(--border-width);
+            border-width: 1px;
             border-color: hsl(
                 var(--default-color-h),
                 var(--default-color-s),
@@ -193,21 +184,32 @@ export class Button extends LitElement {
 
         :host([shape="circle"]) button {
             border-radius: 50%;
-            width: var(--height);
+            width: 2.5rem
             padding: 0;
         }
 
+        :host([size="tiny"]) button {
+            height: 1.5rem;
+            padding: 0 0.5rem;
+            font-size: 0.75rem;
+        }
+
         :host([size="small"]) button {
-            height: calc(var(--height) - 0.875rem);
-            padding: 0 calc(var(--padding) - 0.75em);
-            font-size: calc(var(--font-size) - 0.0625rem);
+            height: 2rem;
+            padding: 0 0.75em;
+            font-size: 1rem;
         }
 
         :host([size="large"]) button {
-            height: calc(var(--height) + 0.875rem);
-            padding: 0 calc(var(--padding) + 0.75rem);
-            font-size: calc(var(--font-size) + 0.75rem);
-            font-weight: 500;
+            height: 3rem;
+            padding: 0 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        :host([size="huge"]) button {
+            height: 3.75rem;
+            padding: 0 1.5rem;
+            font-size: 1.75rem;
         }
 
         :host([width="full"]) button {
