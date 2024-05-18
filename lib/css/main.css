@@ -1,27 +1,42 @@
 :host {
+    --font-family: Inter, sans-serif;
+
+    --element-border-radius: var(--ds-element-border-radius, 0.375rem);
+
     --default-color-h: var(--ds-default-color-h, 220);
-    --default-color-s: var(--ds-default-color-s, 8%);
-    --default-color-l: var(--ds-default-color-l, 91%);
+    --default-color-s: var(--ds-default-color-s, 10%);
+    --default-color-l: var(--ds-default-color-l, 92%);
+    --default-color-a: var(--ds-default-color-a, 1);
 
     --default-accent-h: var(--ds-default-accent-h, 220);
-    --default-accent-s: var(--ds-default-accent-s, 8%);
+    --default-accent-s: var(--ds-default-accent-s, 10%);
     --default-accent-l: var(--ds-default-accent-l, 30%);
+    --default-accent-a: var(--ds-default-accent-a, 1);
 
     --primary-color-h: var(--ds-primary-color-h, 206);
     --primary-color-s: var(--ds-primary-color-s, 84%);
     --primary-color-l: var(--ds-primary-color-l, 51%);
+    --primary-color-a: var(--ds-primary-color-a, 1);
 
     --primary-accent-h: var(--ds-primary-accent-h, 206);
     --primary-accent-s: var(--ds-primary-accent-s, 84%);
     --primary-accent-l: var(--ds-primary-accent-l, 100%);
+    --primary-accent-a: var(--ds-primary-accent-a, 1);
 
     --secondary-color-h: var(--ds-secondary-color-h, 220);
-    --secondary-color-s: var(--ds-secondary-color-s, 8%);
-    --secondary-color-l: var(--ds-secondary-color-l, 30%);
+    --secondary-color-s: var(--ds-secondary-color-s, 10%);
+    --secondary-color-l: var(--ds-secondary-color-l, 32%);
+    --secondary-color-a: var(--ds-secondary-color-a, 1);
 
     --secondary-accent-h: var(--ds-secondary-accent-h, 220);
-    --secondary-accent-s: var(--ds-secondary-accent-s, 8%);
+    --secondary-accent-s: var(--ds-secondary-accent-s, 10%);
     --secondary-accent-l: var(--ds-secondary-accent-l, 100%);
+    --secondary-accent-a: var(--ds-secondary-accent-a, 1);
 
-    --font-family: Inter, sans-serif;
+    --input-border-color-h: var(--ds-input-border-color-h, 220);
+    --input-border-color-s: var(--ds-input-border-color-s, 10%);
+    --input-border-color-l: var(--ds-input-border-color-l, 82%);
+    --input-border-color-a: var(--ds-input-border-color-a, 1);
+
+    --input-border-width: var(--ds-input-border-width, 1px);
 }

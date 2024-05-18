@@ -37,6 +37,16 @@ export class Input extends LitElement {
         :host {
             display: inline-flex;
             vertical-align: bottom;
+
+            --height: 2.5rem;
+            --padding-x: 0.75rem;
+
+            --border-radius: var(--element-border-radius);
+            --border-width: var(--input-border-width);
+            --border-color-h: var(--input-border-color-h);
+            --border-color-s: var(--input-border-color-s);
+            --border-color-l: var(--input-border-color-l);
+            --border-color-a: var(--input-border-color-a);
         }
 
         input {
@@ -44,8 +54,8 @@ export class Input extends LitElement {
             align-items: center;
             justify-content: center;
             vertical-align: middle;
-            height: calc(2.5rem - 2px);
-            padding: 0 0.75rem;
+            height: calc(var(--height) - 2px);
+            padding: 0 var(--padding-x);
             background: transparent;
             font-family: var(--font-family);
             font-size: 1rem;
@@ -70,14 +80,16 @@ export class Input extends LitElement {
         }
 
         [part="input-container"] {
-            height: 2.5rem;
-            border-radius: 0.375rem;
-            border: 1px solid
-                hsl(
-                    var(--default-color-h),
-                    var(--default-color-s),
-                    calc(var(--default-color-l) - 10%)
-                );
+            height: var(--height);
+            border-radius: var(--border-radius);
+            border-width: var(--border-width);
+            border-style: solid;
+            border-color: hsla(
+                var(--border-color-h),
+                var(--border-color-s),
+                var(--border-color-l),
+                var(--border-color-a)
+            );
             outline: 0rem solid
                 hsla(
                     var(--primary-color-h),
@@ -99,7 +111,7 @@ export class Input extends LitElement {
                     var(--primary-color-h),
                     var(--primary-color-s),
                     var(--primary-color-l),
-                    0.125
+                    0.25
                 );
         }
     `;

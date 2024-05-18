@@ -19,6 +19,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "boxicons": "^2.1.4",
         "lit": "^3.1.2"
     },
     "devDependencies": {
