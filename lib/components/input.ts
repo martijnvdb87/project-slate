@@ -23,18 +23,28 @@ export class Input extends LitElement {
     iconRight = "";
 
     render() {
+        const mainClasses = [];
+
+        if (this.icon) {
+            mainClasses.push("has-icon-left");
+        }
+
+        if (this.iconRight) {
+            mainClasses.push("has-icon-right");
+        }
+
         return html`
-            <div part="main">
+            <div part="main" class="${mainClasses.join(" ")}">
                 <label part="label" for="input">${this.label}</label>
                 <div part="input-container">
-                    ${renderIcon(this.icon)}
+                    ${renderIcon(this.icon, ["icon", "icon-left"])}
                     <input
                         id="input"
                         part="input"
                         placeholder="${this.placeholder}"
                         value="${this.value}"
                     />
-                    ${renderIcon(this.iconRight)}
+                    ${renderIcon(this.iconRight, ["icon", "icon-right"])}
                 </div>
             </div>
         `;
@@ -44,13 +54,17 @@ export class Input extends LitElement {
         ${mainCss()}
 
         :host {
-            display: inline-flex;
+            display: var(--display);
             vertical-align: bottom;
 
+            --display: inline-flex;
             --height: var(--height-medium);
             --padding-x: 0.75rem;
             --gap: var(--gap-medium);
             --icon-size: var(--icon-size-medium);
+            --font-size: var(--font-size-medium);
+
+            --input-padding-x: var(--input-padding-x-medium);
 
             --border-radius: var(--element-border-radius);
             --border-width: var(--input-border-width);
@@ -62,19 +76,27 @@ export class Input extends LitElement {
 
         input {
             display: flex;
+            flex-grow: 1;
             align-items: center;
             justify-content: center;
             vertical-align: middle;
             height: calc(var(--height) - 2px);
+            padding: 0 var(--input-padding-x);
             background: transparent;
             font-family: var(--font-family);
-            font-size: 1rem;
+            font-size: var(--font-size);
             border: none;
             outline: none;
         }
 
         input::placeholder {
             opacity: 0.75;
+        }
+
+        [part="main"] {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
         }
 
         [part="label"] {
@@ -99,10 +121,10 @@ export class Input extends LitElement {
         }
 
         [part="input-container"] {
+            position: relative;
             display: flex;
             align-items: center;
             height: var(--height);
-            padding: 0 var(--padding-x);
             gap: var(--gap);
             border-radius: var(--border-radius);
             border-width: var(--border-width);
@@ -136,6 +158,78 @@ export class Input extends LitElement {
                     var(--primary-color-l),
                     0.25
                 );
+        }
+
+        .icon {
+            position: absolute;
+        }
+
+        .icon.icon-left {
+            left: var(--padding-x);
+        }
+
+        .icon.icon-right {
+            right: var(--padding-x);
+        }
+
+        .has-icon-left input {
+            padding-left: calc(
+                var(--padding-x) + var(--icon-size) + var(--gap)
+            );
+        }
+
+        .has-icon-right input {
+            padding-right: calc(
+                var(--padding-x) + var(--icon-size) + var(--gap)
+            );
+        }
+
+        :host([size="tiny"]) {
+            --height: var(--height-tiny);
+            --icon-size: var(--icon-size-tiny);
+            --padding-x: var(--padding-x-tiny);
+            --input-padding-x: var(--input-padding-x-tiny);
+            --gap: var(--gap-tiny);
+            --font-size: var(--font-size-tiny);
+        }
+
+        :host([size="small"]) {
+            --height: var(--height-small);
+            --icon-size: var(--icon-size-small);
+            --padding-x: var(--padding-x-small);
+            --input-padding-x: var(--input-padding-x-small);
+            --gap: var(--gap-small);
+            --font-size: var(--font-size-small);
+        }
+
+        :host([size="large"]) {
+            --height: var(--height-large);
+            --icon-size: var(--icon-size-large);
+            --padding-x: var(--padding-x-large);
+            --input-padding-x: var(--input-padding-x-large);
+            --gap: var(--gap-large);
+            --font-size: var(--font-size-large);
+        }
+
+        :host([size="huge"]) {
+            --height: var(--height-huge);
+            --icon-size: var(--icon-size-huge);
+            --padding-x: var(--padding-x-huge);
+            --input-padding-x: var(--input-padding-x-huge);
+            --gap: var(--gap-huge);
+            --font-size: var(--font-size-huge);
+        }
+
+        :host([width="full"]) {
+            --display: flex;
+        }
+
+        :host([shape="square"]) {
+            --border-radius: 0;
+        }
+
+        :host([shape="pill"]) {
+            --border-radius: 999rem;
         }
     `;
 }
