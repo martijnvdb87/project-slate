@@ -106,7 +106,15 @@ export class Button extends LitElement {
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             cursor: pointer;
-            transition: all 120ms ease-in-out;
+            outline: 0.125rem none
+                hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l),
+                    var(--primary-color-a)
+                );
+            transition: all 120ms ease-in-out, outline 0s, border-width 0s,
+                border-color 0s, padding 0s;
         }
 
         button:hover {
@@ -125,6 +133,40 @@ export class Button extends LitElement {
                 calc(var(--background-color-l) - 8%),
                 var(--background-color-a)
             );
+        }
+
+        button:focus-visible {
+            outline: 0.25rem solid
+                hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l),
+                    0.25
+                );
+        }
+
+        button:focus-visible {
+            border-width: var(--input-border-width);
+            border-color: hsla(
+                var(--primary-color-h),
+                var(--primary-color-s),
+                var(--primary-color-l),
+                var(--primary-color-a)
+            );
+            padding: 0 calc(var(--padding-x) - var(--input-border-width));
+        }
+
+        :host([type="secondary"]) button:focus-visible {
+            border-color: hsla(
+                var(--secondary-color-h),
+                var(--secondary-color-s),
+                var(--secondary-color-l),
+                var(--secondary-color-a)
+            );
+        }
+
+        :host([type="ghost"]) button:focus-visible {
+            padding: 0 var(--padding-x);
         }
 
         :host([type="primary"]) {
