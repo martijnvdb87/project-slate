@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import "@/lib/css/fonts.css";
 import { mainCss } from "../util/style";
+import { renderIcon } from "../util/icons";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
@@ -15,17 +16,25 @@ export class Input extends LitElement {
     @property({ type: String })
     label = "";
 
+    @property({ type: String })
+    icon = "";
+
+    @property({ attribute: "icon-right", type: String })
+    iconRight = "";
+
     render() {
         return html`
             <div part="main">
                 <label part="label" for="input">${this.label}</label>
                 <div part="input-container">
+                    ${renderIcon(this.icon)}
                     <input
                         id="input"
                         part="input"
                         placeholder="${this.placeholder}"
                         value="${this.value}"
                     />
+                    ${renderIcon(this.iconRight)}
                 </div>
             </div>
         `;
@@ -38,8 +47,10 @@ export class Input extends LitElement {
             display: inline-flex;
             vertical-align: bottom;
 
-            --height: 2.5rem;
+            --height: var(--height-medium);
             --padding-x: 0.75rem;
+            --gap: var(--gap-medium);
+            --icon-size: var(--icon-size-medium);
 
             --border-radius: var(--element-border-radius);
             --border-width: var(--input-border-width);
@@ -55,7 +66,6 @@ export class Input extends LitElement {
             justify-content: center;
             vertical-align: middle;
             height: calc(var(--height) - 2px);
-            padding: 0 var(--padding-x);
             background: transparent;
             font-family: var(--font-family);
             font-size: 1rem;
@@ -79,8 +89,21 @@ export class Input extends LitElement {
             );
         }
 
+        [part="icon"] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--icon-size);
+            height: var(--icon-size);
+            pointer-events: none;
+        }
+
         [part="input-container"] {
+            display: flex;
+            align-items: center;
             height: var(--height);
+            padding: 0 var(--padding-x);
+            gap: var(--gap);
             border-radius: var(--border-radius);
             border-width: var(--border-width);
             border-style: solid;

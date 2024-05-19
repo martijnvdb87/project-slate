@@ -2,22 +2,23 @@ import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import "@/lib/css/fonts.css";
-import { mainCss } from "../util/style";
+import { mainCss } from "@/lib/util/style";
+import { renderIcon } from "@/lib/util/icons";
 
 @customElement(`${config.prefix}-button`)
 export class Button extends LitElement {
     @property({ type: String })
     icon = "";
 
-    @property({ type: String })
-    ["icon-right"] = "";
+    @property({ attribute: "icon-right", type: String })
+    iconRight = "";
 
     render() {
         return html`
             <button part="button">
-                ${this.renderIcon(this.icon)}
+                ${renderIcon(this.icon)}
                 <slot></slot>
-                ${this.renderIcon(this["icon-right"])}
+                ${renderIcon(this.iconRight)}
             </button>
         `;
     }
@@ -41,8 +42,8 @@ export class Button extends LitElement {
                 var(--default-accent-s),
                 var(--default-accent-l)
             );
-            --icon-size: 1.125rem;
-            --height: 2.5rem;
+            --icon-size: var(--icon-size-medium);
+            --height: var(--height-medium);
             --width: auto;
 
             --background-color-h: var(--default-color-h);
@@ -55,10 +56,10 @@ export class Button extends LitElement {
             --text-color-l: var(--default-accent-l);
             --text-color-a: var(--default-accent-a);
 
-            --padding-x: 1rem;
-            --gap: 0.5rem;
+            --padding-x: var(--padding-x-medium);
+            --gap: var(--gap-medium);
 
-            --font-size: 0.9375rem;
+            --font-size: var(--font-size-medium);
 
             --border-radius: var(--element-border-radius);
             --border-width: 0px;
@@ -201,35 +202,35 @@ export class Button extends LitElement {
         }
 
         :host([size="tiny"]) {
-            --height: 1.5rem;
-            --icon-size: 0.75rem;
-            --padding-x: 0.375rem;
-            --gap: 0.25rem;
-            --font-size: 0.75rem;
+            --height: var(--height-tiny);
+            --icon-size: var(--icon-size-tiny);
+            --padding-x: var(--padding-x-tiny);
+            --gap: var(--gap-tiny);
+            --font-size: var(--font-size-tiny);
         }
 
         :host([size="small"]) {
-            --height: 2rem;
-            --icon-size: 0.875rem;
-            --padding-x: 0.75em;
-            --gap: 0.375rem;
-            --font-size: 0.875rem;
+            --height: var(--height-small);
+            --icon-size: var(--icon-size-small);
+            --padding-x: var(--padding-x-small);
+            --gap: var(--gap-small);
+            --font-size: var(--font-size-small);
         }
 
         :host([size="large"]) {
-            --height: 3rem;
-            --icon-size: 1.375rem;
-            --padding-x: 1.125rem;
-            --gap: 0.675rem;
-            --font-size: 1.5rem;
+            --height: var(--height-large);
+            --icon-size: var(--icon-size-large);
+            --padding-x: var(--padding-x-large);
+            --gap: var(--gap-large);
+            --font-size: var(--font-size-large);
         }
 
         :host([size="huge"]) {
-            --height: 3.75rem;
-            --icon-size: 1.5rem;
-            --padding-x: 1.5rem;
-            --gap: 0.75rem;
-            --font-size: 1.75rem;
+            --height: var(--height-huge);
+            --icon-size: var(--icon-size-huge);
+            --padding-x: var(--padding-x-huge);
+            --gap: var(--gap-huge);
+            --font-size: var(--font-size-huge);
         }
 
         :host([width="full"]) {
@@ -263,29 +264,12 @@ export class Button extends LitElement {
         [part="icon"] {
             display: flex;
             align-items: center;
-            overflow: hidden;
-            height: var(--icon-size);
+            justify-content: center;
             width: var(--icon-size);
+            height: var(--icon-size);
+            pointer-events: none;
         }
     `;
-
-    private renderIcon(value: string) {
-        if (!value) {
-            return html``;
-        }
-
-        const parts = value.split(":");
-        const name = parts[0];
-        const type = parts[1] ?? "regular";
-
-        return html`<div part="icon">
-            <box-icon
-                name="${name}"
-                color="var(--icon-color)"
-                type="${type}"
-            ></box-icon>
-        </div>`;
-    }
 }
 
 declare global {
