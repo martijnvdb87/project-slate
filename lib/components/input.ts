@@ -69,7 +69,7 @@ export class Input extends LitElement {
         }
 
         if (this.error !== null) {
-            return renderIcon("info-circle", [
+            return renderIcon("error", [
                 "icon",
                 "icon-validation",
                 "icon-validation-error",
@@ -164,7 +164,7 @@ export class Input extends LitElement {
             top: 100%;
             left: 0;
             padding: 0.25rem;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             color: hsl(
                 var(--validation-border-color-h),
                 var(--validation-border-color-s),
