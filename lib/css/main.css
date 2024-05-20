@@ -68,6 +68,11 @@
     --input-icon-color-l: var(--ds-input-icon-color-l, var(--primary-color-l));
     --input-icon-color-a: var(--ds-input-icon-color-a, var(--primary-color-a));
 
+    --input-background-color-h: var(--ds-input-background-color-h, 220);
+    --input-background-color-s: var(--ds-input-background-color-s, 10%);
+    --input-background-color-l: var(--ds-input-background-color-l, 100%);
+    --input-background-color-a: var(--ds-input-background-color-a, 1);
+
     --input-border-color-h: var(--ds-input-border-color-h, 220);
     --input-border-color-s: var(--ds-input-border-color-s, 10%);
     --input-border-color-l: var(--ds-input-border-color-l, 82%);

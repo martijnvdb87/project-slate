@@ -73,6 +73,11 @@ export class Input extends LitElement {
 
             --input-padding-x: var(--input-padding-x-medium);
 
+            --background-color-h: var(--input-background-color-h);
+            --background-color-s: var(--input-background-color-s);
+            --background-color-l: var(--input-background-color-l);
+            --background-color-a: var(--input-background-color-a);
+
             --border-radius: var(--element-border-radius);
             --border-width: var(--input-border-width);
             --border-color-h: var(--input-border-color-h);
@@ -133,6 +138,12 @@ export class Input extends LitElement {
             align-items: center;
             height: var(--height);
             gap: var(--gap);
+            background: hsla(
+                var(--background-color-h),
+                var(--background-color-s),
+                var(--background-color-l),
+                var(--background-color-a)
+            );
             border-radius: var(--border-radius);
             border-width: var(--border-width);
             border-style: solid;

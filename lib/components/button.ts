@@ -13,9 +13,12 @@ export class Button extends LitElement {
     @property({ attribute: "icon-right", type: String })
     iconRight = "";
 
+    @property({ type: Boolean })
+    disabled = false;
+
     render() {
         return html`
-            <button part="button">
+            <button part="button" ?disabled="${this.disabled}">
                 ${renderIcon(this.icon)}
                 <slot></slot>
                 ${renderIcon(this.iconRight)}
@@ -323,6 +326,12 @@ export class Button extends LitElement {
                     calc(var(--background-color-l) - 15%),
                     0.25
                 );
+        }
+
+        :host([disabled]) {
+            opacity: 0.75;
+            --text-color-a: 0.5;
+            pointer-events: none;
         }
 
         [part="icon"] {
