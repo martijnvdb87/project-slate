@@ -80,6 +80,27 @@ export class Input extends LitElement {
             --gap: var(--gap-medium);
             --icon-size: var(--icon-size-medium);
             --font-size: var(--font-size-medium);
+            --font-weight: var(--input-font-weight);
+
+            --text-color-h: var(--input-text-color-h);
+            --text-color-s: var(--input-text-color-s);
+            --text-color-l: var(--input-text-color-l);
+            --text-color-a: var(--input-text-color-a);
+
+            --placeholder-color-h: var(--input-placeholder-color-h);
+            --placeholder-color-s: var(--input-placeholder-color-s);
+            --placeholder-color-l: var(--input-placeholder-color-l);
+            --placeholder-color-a: var(--input-placeholder-color-a);
+            --placeholder-weight: var(--input-placeholder-weight);
+
+            --label-padding: var(--input-label-padding);
+            --label-font-weight: var(--input-label-font-weight);
+            --label-font-size: var(--input-label-font-size);
+
+            --label-color-h: var(--input-label-color-h);
+            --label-color-s: var(--input-label-color-s);
+            --label-color-l: var(--input-label-color-l);
+            --label-color-a: var(--input-label-color-a);
 
             --icon-color: hsla(
                 var(--input-icon-color-h),
@@ -109,17 +130,30 @@ export class Input extends LitElement {
             align-items: center;
             justify-content: center;
             vertical-align: middle;
-            height: calc(var(--height) - 2px);
+            height: calc(var(--height) - var(--border-width) * 2);
             padding: 0 var(--input-padding-x);
             background: transparent;
             font-family: var(--font-family);
             font-size: var(--font-size);
+            font-weight: var(--font-weight);
+            color: hsla(
+                var(--text-color-h),
+                var(--text-color-s),
+                var(--text-color-l),
+                var(--text-color-a)
+            );
             border: none;
             outline: none;
         }
 
         input::placeholder {
-            opacity: 0.75;
+            color: hsla(
+                var(--placeholder-color-h),
+                var(--placeholder-color-s),
+                var(--placeholder-color-l),
+                var(--placeholder-color-a)
+            );
+            font-weight: var(--placeholder-weight);
         }
 
         [part="main"] {
@@ -131,13 +165,15 @@ export class Input extends LitElement {
 
         [part="label"] {
             display: inline-block;
-            padding: 0.25rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: hsl(
-                var(--default-accent-h),
-                var(--default-accent-s),
-                var(--default-accent-l)
+            padding: var(--label-padding);
+            font-size: var(--label-font-size);
+            font-weight: var(--label-font-weight);
+
+            color: hsla(
+                var(--label-color-h),
+                var(--label-color-s),
+                var(--label-color-l),
+                var(--label-color-a)
             );
         }
 
