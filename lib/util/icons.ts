@@ -1,6 +1,9 @@
 import { html } from "lit";
 
-export function renderIcon(value: string, classes: string | string[] = []) {
+export function renderIcon(
+    value: string | null,
+    classes: string | string[] = []
+) {
     if (!value) {
         return html``;
     }

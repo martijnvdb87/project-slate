@@ -8,19 +8,28 @@ import { renderIcon } from "../util/icons";
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
     @property({ type: String })
-    value = "";
+    value: string | null = null;
 
     @property({ type: String })
-    placeholder = "";
+    placeholder: string | null = null;
 
     @property({ type: String })
-    label = "";
+    label: string | null = null;
 
     @property({ type: String })
-    icon = "";
+    icon: string | null = null;
 
     @property({ attribute: "icon-right", type: String })
-    iconRight = "";
+    iconRight: string | null = null;
+
+    @property({ type: String })
+    success: string | null = null;
+
+    @property({ type: String })
+    error: string | null = null;
+
+    @property({ attribute: "show-validation-icon", type: Boolean })
+    showValidationIcon = false;
 
     render() {
         const mainClasses = [];
@@ -44,10 +53,36 @@ export class Input extends LitElement {
                         placeholder="${this.placeholder}"
                         value="${this.value}"
                     />
+                    ${this.validationIcon()}
                     ${renderIcon(this.iconRight, ["icon", "icon-right"])}
+                </div>
+                <div part="validation-message" ?hidden="${!this.error}">
+                    ${this.error}
                 </div>
             </div>
         `;
+    }
+
+    validationIcon() {
+        if (!this.showValidationIcon) {
+            return;
+        }
+
+        if (this.error !== null) {
+            return renderIcon("info-circle", [
+                "icon",
+                "icon-validation",
+                "icon-validation-error",
+            ]);
+        }
+
+        if (this.success !== null) {
+            return renderIcon("check", [
+                "icon",
+                "icon-validation",
+                "icon-validation-success",
+            ]);
+        }
     }
 
     static styles = css`
@@ -106,6 +141,7 @@ export class Input extends LitElement {
         }
 
         [part="main"] {
+            position: relative;
             display: flex;
             flex-grow: 1;
             flex-direction: column;
@@ -120,6 +156,20 @@ export class Input extends LitElement {
                 var(--default-accent-h),
                 var(--default-accent-s),
                 var(--default-accent-l)
+            );
+        }
+
+        [part="validation-message"] {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 0.25rem;
+            font-size: 0.875rem;
+            color: hsl(
+                var(--validation-border-color-h),
+                var(--validation-border-color-s),
+                var(--validation-border-color-l),
+                var(--validation-border-color-a)
             );
         }
 
@@ -148,16 +198,16 @@ export class Input extends LitElement {
             border-width: var(--border-width);
             border-style: solid;
             border-color: hsla(
-                var(--border-color-h),
-                var(--border-color-s),
-                var(--border-color-l),
-                var(--border-color-a)
+                var(--validation-border-color-h, var(--border-color-h)),
+                var(--validation-border-color-s, var(--border-color-s)),
+                var(--validation-border-color-l, var(--border-color-l)),
+                var(--validation-border-color-a, var(--border-color-a))
             );
             outline: 0rem solid
                 hsla(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
+                    var(--validation-border-color-h, var(--primary-color-h)),
+                    var(--validation-border-color-s, var(--primary-color-s)),
+                    var(--validation-border-color-l, var(--primary-color-l)),
                     0
                 );
             transition: all 120ms ease-in-out;
@@ -165,15 +215,15 @@ export class Input extends LitElement {
 
         [part="input-container"]:focus-within {
             border-color: hsl(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                var(--primary-color-l)
+                var(--validation-border-color-h, var(--primary-color-h)),
+                var(--validation-border-color-s, var(--primary-color-s)),
+                var(--validation-border-color-l, var(--primary-color-l))
             );
             outline: 0.25rem solid
                 hsla(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
+                    var(--validation-border-color-h, var(--primary-color-h)),
+                    var(--validation-border-color-s, var(--primary-color-s)),
+                    var(--validation-border-color-l, var(--primary-color-l)),
                     0.25
                 );
         }
@@ -186,8 +236,19 @@ export class Input extends LitElement {
             left: var(--padding-x);
         }
 
-        .icon.icon-right {
+        .icon.icon-right,
+        .icon.icon-validation {
             right: var(--padding-x);
+        }
+
+        .icon.icon-validation-error,
+        .icon.icon-validation-success {
+            --icon-color: hsla(
+                var(--validation-icon-color-h),
+                var(--validation-icon-color-s),
+                var(--validation-icon-color-l),
+                var(--validation-icon-color-a)
+            );
         }
 
         .has-icon-left input {
@@ -196,7 +257,8 @@ export class Input extends LitElement {
             );
         }
 
-        .has-icon-right input {
+        .has-icon-right input,
+        :host([show-validation-icon]) input {
             padding-right: calc(
                 var(--padding-x) + var(--icon-size) + var(--gap)
             );
@@ -248,6 +310,25 @@ export class Input extends LitElement {
 
         :host([shape="pill"]) {
             --border-radius: 999rem;
+        }
+
+        :host([error]) {
+            --validation-border-color-h: var(--error-color-h);
+            --validation-border-color-s: var(--error-color-s);
+            --validation-border-color-l: var(--error-color-l);
+            --validation-border-color-a: var(--error-color-a);
+
+            --validation-icon-color-h: var(--error-color-h);
+            --validation-icon-color-s: var(--error-color-s);
+            --validation-icon-color-l: var(--error-color-l);
+            --validation-icon-color-a: var(--error-color-a);
+        }
+
+        :host([success]) {
+            --validation-icon-color-h: var(--success-color-h);
+            --validation-icon-color-s: var(--success-color-s);
+            --validation-icon-color-l: var(--success-color-l);
+            --validation-icon-color-a: var(--success-color-a);
         }
     `;
 }

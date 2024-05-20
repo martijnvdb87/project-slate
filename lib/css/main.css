@@ -63,10 +63,10 @@
     --secondary-accent-l: var(--ds-secondary-accent-l, 100%);
     --secondary-accent-a: var(--ds-secondary-accent-a, 1);
 
-    --input-icon-color-h: var(--ds-input-icon-color-h, var(--primary-color-h));
-    --input-icon-color-s: var(--ds-input-icon-color-s, var(--primary-color-s));
-    --input-icon-color-l: var(--ds-input-icon-color-l, var(--primary-color-l));
-    --input-icon-color-a: var(--ds-input-icon-color-a, var(--primary-color-a));
+    --input-icon-color-h: var(--ds-input-icon-color-h, 220);
+    --input-icon-color-s: var(--ds-input-icon-color-s, 10%);
+    --input-icon-color-l: var(--ds-input-icon-color-l, 46%);
+    --input-icon-color-a: var(--ds-input-icon-color-a, 1);
 
     --input-background-color-h: var(--ds-input-background-color-h, 220);
     --input-background-color-s: var(--ds-input-background-color-s, 10%);
@@ -85,4 +85,14 @@
     --input-padding-x-medium: var(--ds-input-padding-x-medium, 0.5rem);
     --input-padding-x-large: var(--ds-input-padding-x-large, 0.625rem);
     --input-padding-x-huge: var(--ds-input-padding-x-huge, 0.75rem);
+
+    --error-color-h: var(--ds-error-color-h, 0);
+    --error-color-s: var(--ds-error-color-s, 71%);
+    --error-color-l: var(--ds-error-color-l, 55%);
+    --error-color-a: var(--ds-error-color-a, 1);
+
+    --success-color-h: var(--ds-success-color-h, 106);
+    --success-color-s: var(--ds-success-color-s, 45%);
+    --success-color-l: var(--ds-success-color-l, 55%);
+    --success-color-a: var(--ds-success-color-a, 1);
 }
