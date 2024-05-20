@@ -63,10 +63,16 @@ export class Button extends LitElement {
 
             --border-radius: var(--element-border-radius);
             --border-width: 0px;
-            --border-color-h: var(--input-border-color-h);
-            --border-color-s: var(--input-border-color-s);
-            --border-color-l: var(--input-border-color-l);
-            --border-color-a: var(--input-border-color-a);
+
+            --border-color-h: var(--default-color-h);
+            --border-color-s: var(--default-color-s);
+            --border-color-l: var(--default-color-l);
+            --border-color-a: var(--default-color-a);
+
+            --outline-color-h: var(--primary-color-h);
+            --outline-color-s: var(--primary-color-s);
+            --outline-color-l: var(--primary-color-l);
+            --outline-color-a: var(--primary-color-a);
 
             --box-shadow: none;
         }
@@ -108,13 +114,12 @@ export class Button extends LitElement {
             cursor: pointer;
             outline: 0.125rem none
                 hsla(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
-                    var(--primary-color-a)
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
                 );
-            transition: all 120ms ease-in-out, outline 0s, border-width 0s,
-                border-color 0s, padding 0s;
+            transition: all 120ms ease-in-out, border-width 0s, padding 0s;
         }
 
         button:hover {
@@ -138,9 +143,9 @@ export class Button extends LitElement {
         button:focus-visible {
             outline: 0.25rem solid
                 hsla(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
                     0.25
                 );
         }
@@ -185,6 +190,11 @@ export class Button extends LitElement {
             --text-color-s: var(--primary-accent-s);
             --text-color-l: var(--primary-accent-l);
             --text-color-a: var(--primary-accent-a);
+
+            --border-color-h: var(--primary-color-h);
+            --border-color-s: var(--primary-color-s);
+            --border-color-l: var(--primary-color-l);
+            --border-color-a: var(--primary-color-a);
         }
 
         :host([type="secondary"]) {
@@ -203,6 +213,16 @@ export class Button extends LitElement {
             --text-color-s: var(--secondary-accent-s);
             --text-color-l: var(--secondary-accent-l);
             --text-color-a: var(--secondary-accent-a);
+
+            --outline-color-h: var(--secondary-color-h);
+            --outline-color-s: var(--secondary-color-s);
+            --outline-color-l: var(--secondary-color-l);
+            --outline-color-a: var(--secondary-color-a);
+
+            --border-color-h: var(--secondary-color-h);
+            --border-color-s: var(--secondary-color-s);
+            --border-color-l: var(--secondary-color-l);
+            --border-color-a: var(--secondary-color-a);
         }
 
         :host([type="ghost"]) {
@@ -233,6 +253,8 @@ export class Button extends LitElement {
             --background-color-s: var(--input-border-color-s);
             --background-color-l: var(--input-border-color-l);
             --background-color-a: 0;
+
+            --border-color-a: 0;
         }
 
         :host([type="link"]) button:hover {

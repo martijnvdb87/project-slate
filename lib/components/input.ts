@@ -64,6 +64,13 @@ export class Input extends LitElement {
             --icon-size: var(--icon-size-medium);
             --font-size: var(--font-size-medium);
 
+            --icon-color: hsla(
+                var(--input-icon-color-h),
+                var(--input-icon-color-s),
+                var(--input-icon-color-l),
+                var(--input-icon-color-a)
+            );
+
             --input-padding-x: var(--input-padding-x-medium);
 
             --border-radius: var(--element-border-radius);

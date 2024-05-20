@@ -63,6 +63,11 @@
     --secondary-accent-l: var(--ds-secondary-accent-l, 100%);
     --secondary-accent-a: var(--ds-secondary-accent-a, 1);
 
+    --input-icon-color-h: var(--ds-input-icon-color-h, var(--primary-color-h));
+    --input-icon-color-s: var(--ds-input-icon-color-s, var(--primary-color-s));
+    --input-icon-color-l: var(--ds-input-icon-color-l, var(--primary-color-l));
+    --input-icon-color-a: var(--ds-input-icon-color-a, var(--primary-color-a));
+
     --input-border-color-h: var(--ds-input-border-color-h, 220);
     --input-border-color-s: var(--ds-input-border-color-s, 10%);
     --input-border-color-l: var(--ds-input-border-color-l, 82%);
