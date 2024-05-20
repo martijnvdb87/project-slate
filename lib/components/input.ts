@@ -31,6 +31,9 @@ export class Input extends LitElement {
     @property({ attribute: "show-validation-icon", type: Boolean })
     showValidationIcon = false;
 
+    @property({ type: Boolean })
+    disabled = false;
+
     render() {
         const mainClasses = [];
 
@@ -52,6 +55,7 @@ export class Input extends LitElement {
                         part="input"
                         placeholder="${this.placeholder}"
                         value="${this.value}"
+                        ?disabled="${this.disabled}"
                     />
                     ${this.validationIcon()}
                     ${renderIcon(this.iconRight, ["icon", "icon-right"])}
@@ -61,28 +65,6 @@ export class Input extends LitElement {
                 </div>
             </div>
         `;
-    }
-
-    validationIcon() {
-        if (!this.showValidationIcon) {
-            return;
-        }
-
-        if (this.error !== null) {
-            return renderIcon("error", [
-                "icon",
-                "icon-validation",
-                "icon-validation-error",
-            ]);
-        }
-
-        if (this.success !== null) {
-            return renderIcon("check", [
-                "icon",
-                "icon-validation",
-                "icon-validation-success",
-            ]);
-        }
     }
 
     static styles = css`
@@ -312,6 +294,12 @@ export class Input extends LitElement {
             --border-radius: 999rem;
         }
 
+        :host([disabled]) {
+            opacity: 0.75;
+            --text-color-a: 0.5;
+            pointer-events: none;
+        }
+
         :host([error]) {
             --validation-border-color-h: var(--error-color-h);
             --validation-border-color-s: var(--error-color-s);
@@ -331,6 +319,28 @@ export class Input extends LitElement {
             --validation-icon-color-a: var(--success-color-a);
         }
     `;
+
+    validationIcon() {
+        if (!this.showValidationIcon) {
+            return;
+        }
+
+        if (this.error !== null) {
+            return renderIcon("error", [
+                "icon",
+                "icon-validation",
+                "icon-validation-error",
+            ]);
+        }
+
+        if (this.success !== null) {
+            return renderIcon("check", [
+                "icon",
+                "icon-validation",
+                "icon-validation-success",
+            ]);
+        }
+    }
 }
 
 declare global {
