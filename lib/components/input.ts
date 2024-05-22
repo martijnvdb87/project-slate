@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import "@/lib/css/fonts.css";
 import { mainCss } from "../util/style";
@@ -7,6 +7,12 @@ import { renderIcon } from "../util/icons";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
+    @property({ type: String })
+    type = "text";
+
+    @state()
+    showPassword = false;
+
     @property({ type: String })
     value: string | null = null;
 
@@ -45,6 +51,14 @@ export class Input extends LitElement {
             mainClasses.push("has-icon-right");
         }
 
+        const inputType = (() => {
+            if (this.type === "password") {
+                return this.showPassword ? "text" : this.type;
+            }
+
+            return this.type;
+        })();
+
         return html`
             <div part="main" class="${mainClasses.join(" ")}">
                 <label part="label" for="input">${this.label}</label>
@@ -53,11 +67,12 @@ export class Input extends LitElement {
                     <input
                         id="input"
                         part="input"
+                        type="${inputType}"
                         placeholder="${this.placeholder}"
                         value="${this.value}"
                         ?disabled="${this.disabled}"
                     />
-                    ${this.validationIcon()}
+                    ${this.passwordIcon()} ${this.validationIcon()}
                     ${renderIcon(this.iconRight, ["icon", "icon-right"])}
                 </div>
                 <div part="validation-message" ?hidden="${!this.error}">
@@ -246,7 +261,19 @@ export class Input extends LitElement {
                 );
         }
 
-        .icon {
+        .button-show-password {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--icon-size);
+            height: var(--icon-size);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .icon,
+        .button-show-password {
             position: absolute;
         }
 
@@ -255,7 +282,8 @@ export class Input extends LitElement {
         }
 
         .icon.icon-right,
-        .icon.icon-validation {
+        .icon.icon-validation,
+        .button-show-password {
             right: var(--padding-x);
         }
 
@@ -276,6 +304,7 @@ export class Input extends LitElement {
         }
 
         .has-icon-right input,
+        :host([type="password"]) input,
         :host([show-validation-icon]) input {
             padding-right: calc(
                 var(--padding-x) + var(--icon-size) + var(--gap)
@@ -355,6 +384,24 @@ export class Input extends LitElement {
             --validation-icon-color-a: var(--success-color-a);
         }
     `;
+
+    passwordIcon() {
+        if (this.type !== "password") {
+            return;
+        }
+
+        return html`<button
+            class="button-show-password"
+            @click="${() => {
+                this.showPassword = !this.showPassword;
+            }}"
+        >
+            ${renderIcon(this.showPassword ? "hide" : "show", [
+                "icon",
+                "icon-show-password",
+            ])}
+        </button>`;
+    }
 
     validationIcon() {
         if (!this.showValidationIcon) {
