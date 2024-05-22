@@ -220,7 +220,6 @@ export class Input extends LitElement {
             display: flex;
             align-items: center;
             height: var(--height);
-            gap: var(--gap);
             background: hsla(
                 var(--background-color-h),
                 var(--background-color-s),
@@ -265,15 +264,14 @@ export class Input extends LitElement {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: var(--icon-size);
-            height: var(--icon-size);
+            width: calc(var(--height) - var(--border-width) * 2);
+            height: calc(var(--height) - var(--border-width) * 2);
             background: transparent;
             border: none;
             cursor: pointer;
         }
 
-        .icon,
-        .button-show-password {
+        .icon {
             position: absolute;
         }
 
@@ -282,8 +280,7 @@ export class Input extends LitElement {
         }
 
         .icon.icon-right,
-        .icon.icon-validation,
-        .button-show-password {
+        .icon.icon-validation {
             right: var(--padding-x);
         }
 
@@ -304,11 +301,14 @@ export class Input extends LitElement {
         }
 
         .has-icon-right input,
-        :host([type="password"]) input,
         :host([show-validation-icon]) input {
             padding-right: calc(
                 var(--padding-x) + var(--icon-size) + var(--gap)
             );
+        }
+
+        :host([type="password"]) input {
+            padding-right: var(--padding-x);
         }
 
         :host([size="tiny"]) {
