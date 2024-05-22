@@ -63,17 +63,20 @@ export class Input extends LitElement {
             <div part="main" class="${mainClasses.join(" ")}">
                 <label part="label" for="input">${this.label}</label>
                 <div part="input-container">
-                    ${renderIcon(this.icon, ["icon", "icon-left"])}
-                    <input
-                        id="input"
-                        part="input"
-                        type="${inputType}"
-                        placeholder="${this.placeholder}"
-                        value="${this.value}"
-                        ?disabled="${this.disabled}"
-                    />
-                    ${this.passwordIcon()} ${this.validationIcon()}
-                    ${renderIcon(this.iconRight, ["icon", "icon-right"])}
+                    <div part="input-inner-container">
+                        ${renderIcon(this.icon, ["icon", "icon-left"])}
+                        <input
+                            id="input"
+                            part="input"
+                            type="${inputType}"
+                            placeholder="${this.placeholder}"
+                            value="${this.value}"
+                            ?disabled="${this.disabled}"
+                        />
+                        ${renderIcon(this.iconRight, ["icon", "icon-right"])}
+                        ${this.validationIcon()}
+                    </div>
+                    ${this.passwordIcon()}
                 </div>
                 <div part="validation-message" ?hidden="${!this.error}">
                     ${this.error}
@@ -245,6 +248,12 @@ export class Input extends LitElement {
             transition: all 120ms ease-in-out;
         }
 
+        [part="input-inner-container"] {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
         [part="input-container"]:focus-within {
             border-color: hsl(
                 var(--validation-border-color-h, var(--primary-color-h)),
@@ -305,10 +314,6 @@ export class Input extends LitElement {
             padding-right: calc(
                 var(--padding-x) + var(--icon-size) + var(--gap)
             );
-        }
-
-        :host([type="password"]) input {
-            padding-right: var(--padding-x);
         }
 
         :host([size="tiny"]) {
