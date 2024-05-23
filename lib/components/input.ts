@@ -64,7 +64,7 @@ export class Input extends LitElement {
                 <label part="label" for="input">${this.label}</label>
                 <div part="input-container">
                     <div part="input-inner-container">
-                        ${renderIcon(this.icon, ["icon", "icon-left"])}
+                        ${renderIcon(this.icon, "icon-left")}
                         <input
                             id="input"
                             part="input"
@@ -73,7 +73,7 @@ export class Input extends LitElement {
                             value="${this.value}"
                             ?disabled="${this.disabled}"
                         />
-                        ${renderIcon(this.iconRight, ["icon", "icon-right"])}
+                        ${renderIcon(this.iconRight, "icon-right")}
                         ${this.validationIcon()}
                     </div>
                     ${this.passwordIcon()}
@@ -97,6 +97,9 @@ export class Input extends LitElement {
             --padding-x: 0.75rem;
             --gap: var(--gap-medium);
             --icon-size: var(--icon-size-medium);
+            --icon-container-size: calc(
+                var(--height) - var(--border-width) * 2
+            );
             --font-size: var(--font-size-medium);
             --font-weight: var(--input-font-weight);
 
@@ -218,6 +221,16 @@ export class Input extends LitElement {
             pointer-events: none;
         }
 
+        [part="icon-container"] {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--icon-container-size);
+            height: var(--icon-container-size);
+            pointer-events: none;
+        }
+
         [part="input-container"] {
             position: relative;
             display: flex;
@@ -273,28 +286,28 @@ export class Input extends LitElement {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: calc(var(--height) - var(--border-width) * 2);
-            height: calc(var(--height) - var(--border-width) * 2);
+            width: var(--icon-container-size);
+            height: var(--icon-container-size);
             background: transparent;
             border: none;
             cursor: pointer;
         }
 
-        .icon {
+        .icon-container {
             position: absolute;
         }
 
-        .icon.icon-left {
-            left: var(--padding-x);
+        .icon-left {
+            left: 0;
         }
 
-        .icon.icon-right,
-        .icon.icon-validation {
-            right: var(--padding-x);
+        .icon-right,
+        .icon-validation {
+            right: 0;
         }
 
-        .icon.icon-validation-error,
-        .icon.icon-validation-success {
+        .icon-validation-error,
+        .icon-validation-success {
             --icon-color: hsla(
                 var(--validation-icon-color-h),
                 var(--validation-icon-color-s),
@@ -304,16 +317,20 @@ export class Input extends LitElement {
         }
 
         .has-icon-left input {
-            padding-left: calc(
-                var(--padding-x) + var(--icon-size) + var(--gap)
-            );
+            padding-left: var(--icon-container-size);
         }
 
         .has-icon-right input,
         :host([show-validation-icon]) input {
-            padding-right: calc(
-                var(--padding-x) + var(--icon-size) + var(--gap)
-            );
+            padding-right: var(--icon-container-size);
+        }
+
+        .has-icon-right .icon-validation {
+            right: var(--icon-container-size);
+        }
+
+        :host([show-validation-icon]) .has-icon-right input {
+            padding-right: calc(var(--icon-container-size) * 2);
         }
 
         :host([size="tiny"]) {
@@ -401,10 +418,10 @@ export class Input extends LitElement {
                 this.showPassword = !this.showPassword;
             }}"
         >
-            ${renderIcon(this.showPassword ? "hide" : "show", [
-                "icon",
-                "icon-show-password",
-            ])}
+            ${renderIcon(
+                this.showPassword ? "hide" : "show",
+                "icon-show-password"
+            )}
         </button>`;
     }
 
@@ -415,7 +432,6 @@ export class Input extends LitElement {
 
         if (this.error !== null) {
             return renderIcon("error", [
-                "icon",
                 "icon-validation",
                 "icon-validation-error",
             ]);
@@ -423,7 +439,6 @@ export class Input extends LitElement {
 
         if (this.success !== null) {
             return renderIcon("check", [
-                "icon",
                 "icon-validation",
                 "icon-validation-success",
             ]);

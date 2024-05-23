@@ -14,11 +14,15 @@ export function renderIcon(
     const name = parts[0];
     const type = parts[1] ?? "regular";
 
-    return html`<div part="icon" class="${classes.join(" ")}">
+    const iconHtml = html`<div part="icon">
         <box-icon
             name="${name}"
             color="var(--icon-color)"
             type="${type}"
         ></box-icon>
+    </div>`;
+
+    return html`<div part="icon-container" class="${classes.join(" ")}">
+        ${iconHtml}
     </div>`;
 }
