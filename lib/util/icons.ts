@@ -19,6 +19,7 @@ export function renderIcon(
             name="${name}"
             color="var(--icon-color)"
             type="${type}"
+            size="lg"
         ></box-icon>
     </div>`;
 

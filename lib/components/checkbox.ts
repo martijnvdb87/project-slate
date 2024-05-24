@@ -10,6 +10,12 @@ export class Input extends LitElement {
     @property({ type: Boolean })
     checked = false;
 
+    @property({ type: String })
+    icon = "check";
+
+    @property({ attribute: "icon-padding", type: String })
+    iconPadding = "10px";
+
     @property({ type: Boolean })
     disabled = false;
 
@@ -17,7 +23,7 @@ export class Input extends LitElement {
         return html`
             <div part="main">
                 <input type="checkbox" part="input" ?checked=${this.checked} />
-                <div part="input-container">${renderIcon("check")}</div>
+                <div part="input-container">${renderIcon(this.icon)}</div>
             </div>
         `;
     }
@@ -44,8 +50,6 @@ export class Input extends LitElement {
             --background-color-l: var(--input-background-color-l);
             --background-color-a: var(--input-background-color-a);
 
-            --icon-size: var(--icon-size-medium);
-
             --icon-color-h: var(--primary-accent-h);
             --icon-color-s: var(--primary-accent-s);
             --icon-color-l: var(--primary-accent-l);
@@ -57,6 +61,8 @@ export class Input extends LitElement {
                 var(--icon-color-l),
                 var(--icon-color-a)
             );
+
+            --icon-size: 100%;
 
             --gap: var(--gap-medium);
 
@@ -133,6 +139,8 @@ export class Input extends LitElement {
             justify-content: center;
             width: var(--icon-size);
             height: var(--icon-size);
+            max-width: 100%;
+            max-height: 100%;
             pointer-events: none;
         }
 
@@ -140,29 +148,27 @@ export class Input extends LitElement {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: var(--icon-container-size);
-            height: var(--icon-container-size);
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
             pointer-events: none;
         }
 
         :host([size="tiny"]) {
             --height: var(--height-tiny);
-            --icon-size: var(--icon-size-tiny);
         }
 
         :host([size="small"]) {
             --height: var(--height-small);
-            --icon-size: var(--icon-size-small);
         }
 
         :host([size="large"]) {
             --height: var(--height-large);
-            --icon-size: var(--icon-size-large);
         }
 
         :host([size="huge"]) {
             --height: var(--height-huge);
-            --icon-size: var(--icon-size-huge);
         }
     `;
 }
