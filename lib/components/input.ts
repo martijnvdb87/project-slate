@@ -264,6 +264,7 @@ export class Input extends LitElement {
         [part="input-inner-container"] {
             position: relative;
             display: flex;
+            flex-grow: 1;
             align-items: center;
         }
 
