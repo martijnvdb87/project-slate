@@ -94,7 +94,6 @@ export class Input extends LitElement {
 
             --display: inline-flex;
             --height: var(--height-medium);
-            --padding-x: 0.75rem;
             --gap: var(--gap-medium);
             --icon-size: var(--icon-size-medium);
             --icon-container-size: calc(
@@ -337,7 +336,6 @@ export class Input extends LitElement {
         :host([size="tiny"]) {
             --height: var(--height-tiny);
             --icon-size: var(--icon-size-tiny);
-            --padding-x: var(--padding-x-tiny);
             --input-padding-x: var(--input-padding-x-tiny);
             --gap: var(--gap-tiny);
             --font-size: var(--font-size-tiny);
@@ -346,7 +344,6 @@ export class Input extends LitElement {
         :host([size="small"]) {
             --height: var(--height-small);
             --icon-size: var(--icon-size-small);
-            --padding-x: var(--padding-x-small);
             --input-padding-x: var(--input-padding-x-small);
             --gap: var(--gap-small);
             --font-size: var(--font-size-small);
@@ -355,7 +352,6 @@ export class Input extends LitElement {
         :host([size="large"]) {
             --height: var(--height-large);
             --icon-size: var(--icon-size-large);
-            --padding-x: var(--padding-x-large);
             --input-padding-x: var(--input-padding-x-large);
             --gap: var(--gap-large);
             --font-size: var(--font-size-large);
@@ -364,7 +360,6 @@ export class Input extends LitElement {
         :host([size="huge"]) {
             --height: var(--height-huge);
             --icon-size: var(--icon-size-huge);
-            --padding-x: var(--padding-x-huge);
             --input-padding-x: var(--input-padding-x-huge);
             --gap: var(--gap-huge);
             --font-size: var(--font-size-huge);
