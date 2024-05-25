@@ -78,8 +78,11 @@ export class Input extends LitElement {
                     </div>
                     ${this.passwordIcon()}
                 </div>
-                <div part="validation-message" ?hidden="${!this.error}">
-                    ${this.error}
+                <div
+                    part="validation-message"
+                    ?hidden="${!(this.error !== null || this.success !== null)}"
+                >
+                    ${this.error || this.success || html`&nbsp;`}
                 </div>
             </div>
         `;
@@ -198,9 +201,6 @@ export class Input extends LitElement {
         }
 
         [part="validation-message"] {
-            position: absolute;
-            top: 100%;
-            left: 0;
             padding: 0.25rem;
             font-size: 0.8125rem;
             color: hsl(
