@@ -145,6 +145,10 @@ export class Input extends LitElement {
             --border-color-s: var(--input-border-color-s);
             --border-color-l: var(--input-border-color-l);
             --border-color-a: var(--input-border-color-a);
+
+            --outline-width: var(--input-outline-width);
+
+            --focus-outline-width: var(--input-focus-outline-width);
         }
 
         input {
@@ -250,7 +254,7 @@ export class Input extends LitElement {
                 var(--validation-border-color-l, var(--border-color-l)),
                 var(--validation-border-color-a, var(--border-color-a))
             );
-            outline: 0rem solid
+            outline: calc(var(--input-outline-width) / 2) solid
                 hsla(
                     var(--validation-border-color-h, var(--primary-color-h)),
                     var(--validation-border-color-s, var(--primary-color-s)),
@@ -273,12 +277,12 @@ export class Input extends LitElement {
                 var(--validation-border-color-s, var(--primary-color-s)),
                 var(--validation-border-color-l, var(--primary-color-l))
             );
-            outline: 0.25rem solid
+            outline: var(--input-outline-width) solid
                 hsla(
                     var(--validation-border-color-h, var(--primary-color-h)),
                     var(--validation-border-color-s, var(--primary-color-s)),
                     var(--validation-border-color-l, var(--primary-color-l)),
-                    0.25
+                    var(--input-outline-opacity)
                 );
         }
 
@@ -374,7 +378,7 @@ export class Input extends LitElement {
         }
 
         :host([shape="pill"]) {
-            --border-radius: 999rem;
+            --border-radius: var(--shape-pill-radius);
         }
 
         :host([disabled]) {

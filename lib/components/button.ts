@@ -115,12 +115,12 @@ export class Button extends LitElement {
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             cursor: pointer;
-            outline: 0.125rem none
+            outline: calc(var(--input-outline-width) / 2) solid
                 hsla(
                     var(--outline-color-h),
                     var(--outline-color-s),
                     var(--outline-color-l),
-                    var(--outline-color-a)
+                    0
                 );
             transition: all 120ms ease-in-out, border-width 0s, padding 0s;
         }
@@ -144,12 +144,12 @@ export class Button extends LitElement {
         }
 
         button:focus-visible {
-            outline: 0.25rem solid
+            outline: var(--input-outline-width) solid
                 hsla(
                     var(--outline-color-h),
                     var(--outline-color-s),
                     var(--outline-color-l),
-                    0.25
+                    var(--input-outline-opacity)
                 );
         }
 
@@ -309,7 +309,7 @@ export class Button extends LitElement {
         }
 
         :host([shape="pill"]) {
-            --border-radius: 999rem;
+            --border-radius: var(--shape-pill-radius);
         }
 
         :host([shape="circle"]) {
