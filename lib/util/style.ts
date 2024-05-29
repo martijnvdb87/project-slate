@@ -7,7 +7,7 @@ export function mainCss() {
 }
 
 export function size(value: number) {
-    const size = value / 4;
+    const size = value / 16;
 
     return unsafeCSS(
         `var(--ds-size-${size.toString().replace(".", "_")}, ${size}rem)`

@@ -149,6 +149,14 @@ export class Input extends LitElement {
             --outline-width: var(--input-outline-width);
 
             --focus-outline-width: var(--input-focus-outline-width);
+
+            --validation-font-size: var(
+                --input-validation-message-font-size-medium
+            );
+
+            --validation-padding: var(
+                --input-validation-message-padding-medium
+            );
         }
 
         input {
@@ -205,8 +213,8 @@ export class Input extends LitElement {
         }
 
         [part="validation-message"] {
-            padding: 0.25rem;
-            font-size: 0.8125rem;
+            padding: var(--validation-padding);
+            font-size: var(--validation-font-size);
             color: hsl(
                 var(--validation-border-color-h),
                 var(--validation-border-color-s),
@@ -343,6 +351,10 @@ export class Input extends LitElement {
             --input-padding-x: var(--input-padding-x-tiny);
             --gap: var(--gap-tiny);
             --font-size: var(--font-size-tiny);
+            --validation-font-size: var(
+                --input-validation-message-font-size-tiny
+            );
+            --validation-padding: var(--input-validation-message-padding-tiny);
         }
 
         :host([size="small"]) {
@@ -351,6 +363,10 @@ export class Input extends LitElement {
             --input-padding-x: var(--input-padding-x-small);
             --gap: var(--gap-small);
             --font-size: var(--font-size-small);
+            --validation-font-size: var(
+                --input-validation-message-font-size-small
+            );
+            --validation-padding: var(--input-validation-message-padding-small);
         }
 
         :host([size="large"]) {
@@ -359,6 +375,10 @@ export class Input extends LitElement {
             --input-padding-x: var(--input-padding-x-large);
             --gap: var(--gap-large);
             --font-size: var(--font-size-large);
+            --validation-font-size: var(
+                --input-validation-message-font-size-large
+            );
+            --validation-padding: var(--input-validation-message-padding-large);
         }
 
         :host([size="huge"]) {
@@ -367,6 +387,10 @@ export class Input extends LitElement {
             --input-padding-x: var(--input-padding-x-huge);
             --gap: var(--gap-huge);
             --font-size: var(--font-size-huge);
+            --validation-font-size: var(
+                --input-validation-message-font-size-huge
+            );
+            --validation-padding: var(--input-validation-message-padding-huge);
         }
 
         :host([width="full"]) {

@@ -5,39 +5,37 @@ export default css`
     :host {
         --font-family: Inter, sans-serif;
 
-        --font-size-tiny: var(--ds-font-size-tiny, ${size(3)});
-        --font-size-small: var(--ds-font-size-small, ${size(3.5)});
-        --font-size-medium: var(--ds-font-size-medium, ${size(3.75)});
-        --font-size-large: var(--ds-font-size-large, ${size(5)});
-        --font-size-huge: var(--ds-font-size-huge, ${size(6)});
+        --font-size-tiny: var(--ds-font-size-tiny, ${size(10)});
+        --font-size-small: var(--ds-font-size-small, ${size(12)});
+        --font-size-medium: var(--ds-font-size-medium, ${size(14)});
+        --font-size-large: var(--ds-font-size-large, ${size(18)});
+        --font-size-huge: var(--ds-font-size-huge, ${size(24)});
 
-        --height-tiny: var(--ds-height-tiny, ${size(6)});
-        --height-small: var(--ds-height-small, ${size(8)});
-        --height-medium: var(--ds-height-medium, ${size(10)});
-        --height-large: var(--ds-height-large, ${size(12)});
-        --height-huge: var(--ds-height-huge, ${size(14)});
+        --height-tiny: var(--ds-height-tiny, ${size(24)});
+        --height-small: var(--ds-height-small, ${size(32)});
+        --height-medium: var(--ds-height-medium, ${size(40)});
+        --height-large: var(--ds-height-large, ${size(48)});
+        --height-huge: var(--ds-height-huge, ${size(56)});
 
-        --padding-x-tiny: var(--ds-padding-x-tiny, ${size(2)});
-        --padding-x-small: var(--ds-padding-x-small, ${size(3)});
-        --padding-x-medium: var(--ds-padding-x-medium, ${size(4)});
-        --padding-x-large: var(--ds-padding-x-large, ${size(5)});
-        --padding-x-huge: var(--ds-padding-x-huge, ${size(6)});
+        --padding-x-tiny: var(--ds-padding-x-tiny, ${size(8)});
+        --padding-x-small: var(--ds-padding-x-small, ${size(12)});
+        --padding-x-medium: var(--ds-padding-x-medium, ${size(16)});
+        --padding-x-large: var(--ds-padding-x-large, ${size(20)});
+        --padding-x-huge: var(--ds-padding-x-huge, ${size(24)});
 
-        --gap-tiny: var(--ds-gap-tiny, ${size(1)});
-        --gap-small: var(--ds-gap-small, ${size(1.5)});
-        --gap-medium: var(--ds-gap-medium, ${size(2)});
-        --gap-large: var(--ds-gap-large, ${size(2.5)});
-        --gap-huge: var(--ds-gap-huge, ${size(3)});
+        --gap-tiny: var(--ds-gap-tiny, ${size(4)});
+        --gap-small: var(--ds-gap-small, ${size(6)});
+        --gap-medium: var(--ds-gap-medium, ${size(8)});
+        --gap-large: var(--ds-gap-large, ${size(10)});
+        --gap-huge: var(--ds-gap-huge, ${size(12)});
 
-        --icon-size-tiny: var(--ds-icon-size-tiny, ${size(3)});
-        --icon-size-small: var(--ds-icon-size-small, ${size(3.5)});
-        --icon-size-medium: var(--ds-icon-size-medium, ${size(5)});
-        --icon-size-large: var(--ds-icon-size-large, ${size(5.5)});
-        --icon-size-huge: var(--ds-icon-size-huge, ${size(6)});
+        --icon-size-tiny: var(--ds-icon-size-tiny, ${size(12)});
+        --icon-size-small: var(--ds-icon-size-small, ${size(16)});
+        --icon-size-medium: var(--ds-icon-size-medium, ${size(18)});
+        --icon-size-large: var(--ds-icon-size-large, ${size(24)});
+        --icon-size-huge: var(--ds-icon-size-huge, ${size(26)});
 
-        --shape-pill-radius: var(--ds-shape-pill-radius, ${size(100)});
-
-        --element-border-radius: var(--ds-element-border-radius, ${size(1.25)});
+        --shape-pill-radius: var(--ds-shape-pill-radius, ${size(960)});
 
         --default-color-h: var(--ds-default-color-h, 220);
         --default-color-s: var(--ds-default-color-s, 10%);
@@ -68,6 +66,25 @@ export default css`
         --secondary-accent-s: var(--ds-secondary-accent-s, 10%);
         --secondary-accent-l: var(--ds-secondary-accent-l, 100%);
         --secondary-accent-a: var(--ds-secondary-accent-a, 1);
+
+        --error-color-h: var(--ds-error-color-h, 0);
+        --error-color-s: var(--ds-error-color-s, 71%);
+        --error-color-l: var(--ds-error-color-l, 55%);
+        --error-color-a: var(--ds-error-color-a, 1);
+
+        --success-color-h: var(--ds-success-color-h, 106);
+        --success-color-s: var(--ds-success-color-s, 45%);
+        --success-color-l: var(--ds-success-color-l, 55%);
+        --success-color-a: var(--ds-success-color-a, 1);
+
+        --element-font-weight: var(--ds-element-font-weight, 500);
+        --element-border-radius: var(--ds-element-border-radius, ${size(5)});
+
+        --element-shadow-size: var(
+            --ds-element-shadow-size,
+            ${size(0)} ${size(2)} ${size(12)} ${size(0)}
+        );
+        --element-shadow-opacity: var(--ds-element-shadow-opacity, 0.4);
 
         --input-text-color-h: var(--ds-input-text-color-h, 220);
         --input-text-color-s: var(--ds-input-text-color-s, 10%);
@@ -109,9 +126,9 @@ export default css`
         --input-label-color-l: var(--ds-input-label-color-l, 16%);
         --input-label-color-a: var(--ds-input-label-color-a, 1);
 
-        --input-label-padding: var(--ds-input-label-padding, ${size(1)});
+        --input-label-padding: var(--ds-input-label-padding, ${size(4)});
         --input-label-font-weight: var(--ds-input-label-font-weight, 600);
-        --input-label-font-size: var(--ds-input-label-font-size, ${size(3.5)});
+        --input-label-font-size: var(--ds-input-label-font-size, ${size(14)});
 
         --input-border-color-h: var(--ds-input-border-color-h, 220);
         --input-border-color-s: var(--ds-input-border-color-s, 10%);
@@ -120,23 +137,64 @@ export default css`
 
         --input-border-width: var(--ds-input-border-width, 1px);
 
-        --input-padding-x-tiny: var(--ds-input-padding-x-tiny, ${size(2)});
-        --input-padding-x-small: var(--ds-input-padding-x-small, ${size(2.5)});
-        --input-padding-x-medium: var(--ds-input-padding-x-medium, ${size(3)});
-        --input-padding-x-large: var(--ds-input-padding-x-large, ${size(3.5)});
-        --input-padding-x-huge: var(--ds-input-padding-x-huge, ${size(4)});
+        --input-padding-x-tiny: var(--ds-input-padding-x-tiny, ${size(8)});
+        --input-padding-x-small: var(--ds-input-padding-x-small, ${size(10)});
+        --input-padding-x-medium: var(--ds-input-padding-x-medium, ${size(12)});
+        --input-padding-x-large: var(--ds-input-padding-x-large, ${size(14)});
+        --input-padding-x-huge: var(--ds-input-padding-x-huge, ${size(16)});
 
-        --input-outline-width: var(--ds-input-outline-width, ${size(1)});
+        --input-outline-width: var(--ds-input-outline-width, ${size(4)});
         --input-outline-opacity: var(--ds-input-outline-opacity, 0.25);
 
-        --error-color-h: var(--ds-error-color-h, 0);
-        --error-color-s: var(--ds-error-color-s, 71%);
-        --error-color-l: var(--ds-error-color-l, 55%);
-        --error-color-a: var(--ds-error-color-a, 1);
+        --input-validation-message-padding: var(
+            --ds-input-validation-message-padding,
+            ${size(4)}
+        );
+        --input-validation-message-font-weight: var(
+            --ds-input-validation-message-font-weight,
+            400
+        );
 
-        --success-color-h: var(--ds-success-color-h, 106);
-        --success-color-s: var(--ds-success-color-s, 45%);
-        --success-color-l: var(--ds-success-color-l, 55%);
-        --success-color-a: var(--ds-success-color-a, 1);
+        --input-validation-message-font-size-tiny: var(
+            --ds-input-validation-message-font-size-tiny,
+            ${size(10)}
+        );
+        --input-validation-message-font-size-small: var(
+            --ds-input-validation-message-font-size-small,
+            ${size(11)}
+        );
+        --input-validation-message-font-size-medium: var(
+            --ds-input-validation-message-font-size-medium,
+            ${size(12)}
+        );
+        --input-validation-message-font-size-large: var(
+            --ds-input-validation-message-font-size-large,
+            ${size(14)}
+        );
+        --input-validation-message-font-size-huge: var(
+            --ds-input-validation-message-font-size-huge,
+            ${size(16)}
+        );
+
+        --input-validation-message-padding-tiny: var(
+            --ds-input-validation-message-padding-tiny,
+            ${size(4)}
+        );
+        --input-validation-message-padding-small: var(
+            --ds-input-validation-message-padding-small,
+            ${size(4)}
+        );
+        --input-validation-message-padding-medium: var(
+            --ds-input-validation-message-padding-medium,
+            ${size(4)}
+        );
+        --input-validation-message-padding-large: var(
+            --ds-input-validation-message-padding-large,
+            ${size(4)}
+        );
+        --input-validation-message-padding-huge: var(
+            --ds-input-validation-message-padding-huge,
+            ${size(4)}
+        );
     }
 `;

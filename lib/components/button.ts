@@ -63,6 +63,7 @@ export class Button extends LitElement {
             --gap: var(--gap-medium);
 
             --font-size: var(--font-size-medium);
+            --font-weight: var(--element-font-weight);
 
             --border-radius: var(--element-border-radius);
             --border-width: 0px;
@@ -77,6 +78,8 @@ export class Button extends LitElement {
             --outline-color-l: var(--primary-color-l);
             --outline-color-a: var(--primary-color-a);
 
+            --box-shadow-size: var(--element-shadow-size);
+            --box-shadow-opacity: var(--element-shadow-opacity);
             --box-shadow: none;
         }
 
@@ -91,7 +94,7 @@ export class Button extends LitElement {
             gap: var(--gap);
             font-size: var(--font-size);
             font-family: var(--font-family);
-            font-weight: 500;
+            font-weight: var(--font-weight);
             background: hsla(
                 var(--background-color-h),
                 var(--background-color-s),
@@ -319,12 +322,12 @@ export class Button extends LitElement {
         }
 
         :host([shadow]) {
-            --box-shadow: 0 0.25rem 1rem 0.125rem
+            --box-shadow: var(--box-shadow-size)
                 hsl(
                     var(--background-color-h),
                     var(--background-color-s),
                     calc(var(--background-color-l) - 15%),
-                    0.25
+                    var(--box-shadow-opacity)
                 );
         }
 
