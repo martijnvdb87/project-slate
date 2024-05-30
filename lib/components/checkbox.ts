@@ -11,6 +11,9 @@ export class Input extends LitElement {
     checked = false;
 
     @property({ type: String })
+    label = null;
+
+    @property({ type: String })
     icon = "check";
 
     @property({ attribute: "icon-padding", type: String })
@@ -20,11 +23,21 @@ export class Input extends LitElement {
     disabled = false;
 
     render() {
+        console.log(this.label);
         return html`
-            <div part="main">
-                <input type="checkbox" part="input" ?checked=${this.checked} />
-                <div part="input-container">${renderIcon(this.icon)}</div>
-            </div>
+            <label part="main">
+                <div part="checkbox-container">
+                    <input
+                        type="checkbox"
+                        part="input"
+                        ?checked=${this.checked}
+                    />
+                    <div part="input-container">${renderIcon(this.icon)}</div>
+                </div>
+                <div ?hidden="${this.label === null}" part="label-container">
+                    ${this.label}
+                </div>
+            </label>
         `;
     }
 
@@ -35,7 +48,7 @@ export class Input extends LitElement {
             display: var(--display);
             vertical-align: bottom;
 
-            --display: inline-flex;
+            --display: flex;
             --height: var(--height-medium);
 
             --border-radius: var(--element-border-radius);
@@ -66,11 +79,18 @@ export class Input extends LitElement {
 
             --gap: var(--gap-medium);
 
+            --font-size: var(--font-size-medium);
+
             --checkbox-size: calc(var(--height) - var(--gap) * 2);
         }
 
         [part="main"] {
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: var(--gap);
+            font-family: var(--font-family);
+            font-size: var(--font-size);
         }
 
         [part="input"] {
@@ -157,18 +177,22 @@ export class Input extends LitElement {
 
         :host([size="tiny"]) {
             --height: var(--height-tiny);
+            --font-size: var(--font-size-tiny);
         }
 
         :host([size="small"]) {
             --height: var(--height-small);
+            --font-size: var(--font-size-small);
         }
 
         :host([size="large"]) {
             --height: var(--height-large);
+            --font-size: var(--font-size-large);
         }
 
         :host([size="huge"]) {
             --height: var(--height-huge);
+            --font-size: var(--font-size-huge);
         }
     `;
 }
