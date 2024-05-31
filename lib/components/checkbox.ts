@@ -82,6 +82,10 @@ export class Input extends LitElement {
             --font-size: var(--font-size-medium);
 
             --checkbox-size: calc(var(--height) - var(--gap) * 2);
+
+            --outline-width: var(--input-outline-width);
+
+            --focus-outline-width: var(--input-focus-outline-width);
         }
 
         [part="main"] {
@@ -102,6 +106,21 @@ export class Input extends LitElement {
             opacity: 0;
             z-index: 999;
             cursor: pointer;
+        }
+
+        [part="input"]:focus-visible + [part="input-container"] {
+            border-color: hsl(
+                var(--primary-color-h),
+                var(--primary-color-s),
+                var(--primary-color-l)
+            );
+            outline: var(--input-outline-width) solid
+                hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l),
+                    var(--input-outline-opacity)
+                );
         }
 
         [part="icon-container"] {
@@ -151,6 +170,14 @@ export class Input extends LitElement {
                 var(--background-color-l),
                 var(--background-color-a)
             );
+            outline: calc(var(--input-outline-width) / 2) solid
+                hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l),
+                    0
+                );
+            transition: all var(--transition-duration) ease-in-out;
         }
 
         [part="icon"] {
@@ -173,6 +200,7 @@ export class Input extends LitElement {
             max-width: 100%;
             max-height: 100%;
             pointer-events: none;
+            transition: all var(--transition-duration) ease-in-out;
         }
 
         :host([size="tiny"]) {

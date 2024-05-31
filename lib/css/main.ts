@@ -196,5 +196,7 @@ export default css`
             --ds-input-validation-message-padding-huge,
             ${size(4)}
         );
+
+        --transition-duration: var(--ds-transition-duration, 120ms);
     }
 `;

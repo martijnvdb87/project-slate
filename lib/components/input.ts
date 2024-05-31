@@ -269,7 +269,7 @@ export class Input extends LitElement {
                     var(--validation-border-color-l, var(--primary-color-l)),
                     0
                 );
-            transition: all 120ms ease-in-out;
+            transition: all var(--transition-duration) ease-in-out;
         }
 
         [part="input-inner-container"] {

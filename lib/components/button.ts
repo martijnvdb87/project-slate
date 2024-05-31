@@ -125,7 +125,8 @@ export class Button extends LitElement {
                     var(--outline-color-l),
                     0
                 );
-            transition: all 120ms ease-in-out, border-width 0s, padding 0s;
+            transition: all var(--transition-duration) ease-in-out,
+                border-width 0s, padding 0s;
         }
 
         button:hover {
