@@ -262,7 +262,7 @@ export class Input extends LitElement {
                 var(--validation-border-color-l, var(--border-color-l)),
                 var(--validation-border-color-a, var(--border-color-a))
             );
-            outline: calc(var(--input-outline-width) / 2) solid
+            outline: 0 solid
                 hsla(
                     var(--validation-border-color-h, var(--primary-color-h)),
                     var(--validation-border-color-s, var(--primary-color-s)),
@@ -300,9 +300,35 @@ export class Input extends LitElement {
             justify-content: center;
             width: var(--icon-container-size);
             height: var(--icon-container-size);
+        }
+
+        .button-show-password button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(var(--icon-container-size) - var(--gap) * 2);
+            height: calc(var(--icon-container-size) - var(--gap) * 2);
             background: transparent;
+            border-radius: var(--border-radius);
+            border-radius: 999rem;
             border: none;
             cursor: pointer;
+        }
+
+        .button-show-password button:focus-visible {
+            border-color: hsl(
+                var(--validation-border-color-h, var(--primary-color-h)),
+                var(--validation-border-color-s, var(--primary-color-s)),
+                var(--validation-border-color-l, var(--primary-color-l))
+            );
+            outline: calc(var(--input-outline-width) + var(--outline-width))
+                solid
+                hsla(
+                    var(--validation-border-color-h, var(--primary-color-h)),
+                    var(--validation-border-color-s, var(--primary-color-s)),
+                    var(--validation-border-color-l, var(--primary-color-l)),
+                    var(--input-outline-opacity)
+                );
         }
 
         .icon-container {
@@ -436,17 +462,18 @@ export class Input extends LitElement {
             return;
         }
 
-        return html`<button
-            class="button-show-password"
-            @click="${() => {
-                this.showPassword = !this.showPassword;
-            }}"
-        >
-            ${renderIcon(
-                this.showPassword ? "hide" : "show",
-                "icon-show-password"
-            )}
-        </button>`;
+        return html`<div class="button-show-password">
+            <button
+                @click="${() => {
+                    this.showPassword = !this.showPassword;
+                }}"
+            >
+                ${renderIcon(
+                    this.showPassword ? "hide" : "show",
+                    "icon-show-password"
+                )}
+            </button>
+        </div>`;
     }
 
     validationIcon() {

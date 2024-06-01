@@ -78,6 +78,11 @@ export class Button extends LitElement {
             --outline-color-l: var(--primary-color-l);
             --outline-color-a: var(--primary-color-a);
 
+            --outline-offset: var(--element-outline-offset);
+            --outline-colored-offset: var(--element-colored-outline-offset);
+
+            --outline-width: var(--input-outline-width);
+
             --box-shadow-size: var(--element-shadow-size);
             --box-shadow-opacity: var(--element-shadow-opacity);
             --box-shadow: none;
@@ -118,13 +123,14 @@ export class Button extends LitElement {
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             cursor: pointer;
-            outline: calc(var(--input-outline-width) / 2) solid
+            outline: 0 solid
                 hsla(
                     var(--outline-color-h),
                     var(--outline-color-s),
                     var(--outline-color-l),
                     0
                 );
+            outline-offset: var(--outline-offset);
             transition: all var(--transition-duration) ease-in-out,
                 border-width 0s, padding 0s;
         }
@@ -148,7 +154,7 @@ export class Button extends LitElement {
         }
 
         button:focus-visible {
-            outline: var(--input-outline-width) solid
+            outline: var(--outline-width) solid
                 hsla(
                     var(--outline-color-h),
                     var(--outline-color-s),
@@ -202,6 +208,11 @@ export class Button extends LitElement {
             --border-color-s: var(--primary-color-s);
             --border-color-l: var(--primary-color-l);
             --border-color-a: var(--primary-color-a);
+
+            --outline-width: calc(
+                var(--input-outline-width) + var(--input-border-width)
+            );
+            --outline-offset: var(--outline-colored-offset);
         }
 
         :host([type="secondary"]) {
@@ -221,15 +232,15 @@ export class Button extends LitElement {
             --text-color-l: var(--secondary-accent-l);
             --text-color-a: var(--secondary-accent-a);
 
-            --outline-color-h: var(--secondary-color-h);
-            --outline-color-s: var(--secondary-color-s);
-            --outline-color-l: var(--secondary-color-l);
-            --outline-color-a: var(--secondary-color-a);
-
             --border-color-h: var(--secondary-color-h);
             --border-color-s: var(--secondary-color-s);
             --border-color-l: var(--secondary-color-l);
             --border-color-a: var(--secondary-color-a);
+
+            --outline-width: calc(
+                var(--input-outline-width) + var(--input-border-width)
+            );
+            --outline-offset: var(--outline-colored-offset);
         }
 
         :host([type="ghost"]) {

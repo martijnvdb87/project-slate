@@ -143,8 +143,14 @@ export default css`
         --input-padding-x-large: var(--ds-input-padding-x-large, ${size(14)});
         --input-padding-x-huge: var(--ds-input-padding-x-huge, ${size(16)});
 
-        --input-outline-width: var(--ds-input-outline-width, ${size(4)});
-        --input-outline-opacity: var(--ds-input-outline-opacity, 0.25);
+        --input-outline-width: var(--ds-input-outline-width, ${size(1)});
+        --input-outline-opacity: var(--ds-input-outline-opacity, 1);
+
+        --element-outline-offset: var(--ds-element-outline-offset, ${size(0)});
+        --element-colored-outline-offset: var(
+            --ds-element-colored-outline-offset,
+            ${size(2)}
+        );
 
         --input-validation-message-padding: var(
             --ds-input-validation-message-padding,
