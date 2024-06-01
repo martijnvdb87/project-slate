@@ -85,6 +85,9 @@ export class Input extends LitElement {
 
             --outline-width: var(--input-outline-width);
 
+            --outline-offset: var(--element-outline-offset);
+            --outline-colored-offset: var(--element-colored-outline-offset);
+
             --focus-outline-width: var(--input-focus-outline-width);
         }
 
@@ -114,13 +117,17 @@ export class Input extends LitElement {
                 var(--primary-color-s),
                 var(--primary-color-l)
             );
-            outline: var(--input-outline-width) solid
+            outline: calc(
+                    var(--input-outline-width) + var(--input-border-width)
+                )
+                solid
                 hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
                     var(--primary-color-l),
                     var(--input-outline-opacity)
                 );
+            outline-offset: var(--outline-offset);
         }
 
         [part="icon-container"] {
@@ -138,6 +145,8 @@ export class Input extends LitElement {
             --border-color-s: var(--primary-color-s);
             --border-color-l: var(--primary-color-l);
             --border-color-a: var(--primary-color-a);
+
+            --outline-offset: var(--outline-colored-offset);
         }
 
         [part="input"]:checked
@@ -170,7 +179,7 @@ export class Input extends LitElement {
                 var(--background-color-l),
                 var(--background-color-a)
             );
-            outline: calc(var(--input-outline-width) / 2) solid
+            outline: 0 solid
                 hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
