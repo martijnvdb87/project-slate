@@ -105,6 +105,8 @@ export class Input extends LitElement {
             --font-size: var(--font-size-medium);
             --font-weight: var(--input-font-weight);
 
+            --sub-height: var(--sub-height-medium);
+
             --text-color-h: var(--input-text-color-h);
             --text-color-s: var(--input-text-color-s);
             --text-color-l: var(--input-text-color-l);
@@ -306,8 +308,8 @@ export class Input extends LitElement {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: calc(var(--icon-container-size) - var(--gap) * 2);
-            height: calc(var(--icon-container-size) - var(--gap) * 2);
+            width: var(--sub-height);
+            height: var(--sub-height);
             background: transparent;
             border-radius: var(--border-radius);
             border-radius: 999rem;
@@ -381,6 +383,7 @@ export class Input extends LitElement {
                 --input-validation-message-font-size-tiny
             );
             --validation-padding: var(--input-validation-message-padding-tiny);
+            --sub-height: var(--sub-height-tiny);
         }
 
         :host([size="small"]) {
@@ -393,6 +396,7 @@ export class Input extends LitElement {
                 --input-validation-message-font-size-small
             );
             --validation-padding: var(--input-validation-message-padding-small);
+            --sub-height: var(--sub-height-small);
         }
 
         :host([size="large"]) {
@@ -405,6 +409,7 @@ export class Input extends LitElement {
                 --input-validation-message-font-size-large
             );
             --validation-padding: var(--input-validation-message-padding-large);
+            --sub-height: var(--sub-height-large);
         }
 
         :host([size="huge"]) {
@@ -417,6 +422,7 @@ export class Input extends LitElement {
                 --input-validation-message-font-size-huge
             );
             --validation-padding: var(--input-validation-message-padding-huge);
+            --sub-height: var(--sub-height-huge);
         }
 
         :host([width="full"]) {

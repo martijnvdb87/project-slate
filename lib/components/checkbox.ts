@@ -81,7 +81,7 @@ export class Input extends LitElement {
 
             --font-size: var(--font-size-medium);
 
-            --checkbox-size: calc(var(--height) - var(--gap) * 2);
+            --checkbox-size: var(--sub-height-medium);
 
             --outline-width: var(--input-outline-width);
 
@@ -215,21 +215,25 @@ export class Input extends LitElement {
         :host([size="tiny"]) {
             --height: var(--height-tiny);
             --font-size: var(--font-size-tiny);
+            --checkbox-size: var(--sub-height-tiny);
         }
 
         :host([size="small"]) {
             --height: var(--height-small);
             --font-size: var(--font-size-small);
+            --checkbox-size: var(--sub-height-small);
         }
 
         :host([size="large"]) {
             --height: var(--height-large);
             --font-size: var(--font-size-large);
+            --checkbox-size: var(--sub-height-large);
         }
 
         :host([size="huge"]) {
             --height: var(--height-huge);
             --font-size: var(--font-size-huge);
+            --checkbox-size: var(--sub-height-huge);
         }
     `;
 }

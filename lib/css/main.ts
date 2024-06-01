@@ -17,6 +17,12 @@ export default css`
         --height-large: var(--ds-height-large, ${size(48)});
         --height-huge: var(--ds-height-huge, ${size(56)});
 
+        --sub-height-tiny: var(--ds-sub-height-tiny, ${size(16)});
+        --sub-height-small: var(--ds-sub-height-small, ${size(20)});
+        --sub-height-medium: var(--ds-sub-height-medium, ${size(24)});
+        --sub-height-large: var(--ds-sub-height-large, ${size(28)});
+        --sub-height-huge: var(--ds-sub-height-huge, ${size(32)});
+
         --padding-x-tiny: var(--ds-padding-x-tiny, ${size(8)});
         --padding-x-small: var(--ds-padding-x-small, ${size(12)});
         --padding-x-medium: var(--ds-padding-x-medium, ${size(16)});
