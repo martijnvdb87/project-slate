@@ -4,42 +4,37 @@ import { size } from "../util/style";
 export default css`
     :host {
         --font-family: Inter, sans-serif;
+        --text-color: var(--ds-text-color, hsla(220, 10%, 16%, 1));
 
-        --font-size-tiny: var(--ds-font-size-tiny, ${size(10)});
         --font-size-small: var(--ds-font-size-small, ${size(12)});
         --font-size-medium: var(--ds-font-size-medium, ${size(14)});
-        --font-size-large: var(--ds-font-size-large, ${size(18)});
-        --font-size-huge: var(--ds-font-size-huge, ${size(24)});
+        --font-size-large: var(--ds-font-size-large, ${size(16)});
+        --font-size-huge: var(--ds-font-size-huge, ${size(20)});
 
-        --height-tiny: var(--ds-height-tiny, ${size(24)});
-        --height-small: var(--ds-height-small, ${size(32)});
-        --height-medium: var(--ds-height-medium, ${size(40)});
-        --height-large: var(--ds-height-large, ${size(48)});
-        --height-huge: var(--ds-height-huge, ${size(56)});
+        --height-small: var(--ds-height-small, ${size(24)});
+        --height-medium: var(--ds-height-medium, ${size(32)});
+        --height-large: var(--ds-height-large, ${size(40)});
+        --height-huge: var(--ds-height-huge, ${size(48)});
 
-        --sub-height-tiny: var(--ds-sub-height-tiny, ${size(16)});
-        --sub-height-small: var(--ds-sub-height-small, ${size(20)});
-        --sub-height-medium: var(--ds-sub-height-medium, ${size(24)});
-        --sub-height-large: var(--ds-sub-height-large, ${size(28)});
-        --sub-height-huge: var(--ds-sub-height-huge, ${size(32)});
+        --sub-height-small: var(--ds-sub-height-small, ${size(16)});
+        --sub-height-medium: var(--ds-sub-height-medium, ${size(20)});
+        --sub-height-large: var(--ds-sub-height-large, ${size(24)});
+        --sub-height-huge: var(--ds-sub-height-huge, ${size(28)});
 
-        --padding-x-tiny: var(--ds-padding-x-tiny, ${size(8)});
-        --padding-x-small: var(--ds-padding-x-small, ${size(12)});
-        --padding-x-medium: var(--ds-padding-x-medium, ${size(16)});
-        --padding-x-large: var(--ds-padding-x-large, ${size(20)});
-        --padding-x-huge: var(--ds-padding-x-huge, ${size(24)});
+        --padding-x-small: var(--ds-padding-x-small, ${size(8)});
+        --padding-x-medium: var(--ds-padding-x-medium, ${size(12)});
+        --padding-x-large: var(--ds-padding-x-large, ${size(16)});
+        --padding-x-huge: var(--ds-padding-x-huge, ${size(20)});
 
-        --gap-tiny: var(--ds-gap-tiny, ${size(4)});
-        --gap-small: var(--ds-gap-small, ${size(6)});
-        --gap-medium: var(--ds-gap-medium, ${size(8)});
-        --gap-large: var(--ds-gap-large, ${size(10)});
-        --gap-huge: var(--ds-gap-huge, ${size(12)});
+        --gap-small: var(--ds-gap-small, ${size(4)});
+        --gap-medium: var(--ds-gap-medium, ${size(6)});
+        --gap-large: var(--ds-gap-large, ${size(8)});
+        --gap-huge: var(--ds-gap-huge, ${size(10)});
 
-        --icon-size-tiny: var(--ds-icon-size-tiny, ${size(12)});
-        --icon-size-small: var(--ds-icon-size-small, ${size(16)});
-        --icon-size-medium: var(--ds-icon-size-medium, ${size(18)});
-        --icon-size-large: var(--ds-icon-size-large, ${size(24)});
-        --icon-size-huge: var(--ds-icon-size-huge, ${size(26)});
+        --icon-size-small: var(--ds-icon-size-small, ${size(12)});
+        --icon-size-medium: var(--ds-icon-size-medium, ${size(16)});
+        --icon-size-large: var(--ds-icon-size-large, ${size(18)});
+        --icon-size-huge: var(--ds-icon-size-huge, ${size(24)});
 
         --shape-pill-radius: var(--ds-shape-pill-radius, ${size(960)});
 
@@ -50,7 +45,7 @@ export default css`
 
         --default-accent-h: var(--ds-default-accent-h, 220);
         --default-accent-s: var(--ds-default-accent-s, 10%);
-        --default-accent-l: var(--ds-default-accent-l, 30%);
+        --default-accent-l: var(--ds-default-accent-l, 15%);
         --default-accent-a: var(--ds-default-accent-a, 1);
 
         --primary-color-h: var(--ds-primary-color-h, 206);
@@ -83,7 +78,7 @@ export default css`
         --success-color-l: var(--ds-success-color-l, 55%);
         --success-color-a: var(--ds-success-color-a, 1);
 
-        --element-font-weight: var(--ds-element-font-weight, 500);
+        --element-font-weight: var(--ds-element-font-weight, 400);
         --element-border-radius: var(--ds-element-border-radius, ${size(5)});
 
         --element-shadow-size: var(
@@ -143,11 +138,10 @@ export default css`
 
         --input-border-width: var(--ds-input-border-width, 1px);
 
-        --input-padding-x-tiny: var(--ds-input-padding-x-tiny, ${size(8)});
-        --input-padding-x-small: var(--ds-input-padding-x-small, ${size(10)});
-        --input-padding-x-medium: var(--ds-input-padding-x-medium, ${size(12)});
-        --input-padding-x-large: var(--ds-input-padding-x-large, ${size(14)});
-        --input-padding-x-huge: var(--ds-input-padding-x-huge, ${size(16)});
+        --input-padding-x-small: var(--ds-input-padding-x-small, ${size(8)});
+        --input-padding-x-medium: var(--ds-input-padding-x-medium, ${size(10)});
+        --input-padding-x-large: var(--ds-input-padding-x-large, ${size(12)});
+        --input-padding-x-huge: var(--ds-input-padding-x-huge, ${size(14)});
 
         --input-outline-width: var(--ds-input-outline-width, ${size(1)});
         --input-outline-opacity: var(--ds-input-outline-opacity, 1);
@@ -167,31 +161,23 @@ export default css`
             400
         );
 
-        --input-validation-message-font-size-tiny: var(
-            --ds-input-validation-message-font-size-tiny,
-            ${size(10)}
-        );
         --input-validation-message-font-size-small: var(
             --ds-input-validation-message-font-size-small,
-            ${size(11)}
+            ${size(10)}
         );
         --input-validation-message-font-size-medium: var(
             --ds-input-validation-message-font-size-medium,
-            ${size(12)}
+            ${size(11)}
         );
         --input-validation-message-font-size-large: var(
             --ds-input-validation-message-font-size-large,
-            ${size(14)}
+            ${size(12)}
         );
         --input-validation-message-font-size-huge: var(
             --ds-input-validation-message-font-size-huge,
-            ${size(16)}
+            ${size(14)}
         );
 
-        --input-validation-message-padding-tiny: var(
-            --ds-input-validation-message-padding-tiny,
-            ${size(4)}
-        );
         --input-validation-message-padding-small: var(
             --ds-input-validation-message-padding-small,
             ${size(4)}

@@ -373,19 +373,6 @@ export class Input extends LitElement {
             padding-right: calc(var(--icon-container-size) * 2);
         }
 
-        :host([size="tiny"]) {
-            --height: var(--height-tiny);
-            --icon-size: var(--icon-size-tiny);
-            --input-padding-x: var(--input-padding-x-tiny);
-            --gap: var(--gap-tiny);
-            --font-size: var(--font-size-tiny);
-            --validation-font-size: var(
-                --input-validation-message-font-size-tiny
-            );
-            --validation-padding: var(--input-validation-message-padding-tiny);
-            --sub-height: var(--sub-height-tiny);
-        }
-
         :host([size="small"]) {
             --height: var(--height-small);
             --icon-size: var(--icon-size-small);

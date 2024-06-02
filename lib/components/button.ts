@@ -283,14 +283,6 @@ export class Button extends LitElement {
             --background-color-a: 0.4;
         }
 
-        :host([size="tiny"]) {
-            --height: var(--height-tiny);
-            --icon-size: var(--icon-size-tiny);
-            --padding-x: var(--padding-x-tiny);
-            --gap: var(--gap-tiny);
-            --font-size: var(--font-size-tiny);
-        }
-
         :host([size="small"]) {
             --height: var(--height-small);
             --icon-size: var(--icon-size-small);

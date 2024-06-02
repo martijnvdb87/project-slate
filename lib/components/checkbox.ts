@@ -94,7 +94,6 @@ export class Input extends LitElement {
         [part="main"] {
             position: relative;
             display: flex;
-            align-items: center;
             gap: var(--gap);
             font-family: var(--font-family);
             font-size: var(--font-size);
@@ -210,12 +209,6 @@ export class Input extends LitElement {
             max-height: 100%;
             pointer-events: none;
             transition: all var(--transition-duration) ease-in-out;
-        }
-
-        :host([size="tiny"]) {
-            --height: var(--height-tiny);
-            --font-size: var(--font-size-tiny);
-            --checkbox-size: var(--sub-height-tiny);
         }
 
         :host([size="small"]) {
