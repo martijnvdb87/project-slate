@@ -38,6 +38,7 @@ export class Button extends LitElement {
         :host {
             display: var(--display);
             vertical-align: bottom;
+            margin-bottom: var(--margin-bottom);
 
             --display: inline-flex;
             --icon-color: hsl(
@@ -48,6 +49,7 @@ export class Button extends LitElement {
             --icon-size: var(--icon-size-medium);
             --height: var(--height-medium);
             --width: auto;
+            --margin-bottom: var(--element-margin-bottom);
 
             --background-color-h: var(--default-color-h);
             --background-color-s: var(--default-color-s);

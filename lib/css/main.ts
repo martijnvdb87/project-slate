@@ -204,4 +204,8 @@ export default css`
 
         --transition-duration: var(--ds-transition-duration, 120ms);
     }
+
+    :host [hidden] {
+        display: none;
+    }
 `;

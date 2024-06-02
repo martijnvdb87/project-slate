@@ -61,7 +61,9 @@ export class Input extends LitElement {
 
         return html`
             <div part="main" class="${mainClasses.join(" ")}">
-                <label part="label" for="input">${this.label}</label>
+                <label ?hidden="${this.label === null}" part="label" for="input"
+                    >${this.label}</label
+                >
                 <div part="input-container">
                     <div part="input-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
@@ -94,9 +96,11 @@ export class Input extends LitElement {
         :host {
             display: var(--display);
             vertical-align: bottom;
+            margin-bottom: var(--margin-bottom);
 
             --display: inline-flex;
             --height: var(--height-medium);
+            --margin-bottom: var(--element-margin-bottom);
             --gap: var(--gap-medium);
             --icon-size: var(--icon-size-medium);
             --icon-container-size: calc(
