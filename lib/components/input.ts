@@ -71,6 +71,7 @@ export class Input extends LitElement {
                     <div part="input-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
                         <input
+                            id="input"
                             name="${this.name}"
                             part="input"
                             type="${inputType}"
