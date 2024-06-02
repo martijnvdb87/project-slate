@@ -106,7 +106,11 @@
                 width="full"
             ></ds-input>
             <ds-input placeholder="Placeholder..." width="full"></ds-input>
-            <ds-input placeholder="Placeholder..." width="full"></ds-input>
+            <ds-input
+                placeholder="Placeholder..."
+                size="large"
+                width="full"
+            ></ds-input>
             <ds-input
                 placeholder="Placeholder..."
                 size="huge"
@@ -142,24 +146,47 @@
                 shape="pill"
             ></ds-input>
             <hr />
-            <ds-checkbox>Checkbox</ds-checkbox>
-            <ds-checkbox size="small" checked>Checkbox</ds-checkbox>
-            <ds-checkbox checked>Checkbox</ds-checkbox>
-            <ds-checkbox checked>Checkbox</ds-checkbox>
-            <ds-checkbox size="huge" checked>Checkbox</ds-checkbox>
-            <ds-checkbox icon="sushi:solid" checked style="--icon-size: 75%"
-                >Checkbox</ds-checkbox
-            >
+            <ds-checkbox checked>Option 1</ds-checkbox>
+            <ds-checkbox>Option 2</ds-checkbox>
+            <ds-checkbox>Option 3</ds-checkbox>
             <hr />
-            <ds-checkbox size="small" checked label="Checkbox"
-                >Checkbox</ds-checkbox
+            <ds-checkbox size="small">Small</ds-checkbox>
+            <ds-checkbox checked label="Checkbox">Medium</ds-checkbox>
+            <ds-checkbox size="large">Large</ds-checkbox>
+            <ds-checkbox size="huge">Huge</ds-checkbox>
+            <hr />
+            <ds-checkbox>
+                Option 1
+                <div slot="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque suscipit leo at velit finibus suscipit. Nam lacinia,
+                    risus non accumsan tincidunt, magna ligula tempus felis, in
+                    sollicitudin orci metus in metus.
+                </div>
+            </ds-checkbox>
+            <ds-checkbox>
+                Option 2
+                <div slot="description">
+                    Praesent faucibus a turpis vel accumsan. Nullam metus metus,
+                    venenatis eget rutrum ac, fermentum id lorem.
+                </div>
+            </ds-checkbox>
+            <ds-checkbox>
+                Option 3
+                <div slot="description">
+                    Vestibulum a est at erat elementum euismod. Nullam gravida
+                    gravida mi, eu rhoncus lectus lacinia ac.
+                </div>
+            </ds-checkbox>
+            <hr />
+            <ds-checkbox icon="sushi:solid" checked style="--icon-size: 80%"
+                >Custom icon</ds-checkbox
             >
-            <ds-checkbox checked label="Checkbox">Checkbox</ds-checkbox>
-            <ds-checkbox size="large" checked label="Checkbox"
-                >Checkbox</ds-checkbox
+            <ds-checkbox icon="invader:solid" checked style="--icon-size: 80%"
+                >Custom icon</ds-checkbox
             >
-            <ds-checkbox size="huge" checked label="Checkbox"
-                >Checkbox</ds-checkbox
+            <ds-checkbox icon="smile:solid" checked style="--icon-size: 80%"
+                >Custom icon</ds-checkbox
             >
         </ds-app>
     </body>

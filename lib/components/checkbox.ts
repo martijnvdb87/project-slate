@@ -11,9 +11,6 @@ export class Input extends LitElement {
     checked = false;
 
     @property({ type: String })
-    label = null;
-
-    @property({ type: String })
     icon = "check";
 
     @property({ attribute: "icon-padding", type: String })
@@ -23,7 +20,6 @@ export class Input extends LitElement {
     disabled = false;
 
     render() {
-        console.log(this.label);
         return html`
             <label part="main">
                 <div part="checkbox-container">
@@ -34,8 +30,9 @@ export class Input extends LitElement {
                     />
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>
-                <div ?hidden="${this.label === null}" part="label-container">
-                    ${this.label}
+                <div part="label-container">
+                    <slot></slot>
+                    <slot name="description"></slot>
                 </div>
             </label>
         `;
@@ -47,9 +44,11 @@ export class Input extends LitElement {
         :host {
             display: var(--display);
             vertical-align: bottom;
+            margin-bottom: var(--margin-bottom);
 
             --display: flex;
             --height: var(--height-medium);
+            --margin-bottom: var(--element-margin-bottom);
 
             --border-radius: var(--element-border-radius);
             --border-width: var(--input-border-width);
@@ -74,6 +73,11 @@ export class Input extends LitElement {
                 var(--icon-color-l),
                 var(--icon-color-a)
             );
+
+            --sub-text-color-h: var(--input-sub-text-color-h);
+            --sub-text-color-s: var(--input-sub-text-color-s);
+            --sub-text-color-l: var(--input-sub-text-color-l);
+            --sub-text-color-a: var(--input-sub-text-color-a);
 
             --icon-size: 100%;
 
@@ -209,6 +213,22 @@ export class Input extends LitElement {
             max-height: 100%;
             pointer-events: none;
             transition: all var(--transition-duration) ease-in-out;
+        }
+
+        [part="label-container"] {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
+        }
+
+        ::slotted([slot="description"]) {
+            color: hsla(
+                var(--sub-text-color-h),
+                var(--sub-text-color-s),
+                var(--sub-text-color-l),
+                var(--sub-text-color-a)
+            );
+            margin-bottom: var(--margin-bottom);
         }
 
         :host([size="small"]) {

@@ -81,6 +81,8 @@ export default css`
         --element-font-weight: var(--ds-element-font-weight, 500);
         --element-border-radius: var(--ds-element-border-radius, ${size(5)});
 
+        --element-margin-bottom: var(--ds-element-margin-bottom, ${size(8)});
+
         --element-shadow-size: var(
             --ds-element-shadow-size,
             ${size(0)} ${size(2)} ${size(12)} ${size(0)}
@@ -91,6 +93,11 @@ export default css`
         --input-text-color-s: var(--ds-input-text-color-s, 10%);
         --input-text-color-l: var(--ds-input-text-color-l, 16%);
         --input-text-color-a: var(--ds-input-text-color-a, 1);
+
+        --input-sub-text-color-h: var(--ds-input-text-color-h, 220);
+        --input-sub-text-color-s: var(--ds-input-text-color-s, 10%);
+        --input-sub-text-color-l: var(--ds-input-text-color-l, 40%);
+        --input-sub-text-color-a: var(--ds-input-text-color-a, 1);
 
         --input-icon-color-h: var(--ds-input-icon-color-h, 220);
         --input-icon-color-s: var(--ds-input-icon-color-s, 10%);
