@@ -170,19 +170,19 @@ export default css`
 
         --input-validation-message-font-size-small: var(
             --ds-input-validation-message-font-size-small,
-            ${size(10)}
+            ${size(11)}
         );
         --input-validation-message-font-size-medium: var(
             --ds-input-validation-message-font-size-medium,
-            ${size(11)}
+            ${size(12)}
         );
         --input-validation-message-font-size-large: var(
             --ds-input-validation-message-font-size-large,
-            ${size(12)}
+            ${size(14)}
         );
         --input-validation-message-font-size-huge: var(
             --ds-input-validation-message-font-size-huge,
-            ${size(14)}
+            ${size(16)}
         );
 
         --input-validation-message-padding-small: var(

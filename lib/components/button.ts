@@ -8,6 +8,9 @@ import { renderIcon } from "@/lib/util/icons";
 @customElement(`${config.prefix}-button`)
 export class Button extends LitElement {
     @property({ type: String })
+    name = null;
+
+    @property({ type: String })
     icon: string | null = null;
 
     @property({ attribute: "icon-right", type: String })
@@ -18,7 +21,11 @@ export class Button extends LitElement {
 
     render() {
         return html`
-            <button part="button" ?disabled="${this.disabled}">
+            <button
+                name="${this.name}"
+                part="button"
+                ?disabled="${this.disabled}"
+            >
                 ${renderIcon(this.icon)}
                 <slot></slot>
                 ${renderIcon(this.iconRight)}

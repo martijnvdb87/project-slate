@@ -7,6 +7,9 @@ import { renderIcon } from "../util/icons";
 
 @customElement(`${config.prefix}-checkbox`)
 export class Input extends LitElement {
+    @property({ type: String })
+    name = null;
+
     @property({ type: Boolean })
     checked = false;
 
@@ -27,6 +30,7 @@ export class Input extends LitElement {
                         type="checkbox"
                         part="input"
                         ?checked=${this.checked}
+                        name=${this.name}
                     />
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>

@@ -8,6 +8,9 @@ import { renderIcon } from "../util/icons";
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
     @property({ type: String })
+    name = null;
+
+    @property({ type: String })
     type = "text";
 
     @state()
@@ -68,7 +71,7 @@ export class Input extends LitElement {
                     <div part="input-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
                         <input
-                            id="input"
+                            name="${this.name}"
                             part="input"
                             type="${inputType}"
                             placeholder="${this.placeholder}"
