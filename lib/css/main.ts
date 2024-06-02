@@ -78,7 +78,7 @@ export default css`
         --success-color-l: var(--ds-success-color-l, 55%);
         --success-color-a: var(--ds-success-color-a, 1);
 
-        --element-font-weight: var(--ds-element-font-weight, 400);
+        --element-font-weight: var(--ds-element-font-weight, 500);
         --element-border-radius: var(--ds-element-border-radius, ${size(5)});
 
         --element-shadow-size: var(
