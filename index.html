@@ -7,11 +7,6 @@
         <title>Design System</title>
         <link rel="stylesheet" href="./src/index.css" />
         <script type="module" src="/lib/index.ts"></script>
-        <style>
-            hr {
-                margin: 2rem 0;
-            }
-        </style>
     </head>
     <body>
         <ds-app>
@@ -20,7 +15,9 @@
             <ds-button>Default</ds-button>
             <ds-button type="ghost">Ghost</ds-button>
             <ds-button type="link">Link</ds-button>
-            <hr />
+            <div>
+                <hr />
+            </div>
             <ds-button size="small">Small</ds-button>
             <ds-button>Medium</ds-button>
             <ds-button size="large">Large</ds-button>
@@ -163,16 +160,6 @@
                 </div>
             </ds-checkbox>
             <hr />
-            <ds-checkbox
-                name="yay"
-                icon="sushi:solid"
-                checked
-                style="--icon-size: 80%"
-                >Custom icon</ds-checkbox
-            >
-            <ds-checkbox icon="invader:solid" checked style="--icon-size: 80%"
-                >Custom icon</ds-checkbox
-            >
             <ds-checkbox icon="smile:solid" checked style="--icon-size: 80%"
                 >Custom icon</ds-checkbox
             >

@@ -1,6 +1,7 @@
 import { unsafeCSS } from "lit";
 import reset from "../css/reset.css?inline";
 import main from "../css/main.ts";
+import "../css/global.css";
 
 export function mainCss() {
     return unsafeCSS(`${reset} ${main}`);

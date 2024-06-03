@@ -1,7 +1,6 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "@/lib/util/style";
 
 @customElement(`${config.prefix}-app`)
 export class App extends LitElement {
@@ -13,9 +12,9 @@ export class App extends LitElement {
         `;
     }
 
-    static styles = css`
-        ${mainCss()}
-    `;
+    createRenderRoot() {
+        return this;
+    }
 }
 
 declare global {
