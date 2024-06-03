@@ -1,7 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import "@/lib/css/fonts.css";
 import { mainCss } from "../util/style";
 import { renderIcon } from "../util/icons";
 

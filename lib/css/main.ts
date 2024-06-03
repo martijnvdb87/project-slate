@@ -1,9 +1,10 @@
 import { css } from "lit";
+import "@/lib/assets/fonts/inter/inter.css";
 import { size } from "../util/style";
 
 export default css`
     :host {
-        --font-family: Inter, sans-serif;
+        --font-family: InterVariable, Inter, sans-serif;
         --text-color: var(--ds-text-color, hsla(220, 10%, 16%, 1));
 
         --font-size-small: var(--ds-font-size-small, ${size(12)});
@@ -78,7 +79,7 @@ export default css`
         --success-color-l: var(--ds-success-color-l, 55%);
         --success-color-a: var(--ds-success-color-a, 1);
 
-        --element-font-weight: var(--ds-element-font-weight, 500);
+        --element-font-weight: var(--ds-element-font-weight, 450);
         --element-border-radius: var(--ds-element-border-radius, ${size(5)});
 
         --element-margin-bottom: var(--ds-element-margin-bottom, ${size(8)});
@@ -109,7 +110,7 @@ export default css`
         --input-background-color-l: var(--ds-input-background-color-l, 100%);
         --input-background-color-a: var(--ds-input-background-color-a, 1);
 
-        --input-font-weight: var(--ds-input-font-weight, 400);
+        --input-font-weight: var(--ds-input-font-weight, 350);
 
         --input-placeholder-color-h: var(
             --ds-input-placeholder-color-h,
@@ -126,7 +127,7 @@ export default css`
         --input-placeholder-color-a: var(--ds-input-placeholder-color-a, 0.75);
         --input-placeholder-weight: var(
             --ds-input-placeholder-font-weight,
-            400
+            350
         );
 
         --input-label-color-h: var(--ds-input-label-color-h, 220);
@@ -135,7 +136,7 @@ export default css`
         --input-label-color-a: var(--ds-input-label-color-a, 1);
 
         --input-label-padding: var(--ds-input-label-padding, ${size(4)});
-        --input-label-font-weight: var(--ds-input-label-font-weight, 600);
+        --input-label-font-weight: var(--ds-input-label-font-weight, 500);
         --input-label-font-size: var(--ds-input-label-font-size, ${size(14)});
 
         --input-border-color-h: var(--ds-input-border-color-h, 220);
@@ -165,7 +166,7 @@ export default css`
         );
         --input-validation-message-font-weight: var(
             --ds-input-validation-message-font-weight,
-            400
+            350
         );
 
         --input-validation-message-font-size-small: var(
