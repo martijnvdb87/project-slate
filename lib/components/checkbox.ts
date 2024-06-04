@@ -28,8 +28,9 @@ export class Input extends LitElement {
                     <input
                         type="checkbox"
                         part="input"
-                        ?checked=${this.checked}
                         name=${this.name}
+                        ?checked=${this.checked}
+                        ?disabled="${this.disabled}"
                     />
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>
@@ -76,6 +77,11 @@ export class Input extends LitElement {
                 var(--icon-color-l),
                 var(--icon-color-a)
             );
+
+            --text-color-h: var(--input-label-color-h);
+            --text-color-s: var(--input-label-color-s);
+            --text-color-l: var(--input-label-color-l);
+            --text-color-a: var(--input-label-color-a);
 
             --sub-text-color-h: var(--input-sub-text-color-h);
             --sub-text-color-s: var(--input-sub-text-color-s);
@@ -221,6 +227,12 @@ export class Input extends LitElement {
         [part="label-container"] {
             display: flex;
             flex-direction: column;
+            color: hsla(
+                var(--text-color-h),
+                var(--text-color-s),
+                var(--text-color-l),
+                var(--text-color-a)
+            );
             gap: var(--gap);
         }
 
@@ -250,6 +262,13 @@ export class Input extends LitElement {
             --height: var(--height-huge);
             --font-size: var(--font-size-huge);
             --checkbox-size: var(--sub-height-huge);
+        }
+
+        :host([disabled]) {
+            opacity: 0.75;
+            --sub-text-color-a: 0.5;
+            --sub-text-color-a: 0.5;
+            pointer-events: none;
         }
     `;
 }

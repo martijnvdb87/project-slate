@@ -132,7 +132,7 @@ export default css`
 
         --input-label-color-h: var(--ds-input-label-color-h, 220);
         --input-label-color-s: var(--ds-input-label-color-s, 10%);
-        --input-label-color-l: var(--ds-input-label-color-l, 16%);
+        --input-label-color-l: var(--ds-input-label-color-l, 12%);
         --input-label-color-a: var(--ds-input-label-color-a, 1);
 
         --input-label-padding: var(--ds-input-label-padding, ${size(4)});
