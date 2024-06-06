@@ -20,7 +20,8 @@ export class Tab extends LitElement {
         }
 
         [part="main"] {
-            padding: 2rem;
+            padding: var(--tab-padding);
+            cursor: pointer;
         }
     `;
 }
