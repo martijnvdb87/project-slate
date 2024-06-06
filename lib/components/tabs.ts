@@ -123,6 +123,14 @@ export class Tabs extends LitElement {
             list-style: none;
             margin: 0;
             padding: 0;
+            width: 100%;
+            border-bottom: var(--input-border-width) solid
+                hsla(
+                    var(--input-border-color-h),
+                    var(--input-border-color-s),
+                    var(--input-border-color-l),
+                    var(--input-border-color-a)
+                );
         }
 
         [part="indicator"] {
@@ -140,7 +148,7 @@ export class Tabs extends LitElement {
             content: "";
             position: absolute;
             left: 0;
-            bottom: 0;
+            bottom: calc(0px - var(--input-border-width));
             width: 100%;
             height: var(--indicator-height);
             background-color: hsla(
