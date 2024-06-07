@@ -10,7 +10,7 @@
     </head>
     <body>
         <ds-app>
-            <ds-tabs active-index="1">
+            <ds-tabs>
                 <div slot="tabs">
                     <ds-tab>Tab 1</ds-tab>
                     <ds-tab>Tab 2</ds-tab>
@@ -189,23 +189,129 @@
 
             <hr />
 
-            <ds-button type="primary">Primary</ds-button>
-            <ds-button type="secondary">Secondary</ds-button>
-            <ds-button>Default</ds-button>
-            <ds-button type="ghost">Ghost</ds-button>
-            <ds-button type="link">Link</ds-button>
-            <div>
-                <hr />
-            </div>
-            <ds-button size="small">Small</ds-button>
-            <ds-button>Medium</ds-button>
-            <ds-button size="large">Large</ds-button>
-            <ds-button size="huge">Huge</ds-button>
+            <ds-tabs active-index="1">
+                <div slot="tabs">
+                    <ds-tab>Small</ds-tab>
+                    <ds-tab>Medium</ds-tab>
+                    <ds-tab>Large</ds-tab>
+                    <ds-tab>Huge</ds-tab>
+                </div>
+
+                <div slot="panels">
+                    <ds-panel>
+                        <ds-button size="small" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="small" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="small">Default</ds-button>
+                        <ds-button size="small" type="ghost">Ghost</ds-button>
+                        <ds-button size="small" type="link">Link</ds-button>
+                    </ds-panel>
+                    <ds-panel>
+                        <ds-button type="primary">Primary</ds-button>
+                        <ds-button type="secondary">Secondary</ds-button>
+                        <ds-button>Default</ds-button>
+                        <ds-button type="ghost">Ghost</ds-button>
+                        <ds-button type="link">Link</ds-button>
+                    </ds-panel>
+                    <ds-panel>
+                        <ds-button size="large" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="large" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="large">Default</ds-button>
+                        <ds-button size="large" type="ghost">Ghost</ds-button>
+                        <ds-button size="large" type="link">Link</ds-button>
+                    </ds-panel>
+                    <ds-panel>
+                        <ds-button size="huge" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="huge" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="huge">Default</ds-button>
+                        <ds-button size="huge" type="ghost">Ghost</ds-button>
+                        <ds-button size="huge" type="link">Link</ds-button>
+                    </ds-panel>
+                </div>
+            </ds-tabs>
+
             <hr />
-            <ds-button shape="pill">Pill</ds-button>
-            <ds-button shape="square">Square</ds-button>
-            <ds-button shape="circle" icon="rocket:solid"></ds-button>
+
+            <ds-tabs>
+                <div slot="tabs">
+                    <ds-tab>Rounded</ds-tab>
+                    <ds-tab>Pill</ds-tab>
+                    <ds-tab>Square</ds-tab>
+                    <ds-tab>Circle</ds-tab>
+                </div>
+
+                <div slot="panels">
+                    <ds-panel>
+                        <ds-button type="primary">Primary</ds-button>
+                        <ds-button type="secondary">Secondary</ds-button>
+                        <ds-button>Default</ds-button>
+                        <ds-button type="ghost">Ghost</ds-button>
+                        <ds-button type="link">Link</ds-button>
+                    </ds-panel>
+                    <ds-panel>
+                        <ds-button shape="pill" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button shape="pill" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button shape="pill">Default</ds-button>
+                        <ds-button shape="pill" type="ghost">Ghost</ds-button>
+                        <ds-button shape="pill" type="link">Link</ds-button>
+                    </ds-panel>
+                    <ds-panel>
+                        <ds-button shape="square" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button shape="square" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button shape="square">Default</ds-button>
+                        <ds-button shape="square" type="ghost">Ghost</ds-button>
+                        <ds-button shape="square" type="link">Link</ds-button>
+                    </ds-panel>
+                    <ds-panel>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="primary"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="secondary"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="ghost"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="link"
+                        ></ds-button>
+                    </ds-panel>
+                </div>
+            </ds-tabs>
+
             <hr />
+
             <ds-button type="primary" width="full">Full width</ds-button>
             <hr />
             <ds-button type="primary" shadow>Primary</ds-button>
