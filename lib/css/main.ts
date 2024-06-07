@@ -207,7 +207,7 @@ export default css`
         --tab-indicator-height: var(--ds-tab-indicator-height, ${size(4)});
         --tab-indicator-transition: var(
             --ds-tab-indicator-transition,
-            all 240ms ease
+            all 320ms ease
         );
 
         --transition-duration: var(--ds-transition-duration, 120ms);

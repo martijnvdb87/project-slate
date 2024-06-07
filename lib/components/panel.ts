@@ -15,6 +15,15 @@ export class Panel extends LitElement {
         ${mainCss()}
 
         :host {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        :host([active]) {
+            position: relative;
+            opacity: 1;
+            pointer-events: auto;
         }
     `;
 }

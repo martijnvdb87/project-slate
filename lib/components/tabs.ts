@@ -21,20 +21,31 @@ export class Tabs extends LitElement {
     }
 
     updated() {
-        this.moveIndicatorToTab(this.activeIndex);
+        this.setActive(this.activeIndex);
 
         for (const tab of this.getAllTabs() as HTMLElement[]) {
             tab.addEventListener("click", () => {
-                this.allowAnimation();
-
-                for (const tab of this.getAllTabs()) {
-                    tab.removeAttribute("active");
-                }
-
-                tab.setAttribute("active", "true");
-                this.moveIndicatorToTab(this.tabToIndex(tab));
+                this.allowTransition();
+                const activeIndex = this.tabToIndex(tab);
+                this.setActive(activeIndex);
             });
         }
+    }
+
+    setActive(index: number) {
+        this.activeIndex = index;
+
+        for (const tab of this.getAllTabs()) {
+            tab.removeAttribute("active");
+        }
+
+        for (const panel of this.getAllPanels()) {
+            panel.removeAttribute("active");
+        }
+
+        this.moveIndicatorToTab(this.activeIndex);
+        this.getTab(this.activeIndex).setAttribute("active", "true");
+        this.getPanel(this.activeIndex).setAttribute("active", "true");
     }
 
     tabToIndex(tab: HTMLElement) {
@@ -93,11 +104,39 @@ export class Tabs extends LitElement {
         );
     }
 
-    allowAnimation() {
+    getAllPanels() {
+        const slotQuery = this.shadowRoot?.querySelector(
+            "slot[name='panels']"
+        ) as HTMLSlotElement;
+
+        if (!slotQuery) {
+            return [];
+        }
+
+        const slots = [...slotQuery.assignedNodes()].filter(
+            (node) => node.nodeType === Node.ELEMENT_NODE
+        ) as HTMLElement[];
+
+        if (slots.length === 0) {
+            return [];
+        }
+
+        return Array.from(slots[0].children) as HTMLElement[];
+    }
+
+    getPanel(index: number) {
+        return this.getAllPanels()[index];
+    }
+
+    allowTransition() {
         this.style.setProperty(
-            "--active-transition-duration",
-            "var(--transition-duration)"
+            "--transition",
+            "var(--tab-indicator-transition)"
         );
+    }
+
+    disableTransation() {
+        this.style.setProperty("--transition", "none");
     }
 
     static styles = css`
@@ -110,8 +149,6 @@ export class Tabs extends LitElement {
             --indicator-color-s: var(--primary-color-h);
             --indicator-color-l: var(--primary-color-h);
             --indicator-color-a: var(--primary-color-h);
-
-            --active-transition-duration: 0ms;
         }
 
         [part="main"] {
@@ -141,7 +178,7 @@ export class Tabs extends LitElement {
             height: var(--tab-height);
             pointer-events: none;
 
-            transition: var(--tab-indicator-transition);
+            transition: var(--transition);
         }
 
         [part="indicator"]::after {
