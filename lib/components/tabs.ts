@@ -41,11 +41,19 @@ export class Tabs extends LitElement {
 
         for (const panel of this.getAllPanels()) {
             panel.removeAttribute("active");
+            panel.setAttribute("aria-hidden", "true");
+            panel.setAttribute("tabindex", "-1");
         }
 
         this.moveIndicatorToTab(this.activeIndex);
-        this.getTab(this.activeIndex).setAttribute("active", "true");
-        this.getPanel(this.activeIndex).setAttribute("active", "true");
+        const activeTab = this.getTab(this.activeIndex);
+        const activePanel = this.getPanel(this.activeIndex);
+
+        activeTab.setAttribute("active", "true");
+
+        activePanel.setAttribute("active", "true");
+        activePanel.setAttribute("aria-hidden", "false");
+        activePanel.setAttribute("tabindex", "");
     }
 
     tabToIndex(tab: HTMLElement) {
