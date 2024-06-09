@@ -147,77 +147,78 @@ export class Tabs extends LitElement {
         this.style.setProperty("--transition", "none");
     }
 
-    static styles = css`
-        ${mainCss()}
+    static styles = [
+        mainCss,
+        css`
+            :host {
+                --indicator-height: var(--tab-indicator-height);
 
-        :host {
-            --indicator-height: var(--tab-indicator-height);
+                --indicator-color-h: var(--primary-color-h);
+                --indicator-color-s: var(--primary-color-h);
+                --indicator-color-l: var(--primary-color-h);
+                --indicator-color-a: var(--primary-color-h);
+            }
 
-            --indicator-color-h: var(--primary-color-h);
-            --indicator-color-s: var(--primary-color-h);
-            --indicator-color-l: var(--primary-color-h);
-            --indicator-color-a: var(--primary-color-h);
-        }
+            [part="main"] {
+            }
 
-        [part="main"] {
-        }
+            [part="tabs"] {
+                position: relative;
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                border-bottom: var(--input-border-width) solid
+                    hsla(
+                        var(--input-border-color-h),
+                        var(--input-border-color-s),
+                        var(--input-border-color-l),
+                        var(--input-border-color-a)
+                    );
+            }
 
-        [part="tabs"] {
-            position: relative;
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            border-bottom: var(--input-border-width) solid
-                hsla(
-                    var(--input-border-color-h),
-                    var(--input-border-color-s),
-                    var(--input-border-color-l),
-                    var(--input-border-color-a)
+            [part="indicator"] {
+                position: absolute;
+                top: var(--tab-top, 0);
+                left: var(--tab-left, 0);
+                width: var(--tab-width);
+                height: var(--tab-height);
+                pointer-events: none;
+
+                transition: var(--transition);
+            }
+
+            [part="indicator"]::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: calc(0px - var(--input-border-width));
+                width: 100%;
+                height: var(--indicator-height);
+                background-color: hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l),
+                    var(--primary-color-a)
                 );
-        }
+            }
 
-        [part="indicator"] {
-            position: absolute;
-            top: var(--tab-top, 0);
-            left: var(--tab-left, 0);
-            width: var(--tab-width);
-            height: var(--tab-height);
-            pointer-events: none;
+            ::slotted([slot="tabs"]) {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
 
-            transition: var(--transition);
-        }
-
-        [part="indicator"]::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: calc(0px - var(--input-border-width));
-            width: 100%;
-            height: var(--indicator-height);
-            background-color: hsla(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                var(--primary-color-l),
-                var(--primary-color-a)
-            );
-        }
-
-        ::slotted([slot="tabs"]) {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        ::slotted([slot="panels"]) {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-    `;
+            ::slotted([slot="panels"]) {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+        `,
+    ];
 }
 
 declare global {

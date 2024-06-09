@@ -42,235 +42,236 @@ export class Input extends LitElement {
         `;
     }
 
-    static styles = css`
-        ${mainCss()}
+    static styles = [
+        mainCss,
+        css`
+            :host {
+                display: var(--display);
+                vertical-align: bottom;
+                margin-bottom: var(--margin-bottom);
 
-        :host {
-            display: var(--display);
-            vertical-align: bottom;
-            margin-bottom: var(--margin-bottom);
+                --display: flex;
+                --height: var(--height-medium);
+                --margin-bottom: var(--element-margin-bottom);
 
-            --display: flex;
-            --height: var(--height-medium);
-            --margin-bottom: var(--element-margin-bottom);
+                --border-radius: var(--element-border-radius);
+                --border-width: var(--input-border-width);
+                --border-color-h: var(--input-border-color-h);
+                --border-color-s: var(--input-border-color-s);
+                --border-color-l: var(--input-border-color-l);
+                --border-color-a: var(--input-border-color-a);
 
-            --border-radius: var(--element-border-radius);
-            --border-width: var(--input-border-width);
-            --border-color-h: var(--input-border-color-h);
-            --border-color-s: var(--input-border-color-s);
-            --border-color-l: var(--input-border-color-l);
-            --border-color-a: var(--input-border-color-a);
+                --background-color-h: var(--input-background-color-h);
+                --background-color-s: var(--input-background-color-s);
+                --background-color-l: var(--input-background-color-l);
+                --background-color-a: var(--input-background-color-a);
 
-            --background-color-h: var(--input-background-color-h);
-            --background-color-s: var(--input-background-color-s);
-            --background-color-l: var(--input-background-color-l);
-            --background-color-a: var(--input-background-color-a);
+                --icon-color-h: var(--primary-accent-h);
+                --icon-color-s: var(--primary-accent-s);
+                --icon-color-l: var(--primary-accent-l);
+                --icon-color-a: var(--primary-accent-a);
 
-            --icon-color-h: var(--primary-accent-h);
-            --icon-color-s: var(--primary-accent-s);
-            --icon-color-l: var(--primary-accent-l);
-            --icon-color-a: var(--primary-accent-a);
+                --icon-color: hsla(
+                    var(--icon-color-h),
+                    var(--icon-color-s),
+                    var(--icon-color-l),
+                    var(--icon-color-a)
+                );
 
-            --icon-color: hsla(
-                var(--icon-color-h),
-                var(--icon-color-s),
-                var(--icon-color-l),
-                var(--icon-color-a)
-            );
+                --text-color-h: var(--input-label-color-h);
+                --text-color-s: var(--input-label-color-s);
+                --text-color-l: var(--input-label-color-l);
+                --text-color-a: var(--input-label-color-a);
 
-            --text-color-h: var(--input-label-color-h);
-            --text-color-s: var(--input-label-color-s);
-            --text-color-l: var(--input-label-color-l);
-            --text-color-a: var(--input-label-color-a);
+                --sub-text-color-h: var(--input-sub-text-color-h);
+                --sub-text-color-s: var(--input-sub-text-color-s);
+                --sub-text-color-l: var(--input-sub-text-color-l);
+                --sub-text-color-a: var(--input-sub-text-color-a);
 
-            --sub-text-color-h: var(--input-sub-text-color-h);
-            --sub-text-color-s: var(--input-sub-text-color-s);
-            --sub-text-color-l: var(--input-sub-text-color-l);
-            --sub-text-color-a: var(--input-sub-text-color-a);
+                --icon-size: 100%;
 
-            --icon-size: 100%;
+                --gap: var(--gap-medium);
 
-            --gap: var(--gap-medium);
+                --font-size: var(--font-size-medium);
 
-            --font-size: var(--font-size-medium);
+                --checkbox-size: var(--sub-height-medium);
 
-            --checkbox-size: var(--sub-height-medium);
+                --outline-width: var(--input-outline-width);
 
-            --outline-width: var(--input-outline-width);
+                --outline-offset: var(--element-outline-offset);
+                --outline-colored-offset: var(--element-colored-outline-offset);
 
-            --outline-offset: var(--element-outline-offset);
-            --outline-colored-offset: var(--element-colored-outline-offset);
+                --focus-outline-width: var(--input-focus-outline-width);
+            }
 
-            --focus-outline-width: var(--input-focus-outline-width);
-        }
+            [part="main"] {
+                position: relative;
+                display: flex;
+                gap: var(--gap);
+                font-family: var(--font-family);
+                font-size: var(--font-size);
+            }
 
-        [part="main"] {
-            position: relative;
-            display: flex;
-            gap: var(--gap);
-            font-family: var(--font-family);
-            font-size: var(--font-size);
-        }
+            [part="input"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                z-index: 999;
+                cursor: pointer;
+            }
 
-        [part="input"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            z-index: 999;
-            cursor: pointer;
-        }
-
-        [part="input"]:focus-visible + [part="input-container"] {
-            border-color: hsl(
-                var(--primary-color-h),
-                var(--primary-color-s),
-                var(--primary-color-l)
-            );
-            outline: calc(
-                    var(--input-outline-width) + var(--input-border-width)
-                )
-                solid
-                hsla(
+            [part="input"]:focus-visible + [part="input-container"] {
+                border-color: hsl(
                     var(--primary-color-h),
                     var(--primary-color-s),
-                    var(--primary-color-l),
-                    var(--input-outline-opacity)
+                    var(--primary-color-l)
                 );
-            outline-offset: var(--outline-offset);
-        }
+                outline: calc(
+                        var(--input-outline-width) + var(--input-border-width)
+                    )
+                    solid
+                    hsla(
+                        var(--primary-color-h),
+                        var(--primary-color-s),
+                        var(--primary-color-l),
+                        var(--input-outline-opacity)
+                    );
+                outline-offset: var(--outline-offset);
+            }
 
-        [part="icon-container"] {
-            display: flex;
-            opacity: 0;
-        }
-
-        [part="input"]:checked + [part="input-container"] {
-            --background-color-h: var(--primary-color-h);
-            --background-color-s: var(--primary-color-s);
-            --background-color-l: var(--primary-color-l);
-            --background-color-a: var(--primary-color-a);
-
-            --border-color-h: var(--primary-color-h);
-            --border-color-s: var(--primary-color-s);
-            --border-color-l: var(--primary-color-l);
-            --border-color-a: var(--primary-color-a);
-
-            --outline-offset: var(--outline-colored-offset);
-        }
-
-        [part="input"]:checked
-            + [part="input-container"]
             [part="icon-container"] {
-            opacity: 1;
-        }
+                display: flex;
+                opacity: 0;
+            }
 
-        [part="input-container"] {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            width: var(--checkbox-size);
-            height: var(--checkbox-size);
+            [part="input"]:checked + [part="input-container"] {
+                --background-color-h: var(--primary-color-h);
+                --background-color-s: var(--primary-color-s);
+                --background-color-l: var(--primary-color-l);
+                --background-color-a: var(--primary-color-a);
 
-            border-radius: var(--border-radius);
-            border-width: var(--border-width);
-            border-style: solid;
-            border-color: hsla(
-                var(--border-color-h),
-                var(--border-color-s),
-                var(--border-color-l),
-                var(--border-color-a)
-            );
+                --border-color-h: var(--primary-color-h);
+                --border-color-s: var(--primary-color-s);
+                --border-color-l: var(--primary-color-l);
+                --border-color-a: var(--primary-color-a);
 
-            background-color: hsla(
-                var(--background-color-h),
-                var(--background-color-s),
-                var(--background-color-l),
-                var(--background-color-a)
-            );
-            outline: 0 solid
-                hsla(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
-                    0
+                --outline-offset: var(--outline-colored-offset);
+            }
+
+            [part="input"]:checked
+                + [part="input-container"]
+                [part="icon-container"] {
+                opacity: 1;
+            }
+
+            [part="input-container"] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                width: var(--checkbox-size);
+                height: var(--checkbox-size);
+
+                border-radius: var(--border-radius);
+                border-width: var(--border-width);
+                border-style: solid;
+                border-color: hsla(
+                    var(--border-color-h),
+                    var(--border-color-s),
+                    var(--border-color-l),
+                    var(--border-color-a)
                 );
-            transition: all var(--transition-duration) ease-in-out;
-        }
 
-        [part="icon"] {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: var(--icon-size);
-            height: var(--icon-size);
-            max-width: 100%;
-            max-height: 100%;
-            pointer-events: none;
-        }
+                background-color: hsla(
+                    var(--background-color-h),
+                    var(--background-color-s),
+                    var(--background-color-l),
+                    var(--background-color-a)
+                );
+                outline: 0 solid
+                    hsla(
+                        var(--primary-color-h),
+                        var(--primary-color-s),
+                        var(--primary-color-l),
+                        0
+                    );
+                transition: all var(--transition-duration) ease-in-out;
+            }
 
-        [part="icon-container"] {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            pointer-events: none;
-            transition: all var(--transition-duration) ease-in-out;
-        }
+            [part="icon"] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--icon-size);
+                height: var(--icon-size);
+                max-width: 100%;
+                max-height: 100%;
+                pointer-events: none;
+            }
 
-        [part="label-container"] {
-            display: flex;
-            flex-direction: column;
-            color: hsla(
-                var(--text-color-h),
-                var(--text-color-s),
-                var(--text-color-l),
-                var(--text-color-a)
-            );
-            gap: var(--gap);
-        }
+            [part="icon-container"] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                pointer-events: none;
+                transition: all var(--transition-duration) ease-in-out;
+            }
 
-        ::slotted([slot="description"]) {
-            color: hsla(
-                var(--sub-text-color-h),
-                var(--sub-text-color-s),
-                var(--sub-text-color-l),
-                var(--sub-text-color-a)
-            );
-            margin-bottom: var(--margin-bottom);
-        }
+            [part="label-container"] {
+                display: flex;
+                flex-direction: column;
+                color: hsla(
+                    var(--text-color-h),
+                    var(--text-color-s),
+                    var(--text-color-l),
+                    var(--text-color-a)
+                );
+                gap: var(--gap);
+            }
 
-        :host([size="small"]) {
-            --height: var(--height-small);
-            --font-size: var(--font-size-small);
-            --checkbox-size: var(--sub-height-small);
-        }
+            ::slotted([slot="description"]) {
+                color: hsla(
+                    var(--sub-text-color-h),
+                    var(--sub-text-color-s),
+                    var(--sub-text-color-l),
+                    var(--sub-text-color-a)
+                );
+                margin-bottom: var(--margin-bottom);
+            }
 
-        :host([size="large"]) {
-            --height: var(--height-large);
-            --font-size: var(--font-size-large);
-            --checkbox-size: var(--sub-height-large);
-        }
+            :host([size="small"]) {
+                --height: var(--height-small);
+                --font-size: var(--font-size-small);
+                --checkbox-size: var(--sub-height-small);
+            }
 
-        :host([size="huge"]) {
-            --height: var(--height-huge);
-            --font-size: var(--font-size-huge);
-            --checkbox-size: var(--sub-height-huge);
-        }
+            :host([size="large"]) {
+                --height: var(--height-large);
+                --font-size: var(--font-size-large);
+                --checkbox-size: var(--sub-height-large);
+            }
 
-        :host([disabled]) {
-            opacity: 0.75;
-            --sub-text-color-a: 0.5;
-            --sub-text-color-a: 0.5;
-            pointer-events: none;
-        }
-    `;
+            :host([size="huge"]) {
+                --height: var(--height-huge);
+                --font-size: var(--font-size-huge);
+                --checkbox-size: var(--sub-height-huge);
+            }
+
+            :host([disabled]) {
+                opacity: 0.75;
+                --sub-text-color-a: 0.5;
+                --sub-text-color-a: 0.5;
+                pointer-events: none;
+            }
+        `,
+    ];
 }
 
 declare global {

@@ -1,11 +1,9 @@
 import { unsafeCSS } from "lit";
-import reset from "../css/reset.css?inline";
-import main from "../css/main.ts";
-import "../css/global.css";
+import { reset } from "../css/reset.ts";
+import { main } from "../css/main.ts";
+import "../css/global.ts";
 
-export function mainCss() {
-    return unsafeCSS(`${reset} ${main}`);
-}
+export const mainCss = [reset, main];
 
 export function size(value: number) {
     const size = value / 16;

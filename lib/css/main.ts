@@ -2,7 +2,7 @@ import { css } from "lit";
 import "@/lib/assets/fonts/inter/inter.css";
 import { size } from "../util/style";
 
-export default css`
+export const main = css`
     :host {
         --font-family: InterVariable, Inter, sans-serif;
         --text-color: var(--ds-text-color, hsla(220, 10%, 16%, 1));

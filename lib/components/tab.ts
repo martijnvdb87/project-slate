@@ -13,17 +13,18 @@ export class Tab extends LitElement {
         `;
     }
 
-    static styles = css`
-        ${mainCss()}
+    static styles = [
+        mainCss,
+        css`
+            :host {
+            }
 
-        :host {
-        }
-
-        [part="main"] {
-            padding: var(--tab-padding);
-            cursor: pointer;
-        }
-    `;
+            [part="main"] {
+                padding: var(--tab-padding);
+                cursor: pointer;
+            }
+        `,
+    ];
 }
 
 declare global {

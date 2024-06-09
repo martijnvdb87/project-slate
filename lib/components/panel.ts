@@ -11,21 +11,22 @@ export class Panel extends LitElement {
         </div>`;
     }
 
-    static styles = css`
-        ${mainCss()}
+    static styles = [
+        mainCss,
+        css`
+            :host {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+            }
 
-        :host {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        :host([active]) {
-            position: relative;
-            opacity: 1;
-            pointer-events: auto;
-        }
-    `;
+            :host([active]) {
+                position: relative;
+                opacity: 1;
+                pointer-events: auto;
+            }
+        `,
+    ];
 }
 
 declare global {
