@@ -5,5 +5,4 @@ import "@/lib/components/button";
 import "@/lib/components/checkbox";
 import "@/lib/components/input";
 import "@/lib/components/panel";
-import "@/lib/components/tab";
 import "@/lib/components/tabs";

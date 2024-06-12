@@ -1,5 +1,9 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import {
+    customElement,
+    property,
+    queryAssignedElements,
+} from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss } from "../util/style";
 
@@ -8,10 +12,14 @@ export class Tabs extends LitElement {
     @property({ attribute: "active-index", type: Number })
     activeIndex = 0;
 
+    @queryAssignedElements({ slot: "tab" })
+    tabs!: HTMLElement[];
+
     render() {
         return html` <div part="main">
-            <div part="tabs">
-                <slot name="tabs"></slot>
+            <div part="head">
+                <slot name="tab"></slot>
+                <div part="tabs"></div>
                 <div part="indicator"></div>
             </div>
             <div part="panels">
@@ -20,7 +28,8 @@ export class Tabs extends LitElement {
         </div>`;
     }
 
-    updated() {
+    firstUpdated() {
+        this.renderTabs();
         this.setActive(this.activeIndex);
 
         for (const tab of this.getAllTabs() as HTMLElement[]) {
@@ -30,6 +39,27 @@ export class Tabs extends LitElement {
                 this.setActive(activeIndex);
             });
         }
+    }
+
+    renderTabs() {
+        const tabsRoot = this.shadowRoot?.querySelector(
+            "div[part='tabs']"
+        ) as HTMLElement;
+
+        tabsRoot.innerHTML = "";
+
+        this.tabs.forEach((tab, index) => {
+            const tabRoot = document.createElement("div");
+            tabRoot.setAttribute("part", "tab");
+            tabRoot.appendChild(tab);
+
+            tabRoot.addEventListener("click", () => {
+                this.allowTransition();
+                this.setActive(index);
+            });
+
+            tabsRoot.appendChild(tabRoot);
+        });
     }
 
     setActive(index: number) {
@@ -61,23 +91,23 @@ export class Tabs extends LitElement {
     }
 
     getAllTabs() {
-        const slotQuery = this.shadowRoot?.querySelector(
-            "slot[name='tabs']"
+        const tabsQuery = this.shadowRoot?.querySelector(
+            "[part='tabs']"
         ) as HTMLSlotElement;
 
-        if (!slotQuery) {
+        if (!tabsQuery) {
             return [];
         }
 
-        const slots = [...slotQuery.assignedNodes()].filter(
+        const tabs = [...tabsQuery.children].filter(
             (node) => node.nodeType === Node.ELEMENT_NODE
         ) as HTMLElement[];
 
-        if (slots.length === 0) {
+        if (tabs.length === 0) {
             return [];
         }
 
-        return Array.from(slots[0].children) as HTMLElement[];
+        return tabs;
     }
 
     getTab(index: number) {
@@ -162,6 +192,14 @@ export class Tabs extends LitElement {
             [part="main"] {
             }
 
+            [part="head"] {
+                position: relative;
+            }
+
+            slot[name="tab"] {
+                display: none;
+            }
+
             [part="tabs"] {
                 position: relative;
                 display: flex;
@@ -176,6 +214,10 @@ export class Tabs extends LitElement {
                         var(--input-border-color-l),
                         var(--input-border-color-a)
                     );
+            }
+
+            [part="tab"] {
+                padding: var(--tab-padding);
             }
 
             [part="indicator"] {
@@ -202,13 +244,6 @@ export class Tabs extends LitElement {
                     var(--primary-color-l),
                     var(--primary-color-a)
                 );
-            }
-
-            ::slotted([slot="tabs"]) {
-                display: flex;
-                list-style: none;
-                margin: 0;
-                padding: 0;
             }
 
             ::slotted([slot="panels"]) {
