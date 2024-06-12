@@ -15,6 +15,9 @@ export class Tabs extends LitElement {
     @queryAssignedElements({ slot: "tab" })
     tabs!: HTMLElement[];
 
+    @queryAssignedElements({ slot: "panel" })
+    panels!: HTMLElement[];
+
     render() {
         return html` <div part="main">
             <div part="head">
@@ -22,14 +25,17 @@ export class Tabs extends LitElement {
                 <div part="tabs"></div>
                 <div part="indicator"></div>
             </div>
-            <div part="panels">
-                <slot name="panels"></slot>
+            <div part="content">
+                <slot name="panel"></slot>
+                <div part="panels"></div>
             </div>
         </div>`;
     }
 
     firstUpdated() {
         this.renderTabs();
+        this.renderPanels();
+
         this.setActive(this.activeIndex);
 
         for (const tab of this.getAllTabs() as HTMLElement[]) {
@@ -42,11 +48,11 @@ export class Tabs extends LitElement {
     }
 
     renderTabs() {
-        const tabsRoot = this.shadowRoot?.querySelector(
-            "div[part='tabs']"
+        const root = this.shadowRoot?.querySelector(
+            "[part='tabs']"
         ) as HTMLElement;
 
-        tabsRoot.innerHTML = "";
+        root.innerHTML = "";
 
         this.tabs.forEach((tab, index) => {
             const tabRoot = document.createElement("div");
@@ -58,7 +64,23 @@ export class Tabs extends LitElement {
                 this.setActive(index);
             });
 
-            tabsRoot.appendChild(tabRoot);
+            root.appendChild(tabRoot);
+        });
+    }
+
+    renderPanels() {
+        const root = this.shadowRoot?.querySelector(
+            "[part='panels']"
+        ) as HTMLElement;
+
+        root.innerHTML = "";
+
+        this.panels.forEach((panel, index) => {
+            const panelRoot = document.createElement("div");
+            panelRoot.setAttribute("part", "panel");
+            panelRoot.appendChild(panel);
+            panelRoot.setAttribute("tabindex", "-1");
+            root.appendChild(panelRoot);
         });
     }
 
@@ -91,15 +113,15 @@ export class Tabs extends LitElement {
     }
 
     getAllTabs() {
-        const tabsQuery = this.shadowRoot?.querySelector(
+        const root = this.shadowRoot?.querySelector(
             "[part='tabs']"
-        ) as HTMLSlotElement;
+        ) as HTMLElement;
 
-        if (!tabsQuery) {
+        if (!root) {
             return [];
         }
 
-        const tabs = [...tabsQuery.children].filter(
+        const tabs = [...root.children].filter(
             (node) => node.nodeType === Node.ELEMENT_NODE
         ) as HTMLElement[];
 
@@ -122,7 +144,7 @@ export class Tabs extends LitElement {
         const tab = this.getTab(index);
         const indicator = this.shadowRoot?.querySelector(
             "[part='indicator']"
-        ) as HTMLDivElement;
+        ) as HTMLElement;
 
         if (!indicator || !tab) {
             return;
@@ -143,23 +165,23 @@ export class Tabs extends LitElement {
     }
 
     getAllPanels() {
-        const slotQuery = this.shadowRoot?.querySelector(
-            "slot[name='panels']"
-        ) as HTMLSlotElement;
+        const root = this.shadowRoot?.querySelector(
+            "[part='panels']"
+        ) as HTMLElement;
 
-        if (!slotQuery) {
+        if (!root) {
             return [];
         }
 
-        const slots = [...slotQuery.assignedNodes()].filter(
+        const panels = [...root.children].filter(
             (node) => node.nodeType === Node.ELEMENT_NODE
         ) as HTMLElement[];
 
-        if (slots.length === 0) {
+        if (panels.length === 0) {
             return [];
         }
 
-        return Array.from(slots[0].children) as HTMLElement[];
+        return panels;
     }
 
     getPanel(index: number) {
@@ -196,7 +218,8 @@ export class Tabs extends LitElement {
                 position: relative;
             }
 
-            slot[name="tab"] {
+            slot[name="tab"],
+            slot[name="panel"] {
                 display: none;
             }
 
@@ -246,11 +269,16 @@ export class Tabs extends LitElement {
                 );
             }
 
-            ::slotted([slot="panels"]) {
-                display: flex;
-                list-style: none;
-                margin: 0;
-                padding: 0;
+            [part="panel"] {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            [part="panel"][active] {
+                position: relative;
+                opacity: 1;
+                pointer-events: auto;
             }
         `,
     ];
