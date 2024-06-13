@@ -59,6 +59,7 @@ export class Tabs extends LitElement {
             tabRoot.addEventListener("click", () => {
                 this.disableTransition();
                 this.moveIndicatorToTab(this.activeIndex);
+                this.setPanelsHeight(this.activeIndex);
                 this.enableTransition();
                 this.setActive(index);
             });
@@ -78,7 +79,6 @@ export class Tabs extends LitElement {
             const panelRoot = document.createElement("div");
             panelRoot.setAttribute("part", "panel");
             panelRoot.appendChild(panel);
-            panelRoot.setAttribute("tabindex", "-1");
             root.appendChild(panelRoot);
         });
     }
@@ -90,6 +90,7 @@ export class Tabs extends LitElement {
 
         root.addEventListener("transitionend", () => {
             this.disableTransition();
+            this.resetPanelsHeight();
         });
     }
 
@@ -103,10 +104,11 @@ export class Tabs extends LitElement {
         for (const panel of this.getAllPanels()) {
             panel.removeAttribute("active");
             panel.setAttribute("aria-hidden", "true");
-            panel.setAttribute("tabindex", "-1");
         }
 
         this.moveIndicatorToTab(this.activeIndex);
+        this.setPanelsHeight(this.activeIndex);
+
         const activeTab = this.getTab(this.activeIndex);
         const activePanel = this.getPanel(this.activeIndex);
 
@@ -114,7 +116,6 @@ export class Tabs extends LitElement {
 
         activePanel.setAttribute("active", "true");
         activePanel.setAttribute("aria-hidden", "false");
-        activePanel.setAttribute("tabindex", "");
     }
 
     tabToIndex(tab: HTMLElement) {
@@ -159,15 +160,18 @@ export class Tabs extends LitElement {
             return;
         }
 
-        this.style.setProperty("--tab-width", `${tab.offsetWidth}px`);
-        this.style.setProperty("--tab-height", `${tab.offsetHeight}px`);
+        this.getMain().style.setProperty("--tab-width", `${tab.offsetWidth}px`);
+        this.getMain().style.setProperty(
+            "--tab-height",
+            `${tab.offsetHeight}px`
+        );
 
-        this.style.setProperty(
+        this.getMain().style.setProperty(
             "--tab-left",
             `${tab.offsetLeft - (tab.parentElement?.offsetLeft ?? 0)}px`
         );
 
-        this.style.setProperty(
+        this.getMain().style.setProperty(
             "--tab-top",
             `${tab.offsetTop - (tab.parentElement?.offsetTop ?? 0)}px`
         );
@@ -207,6 +211,22 @@ export class Tabs extends LitElement {
         this.shadowRoot
             ?.querySelector("[part='main']")
             ?.removeAttribute("animating");
+    }
+
+    setPanelsHeight(index: number) {
+        const panel = this.getPanel(index);
+        this.getMain().style.setProperty(
+            "--panel-height",
+            `${panel?.offsetHeight}px`
+        );
+    }
+
+    resetPanelsHeight() {
+        this.getMain().style.removeProperty("--panel-height");
+    }
+
+    getMain() {
+        return this.shadowRoot?.querySelector("[part='main']") as HTMLElement;
     }
 
     static styles = [
@@ -276,8 +296,9 @@ export class Tabs extends LitElement {
             [part="transition-indicator"] {
                 display: none;
                 position: absolute;
-                top: var(--tab-top, 0);
-                left: var(--tab-left, 0);
+                top: 0;
+                left: 0;
+                transform: translate(var(--tab-left, 0), var(--tab-top, 0));
                 width: var(--tab-width);
                 height: var(--tab-height);
                 pointer-events: none;
@@ -304,16 +325,39 @@ export class Tabs extends LitElement {
                 );
             }
 
+            [part="panels"] {
+                position: relative;
+                height: var(--panel-height, auto);
+            }
+
+            [part="main"][animating] [part="panels"] {
+                transition: var(--panel-transition);
+                overflow: hidden;
+            }
+
             [part="panel"] {
                 position: absolute;
+                top: 0;
+                left: 0;
                 opacity: 0;
+                visibility: hidden;
+                padding: var(--panel-padding);
                 pointer-events: none;
             }
 
             [part="panel"][active] {
                 position: relative;
                 opacity: 1;
+                visibility: visible;
                 pointer-events: auto;
+            }
+
+            [part="main"][animating] [part="panel"] {
+                transition: var(--panel-transition);
+            }
+
+            [part="main"][animating] [part="panel"][active] {
+                transition-delay: var(--panel-transition-delay);
             }
         `,
     ];
