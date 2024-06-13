@@ -23,7 +23,7 @@ export class Tabs extends LitElement {
             <div part="head">
                 <slot name="tab"></slot>
                 <div part="tabs"></div>
-                <div part="indicator"></div>
+                <div part="transition-indicator"></div>
             </div>
             <div part="content">
                 <slot name="panel"></slot>
@@ -35,16 +35,9 @@ export class Tabs extends LitElement {
     firstUpdated() {
         this.renderTabs();
         this.renderPanels();
+        this.setupTransitionIndicator();
 
         this.setActive(this.activeIndex);
-
-        for (const tab of this.getAllTabs() as HTMLElement[]) {
-            tab.addEventListener("click", () => {
-                this.allowTransition();
-                const activeIndex = this.tabToIndex(tab);
-                this.setActive(activeIndex);
-            });
-        }
     }
 
     renderTabs() {
@@ -59,8 +52,14 @@ export class Tabs extends LitElement {
             tabRoot.setAttribute("part", "tab");
             tabRoot.appendChild(tab);
 
+            const indicator = document.createElement("div");
+            indicator.setAttribute("part", "indicator");
+            tabRoot.appendChild(indicator);
+
             tabRoot.addEventListener("click", () => {
-                this.allowTransition();
+                this.disableTransition();
+                this.moveIndicatorToTab(this.activeIndex);
+                this.enableTransition();
                 this.setActive(index);
             });
 
@@ -75,12 +74,22 @@ export class Tabs extends LitElement {
 
         root.innerHTML = "";
 
-        this.panels.forEach((panel, index) => {
+        this.panels.forEach((panel) => {
             const panelRoot = document.createElement("div");
             panelRoot.setAttribute("part", "panel");
             panelRoot.appendChild(panel);
             panelRoot.setAttribute("tabindex", "-1");
             root.appendChild(panelRoot);
+        });
+    }
+
+    setupTransitionIndicator() {
+        const root = this.shadowRoot?.querySelector(
+            "[part='transition-indicator']"
+        ) as HTMLElement;
+
+        root.addEventListener("transitionend", () => {
+            this.disableTransition();
         });
     }
 
@@ -143,7 +152,7 @@ export class Tabs extends LitElement {
     moveIndicatorToTab(index: number) {
         const tab = this.getTab(index);
         const indicator = this.shadowRoot?.querySelector(
-            "[part='indicator']"
+            "[part='transition-indicator']"
         ) as HTMLElement;
 
         if (!indicator || !tab) {
@@ -188,15 +197,16 @@ export class Tabs extends LitElement {
         return this.getAllPanels()[index];
     }
 
-    allowTransition() {
-        this.style.setProperty(
-            "--transition",
-            "var(--tab-indicator-transition)"
-        );
+    enableTransition() {
+        this.shadowRoot
+            ?.querySelector("[part='main']")
+            ?.setAttribute("animating", "");
     }
 
-    disableTransation() {
-        this.style.setProperty("--transition", "none");
+    disableTransition() {
+        this.shadowRoot
+            ?.querySelector("[part='main']")
+            ?.removeAttribute("animating");
     }
 
     static styles = [
@@ -240,21 +250,46 @@ export class Tabs extends LitElement {
             }
 
             [part="tab"] {
+                position: relative;
                 padding: var(--tab-padding);
+                cursor: pointer;
             }
 
             [part="indicator"] {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+
+            [part="tab"][active] [part="indicator"] {
+                display: block;
+            }
+
+            [part="main"][animating] [part="tab"][active] [part="indicator"] {
+                display: none;
+            }
+
+            [part="transition-indicator"] {
+                display: none;
                 position: absolute;
                 top: var(--tab-top, 0);
                 left: var(--tab-left, 0);
                 width: var(--tab-width);
                 height: var(--tab-height);
                 pointer-events: none;
-
-                transition: var(--transition);
             }
 
-            [part="indicator"]::after {
+            [part="main"][animating] [part="transition-indicator"] {
+                display: block;
+                transition: var(--tab-indicator-transition);
+            }
+
+            [part="indicator"]::after,
+            [part="transition-indicator"]::after {
                 content: "";
                 position: absolute;
                 left: 0;
