@@ -5,7 +5,7 @@ import {
     queryAssignedElements,
 } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "../util/style";
+import { mainCss, size } from "../util/style";
 
 @customElement(`${config.prefix}-tabs`)
 export class Tabs extends LitElement {
@@ -35,15 +35,13 @@ export class Tabs extends LitElement {
     firstUpdated() {
         this.renderTabs();
         this.renderPanels();
-        this.setupTransitionIndicator();
+        this.setupTransitionEnd();
 
         this.setActive(this.activeIndex);
     }
 
     renderTabs() {
-        const root = this.shadowRoot?.querySelector(
-            "[part='tabs']"
-        ) as HTMLElement;
+        const root = this.getPart("tabs");
 
         root.innerHTML = "";
 
@@ -57,10 +55,12 @@ export class Tabs extends LitElement {
             tabRoot.appendChild(indicator);
 
             tabRoot.addEventListener("click", () => {
-                this.disableTransition();
+                this.disableIndicatorTransition();
+                this.disablePanelTransition();
                 this.moveIndicatorToTab(this.activeIndex);
                 this.setPanelsHeight(this.activeIndex);
-                this.enableTransition();
+                this.enableIndicatorTransition();
+                this.enablePanelTransition();
                 this.setActive(index);
             });
 
@@ -69,9 +69,7 @@ export class Tabs extends LitElement {
     }
 
     renderPanels() {
-        const root = this.shadowRoot?.querySelector(
-            "[part='panels']"
-        ) as HTMLElement;
+        const root = this.getPart("panels");
 
         root.innerHTML = "";
 
@@ -83,14 +81,22 @@ export class Tabs extends LitElement {
         });
     }
 
-    setupTransitionIndicator() {
-        const root = this.shadowRoot?.querySelector(
-            "[part='transition-indicator']"
-        ) as HTMLElement;
+    setupTransitionEnd() {
+        const indicator = this.getPart("transition-indicator");
 
-        root.addEventListener("transitionend", () => {
-            this.disableTransition();
-            this.resetPanelsHeight();
+        indicator.addEventListener("transitionend", (e) => {
+            if (e.propertyName === "transform") {
+                this.disableIndicatorTransition();
+            }
+        });
+
+        const panels = this.getPart("panels");
+
+        panels.addEventListener("transitionend", (e) => {
+            if (e.propertyName === "height") {
+                this.disablePanelTransition();
+                this.resetPanelsHeight();
+            }
         });
     }
 
@@ -123,9 +129,7 @@ export class Tabs extends LitElement {
     }
 
     getAllTabs() {
-        const root = this.shadowRoot?.querySelector(
-            "[part='tabs']"
-        ) as HTMLElement;
+        const root = this.getPart("tabs");
 
         if (!root) {
             return [];
@@ -152,35 +156,34 @@ export class Tabs extends LitElement {
 
     moveIndicatorToTab(index: number) {
         const tab = this.getTab(index);
-        const indicator = this.shadowRoot?.querySelector(
-            "[part='transition-indicator']"
-        ) as HTMLElement;
+        const indicator = this.getPart("transition-indicator");
 
         if (!indicator || !tab) {
             return;
         }
 
-        this.getMain().style.setProperty("--tab-width", `${tab.offsetWidth}px`);
-        this.getMain().style.setProperty(
+        this.getPart("main").style.setProperty(
+            "--tab-width",
+            `${tab.offsetWidth}px`
+        );
+        this.getPart("main").style.setProperty(
             "--tab-height",
             `${tab.offsetHeight}px`
         );
 
-        this.getMain().style.setProperty(
+        this.getPart("main").style.setProperty(
             "--tab-left",
             `${tab.offsetLeft - (tab.parentElement?.offsetLeft ?? 0)}px`
         );
 
-        this.getMain().style.setProperty(
+        this.getPart("main").style.setProperty(
             "--tab-top",
             `${tab.offsetTop - (tab.parentElement?.offsetTop ?? 0)}px`
         );
     }
 
     getAllPanels() {
-        const root = this.shadowRoot?.querySelector(
-            "[part='panels']"
-        ) as HTMLElement;
+        const root = this.getPart("panels");
 
         if (!root) {
             return [];
@@ -201,46 +204,43 @@ export class Tabs extends LitElement {
         return this.getAllPanels()[index];
     }
 
-    enableTransition() {
-        this.shadowRoot
-            ?.querySelector("[part='main']")
-            ?.setAttribute("animating", "");
+    enableIndicatorTransition() {
+        this.getPart("main").setAttribute("enable-indicator-transition", "");
     }
 
-    disableTransition() {
-        this.shadowRoot
-            ?.querySelector("[part='main']")
-            ?.removeAttribute("animating");
+    disableIndicatorTransition() {
+        this.getPart("main").removeAttribute("enable-indicator-transition");
+    }
+
+    enablePanelTransition() {
+        this.getPart("main").setAttribute("enable-panel-transition", "");
+    }
+
+    disablePanelTransition() {
+        this.getPart("main").removeAttribute("enable-panel-transition");
     }
 
     setPanelsHeight(index: number) {
         const panel = this.getPanel(index);
-        this.getMain().style.setProperty(
+        this.getPart("main").style.setProperty(
             "--panel-height",
             `${panel?.offsetHeight}px`
         );
     }
 
     resetPanelsHeight() {
-        this.getMain().style.removeProperty("--panel-height");
+        this.getPart("main").style.removeProperty("--panel-height");
     }
 
-    getMain() {
-        return this.shadowRoot?.querySelector("[part='main']") as HTMLElement;
+    getPart(name: string) {
+        return this.shadowRoot?.querySelector(
+            `[part='${name}']`
+        ) as HTMLElement;
     }
 
     static styles = [
         mainCss,
         css`
-            :host {
-                --indicator-height: var(--tab-indicator-height);
-
-                --indicator-color-h: var(--primary-color-h);
-                --indicator-color-s: var(--primary-color-h);
-                --indicator-color-l: var(--primary-color-h);
-                --indicator-color-a: var(--primary-color-h);
-            }
-
             [part="main"] {
             }
 
@@ -271,7 +271,7 @@ export class Tabs extends LitElement {
 
             [part="tab"] {
                 position: relative;
-                padding: var(--tab-padding);
+                padding: ${size(12)} ${size(24)};
                 cursor: pointer;
             }
 
@@ -289,7 +289,9 @@ export class Tabs extends LitElement {
                 display: block;
             }
 
-            [part="main"][animating] [part="tab"][active] [part="indicator"] {
+            [part="main"][enable-indicator-transition]
+                [part="tab"][active]
+                [part="indicator"] {
                 display: none;
             }
 
@@ -304,7 +306,8 @@ export class Tabs extends LitElement {
                 pointer-events: none;
             }
 
-            [part="main"][animating] [part="transition-indicator"] {
+            [part="main"][enable-indicator-transition]
+                [part="transition-indicator"] {
                 display: block;
                 transition: var(--tab-indicator-transition);
             }
@@ -316,7 +319,7 @@ export class Tabs extends LitElement {
                 left: 0;
                 bottom: calc(0px - var(--input-border-width));
                 width: 100%;
-                height: var(--indicator-height);
+                height: ${size(4)};
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
@@ -330,7 +333,7 @@ export class Tabs extends LitElement {
                 height: var(--panel-height, auto);
             }
 
-            [part="main"][animating] [part="panels"] {
+            [part="main"][enable-panel-transition] [part="panels"] {
                 transition: var(--panel-transition);
                 overflow: hidden;
             }
@@ -341,7 +344,7 @@ export class Tabs extends LitElement {
                 left: 0;
                 opacity: 0;
                 visibility: hidden;
-                padding: var(--panel-padding);
+                padding: ${size(16)} ${size(16)};
                 pointer-events: none;
             }
 
@@ -352,11 +355,11 @@ export class Tabs extends LitElement {
                 pointer-events: auto;
             }
 
-            [part="main"][animating] [part="panel"] {
+            [part="main"][enable-panel-transition] [part="panel"] {
                 transition: var(--panel-transition);
             }
 
-            [part="main"][animating] [part="panel"][active] {
+            [part="main"][enable-panel-transition] [part="panel"][active] {
                 transition-delay: var(--panel-transition-delay);
             }
         `,

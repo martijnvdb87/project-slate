@@ -203,13 +203,10 @@ export const main = css`
             ${size(4)}
         );
 
-        --tab-padding: var(--ds-tab-padding, ${size(12)} ${size(24)});
-        --tab-indicator-height: var(--ds-tab-indicator-height, ${size(4)});
         --tab-indicator-transition: var(
             --ds-tab-indicator-transition,
             all 320ms ease
         );
-        --panel-padding: var(--ds-panel-padding, ${size(16)} ${size(16)});
         --panel-transition: var(--ds-panel-transition, all 320ms ease);
         --panel-transition-delay: var(--ds-panel-transition-delay, 0ms);
         --transition-duration: var(--ds-transition-duration, 120ms);
