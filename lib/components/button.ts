@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "@/lib/util/style";
+import { mainCss, size } from "@/lib/util/style";
 import { renderIcon } from "@/lib/util/icons";
 
 @customElement(`${config.prefix}-button`)
@@ -52,8 +52,8 @@ export class Button extends LitElement {
                     var(--default-accent-s),
                     var(--default-accent-l)
                 );
-                --icon-size: var(--icon-size-medium);
-                --height: var(--height-medium);
+                --icon-size: ${size(16)};
+                --height: ${size(32)};
                 --width: auto;
                 --margin-bottom: var(--element-margin-bottom);
 
@@ -67,13 +67,13 @@ export class Button extends LitElement {
                 --text-color-l: var(--default-accent-l);
                 --text-color-a: var(--default-accent-a);
 
-                --padding-x: var(--padding-x-medium);
-                --gap: var(--gap-medium);
+                --padding-x: ${size(12)};
+                --gap: ${size(6)};
 
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--element-font-weight);
 
-                --border-radius: var(--element-border-radius);
+                --element-border-radius: var(--border-radius);
                 --border-width: 0px;
 
                 --border-color-h: var(--default-color-h);
@@ -86,14 +86,10 @@ export class Button extends LitElement {
                 --outline-color-l: var(--primary-color-l);
                 --outline-color-a: var(--primary-color-a);
 
-                --outline-offset: var(--element-outline-offset);
-                --outline-colored-offset: var(--element-colored-outline-offset);
+                --outline-offset: ${size(0)};
+                --outline-colored-offset: ${size(2)};
 
                 --outline-width: var(--input-outline-width);
-
-                --box-shadow-size: var(--element-shadow-size);
-                --box-shadow-opacity: var(--element-shadow-opacity);
-                --box-shadow: none;
             }
 
             button {
@@ -128,8 +124,7 @@ export class Button extends LitElement {
                     var(--border-color-l),
                     var(--border-color-a)
                 );
-                border-radius: var(--border-radius);
-                box-shadow: var(--box-shadow);
+                border-radius: var(--element-border-radius);
                 cursor: pointer;
                 outline: 0 solid
                     hsla(
@@ -139,8 +134,7 @@ export class Button extends LitElement {
                         0
                     );
                 outline-offset: var(--outline-offset);
-                transition: all var(--transition-duration) ease-in-out,
-                    border-width 0s, padding 0s;
+                transition: all 120ms ease-in-out, border-width 0s, padding 0s;
             }
 
             button:hover {
@@ -292,26 +286,26 @@ export class Button extends LitElement {
             }
 
             :host([size="small"]) {
-                --height: var(--height-small);
-                --icon-size: var(--icon-size-small);
-                --padding-x: var(--padding-x-small);
-                --gap: var(--gap-small);
+                --height: ${size(24)};
+                --icon-size: ${size(12)};
+                --padding-x: ${size(8)};
+                --gap: ${size(4)};
                 --font-size: var(--font-size-small);
             }
 
             :host([size="large"]) {
-                --height: var(--height-large);
-                --icon-size: var(--icon-size-large);
-                --padding-x: var(--padding-x-large);
-                --gap: var(--gap-large);
+                --height: ${size(40)};
+                --icon-size: ${size(18)};
+                --padding-x: ${size(16)};
+                --gap: ${size(8)};
                 --font-size: var(--font-size-large);
             }
 
             :host([size="huge"]) {
-                --height: var(--height-huge);
-                --icon-size: var(--icon-size-huge);
-                --padding-x: var(--padding-x-huge);
-                --gap: var(--gap-huge);
+                --height: ${size(48)};
+                --icon-size: ${size(24)};
+                --padding-x: ${size(20)};
+                --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
             }
 
@@ -320,27 +314,17 @@ export class Button extends LitElement {
             }
 
             :host([shape="square"]) {
-                --border-radius: 0;
+                --element-border-radius: 0;
             }
 
             :host([shape="pill"]) {
-                --border-radius: var(--shape-pill-radius);
+                --element-border-radius: var(--shape-pill-radius);
             }
 
             :host([shape="circle"]) {
                 --padding-x: 0;
-                --border-radius: 50%;
+                --element-border-radius: 50%;
                 --width: var(--height);
-            }
-
-            :host([shadow]) {
-                --box-shadow: var(--box-shadow-size)
-                    hsl(
-                        var(--background-color-h),
-                        var(--background-color-s),
-                        calc(var(--background-color-l) - 15%),
-                        var(--box-shadow-opacity)
-                    );
             }
 
             :host([disabled]) {

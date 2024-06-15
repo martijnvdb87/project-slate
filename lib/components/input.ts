@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "../util/style";
+import { mainCss, size } from "../util/style";
 import { renderIcon } from "../util/icons";
 
 @customElement(`${config.prefix}-input`)
@@ -102,17 +102,17 @@ export class Input extends LitElement {
                 margin-bottom: var(--margin-bottom);
 
                 --display: inline-flex;
-                --height: var(--height-medium);
+                --height: ${size(32)};
                 --margin-bottom: var(--element-margin-bottom);
-                --gap: var(--gap-medium);
-                --icon-size: var(--icon-size-medium);
+                --gap: ${size(6)};
+                --icon-size: ${size(16)};
                 --icon-container-size: calc(
                     var(--height) - var(--border-width) * 2
                 );
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--input-font-weight);
 
-                --sub-height: var(--sub-height-medium);
+                --sub-height: ${size(20)};
 
                 --text-color-h: var(--input-text-color-h);
                 --text-color-s: var(--input-text-color-s);
@@ -125,7 +125,7 @@ export class Input extends LitElement {
                 --placeholder-color-a: var(--input-placeholder-color-a);
                 --placeholder-weight: var(--input-placeholder-weight);
 
-                --label-padding: var(--input-label-padding);
+                --label-padding: ${size(4)};
                 --label-font-weight: var(--input-label-font-weight);
                 --label-font-size: var(--input-label-font-size);
 
@@ -141,14 +141,14 @@ export class Input extends LitElement {
                     var(--input-icon-color-a)
                 );
 
-                --input-padding-x: var(--input-padding-x-medium);
+                --input-padding-x: ${size(10)};
 
                 --background-color-h: var(--input-background-color-h);
                 --background-color-s: var(--input-background-color-s);
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
 
-                --border-radius: var(--element-border-radius);
+                --element-border-radius: var(--border-radius);
                 --border-width: var(--input-border-width);
                 --border-color-h: var(--input-border-color-h);
                 --border-color-s: var(--input-border-color-s);
@@ -159,13 +159,9 @@ export class Input extends LitElement {
 
                 --focus-outline-width: var(--input-focus-outline-width);
 
-                --validation-font-size: var(
-                    --input-validation-message-font-size-medium
-                );
+                --validation-font-size: ${size(12)};
 
-                --validation-padding: var(
-                    --input-validation-message-padding-medium
-                );
+                --validation-padding: ${size(4)};
             }
 
             input {
@@ -262,7 +258,7 @@ export class Input extends LitElement {
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-                border-radius: var(--border-radius);
+                border-radius: var(--element-border-radius);
                 border-width: var(--border-width);
                 border-style: solid;
                 border-color: hsla(
@@ -287,7 +283,7 @@ export class Input extends LitElement {
                         ),
                         0
                     );
-                transition: all var(--transition-duration) ease-in-out;
+                transition: all 120ms ease-in-out;
             }
 
             [part="input-inner-container"] {
@@ -336,7 +332,7 @@ export class Input extends LitElement {
                 width: var(--sub-height);
                 height: var(--sub-height);
                 background: transparent;
-                border-radius: var(--border-radius);
+                border-radius: var(--element-border-radius);
                 border-radius: 999rem;
                 border: none;
                 cursor: pointer;
@@ -408,48 +404,36 @@ export class Input extends LitElement {
             }
 
             :host([size="small"]) {
-                --height: var(--height-small);
-                --icon-size: var(--icon-size-small);
-                --input-padding-x: var(--input-padding-x-small);
-                --gap: var(--gap-small);
+                --height: ${size(24)};
+                --icon-size: ${size(12)};
+                --input-padding-x: ${size(8)};
+                --gap: ${size(4)};
                 --font-size: var(--font-size-small);
-                --validation-font-size: var(
-                    --input-validation-message-font-size-small
-                );
-                --validation-padding: var(
-                    --input-validation-message-padding-small
-                );
-                --sub-height: var(--sub-height-small);
+                --validation-font-size: ${size(11)};
+                --validation-padding: ${size(4)};
+                --sub-height: ${size(16)};
             }
 
             :host([size="large"]) {
-                --height: var(--height-large);
-                --icon-size: var(--icon-size-large);
-                --input-padding-x: var(--input-padding-x-large);
-                --gap: var(--gap-large);
+                --height: ${size(40)};
+                --icon-size: ${size(18)};
+                --input-padding-x: ${size(12)};
+                --gap: ${size(8)};
                 --font-size: var(--font-size-large);
-                --validation-font-size: var(
-                    --input-validation-message-font-size-large
-                );
-                --validation-padding: var(
-                    --input-validation-message-padding-large
-                );
-                --sub-height: var(--sub-height-large);
+                --validation-font-size: ${size(14)};
+                --validation-padding: ${size(4)};
+                --sub-height: ${size(24)};
             }
 
             :host([size="huge"]) {
-                --height: var(--height-huge);
-                --icon-size: var(--icon-size-huge);
-                --input-padding-x: var(--input-padding-x-huge);
-                --gap: var(--gap-huge);
+                --height: ${size(48)};
+                --icon-size: ${size(24)};
+                --input-padding-x: ${size(14)};
+                --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
-                --validation-font-size: var(
-                    --input-validation-message-font-size-huge
-                );
-                --validation-padding: var(
-                    --input-validation-message-padding-huge
-                );
-                --sub-height: var(--sub-height-huge);
+                --validation-font-size: ${size(16)};
+                --validation-padding: ${size(4)};
+                --sub-height: ${size(28)};
             }
 
             :host([width="full"]) {
@@ -457,11 +441,11 @@ export class Input extends LitElement {
             }
 
             :host([shape="square"]) {
-                --border-radius: 0;
+                --element-border-radius: 0;
             }
 
             :host([shape="pill"]) {
-                --border-radius: var(--shape-pill-radius);
+                --element-border-radius: var(--shape-pill-radius);
             }
 
             :host([disabled]) {
