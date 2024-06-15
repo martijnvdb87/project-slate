@@ -42,6 +42,28 @@ export class Input extends LitElement {
         `;
     }
 
+    firstUpdated() {
+        this.setupInput();
+    }
+
+    setupInput() {
+        this.getPart("input").addEventListener("change", (e) => {
+            const isChecked = (e.target as HTMLInputElement).checked;
+
+            if (isChecked) {
+                this.setAttribute("checked", "");
+            } else {
+                this.removeAttribute("checked");
+            }
+        });
+    }
+
+    getPart(name: string) {
+        return this.shadowRoot?.querySelector(
+            `[part='${name}']`
+        ) as HTMLElement;
+    }
+
     static styles = [
         mainCss,
         css`
@@ -198,7 +220,7 @@ export class Input extends LitElement {
                         var(--primary-color-l),
                         0
                     );
-                transition: all 120ms ease-in-out;
+                transition: all 60ms ease-in-out;
             }
 
             [part="icon"] {
@@ -221,7 +243,7 @@ export class Input extends LitElement {
                 max-width: 100%;
                 max-height: 100%;
                 pointer-events: none;
-                transition: all 120ms ease-in-out;
+                transition: all 60ms ease-in-out;
             }
 
             [part="label-container"] {
