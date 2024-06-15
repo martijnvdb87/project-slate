@@ -90,13 +90,13 @@ export class Tabs extends LitElement {
             }
         });
 
-        const panels = this.getPart("panels");
-
-        panels.addEventListener("transitionend", (e) => {
-            if (e.propertyName === "height") {
-                this.disablePanelTransition();
-                this.resetPanelsHeight();
-            }
+        this.getParts(["panel", "panels"]).forEach((element) => {
+            element.addEventListener("transitionend", (e) => {
+                if (e.propertyName === "height") {
+                    this.disablePanelTransition();
+                    this.resetPanelsHeight();
+                }
+            });
         });
     }
 
@@ -205,19 +205,31 @@ export class Tabs extends LitElement {
     }
 
     enableIndicatorTransition() {
-        this.getPart("main").setAttribute("enable-indicator-transition", "");
+        this.getParts(["indicator", "transition-indicator"]).forEach(
+            (element) => {
+                element.setAttribute("enable-indicator-transition", "");
+            }
+        );
     }
 
     disableIndicatorTransition() {
-        this.getPart("main").removeAttribute("enable-indicator-transition");
+        this.getParts(["indicator", "transition-indicator"]).forEach(
+            (element) => {
+                element.removeAttribute("enable-indicator-transition");
+            }
+        );
     }
 
     enablePanelTransition() {
-        this.getPart("main").setAttribute("enable-panel-transition", "");
+        this.getParts(["panels", "panel"]).forEach((element) => {
+            element.setAttribute("enable-panel-transition", "");
+        });
     }
 
     disablePanelTransition() {
-        this.getPart("main").removeAttribute("enable-panel-transition");
+        this.getParts(["panels", "panel"]).forEach((element) => {
+            element.removeAttribute("enable-panel-transition");
+        });
     }
 
     setPanelsHeight(index: number) {
@@ -236,6 +248,14 @@ export class Tabs extends LitElement {
         return this.shadowRoot?.querySelector(
             `[part='${name}']`
         ) as HTMLElement;
+    }
+
+    getParts(name: string | string[]) {
+        const names = Array.isArray(name) ? name : [name];
+
+        return (this.shadowRoot?.querySelectorAll(
+            names.map((name) => `[part='${name}']`).join(", ")
+        ) ?? []) as HTMLElement[];
     }
 
     static styles = [
@@ -289,9 +309,8 @@ export class Tabs extends LitElement {
                 display: block;
             }
 
-            [part="main"][enable-indicator-transition]
-                [part="tab"][active]
-                [part="indicator"] {
+            [part="tab"][active]
+                [part="indicator"][enable-indicator-transition] {
                 display: none;
             }
 
@@ -306,10 +325,9 @@ export class Tabs extends LitElement {
                 pointer-events: none;
             }
 
-            [part="main"][enable-indicator-transition]
-                [part="transition-indicator"] {
+            [part="transition-indicator"][enable-indicator-transition] {
                 display: block;
-                transition: var(--tab-indicator-transition);
+                transition: all 320ms ease;
             }
 
             [part="indicator"]::after,
@@ -333,8 +351,8 @@ export class Tabs extends LitElement {
                 height: var(--panel-height, auto);
             }
 
-            [part="main"][enable-panel-transition] [part="panels"] {
-                transition: var(--panel-transition);
+            [part="panels"][enable-panel-transition] {
+                transition: all 480ms ease;
                 overflow: hidden;
             }
 
@@ -355,12 +373,12 @@ export class Tabs extends LitElement {
                 pointer-events: auto;
             }
 
-            [part="main"][enable-panel-transition] [part="panel"] {
-                transition: var(--panel-transition);
+            [part="panel"][enable-panel-transition] {
+                transition: all 320ms ease;
             }
 
-            [part="main"][enable-panel-transition] [part="panel"][active] {
-                transition-delay: var(--panel-transition-delay);
+            [part="panel"][enable-panel-transition][active] {
+                transition-delay: 160ms;
             }
         `,
     ];

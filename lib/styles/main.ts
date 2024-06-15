@@ -203,12 +203,6 @@ export const main = css`
             ${size(4)}
         );
 
-        --tab-indicator-transition: var(
-            --ds-tab-indicator-transition,
-            all 320ms ease
-        );
-        --panel-transition: var(--ds-panel-transition, all 320ms ease);
-        --panel-transition-delay: var(--ds-panel-transition-delay, 0ms);
         --transition-duration: var(--ds-transition-duration, 120ms);
     }
 
