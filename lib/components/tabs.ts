@@ -37,7 +37,7 @@ export class Tabs extends LitElement {
         this.renderPanels();
         this.setupTransitionEnd();
 
-        this.setActive(this.activeIndex);
+        this.setActive(this.activeIndex, true);
     }
 
     renderTabs() {
@@ -100,7 +100,7 @@ export class Tabs extends LitElement {
         });
     }
 
-    setActive(index: number) {
+    setActive(index: number, firstUpdated = false) {
         this.activeIndex = index;
 
         for (const tab of this.getAllTabs()) {
@@ -113,7 +113,10 @@ export class Tabs extends LitElement {
         }
 
         this.moveIndicatorToTab(this.activeIndex);
-        this.setPanelsHeight(this.activeIndex);
+
+        if (!firstUpdated) {
+            this.setPanelsHeight(this.activeIndex);
+        }
 
         const activeTab = this.getTab(this.activeIndex);
         const activePanel = this.getPanel(this.activeIndex);
