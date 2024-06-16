@@ -3,6 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { renderIcon } from "../util/icons";
+import { getRandomId } from "../util/general";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
@@ -43,6 +44,8 @@ export class Input extends LitElement {
     disabled = false;
 
     render() {
+        const id = getRandomId();
+
         const mainClasses = [];
 
         if (this.icon) {
@@ -63,14 +66,14 @@ export class Input extends LitElement {
 
         return html`
             <div part="main" class="${mainClasses.join(" ")}">
-                <label ?hidden="${this.label === null}" part="label" for="input"
+                <label ?hidden="${this.label === null}" part="label" for="${id}"
                     >${this.label}</label
                 >
                 <div part="input-container">
                     <div part="input-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
                         <input
-                            id="input"
+                            id="${id}"
                             name="${this.name}"
                             part="input"
                             type="${inputType}"
@@ -279,6 +282,7 @@ export class Input extends LitElement {
                         ),
                         0
                     );
+                box-shadow: var(--input-box-shadow);
             }
 
             [part="input-inner-container"] {

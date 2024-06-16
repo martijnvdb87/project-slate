@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { renderIcon } from "../util/icons";
+import { getPart, getRandomId } from "../util/general";
 
 @customElement(`${config.prefix}-checkbox`)
 export class Input extends LitElement {
@@ -22,13 +23,15 @@ export class Input extends LitElement {
     disabled = false;
 
     render() {
+        const id = getRandomId();
+
         return html`
             <div part="main">
                 <div part="checkbox-container">
                     <input
                         type="checkbox"
                         part="input"
-                        id="input"
+                        id="${id}"
                         name="${this.name}"
                         ?checked="${this.checked}"
                         ?disabled="${this.disabled}"
@@ -36,7 +39,7 @@ export class Input extends LitElement {
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>
                 <div part="label-container">
-                    <label for="input" part="label"><slot></slot></label>
+                    <label for="${id}" part="label"><slot></slot></label>
                     <slot name="description"></slot>
                 </div>
             </div>
@@ -48,7 +51,7 @@ export class Input extends LitElement {
     }
 
     setupInput() {
-        this.getPart("input").addEventListener("change", (e) => {
+        getPart(this, "input").addEventListener("change", (e) => {
             const isChecked = (e.target as HTMLInputElement).checked;
 
             if (isChecked) {
@@ -57,12 +60,6 @@ export class Input extends LitElement {
                 this.removeAttribute("checked");
             }
         });
-    }
-
-    getPart(name: string) {
-        return this.shadowRoot?.querySelector(
-            `[part='${name}']`
-        ) as HTMLElement;
     }
 
     static styles = [
@@ -216,6 +213,7 @@ export class Input extends LitElement {
                         var(--primary-color-l),
                         0
                     );
+                box-shadow: var(--input-box-shadow);
             }
 
             [part="icon"] {

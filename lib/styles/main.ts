@@ -38,6 +38,12 @@ export const main = css`
 
         --shape-pill-radius: var(--ds-shape-pill-radius, ${size(960)});
 
+        --input-box-shadow: var(
+            --ds-input-box-shadow,
+            rgba(0, 0, 0, 0.025) ${size(0)} ${size(2)} ${size(2)},
+            rgba(0, 0, 0, 0.025) ${size(0)} ${size(1)} ${size(1)}
+        );
+
         --default-color-h: var(--ds-default-color-h, 220);
         --default-color-s: var(--ds-default-color-s, 10%);
         --default-color-l: var(--ds-default-color-l, 92%);

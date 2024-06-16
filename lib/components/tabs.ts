@@ -6,6 +6,7 @@ import {
 } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
+import { getPart, getParts } from "../util/general";
 
 @customElement(`${config.prefix}-tabs`)
 export class Tabs extends LitElement {
@@ -41,7 +42,7 @@ export class Tabs extends LitElement {
     }
 
     renderTabs() {
-        const root = this.getPart("tabs");
+        const root = getPart(this, "tabs");
 
         root.innerHTML = "";
 
@@ -69,7 +70,7 @@ export class Tabs extends LitElement {
     }
 
     renderPanels() {
-        const root = this.getPart("panels");
+        const root = getPart(this, "panels");
 
         root.innerHTML = "";
 
@@ -82,7 +83,7 @@ export class Tabs extends LitElement {
     }
 
     setupTransitionEnd() {
-        const indicator = this.getPart("transition-indicator");
+        const indicator = getPart(this, "transition-indicator");
 
         indicator.addEventListener("transitionend", (e) => {
             if (e.propertyName === "transform") {
@@ -90,7 +91,7 @@ export class Tabs extends LitElement {
             }
         });
 
-        this.getParts(["panel", "panels"]).forEach((element) => {
+        getParts(this, ["panel", "panels"]).forEach((element) => {
             element.addEventListener("transitionend", (e) => {
                 if (e.propertyName === "height") {
                     this.disablePanelTransition();
@@ -132,7 +133,7 @@ export class Tabs extends LitElement {
     }
 
     getAllTabs() {
-        const root = this.getPart("tabs");
+        const root = getPart(this, "tabs");
 
         if (!root) {
             return [];
@@ -159,34 +160,34 @@ export class Tabs extends LitElement {
 
     moveIndicatorToTab(index: number) {
         const tab = this.getTab(index);
-        const indicator = this.getPart("transition-indicator");
+        const indicator = getPart(this, "transition-indicator");
 
         if (!indicator || !tab) {
             return;
         }
 
-        this.getPart("main").style.setProperty(
+        getPart(this, "main").style.setProperty(
             "--tab-width",
             `${tab.offsetWidth}px`
         );
-        this.getPart("main").style.setProperty(
+        getPart(this, "main").style.setProperty(
             "--tab-height",
             `${tab.offsetHeight}px`
         );
 
-        this.getPart("main").style.setProperty(
+        getPart(this, "main").style.setProperty(
             "--tab-left",
             `${tab.offsetLeft - (tab.parentElement?.offsetLeft ?? 0)}px`
         );
 
-        this.getPart("main").style.setProperty(
+        getPart(this, "main").style.setProperty(
             "--tab-top",
             `${tab.offsetTop - (tab.parentElement?.offsetTop ?? 0)}px`
         );
     }
 
     getAllPanels() {
-        const root = this.getPart("panels");
+        const root = getPart(this, "panels");
 
         if (!root) {
             return [];
@@ -208,7 +209,7 @@ export class Tabs extends LitElement {
     }
 
     enableIndicatorTransition() {
-        this.getParts(["indicator", "transition-indicator"]).forEach(
+        getParts(this, ["indicator", "transition-indicator"]).forEach(
             (element) => {
                 element.setAttribute("enable-indicator-transition", "");
             }
@@ -216,7 +217,7 @@ export class Tabs extends LitElement {
     }
 
     disableIndicatorTransition() {
-        this.getParts(["indicator", "transition-indicator"]).forEach(
+        getParts(this, ["indicator", "transition-indicator"]).forEach(
             (element) => {
                 element.removeAttribute("enable-indicator-transition");
             }
@@ -224,41 +225,33 @@ export class Tabs extends LitElement {
     }
 
     enablePanelTransition() {
-        this.getParts(["panels", "panel"]).forEach((element) => {
+        getParts(this, ["panels", "panel"]).forEach((element) => {
             element.setAttribute("enable-panel-transition", "");
         });
     }
 
     disablePanelTransition() {
-        this.getParts(["panels", "panel"]).forEach((element) => {
+        getParts(this, ["panels", "panel"]).forEach((element) => {
             element.removeAttribute("enable-panel-transition");
         });
     }
 
     setPanelsHeight(index: number) {
         const panel = this.getPanel(index);
-        this.getPart("main").style.setProperty(
+        getPart(this, "main").style.setProperty(
             "--panel-height",
             `${panel?.offsetHeight}px`
         );
     }
 
     resetPanelsHeight() {
-        this.getPart("main").style.removeProperty("--panel-height");
+        getPart(this, "main").style.removeProperty("--panel-height");
     }
 
     getPart(name: string) {
         return this.shadowRoot?.querySelector(
             `[part='${name}']`
         ) as HTMLElement;
-    }
-
-    getParts(name: string | string[]) {
-        const names = Array.isArray(name) ? name : [name];
-
-        return (this.shadowRoot?.querySelectorAll(
-            names.map((name) => `[part='${name}']`).join(", ")
-        ) ?? []) as HTMLElement[];
     }
 
     static styles = [
