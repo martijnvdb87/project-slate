@@ -23,6 +23,7 @@
             >
                 <div style="display: flex; gap: 1.5rem">
                     <ds-input
+                        name="firstName"
                         label="First name"
                         width="full"
                         style="flex: 1"
@@ -33,15 +34,19 @@
                         style="flex: 1"
                     ></ds-input>
                 </div>
-                <ds-input label="Email address"></ds-input>
-                <ds-input label="Street address"></ds-input>
+                <ds-input
+                    name="email"
+                    type="email"
+                    label="Email address"
+                ></ds-input>
+                <ds-input name="address" label="Street address"></ds-input>
                 <div style="display: flex; gap: 1.5rem">
-                    <ds-input label="City"></ds-input>
-                    <ds-input label="State / Province"></ds-input>
-                    <ds-input label="ZIP / Postal code"></ds-input>
+                    <ds-input name="city" label="City"></ds-input>
+                    <ds-input name="state" label="State / Province"></ds-input>
+                    <ds-input name="zip" label="ZIP / Postal code"></ds-input>
                 </div>
                 <hr />
-                <ds-checkbox>
+                <ds-checkbox name="terms">
                     Accept Terms and Conditions
                     <div slot="description">
                         By checking this box, I confirm that I have read,
@@ -49,7 +54,7 @@
                         Privacy Policy, and Refund Policy.
                     </div>
                 </ds-checkbox>
-                <ds-checkbox>
+                <ds-checkbox name="newsletter">
                     Sign Up for Our Newsletter
                     <div slot="description">
                         By checking this box, I agree to receive promotional
@@ -59,8 +64,8 @@
                 </ds-checkbox>
                 <hr />
                 <div style="display: flex; gap: 0.5rem; justify-content: end">
-                    <ds-button type="primary">Submit</ds-button>
-                    <ds-button type="link">Cancel</ds-button>
+                    <ds-button submit type="primary">Submit</ds-button>
+                    <ds-button reset type="ghost">Reset</ds-button>
                 </div>
             </form>
 

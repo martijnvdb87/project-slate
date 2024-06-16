@@ -1,68 +1,86 @@
-import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { LitElement, PropertyValueMap, css, html } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { renderIcon } from "../util/icons";
-import { getPart, getRandomId } from "../util/general";
+import { getRandomId } from "../util/general";
 
 @customElement(`${config.prefix}-checkbox`)
 export class Input extends LitElement {
     @property({ type: String })
-    name = null;
+    protected name = null;
 
     @property({ type: Boolean })
-    checked = false;
+    protected checked = false;
+
+    @state()
+    protected originalChecked = false;
 
     @property({ type: String })
-    icon = "check";
+    protected icon = "check";
 
     @property({ attribute: "icon-padding", type: String })
-    iconPadding = "10px";
+    protected iconPadding = "10px";
 
     @property({ type: Boolean })
-    disabled = false;
+    protected disabled = false;
 
-    render() {
-        const id = getRandomId();
+    @state()
+    protected elementId = "";
 
+    @state()
+    protected internals;
+
+    protected static formAssociated = true;
+
+    public constructor() {
+        super();
+
+        this.originalChecked = this.getAttribute("checked") !== null;
+
+        this.internals = this.attachInternals();
+        this.internals.setFormValue(this.checked ? "on" : "off");
+
+        this.elementId = getRandomId();
+    }
+
+    public formResetCallback() {
+        this.checked = this.originalChecked;
+        this.internals.setFormValue(this.checked ? "on" : "off");
+    }
+
+    protected render() {
         return html`
             <div part="main">
                 <div part="checkbox-container">
                     <input
                         type="checkbox"
                         part="input"
-                        id="${id}"
+                        id="${this.elementId}"
                         name="${this.name}"
-                        ?checked="${this.checked}"
+                        .checked="${this.checked}"
                         ?disabled="${this.disabled}"
+                        @change="${this.handleChange}"
                     />
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>
                 <div part="label-container">
-                    <label for="${id}" part="label"><slot></slot></label>
+                    <label for="${this.elementId}" part="label"
+                        ><slot></slot
+                    ></label>
                     <slot name="description"></slot>
                 </div>
             </div>
         `;
     }
 
-    firstUpdated() {
-        this.setupInput();
+    protected handleChange(e: Event) {
+        const target = e.target as HTMLInputElement;
+        this.checked = target.checked;
+        this.internals.setFormValue(this.checked ? "on" : "off");
     }
 
-    setupInput() {
-        getPart(this, "input").addEventListener("change", (e) => {
-            const isChecked = (e.target as HTMLInputElement).checked;
-
-            if (isChecked) {
-                this.setAttribute("checked", "");
-            } else {
-                this.removeAttribute("checked");
-            }
-        });
-    }
-
-    static styles = [
+    public static styles = [
         mainCss,
         css`
             :host {

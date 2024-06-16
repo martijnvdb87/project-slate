@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "@/lib/util/style";
 import { renderIcon } from "@/lib/util/icons";
@@ -7,23 +7,41 @@ import { renderIcon } from "@/lib/util/icons";
 @customElement(`${config.prefix}-button`)
 export class Button extends LitElement {
     @property({ type: String })
-    name = null;
+    protected name = null;
 
     @property({ type: String })
-    icon: string | null = null;
+    protected icon: string | null = null;
 
     @property({ attribute: "icon-right", type: String })
-    iconRight: string | null = null;
+    protected iconRight: string | null = null;
 
     @property({ type: Boolean })
-    disabled = false;
+    protected disabled = false;
 
-    render() {
+    @property({ type: Boolean })
+    protected submit = false;
+
+    @property({ type: Boolean })
+    protected reset = false;
+
+    @state()
+    protected internals;
+
+    protected static formAssociated = true;
+
+    public constructor() {
+        super();
+        this.internals = this.attachInternals();
+    }
+
+    protected render() {
         return html`
             <button
                 name="${this.name}"
                 part="button"
                 ?disabled="${this.disabled}"
+                type="${this.submit ? "submit" : "button"}"
+                @click="${this.handleClick}"
             >
                 ${renderIcon(this.icon)}
                 <slot></slot>
@@ -32,7 +50,17 @@ export class Button extends LitElement {
         `;
     }
 
-    static styles = [
+    protected handleClick() {
+        if (this.submit) {
+            this.internals.form?.submit();
+        }
+
+        if (this.reset) {
+            this.internals.form?.reset();
+        }
+    }
+
+    public static styles = [
         mainCss,
         css`
             box-icon {

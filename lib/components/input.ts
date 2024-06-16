@@ -8,44 +8,69 @@ import { getRandomId } from "../util/general";
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
     @property({ type: String })
-    name = null;
+    protected name = null;
 
     @property({ type: String })
-    type = "text";
+    protected type = "text";
 
     @state()
-    showPassword = false;
+    protected showPassword = false;
 
     @property({ type: String })
-    value: string | null = null;
+    protected value = "";
+
+    @state()
+    protected originalValue = "";
 
     @property({ type: String })
-    placeholder: string | null = null;
+    protected placeholder: string | null = null;
 
     @property({ type: String })
-    label: string | null = null;
+    protected label: string | null = null;
 
     @property({ type: String })
-    icon: string | null = null;
+    protected icon: string | null = null;
 
     @property({ attribute: "icon-right", type: String })
-    iconRight: string | null = null;
+    protected iconRight: string | null = null;
 
     @property({ type: String })
-    success: string | null = null;
+    protected success: string | null = null;
 
     @property({ type: String })
-    error: string | null = null;
+    protected error: string | null = null;
 
     @property({ attribute: "show-validation-icon", type: Boolean })
-    showValidationIcon = false;
+    protected showValidationIcon = false;
 
     @property({ type: Boolean })
-    disabled = false;
+    protected disabled = false;
 
-    render() {
-        const id = getRandomId();
+    @state()
+    protected elementId = "";
 
+    @state()
+    protected internals;
+
+    protected static formAssociated = true;
+
+    public constructor() {
+        super();
+
+        this.originalValue = this.getAttribute("value") ?? "";
+
+        this.internals = this.attachInternals();
+        this.internals.setFormValue(this.value);
+
+        this.elementId = getRandomId();
+    }
+
+    public formResetCallback() {
+        this.value = this.originalValue;
+        this.internals.setFormValue(this.value);
+    }
+
+    protected render() {
         const mainClasses = [];
 
         if (this.icon) {
@@ -66,20 +91,24 @@ export class Input extends LitElement {
 
         return html`
             <div part="main" class="${mainClasses.join(" ")}">
-                <label ?hidden="${this.label === null}" part="label" for="${id}"
+                <label
+                    ?hidden="${this.label === null}"
+                    part="label"
+                    for="${this.elementId}"
                     >${this.label}</label
                 >
                 <div part="input-container">
                     <div part="input-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
                         <input
-                            id="${id}"
+                            id="${this.elementId}"
                             name="${this.name}"
                             part="input"
                             type="${inputType}"
                             placeholder="${this.placeholder}"
-                            value="${this.value}"
+                            .value="${this.value}"
                             ?disabled="${this.disabled}"
+                            @change="${this.handleChange}"
                         />
                         ${renderIcon(this.iconRight, "icon-right")}
                         ${this.validationIcon()}
@@ -96,7 +125,52 @@ export class Input extends LitElement {
         `;
     }
 
-    static styles = [
+    protected handleChange(e: Event) {
+        const target = e.target as HTMLInputElement;
+        this.value = target.value;
+        this.internals.setFormValue(this.value);
+    }
+
+    protected passwordIcon() {
+        if (this.type !== "password") {
+            return;
+        }
+
+        return html`<div class="button-show-password">
+            <button
+                @click="${() => {
+                    this.showPassword = !this.showPassword;
+                }}"
+            >
+                ${renderIcon(
+                    this.showPassword ? "hide" : "show",
+                    "icon-show-password"
+                )}
+            </button>
+        </div>`;
+    }
+
+    protected validationIcon() {
+        if (!this.showValidationIcon) {
+            return;
+        }
+
+        if (this.error !== null) {
+            return renderIcon("error", [
+                "icon-validation",
+                "icon-validation-error",
+            ]);
+        }
+
+        if (this.success !== null) {
+            return renderIcon("check", [
+                "icon-validation",
+                "icon-validation-success",
+            ]);
+        }
+    }
+
+    public static styles = [
         mainCss,
         css`
             :host {
@@ -470,45 +544,6 @@ export class Input extends LitElement {
             }
         `,
     ];
-
-    passwordIcon() {
-        if (this.type !== "password") {
-            return;
-        }
-
-        return html`<div class="button-show-password">
-            <button
-                @click="${() => {
-                    this.showPassword = !this.showPassword;
-                }}"
-            >
-                ${renderIcon(
-                    this.showPassword ? "hide" : "show",
-                    "icon-show-password"
-                )}
-            </button>
-        </div>`;
-    }
-
-    validationIcon() {
-        if (!this.showValidationIcon) {
-            return;
-        }
-
-        if (this.error !== null) {
-            return renderIcon("error", [
-                "icon-validation",
-                "icon-validation-error",
-            ]);
-        }
-
-        if (this.success !== null) {
-            return renderIcon("check", [
-                "icon-validation",
-                "icon-validation-success",
-            ]);
-        }
-    }
 }
 
 declare global {

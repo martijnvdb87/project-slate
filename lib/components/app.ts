@@ -4,7 +4,7 @@ import { config } from "@/lib/config";
 
 @customElement(`${config.prefix}-app`)
 export class App extends LitElement {
-    render() {
+    protected render() {
         return html`
             <main>
                 <slot></slot>
@@ -12,7 +12,7 @@ export class App extends LitElement {
         `;
     }
 
-    createRenderRoot() {
+    protected createRenderRoot() {
         return this;
     }
 }

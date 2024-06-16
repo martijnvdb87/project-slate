@@ -11,15 +11,15 @@ import { getPart, getParts } from "../util/general";
 @customElement(`${config.prefix}-tabs`)
 export class Tabs extends LitElement {
     @property({ attribute: "active-index", type: Number })
-    activeIndex = 0;
+    protected activeIndex = 0;
 
     @queryAssignedElements({ slot: "tab" })
-    tabs!: HTMLElement[];
+    protected tabs!: HTMLElement[];
 
     @queryAssignedElements({ slot: "panel" })
-    panels!: HTMLElement[];
+    protected panels!: HTMLElement[];
 
-    render() {
+    protected render() {
         return html` <div part="main">
             <div part="head">
                 <slot name="tab"></slot>
@@ -33,7 +33,7 @@ export class Tabs extends LitElement {
         </div>`;
     }
 
-    firstUpdated() {
+    protected firstUpdated() {
         this.renderTabs();
         this.renderPanels();
         this.setupTransitionEnd();
@@ -41,7 +41,7 @@ export class Tabs extends LitElement {
         this.setActive(this.activeIndex, true);
     }
 
-    renderTabs() {
+    protected renderTabs() {
         const root = getPart(this, "tabs");
 
         root.innerHTML = "";
@@ -69,7 +69,7 @@ export class Tabs extends LitElement {
         });
     }
 
-    renderPanels() {
+    protected renderPanels() {
         const root = getPart(this, "panels");
 
         root.innerHTML = "";
@@ -82,7 +82,7 @@ export class Tabs extends LitElement {
         });
     }
 
-    setupTransitionEnd() {
+    protected setupTransitionEnd() {
         const indicator = getPart(this, "transition-indicator");
 
         indicator.addEventListener("transitionend", (e) => {
@@ -101,7 +101,7 @@ export class Tabs extends LitElement {
         });
     }
 
-    setActive(index: number, firstUpdated = false) {
+    protected setActive(index: number, firstUpdated = false) {
         this.activeIndex = index;
 
         for (const tab of this.getAllTabs()) {
@@ -128,11 +128,11 @@ export class Tabs extends LitElement {
         activePanel.setAttribute("aria-hidden", "false");
     }
 
-    tabToIndex(tab: HTMLElement) {
+    protected tabToIndex(tab: HTMLElement) {
         return this.getAllTabs().indexOf(tab);
     }
 
-    getAllTabs() {
+    protected getAllTabs() {
         const root = getPart(this, "tabs");
 
         if (!root) {
@@ -150,15 +150,15 @@ export class Tabs extends LitElement {
         return tabs;
     }
 
-    getTab(index: number) {
+    protected getTab(index: number) {
         return this.getAllTabs()[index];
     }
 
-    getActiveTab() {
+    protected getActiveTab() {
         return this.getTab(this.activeIndex);
     }
 
-    moveIndicatorToTab(index: number) {
+    protected moveIndicatorToTab(index: number) {
         const tab = this.getTab(index);
         const indicator = getPart(this, "transition-indicator");
 
@@ -186,7 +186,7 @@ export class Tabs extends LitElement {
         );
     }
 
-    getAllPanels() {
+    protected getAllPanels() {
         const root = getPart(this, "panels");
 
         if (!root) {
@@ -204,11 +204,11 @@ export class Tabs extends LitElement {
         return panels;
     }
 
-    getPanel(index: number) {
+    protected getPanel(index: number) {
         return this.getAllPanels()[index];
     }
 
-    enableIndicatorTransition() {
+    protected enableIndicatorTransition() {
         getParts(this, ["indicator", "transition-indicator"]).forEach(
             (element) => {
                 element.setAttribute("enable-indicator-transition", "");
@@ -216,7 +216,7 @@ export class Tabs extends LitElement {
         );
     }
 
-    disableIndicatorTransition() {
+    protected disableIndicatorTransition() {
         getParts(this, ["indicator", "transition-indicator"]).forEach(
             (element) => {
                 element.removeAttribute("enable-indicator-transition");
@@ -224,19 +224,19 @@ export class Tabs extends LitElement {
         );
     }
 
-    enablePanelTransition() {
+    protected enablePanelTransition() {
         getParts(this, ["panels", "panel"]).forEach((element) => {
             element.setAttribute("enable-panel-transition", "");
         });
     }
 
-    disablePanelTransition() {
+    protected disablePanelTransition() {
         getParts(this, ["panels", "panel"]).forEach((element) => {
             element.removeAttribute("enable-panel-transition");
         });
     }
 
-    setPanelsHeight(index: number) {
+    protected setPanelsHeight(index: number) {
         const panel = this.getPanel(index);
         getPart(this, "main").style.setProperty(
             "--panel-height",
@@ -244,17 +244,11 @@ export class Tabs extends LitElement {
         );
     }
 
-    resetPanelsHeight() {
+    protected resetPanelsHeight() {
         getPart(this, "main").style.removeProperty("--panel-height");
     }
 
-    getPart(name: string) {
-        return this.shadowRoot?.querySelector(
-            `[part='${name}']`
-        ) as HTMLElement;
-    }
-
-    static styles = [
+    public static styles = [
         mainCss,
         css`
             [part="main"] {
