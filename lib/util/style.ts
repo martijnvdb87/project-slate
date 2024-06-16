@@ -1,7 +1,6 @@
 import { unsafeCSS } from "lit";
 import { reset } from "../styles/reset.ts";
 import { main } from "../styles/main.ts";
-import "../styles/global.ts";
 
 export const mainCss = [reset, main];
 

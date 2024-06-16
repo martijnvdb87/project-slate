@@ -23,22 +23,23 @@ export class Input extends LitElement {
 
     render() {
         return html`
-            <label part="main">
+            <div part="main">
                 <div part="checkbox-container">
                     <input
                         type="checkbox"
                         part="input"
-                        name=${this.name}
-                        ?checked=${this.checked}
+                        id="input"
+                        name="${this.name}"
+                        ?checked="${this.checked}"
                         ?disabled="${this.disabled}"
                     />
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>
                 <div part="label-container">
-                    <slot></slot>
+                    <label for="input" part="label"><slot></slot></label>
                     <slot name="description"></slot>
                 </div>
-            </label>
+            </div>
         `;
     }
 
@@ -100,19 +101,9 @@ export class Input extends LitElement {
                     var(--icon-color-a)
                 );
 
-                --text-color-h: var(--input-label-color-h);
-                --text-color-s: var(--input-label-color-s);
-                --text-color-l: var(--input-label-color-l);
-                --text-color-a: var(--input-label-color-a);
-
-                --sub-text-color-h: var(--input-sub-text-color-h);
-                --sub-text-color-s: var(--input-sub-text-color-s);
-                --sub-text-color-l: var(--input-sub-text-color-l);
-                --sub-text-color-a: var(--input-sub-text-color-a);
-
                 --icon-size: 100%;
 
-                --gap: ${size(6)};
+                --gap: ${size(16)};
 
                 --font-size: var(--font-size-medium);
 
@@ -120,7 +111,7 @@ export class Input extends LitElement {
 
                 --outline-width: var(--input-outline-width);
 
-                --outline-offset: ${size(0)};
+                --outline-offset: calc(0 - var(--border-width));
                 --outline-colored-offset: ${size(2)};
 
                 --focus-outline-width: var(--input-focus-outline-width);
@@ -132,6 +123,11 @@ export class Input extends LitElement {
                 gap: var(--gap);
                 font-family: var(--font-family);
                 font-size: var(--font-size);
+                line-height: var(--text-line-height);
+            }
+
+            [part="checkbox-container"] {
+                position: relative;
             }
 
             [part="input"] {
@@ -220,7 +216,6 @@ export class Input extends LitElement {
                         var(--primary-color-l),
                         0
                     );
-                transition: all 60ms ease-in-out;
             }
 
             [part="icon"] {
@@ -243,28 +238,27 @@ export class Input extends LitElement {
                 max-width: 100%;
                 max-height: 100%;
                 pointer-events: none;
-                transition: all 60ms ease-in-out;
             }
 
             [part="label-container"] {
                 display: flex;
                 flex-direction: column;
-                color: hsla(
-                    var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
-                    var(--text-color-a)
-                );
-                gap: var(--gap);
+                color: var(--input-label-color);
+            }
+
+            [part="label"] {
+                display: inline-flex;
+                cursor: pointer;
+            }
+
+            slot:not([name]) {
+                font-weight: var(--input-label-font-weight);
+
+                font-size: var(--input-label-font-size);
             }
 
             ::slotted([slot="description"]) {
-                color: hsla(
-                    var(--sub-text-color-h),
-                    var(--sub-text-color-s),
-                    var(--sub-text-color-l),
-                    var(--sub-text-color-a)
-                );
+                color: var(--text-color);
                 margin-bottom: var(--margin-bottom);
             }
 
@@ -288,8 +282,6 @@ export class Input extends LitElement {
 
             :host([disabled]) {
                 opacity: 0.75;
-                --sub-text-color-a: 0.5;
-                --sub-text-color-a: 0.5;
                 pointer-events: none;
             }
         `,

@@ -44,7 +44,6 @@ export class Button extends LitElement {
             :host {
                 display: var(--display);
                 vertical-align: bottom;
-                margin-bottom: var(--margin-bottom);
 
                 --display: inline-flex;
                 --icon-color: hsl(
@@ -53,9 +52,8 @@ export class Button extends LitElement {
                     var(--default-accent-l)
                 );
                 --icon-size: ${size(16)};
-                --height: ${size(32)};
+                --height: ${size(36)};
                 --width: auto;
-                --margin-bottom: var(--element-margin-bottom);
 
                 --background-color-h: var(--default-color-h);
                 --background-color-s: var(--default-color-s);
@@ -67,7 +65,7 @@ export class Button extends LitElement {
                 --text-color-l: var(--default-accent-l);
                 --text-color-a: var(--default-accent-a);
 
-                --padding-x: ${size(12)};
+                --padding-x: ${size(14)};
                 --gap: ${size(6)};
 
                 --font-size: var(--font-size-medium);
@@ -134,7 +132,7 @@ export class Button extends LitElement {
                         0
                     );
                 outline-offset: var(--outline-offset);
-                transition: all 120ms ease-in-out, border-width 0s, padding 0s;
+                transition: background 120ms ease-in-out;
             }
 
             button:hover {
@@ -286,15 +284,15 @@ export class Button extends LitElement {
             }
 
             :host([size="small"]) {
-                --height: ${size(24)};
+                --height: ${size(28)};
                 --icon-size: ${size(12)};
-                --padding-x: ${size(8)};
+                --padding-x: ${size(10)};
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
             }
 
             :host([size="large"]) {
-                --height: ${size(40)};
+                --height: ${size(44)};
                 --icon-size: ${size(18)};
                 --padding-x: ${size(16)};
                 --gap: ${size(8)};
@@ -302,7 +300,7 @@ export class Button extends LitElement {
             }
 
             :host([size="huge"]) {
-                --height: ${size(48)};
+                --height: ${size(52)};
                 --icon-size: ${size(24)};
                 --padding-x: ${size(20)};
                 --gap: ${size(10)};

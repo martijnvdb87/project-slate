@@ -3,19 +3,38 @@ import "@/lib/assets/fonts/inter/inter.css";
 import { size } from "../util/style";
 
 export const main = css`
+    :root,
     :host {
-        --font-family: InterVariable, Inter, sans-serif;
-        --element-font-weight: var(--ds-element-font-weight, 450);
+        --font-sans: InterVariable, Inter, ui-sans-serif, system-ui, sans-serif,
+            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+            "Noto Color Emoji";
+        --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times,
+            serif;
+        --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+
+        --font-family: var(--font-sans);
+        --element-font-weight: var(--ds-element-font-weight, 500);
         --input-font-weight: var(--ds-input-font-weight, 350);
 
-        --text-color: var(--ds-text-color, hsla(220, 10%, 16%, 1));
+        --text-color-h: var(--ds-text-color-h, 220);
+        --text-color-s: var(--ds-text-color-s, 10%);
+        --text-color-l: var(--ds-text-color-l, 30%);
+        --text-color-a: var(--ds-text-color-a, 1);
+
+        --text-color: hsla(
+            var(--text-color-h),
+            var(--text-color-s),
+            var(--text-color-l),
+            var(--text-color-a)
+        );
+
+        --text-line-height: var(--ds-text-line-height, 1.6);
 
         --font-size-small: var(--ds-font-size-small, ${size(12)});
         --font-size-medium: var(--ds-font-size-medium, ${size(14)});
         --font-size-large: var(--ds-font-size-large, ${size(16)});
         --font-size-huge: var(--ds-font-size-huge, ${size(20)});
-
-        --element-margin-bottom: var(--ds-element-margin-bottom, ${size(8)});
 
         --shape-pill-radius: var(--ds-shape-pill-radius, ${size(960)});
 
@@ -64,11 +83,6 @@ export const main = css`
         --input-text-color-l: var(--ds-input-text-color-l, 16%);
         --input-text-color-a: var(--ds-input-text-color-a, 1);
 
-        --input-sub-text-color-h: var(--ds-input-text-color-h, 220);
-        --input-sub-text-color-s: var(--ds-input-text-color-s, 10%);
-        --input-sub-text-color-l: var(--ds-input-text-color-l, 40%);
-        --input-sub-text-color-a: var(--ds-input-text-color-a, 1);
-
         --input-icon-color-h: var(--ds-input-icon-color-h, 220);
         --input-icon-color-s: var(--ds-input-icon-color-s, 10%);
         --input-icon-color-l: var(--ds-input-icon-color-l, 46%);
@@ -99,8 +113,15 @@ export const main = css`
 
         --input-label-color-h: var(--ds-input-label-color-h, 220);
         --input-label-color-s: var(--ds-input-label-color-s, 10%);
-        --input-label-color-l: var(--ds-input-label-color-l, 12%);
+        --input-label-color-l: var(--ds-input-label-color-l, 8%);
         --input-label-color-a: var(--ds-input-label-color-a, 1);
+
+        --input-label-color: hsla(
+            var(--input-label-color-h),
+            var(--input-label-color-s),
+            var(--input-label-color-l),
+            var(--input-label-color-a)
+        );
 
         --input-label-font-weight: var(--ds-input-label-font-weight, 500);
         --input-label-font-size: var(--ds-input-label-font-size, ${size(14)});
@@ -109,6 +130,12 @@ export const main = css`
         --input-border-color-s: var(--ds-input-border-color-s, 10%);
         --input-border-color-l: var(--ds-input-border-color-l, 82%);
         --input-border-color-a: var(--ds-input-border-color-a, 1);
+        --input-border-color: hsla(
+            var(--input-border-color-h),
+            var(--input-border-color-s),
+            var(--input-border-color-l),
+            var(--input-border-color-a)
+        );
 
         --input-border-width: var(--ds-input-border-width, ${size(1)});
 

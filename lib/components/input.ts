@@ -99,11 +99,9 @@ export class Input extends LitElement {
             :host {
                 display: var(--display);
                 vertical-align: bottom;
-                margin-bottom: var(--margin-bottom);
 
                 --display: inline-flex;
-                --height: ${size(32)};
-                --margin-bottom: var(--element-margin-bottom);
+                --height: ${size(36)};
                 --gap: ${size(6)};
                 --icon-size: ${size(16)};
                 --icon-container-size: calc(
@@ -125,7 +123,6 @@ export class Input extends LitElement {
                 --placeholder-color-a: var(--input-placeholder-color-a);
                 --placeholder-weight: var(--input-placeholder-weight);
 
-                --label-padding: ${size(4)};
                 --label-font-weight: var(--input-label-font-weight);
                 --label-font-size: var(--input-label-font-size);
 
@@ -141,7 +138,7 @@ export class Input extends LitElement {
                     var(--input-icon-color-a)
                 );
 
-                --input-padding-x: ${size(10)};
+                --input-padding-x: ${size(12)};
 
                 --background-color-h: var(--input-background-color-h);
                 --background-color-s: var(--input-background-color-s);
@@ -160,8 +157,6 @@ export class Input extends LitElement {
                 --focus-outline-width: var(--input-focus-outline-width);
 
                 --validation-font-size: ${size(12)};
-
-                --validation-padding: ${size(4)};
             }
 
             input {
@@ -171,6 +166,7 @@ export class Input extends LitElement {
                 justify-content: center;
                 vertical-align: middle;
                 height: calc(var(--height) - var(--border-width) * 2);
+                width: 100%;
                 padding: 0 var(--input-padding-x);
                 background: transparent;
                 font-family: var(--font-family);
@@ -205,7 +201,7 @@ export class Input extends LitElement {
 
             [part="label"] {
                 display: inline-block;
-                padding: var(--label-padding);
+                padding-bottom: ${size(8)};
                 font-size: var(--label-font-size);
                 font-weight: var(--label-font-weight);
 
@@ -218,7 +214,7 @@ export class Input extends LitElement {
             }
 
             [part="validation-message"] {
-                padding: var(--validation-padding);
+                padding-top: ${size(6)};
                 font-size: var(--validation-font-size);
                 color: hsl(
                     var(--validation-border-color-h),
@@ -283,7 +279,6 @@ export class Input extends LitElement {
                         ),
                         0
                     );
-                transition: all 120ms ease-in-out;
             }
 
             [part="input-inner-container"] {
@@ -404,35 +399,32 @@ export class Input extends LitElement {
             }
 
             :host([size="small"]) {
-                --height: ${size(24)};
+                --height: ${size(28)};
                 --icon-size: ${size(12)};
-                --input-padding-x: ${size(8)};
+                --input-padding-x: ${size(10)};
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
                 --validation-font-size: ${size(11)};
-                --validation-padding: ${size(4)};
                 --sub-height: ${size(16)};
             }
 
             :host([size="large"]) {
-                --height: ${size(40)};
+                --height: ${size(44)};
                 --icon-size: ${size(18)};
-                --input-padding-x: ${size(12)};
+                --input-padding-x: ${size(14)};
                 --gap: ${size(8)};
                 --font-size: var(--font-size-large);
                 --validation-font-size: ${size(14)};
-                --validation-padding: ${size(4)};
                 --sub-height: ${size(24)};
             }
 
             :host([size="huge"]) {
-                --height: ${size(48)};
+                --height: ${size(52)};
                 --icon-size: ${size(24)};
-                --input-padding-x: ${size(14)};
+                --input-padding-x: ${size(16)};
                 --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
                 --validation-font-size: ${size(16)};
-                --validation-padding: ${size(4)};
                 --sub-height: ${size(28)};
             }
 

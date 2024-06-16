@@ -11,6 +11,60 @@
     <body>
         <style></style>
         <ds-app>
+            <form
+                style="
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 48rem;
+                    gap: 2rem;
+                    margin: 3rem auto;
+                "
+            >
+                <div style="display: flex; gap: 1.5rem">
+                    <ds-input
+                        label="First name"
+                        width="full"
+                        style="flex: 1"
+                    ></ds-input>
+                    <ds-input
+                        label="Last name"
+                        width="full"
+                        style="flex: 1"
+                    ></ds-input>
+                </div>
+                <ds-input label="Email address"></ds-input>
+                <ds-input label="Street address"></ds-input>
+                <div style="display: flex; gap: 1.5rem">
+                    <ds-input label="City"></ds-input>
+                    <ds-input label="State / Province"></ds-input>
+                    <ds-input label="ZIP / Postal code"></ds-input>
+                </div>
+                <hr />
+                <ds-checkbox>
+                    Accept Terms and Conditions
+                    <div slot="description">
+                        By checking this box, I confirm that I have read,
+                        understood, and agree to the Terms and Conditions,
+                        Privacy Policy, and Refund Policy.
+                    </div>
+                </ds-checkbox>
+                <ds-checkbox>
+                    Sign Up for Our Newsletter
+                    <div slot="description">
+                        By checking this box, I agree to receive promotional
+                        emails and updates. I understand that I can unsubscribe
+                        at any time.
+                    </div>
+                </ds-checkbox>
+                <hr />
+                <div style="display: flex; gap: 0.5rem; justify-content: end">
+                    <ds-button type="primary">Submit</ds-button>
+                    <ds-button type="link">Cancel</ds-button>
+                </div>
+            </form>
+
+            <hr />
+
             <ds-tabs>
                 <div slot="tab">Tab 1</div>
                 <div slot="tab">Tab 2</div>
@@ -456,7 +510,7 @@
                 shape="pill"
             ></ds-input>
             <hr />
-            <ds-checkbox checked>Option 1</ds-checkbox>
+            <ds-checkbox checked>Option 1s</ds-checkbox>
             <ds-checkbox>Option 2</ds-checkbox>
             <ds-checkbox>Option 3</ds-checkbox>
             <hr />
