@@ -356,7 +356,7 @@ export class Input extends LitElement {
                         ),
                         0
                     );
-                box-shadow: var(--input-box-shadow);
+                box-shadow: var(--box-shadow);
             }
 
             [part="input-inner-container"] {

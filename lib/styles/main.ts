@@ -38,8 +38,8 @@ export const main = css`
 
         --shape-pill-radius: var(--ds-shape-pill-radius, ${size(960)});
 
-        --input-box-shadow: var(
-            --ds-input-box-shadow,
+        --box-shadow: var(
+            --ds-box-shadow,
             rgba(0, 0, 0, 0.05) ${size(0)} ${size(2)} ${size(4)},
             rgba(0, 0, 0, 0.025) ${size(0)} ${size(1)} ${size(1)}
         );

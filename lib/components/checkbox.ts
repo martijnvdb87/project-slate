@@ -231,7 +231,7 @@ export class Input extends LitElement {
                         var(--primary-color-l),
                         0
                     );
-                box-shadow: var(--input-box-shadow);
+                box-shadow: var(--box-shadow);
             }
 
             [part="icon"] {
