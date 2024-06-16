@@ -108,7 +108,7 @@ export class Input extends LitElement {
                             placeholder="${this.placeholder}"
                             .value="${this.value}"
                             ?disabled="${this.disabled}"
-                            @change="${this.handleChange}"
+                            @input="${this.handleInput}"
                         />
                         ${renderIcon(this.iconRight, "icon-right")}
                         ${this.validationIcon()}
@@ -125,7 +125,7 @@ export class Input extends LitElement {
         `;
     }
 
-    protected handleChange(e: Event) {
+    protected handleInput(e: Event) {
         const target = e.target as HTMLInputElement;
         this.value = target.value;
         this.internals.setFormValue(this.value);

@@ -60,7 +60,7 @@ export class Input extends LitElement {
                         name="${this.name}"
                         .checked="${this.checked}"
                         ?disabled="${this.disabled}"
-                        @change="${this.handleChange}"
+                        @input="${this.handleInput}"
                     />
                     <div part="input-container">${renderIcon(this.icon)}</div>
                 </div>
@@ -74,7 +74,7 @@ export class Input extends LitElement {
         `;
     }
 
-    protected handleChange(e: Event) {
+    protected handleInput(e: Event) {
         const target = e.target as HTMLInputElement;
         this.checked = target.checked;
         this.internals.setFormValue(this.checked ? "on" : "off");
