@@ -8,6 +8,7 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-checkbox`)
 export class Input extends LitElement {
+    public root: Ref<HTMLInputElement> = createRef();
     public input: Ref<HTMLInputElement> = createRef();
 
     @property({ type: String })
@@ -54,7 +55,7 @@ export class Input extends LitElement {
 
     protected render() {
         return html`
-            <div part="main">
+            <div ${ref(this.root)} part="main">
                 <div part="checkbox-container">
                     <input
                         ${ref(this.input)}

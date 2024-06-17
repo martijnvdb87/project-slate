@@ -7,9 +7,12 @@ import {
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { getPart, getParts } from "../util/general";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-tabs`)
 export class Tabs extends LitElement {
+    public root: Ref<HTMLInputElement> = createRef();
+
     @property({ attribute: "active-index", type: Number })
     protected activeIndex = 0;
 
@@ -20,7 +23,7 @@ export class Tabs extends LitElement {
     protected panels!: HTMLElement[];
 
     protected render() {
-        return html` <div part="main">
+        return html` <div ${ref(this.root)} part="main">
             <div part="head">
                 <slot name="tab"></slot>
                 <div part="tabs"></div>

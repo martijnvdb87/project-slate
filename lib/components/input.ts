@@ -8,6 +8,7 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
+    public root: Ref<HTMLInputElement> = createRef();
     public input: Ref<HTMLInputElement> = createRef();
 
     @property({ type: String })
@@ -93,7 +94,7 @@ export class Input extends LitElement {
         })();
 
         return html`
-            <div part="main" class="${mainClasses.join(" ")}">
+            <div ${ref(this.root)} part="main" class="${mainClasses.join(" ")}">
                 <label
                     ?hidden="${this.label === null}"
                     part="label"

@@ -3,9 +3,13 @@ import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "@/lib/util/style";
 import { renderIcon } from "@/lib/util/icons";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-button`)
 export class Button extends LitElement {
+    public root: Ref<HTMLInputElement> = createRef();
+    public input: Ref<HTMLInputElement> = createRef();
+
     @property({ type: String })
     protected name = null;
 
@@ -37,6 +41,8 @@ export class Button extends LitElement {
     protected render() {
         return html`
             <button
+                ${ref(this.root)}
+                ${ref(this.input)}
                 name="${this.name}"
                 part="button"
                 ?disabled="${this.disabled}"
