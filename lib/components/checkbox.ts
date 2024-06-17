@@ -1,12 +1,15 @@
-import { LitElement, PropertyValueMap, css, html } from "lit";
+import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-checkbox`)
 export class Input extends LitElement {
+    public input: Ref<HTMLInputElement> = createRef();
+
     @property({ type: String })
     protected name = null;
 
@@ -54,6 +57,7 @@ export class Input extends LitElement {
             <div part="main">
                 <div part="checkbox-container">
                     <input
+                        ${ref(this.input)}
                         type="checkbox"
                         part="input"
                         id="${this.elementId}"

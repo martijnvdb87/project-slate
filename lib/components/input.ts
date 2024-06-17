@@ -4,9 +4,12 @@ import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
+    public input: Ref<HTMLInputElement> = createRef();
+
     @property({ type: String })
     protected name = null;
 
@@ -101,6 +104,7 @@ export class Input extends LitElement {
                     <div part="input-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
                         <input
+                            ${ref(this.input)}
                             id="${this.elementId}"
                             name="${this.name}"
                             part="input"
