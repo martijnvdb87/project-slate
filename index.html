@@ -9,7 +9,6 @@
         <script type="module" src="/lib/index.ts"></script>
     </head>
     <body>
-        <style></style>
         <ds-app>
             <form
                 style="
@@ -68,9 +67,68 @@
                     <ds-button reset type="ghost">Reset</ds-button>
                 </div>
             </form>
+        </ds-app>
+        <ds-app theme="dark">
+            <form
+                style="
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 48rem;
+                    gap: 2rem;
+                    margin: auto;
+                    padding: 3rem;
+                "
+            >
+                <div style="display: flex; gap: 1.5rem">
+                    <ds-input
+                        name="firstName"
+                        label="First name"
+                        width="full"
+                        style="flex: 1"
+                    ></ds-input>
+                    <ds-input
+                        label="Last name"
+                        width="full"
+                        style="flex: 1"
+                    ></ds-input>
+                </div>
+                <ds-input
+                    name="email"
+                    type="email"
+                    label="Email address"
+                ></ds-input>
+                <ds-input name="address" label="Street address"></ds-input>
+                <div style="display: flex; gap: 1.5rem">
+                    <ds-input name="city" label="City"></ds-input>
+                    <ds-input name="state" label="State / Province"></ds-input>
+                    <ds-input name="zip" label="ZIP / Postal code"></ds-input>
+                </div>
+                <hr />
+                <ds-checkbox name="terms">
+                    Accept Terms and Conditions
+                    <div slot="description">
+                        By checking this box, I confirm that I have read,
+                        understood, and agree to the Terms and Conditions,
+                        Privacy Policy, and Refund Policy.
+                    </div>
+                </ds-checkbox>
+                <ds-checkbox name="newsletter">
+                    Sign Up for Our Newsletter
+                    <div slot="description">
+                        By checking this box, I agree to receive promotional
+                        emails and updates. I understand that I can unsubscribe
+                        at any time.
+                    </div>
+                </ds-checkbox>
+                <hr />
+                <div style="display: flex; gap: 0.5rem; justify-content: end">
+                    <ds-button submit type="primary">Submit</ds-button>
+                    <ds-button reset type="ghost">Reset</ds-button>
+                </div>
+            </form>
+        </ds-app>
 
-            <hr />
-
+        <ds-app>
             <ds-tabs>
                 <div slot="tab">Tab 1</div>
                 <div slot="tab">Tab 2</div>

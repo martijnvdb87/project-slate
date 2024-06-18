@@ -264,7 +264,12 @@ export class Input extends LitElement {
             [part="label-container"] {
                 display: flex;
                 flex-direction: column;
-                color: var(--input-label-color);
+                color: hsla(
+                    var(--input-label-color-h),
+                    var(--input-label-color-s),
+                    var(--input-label-color-l),
+                    var(--input-label-color-a)
+                );
             }
 
             [part="label"] {
@@ -279,7 +284,12 @@ export class Input extends LitElement {
             }
 
             ::slotted([slot="description"]) {
-                color: var(--text-color);
+                color: hsla(
+                    var(--text-color-h),
+                    var(--text-color-s),
+                    var(--text-color-l),
+                    var(--text-color-a)
+                );
                 margin-bottom: var(--margin-bottom);
             }
 

@@ -1,19 +1,15 @@
-import { LitElement, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { LitElement, css, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { mainCss } from "../util/style";
 
 @customElement(`${config.prefix}-app`)
 export class App extends LitElement {
     public root: Ref<HTMLInputElement> = createRef();
 
-    protected render() {
-        return html`
-            <main ${ref(this.root)}>
-                <slot></slot>
-            </main>
-        `;
-    }
+    @property({ type: String })
+    protected theme = "system";
 
     protected createRenderRoot() {
         return this;
