@@ -4,6 +4,10 @@ import { size } from "../util/style";
 
 export const main = css`
     :root {
+        --main-background-color-h: var(--primary-color-h);
+        --main-background-color-s: var(--primary-color-s);
+        --main-background-color-l: 100%;
+
         --font-sans: InterVariable, Inter, ui-sans-serif, system-ui, sans-serif,
             "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
             "Noto Color Emoji";
