@@ -9,6 +9,13 @@
         <script type="module" src="/lib/index.ts"></script>
     </head>
     <body>
+        <style>
+            main {
+                margin: auto;
+                padding: 1.5rem;
+                max-width: 64rem;
+            }
+        </style>
         <ds-app>
             <form
                 style="
@@ -128,491 +135,516 @@
             </form>
         </ds-app>
 
-        <ds-app>
-            <ds-tabs>
-                <div slot="tab">Tab 1</div>
-                <div slot="tab">Tab 2</div>
-                <div slot="tab">Tab 3</div>
+        <main>
+            <ds-app>
+                <ds-tabs>
+                    <div slot="tab">Tab 1</div>
+                    <div slot="tab">Tab 2</div>
+                    <div slot="tab">Tab 3</div>
 
-                <div slot="panel">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Accusamus aut cumque beatae in ratione id dolores
-                        accusantium. Nobis distinctio officia, ullam voluptates
-                        doloremque fugit laboriosam illo maiores ipsam pariatur
-                        voluptatum.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Accusamus aut cumque beatae in ratione id dolores
-                        accusantium. Nobis distinctio officia, ullam voluptates
-                        doloremque fugit laboriosam illo maiores ipsam pariatur
-                        voluptatum.
-                    </p>
-                </div>
-                <div slot="panel">
-                    <p>
-                        Nam et ultricies nunc. Maecenas pellentesque sit amet
-                        mauris id scelerisque. Quisque rutrum pretium neque id
-                        lobortis. Donec vitae egestas augue, ac sollicitudin
-                        metus. Vestibulum aliquam, sapien at sagittis maximus,
-                        libero erat hendrerit justo, at cursus neque libero non
-                        orci. Duis hendrerit est nec hendrerit condimentum.
-                        Fusce vulputate, enim quis placerat vulputate, erat orci
-                        aliquam odio, vel iaculis massa mauris ac lorem. Mauris
-                        molestie purus eget metus gravida placerat.
-                    </p>
+                    <div slot="panel">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Accusamus aut cumque beatae in ratione id
+                            dolores accusantium. Nobis distinctio officia, ullam
+                            voluptates doloremque fugit laboriosam illo maiores
+                            ipsam pariatur voluptatum.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Accusamus aut cumque beatae in ratione id
+                            dolores accusantium. Nobis distinctio officia, ullam
+                            voluptates doloremque fugit laboriosam illo maiores
+                            ipsam pariatur voluptatum.
+                        </p>
+                    </div>
+                    <div slot="panel">
+                        <p>
+                            Nam et ultricies nunc. Maecenas pellentesque sit
+                            amet mauris id scelerisque. Quisque rutrum pretium
+                            neque id lobortis. Donec vitae egestas augue, ac
+                            sollicitudin metus. Vestibulum aliquam, sapien at
+                            sagittis maximus, libero erat hendrerit justo, at
+                            cursus neque libero non orci. Duis hendrerit est nec
+                            hendrerit condimentum. Fusce vulputate, enim quis
+                            placerat vulputate, erat orci aliquam odio, vel
+                            iaculis massa mauris ac lorem. Mauris molestie purus
+                            eget metus gravida placerat.
+                        </p>
 
-                    <p>
-                        Morbi faucibus dignissim blandit. Maecenas scelerisque
-                        lectus quam, non euismod nisi lacinia eu. Vestibulum nec
-                        ante lacus. Nulla facilisi. Vestibulum ut accumsan
-                        ligula. Proin sed tellus nec nibh feugiat facilisis in
-                        sed lacus. Mauris facilisis sagittis turpis, non semper
-                        urna porttitor eget. Nam et tempor ante, vitae congue
-                        ante. Integer dignissim et ligula vel posuere. Mauris
-                        luctus pharetra velit id dignissim. Aliquam dignissim
-                        odio nec neque laoreet fermentum. Proin volutpat aliquam
-                        purus, ut rhoncus urna semper id. Sed volutpat eget nibh
-                        ac eleifend. Duis ac ipsum vel libero posuere dapibus id
-                        vel turpis. Morbi dapibus tincidunt est, at porttitor
-                        purus vulputate eu. Suspendisse venenatis quam a libero
-                        fermentum malesuada.
-                    </p>
-                </div>
-                <div slot="panel">
-                    <p>
-                        Donec vel leo lorem. Nunc congue aliquet diam, et
-                        interdum dolor rhoncus at. Fusce sit amet pretium est.
-                        Vivamus mauris dolor, egestas at turpis eget,
-                        scelerisque auctor tortor. Mauris varius urna eu
-                        ultricies porttitor. Phasellus vitae libero lacus.
-                        Curabitur euismod sodales augue quis placerat. Nunc eu
-                        eros sit amet ex venenatis dignissim. Suspendisse vitae
-                        vestibulum lectus, a elementum nibh. In nec molestie
-                        felis. Praesent interdum nibh et facilisis congue.
-                    </p>
+                        <p>
+                            Morbi faucibus dignissim blandit. Maecenas
+                            scelerisque lectus quam, non euismod nisi lacinia
+                            eu. Vestibulum nec ante lacus. Nulla facilisi.
+                            Vestibulum ut accumsan ligula. Proin sed tellus nec
+                            nibh feugiat facilisis in sed lacus. Mauris
+                            facilisis sagittis turpis, non semper urna porttitor
+                            eget. Nam et tempor ante, vitae congue ante. Integer
+                            dignissim et ligula vel posuere. Mauris luctus
+                            pharetra velit id dignissim. Aliquam dignissim odio
+                            nec neque laoreet fermentum. Proin volutpat aliquam
+                            purus, ut rhoncus urna semper id. Sed volutpat eget
+                            nibh ac eleifend. Duis ac ipsum vel libero posuere
+                            dapibus id vel turpis. Morbi dapibus tincidunt est,
+                            at porttitor purus vulputate eu. Suspendisse
+                            venenatis quam a libero fermentum malesuada.
+                        </p>
+                    </div>
+                    <div slot="panel">
+                        <p>
+                            Donec vel leo lorem. Nunc congue aliquet diam, et
+                            interdum dolor rhoncus at. Fusce sit amet pretium
+                            est. Vivamus mauris dolor, egestas at turpis eget,
+                            scelerisque auctor tortor. Mauris varius urna eu
+                            ultricies porttitor. Phasellus vitae libero lacus.
+                            Curabitur euismod sodales augue quis placerat. Nunc
+                            eu eros sit amet ex venenatis dignissim. Suspendisse
+                            vitae vestibulum lectus, a elementum nibh. In nec
+                            molestie felis. Praesent interdum nibh et facilisis
+                            congue.
+                        </p>
 
-                    <p>
-                        In auctor nisl in dictum consectetur. Duis congue libero
-                        id nunc aliquet fringilla. Aliquam erat volutpat. Cras
-                        at consectetur ex. Quisque in suscipit velit. Nunc porta
-                        ultrices commodo. Nam feugiat eros vitae ex elementum
-                        rhoncus. Vivamus ornare velit sed mauris feugiat, sed
-                        tristique orci facilisis. Integer fringilla orci at nunc
-                        aliquam, ut viverra massa mollis. Phasellus mauris est,
-                        elementum vel velit in, consequat aliquam diam. Lorem
-                        ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris ac purus urna. Pellentesque ut ipsum lacus.
-                        Suspendisse potenti. Sed ac justo eu diam vulputate
-                        placerat.
-                    </p>
-                </div>
-            </ds-tabs>
+                        <p>
+                            In auctor nisl in dictum consectetur. Duis congue
+                            libero id nunc aliquet fringilla. Aliquam erat
+                            volutpat. Cras at consectetur ex. Quisque in
+                            suscipit velit. Nunc porta ultrices commodo. Nam
+                            feugiat eros vitae ex elementum rhoncus. Vivamus
+                            ornare velit sed mauris feugiat, sed tristique orci
+                            facilisis. Integer fringilla orci at nunc aliquam,
+                            ut viverra massa mollis. Phasellus mauris est,
+                            elementum vel velit in, consequat aliquam diam.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Mauris ac purus urna. Pellentesque ut ipsum
+                            lacus. Suspendisse potenti. Sed ac justo eu diam
+                            vulputate placerat.
+                        </p>
+                    </div>
+                </ds-tabs>
 
-            <hr />
+                <hr />
 
-            <h1>H1 Heading</h1>
-            <h2>H2 Heading</h2>
-            <h3>H3 Heading</h3>
-            <h4>H4 Heading</h4>
-            <h5>H5 Heading</h5>
-            <h6>H6 Heading</h6>
+                <h1>H1 Heading</h1>
+                <h2>H2 Heading</h2>
+                <h3>H3 Heading</h3>
+                <h4>H4 Heading</h4>
+                <h5>H5 Heading</h5>
+                <h6>H6 Heading</h6>
 
-            <hr />
+                <hr />
 
-            <p>
-                Consequat irure <strong>cupidatat</strong> labore pariatur Lorem
-                ad incididunt in sint dolore nulla amet officia et. Proident
-                aliquip commodo ipsum <em>adipisicing</em> commodo in ad. Enim
-                occaecat laborum consectetur adipisicing anim nostrud. Anim
-                voluptate anim <u>consequat</u> Lorem ex aute esse minim fugiat
-                id <a href="#">cupidatat</a> reprehenderit. Eiusmod consequat
-                voluptate sit aute nostrud consectetur mollit eu et aute ad
-                ullamco sint. Eiusmod <del>occaecat</del> cupidatat laboris
-                cupidatat laboris laboris velit <code>excepteur</code> duis id
-                occaecat aute velit pariatur.
-            </p>
-
-            <hr />
-
-            <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Page Title&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;This is a Heading&lt;/h1&gt;
-        &lt;p&gt;This is a paragraph.&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-            <hr />
-
-            <blockquote>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    Consequat irure <strong>cupidatat</strong> labore pariatur
+                    Lorem ad incididunt in sint dolore nulla amet officia et.
+                    Proident aliquip commodo ipsum <em>adipisicing</em> commodo
+                    in ad. Enim occaecat laborum consectetur adipisicing anim
+                    nostrud. Anim voluptate anim <u>consequat</u> Lorem ex aute
+                    esse minim fugiat id
+                    <a href="#">cupidatat</a> reprehenderit. Eiusmod consequat
+                    voluptate sit aute nostrud consectetur mollit eu et aute ad
+                    ullamco sint. Eiusmod <del>occaecat</del> cupidatat laboris
+                    cupidatat laboris laboris velit <code>excepteur</code> duis
+                    id occaecat aute velit pariatur.
                 </p>
-            </blockquote>
 
-            <hr />
+                <hr />
 
-            <ol>
-                <li>
-                    Planning
-                    <ol>
-                        <li>Define scope</li>
-                        <li>
-                            Identify stakeholders
-                            <ol>
-                                <li>Stakeholder analysis</li>
-                                <li>Stakeholder engagement</li>
-                            </ol>
-                        </li>
-                    </ol>
-                </li>
-                <li>Execution</li>
-                <li>
-                    Monitoring and Controlling
-                    <ol>
-                        <li>Performance reporting</li>
-                        <li>Change management</li>
-                    </ol>
-                </li>
-                <li>Closure</li>
-            </ol>
+                <pre><code>&lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;Page Title&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1&gt;This is a Heading&lt;/h1&gt;
+            &lt;p&gt;This is a paragraph.&lt;/p&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+    </code></pre>
 
-            <hr />
+                <hr />
 
-            <ul>
-                <li>
-                    Groceries
-                    <ul>
-                        <li>
-                            Fruits
-                            <ul>
-                                <li>Apples</li>
-                                <li>Bananas</li>
-                            </ul>
-                        </li>
-                        <li>
-                            Vegetables
-                            <ul>
-                                <li>Carrots</li>
-                                <li>Broccoli</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>Household Items</li>
-                <li>
-                    Personal Care
-                    <ul>
-                        <li>Shampoo</li>
-                        <li>Toothpaste</li>
-                    </ul>
-                </li>
-            </ul>
+                <blockquote>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum.
+                    </p>
+                </blockquote>
 
-            <hr />
+                <hr />
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Age</th>
-                        <th>Country</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>johndoe@example.com</td>
-                        <td>28</td>
-                        <td>USA</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Smith</td>
-                        <td>janesmith@example.com</td>
-                        <td>34</td>
-                        <td>Canada</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Sam Johnson</td>
-                        <td>samjohnson@example.com</td>
-                        <td>45</td>
-                        <td>UK</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Linda Lee</td>
-                        <td>lindalee@example.com</td>
-                        <td>29</td>
-                        <td>Australia</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Michael Brown</td>
-                        <td>michaelbrown@example.com</td>
-                        <td>39</td>
-                        <td>Germany</td>
-                    </tr>
-                </tbody>
-            </table>
+                <ol>
+                    <li>
+                        Planning
+                        <ol>
+                            <li>Define scope</li>
+                            <li>
+                                Identify stakeholders
+                                <ol>
+                                    <li>Stakeholder analysis</li>
+                                    <li>Stakeholder engagement</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>Execution</li>
+                    <li>
+                        Monitoring and Controlling
+                        <ol>
+                            <li>Performance reporting</li>
+                            <li>Change management</li>
+                        </ol>
+                    </li>
+                    <li>Closure</li>
+                </ol>
 
-            <hr />
+                <hr />
 
-            <ds-tabs active-index="1">
-                <div slot="tab">Small</div>
-                <div slot="tab">Medium</div>
-                <div slot="tab">Large</div>
-                <div slot="tab">Huge</div>
+                <ul>
+                    <li>
+                        Groceries
+                        <ul>
+                            <li>
+                                Fruits
+                                <ul>
+                                    <li>Apples</li>
+                                    <li>Bananas</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Vegetables
+                                <ul>
+                                    <li>Carrots</li>
+                                    <li>Broccoli</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Household Items</li>
+                    <li>
+                        Personal Care
+                        <ul>
+                            <li>Shampoo</li>
+                            <li>Toothpaste</li>
+                        </ul>
+                    </li>
+                </ul>
 
-                <div slot="panel">
-                    <ds-button size="small" type="primary">Primary</ds-button>
-                    <ds-button size="small" type="secondary"
-                        >Secondary</ds-button
-                    >
-                    <ds-button size="small">Default</ds-button>
-                    <ds-button size="small" type="ghost">Ghost</ds-button>
-                    <ds-button size="small" type="link">Link</ds-button>
-                </div>
-                <div slot="panel">
-                    <ds-button type="primary">Primary</ds-button>
-                    <ds-button type="secondary">Secondary</ds-button>
-                    <ds-button>Default</ds-button>
-                    <ds-button type="ghost">Ghost</ds-button>
-                    <ds-button type="link">Link</ds-button>
-                </div>
-                <div slot="panel">
-                    <ds-button size="large" type="primary">Primary</ds-button>
-                    <ds-button size="large" type="secondary"
-                        >Secondary</ds-button
-                    >
-                    <ds-button size="large">Default</ds-button>
-                    <ds-button size="large" type="ghost">Ghost</ds-button>
-                    <ds-button size="large" type="link">Link</ds-button>
-                </div>
-                <div slot="panel">
-                    <ds-button size="huge" type="primary">Primary</ds-button>
-                    <ds-button size="huge" type="secondary"
-                        >Secondary</ds-button
-                    >
-                    <ds-button size="huge">Default</ds-button>
-                    <ds-button size="huge" type="ghost">Ghost</ds-button>
-                    <ds-button size="huge" type="link">Link</ds-button>
-                </div>
-            </ds-tabs>
+                <hr />
 
-            <hr />
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>johndoe@example.com</td>
+                            <td>28</td>
+                            <td>USA</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>janesmith@example.com</td>
+                            <td>34</td>
+                            <td>Canada</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Sam Johnson</td>
+                            <td>samjohnson@example.com</td>
+                            <td>45</td>
+                            <td>UK</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Linda Lee</td>
+                            <td>lindalee@example.com</td>
+                            <td>29</td>
+                            <td>Australia</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Michael Brown</td>
+                            <td>michaelbrown@example.com</td>
+                            <td>39</td>
+                            <td>Germany</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <ds-tabs>
-                <div slot="tab">Rounded</div>
-                <div slot="tab">Pill</div>
-                <div slot="tab">Square</div>
-                <div slot="tab">Circle</div>
+                <hr />
 
-                <div slot="panel">
-                    <ds-button type="primary">Primary</ds-button>
-                    <ds-button type="secondary">Secondary</ds-button>
-                    <ds-button>Default</ds-button>
-                    <ds-button type="ghost">Ghost</ds-button>
-                    <ds-button type="link">Link</ds-button>
-                </div>
-                <div slot="panel">
-                    <ds-button shape="pill" type="primary">Primary</ds-button>
-                    <ds-button shape="pill" type="secondary"
-                        >Secondary</ds-button
-                    >
-                    <ds-button shape="pill">Default</ds-button>
-                    <ds-button shape="pill" type="ghost">Ghost</ds-button>
-                    <ds-button shape="pill" type="link">Link</ds-button>
-                </div>
-                <div slot="panel">
-                    <ds-button shape="square" type="primary">Primary</ds-button>
-                    <ds-button shape="square" type="secondary"
-                        >Secondary</ds-button
-                    >
-                    <ds-button shape="square">Default</ds-button>
-                    <ds-button shape="square" type="ghost">Ghost</ds-button>
-                    <ds-button shape="square" type="link">Link</ds-button>
-                </div>
-                <div slot="panel">
-                    <ds-button
-                        icon="rocket:solid"
-                        shape="circle"
-                        type="primary"
-                    ></ds-button>
-                    <ds-button
-                        icon="rocket:solid"
-                        shape="circle"
-                        type="secondary"
-                    ></ds-button>
-                    <ds-button icon="rocket:solid" shape="circle"></ds-button>
-                    <ds-button
-                        icon="rocket:solid"
-                        shape="circle"
-                        type="ghost"
-                    ></ds-button>
-                    <ds-button
-                        icon="rocket:solid"
-                        shape="circle"
-                        type="link"
-                    ></ds-button>
-                </div>
-            </ds-tabs>
+                <ds-tabs active-index="1">
+                    <div slot="tab">Small</div>
+                    <div slot="tab">Medium</div>
+                    <div slot="tab">Large</div>
+                    <div slot="tab">Huge</div>
 
-            <hr />
+                    <div slot="panel">
+                        <ds-button size="small" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="small" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="small">Default</ds-button>
+                        <ds-button size="small" type="ghost">Ghost</ds-button>
+                        <ds-button size="small" type="link">Link</ds-button>
+                    </div>
+                    <div slot="panel">
+                        <ds-button type="primary">Primary</ds-button>
+                        <ds-button type="secondary">Secondary</ds-button>
+                        <ds-button>Default</ds-button>
+                        <ds-button type="ghost">Ghost</ds-button>
+                        <ds-button type="link">Link</ds-button>
+                    </div>
+                    <div slot="panel">
+                        <ds-button size="large" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="large" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="large">Default</ds-button>
+                        <ds-button size="large" type="ghost">Ghost</ds-button>
+                        <ds-button size="large" type="link">Link</ds-button>
+                    </div>
+                    <div slot="panel">
+                        <ds-button size="huge" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="huge" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="huge">Default</ds-button>
+                        <ds-button size="huge" type="ghost">Ghost</ds-button>
+                        <ds-button size="huge" type="link">Link</ds-button>
+                    </div>
+                </ds-tabs>
 
-            <ds-button type="primary" width="full">Full width</ds-button>
-            <hr />
-            <ds-button type="primary" icon="rocket:solid">Icon</ds-button>
-            <ds-button type="secondary" icon-right="chevron-down"
-                >Right icon</ds-button
-            >
-            <ds-button icon="plus"></ds-button>
-            <ds-button
-                icon="share:solid"
-                type="ghost"
-                shape="circle"
-            ></ds-button>
-            <ds-button icon="paperclip" type="link" shape="circle"></ds-button>
-            <hr />
-            <ds-button size="small" icon="rocket:solid">Icon</ds-button>
-            <ds-button icon="rocket:solid">Icon</ds-button>
-            <ds-button size="large" icon="rocket:solid">Icon</ds-button>
-            <ds-button size="huge" icon="rocket:solid">Icon</ds-button>
-            <hr />
-            <ds-button disabled>Disabled</ds-button>
-            <ds-button type="primary" disabled>Disabled</ds-button>
-            <ds-button type="secondary" disabled>Disabled</ds-button>
-            <ds-button type="ghost" disabled>Disabled</ds-button>
-            <ds-button type="link" disabled>Disabled</ds-button>
-            <hr />
-            <ds-input
-                icon="envelope"
-                label="Label"
-                placeholder="Placeholder..."
-                icon-right="ghost:solid"
-                value=""
-            ></ds-input>
-            <ds-button>Button</ds-button>
-            <hr />
-            <ds-input
-                label="Label"
-                placeholder="Placeholder..."
-                value=""
-                error
-            ></ds-input>
-            <ds-input
-                label="Label"
-                placeholder="Placeholder..."
-                value=""
-                error="Please provide a valid value"
-            ></ds-input>
-            <ds-input
-                label="Label"
-                placeholder="Placeholder..."
-                value=""
-                error="Please provide a valid value"
-                show-validation-icon
-            ></ds-input>
-            <ds-input
-                label="Label"
-                placeholder="Placeholder..."
-                value=""
-                success
-                show-validation-icon
-            ></ds-input>
-            <hr />
-            <ds-input placeholder="Placeholder..." width="full"></ds-input>
-            <hr />
-            <ds-input placeholder="Placeholder..." size="small"></ds-input>
-            <ds-input placeholder="Placeholder..."></ds-input>
-            <ds-input placeholder="Placeholder..." size="large"></ds-input>
-            <ds-input placeholder="Placeholder..." size="huge"></ds-input>
-            <hr />
-            <ds-input value="Disabled" disabled></ds-input>
-            <hr />
-            <ds-input
-                icon="user:solid"
-                value="Very$ecretP@$$0rd"
-                type="password"
-                label="Password"
-            ></ds-input>
-            <ds-input
-                value="Very$ecretP@$$0rd"
-                type="password"
-                label="Password"
-                error="Please provide a valid value"
-                icon-right="user:solid"
-                placeholder="Password"
-                show-validation-icon
-            ></ds-input>
-            <ds-input
-                value="Very$ecretP@$$0rd"
-                type="password"
-                label="Password"
-                error="Please provide a valid value"
-                icon="user:solid"
-                icon-right="user:solid"
-                placeholder="Password"
-                show-validation-icon
-                shape="pill"
-            ></ds-input>
-            <hr />
-            <ds-checkbox checked>Option 1s</ds-checkbox>
-            <ds-checkbox>Option 2</ds-checkbox>
-            <ds-checkbox>Option 3</ds-checkbox>
-            <hr />
-            <ds-checkbox size="small">Small</ds-checkbox>
-            <ds-checkbox checked label="Checkbox">Medium</ds-checkbox>
-            <ds-checkbox size="large">Large</ds-checkbox>
-            <ds-checkbox size="huge">Huge</ds-checkbox>
-            <hr />
-            <ds-checkbox>
-                Option 1
-                <div slot="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Quisque suscipit leo at velit finibus suscipit. Nam lacinia,
-                    risus non accumsan tincidunt, magna ligula tempus felis, in
-                    sollicitudin orci metus in metus.
-                </div>
-            </ds-checkbox>
-            <ds-checkbox>
-                Option 2
-                <div slot="description">
-                    Praesent faucibus a turpis vel accumsan. Nullam metus metus,
-                    venenatis eget rutrum ac, fermentum id lorem.
-                </div>
-            </ds-checkbox>
-            <ds-checkbox>
-                Option 3
-                <div slot="description">
-                    Vestibulum a est at erat elementum euismod. Nullam gravida
-                    gravida mi, eu rhoncus lectus lacinia ac.
-                </div>
-            </ds-checkbox>
-            <hr />
-            <ds-checkbox icon="smile:solid" checked style="--icon-size: 80%"
-                >Custom icon</ds-checkbox
-            >
-            <hr />
-            <ds-checkbox checked disabled>Disabled checked</ds-checkbox>
-            <ds-checkbox disabled>Disabled unchecked</ds-checkbox>
-        </ds-app>
+                <hr />
+
+                <ds-tabs>
+                    <div slot="tab">Rounded</div>
+                    <div slot="tab">Pill</div>
+                    <div slot="tab">Square</div>
+                    <div slot="tab">Circle</div>
+
+                    <div slot="panel">
+                        <ds-button type="primary">Primary</ds-button>
+                        <ds-button type="secondary">Secondary</ds-button>
+                        <ds-button>Default</ds-button>
+                        <ds-button type="ghost">Ghost</ds-button>
+                        <ds-button type="link">Link</ds-button>
+                    </div>
+                    <div slot="panel">
+                        <ds-button shape="pill" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button shape="pill" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button shape="pill">Default</ds-button>
+                        <ds-button shape="pill" type="ghost">Ghost</ds-button>
+                        <ds-button shape="pill" type="link">Link</ds-button>
+                    </div>
+                    <div slot="panel">
+                        <ds-button shape="square" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button shape="square" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button shape="square">Default</ds-button>
+                        <ds-button shape="square" type="ghost">Ghost</ds-button>
+                        <ds-button shape="square" type="link">Link</ds-button>
+                    </div>
+                    <div slot="panel">
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="primary"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="secondary"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="ghost"
+                        ></ds-button>
+                        <ds-button
+                            icon="rocket:solid"
+                            shape="circle"
+                            type="link"
+                        ></ds-button>
+                    </div>
+                </ds-tabs>
+
+                <hr />
+
+                <ds-button type="primary" width="full">Full width</ds-button>
+                <hr />
+                <ds-button type="primary" icon="rocket:solid">Icon</ds-button>
+                <ds-button type="secondary" icon-right="chevron-down"
+                    >Right icon</ds-button
+                >
+                <ds-button icon="plus"></ds-button>
+                <ds-button
+                    icon="share:solid"
+                    type="ghost"
+                    shape="circle"
+                ></ds-button>
+                <ds-button
+                    icon="paperclip"
+                    type="link"
+                    shape="circle"
+                ></ds-button>
+                <hr />
+                <ds-button size="small" icon="rocket:solid">Icon</ds-button>
+                <ds-button icon="rocket:solid">Icon</ds-button>
+                <ds-button size="large" icon="rocket:solid">Icon</ds-button>
+                <ds-button size="huge" icon="rocket:solid">Icon</ds-button>
+                <hr />
+                <ds-button disabled>Disabled</ds-button>
+                <ds-button type="primary" disabled>Disabled</ds-button>
+                <ds-button type="secondary" disabled>Disabled</ds-button>
+                <ds-button type="ghost" disabled>Disabled</ds-button>
+                <ds-button type="link" disabled>Disabled</ds-button>
+                <hr />
+                <ds-input
+                    icon="envelope"
+                    label="Label"
+                    placeholder="Placeholder..."
+                    icon-right="ghost:solid"
+                    value=""
+                ></ds-input>
+                <ds-button>Button</ds-button>
+                <hr />
+                <ds-input
+                    label="Label"
+                    placeholder="Placeholder..."
+                    value=""
+                    error
+                ></ds-input>
+                <ds-input
+                    label="Label"
+                    placeholder="Placeholder..."
+                    value=""
+                    error="Please provide a valid value"
+                ></ds-input>
+                <ds-input
+                    label="Label"
+                    placeholder="Placeholder..."
+                    value=""
+                    error="Please provide a valid value"
+                    show-validation-icon
+                ></ds-input>
+                <ds-input
+                    label="Label"
+                    placeholder="Placeholder..."
+                    value=""
+                    success
+                    show-validation-icon
+                ></ds-input>
+                <hr />
+                <ds-input placeholder="Placeholder..." width="full"></ds-input>
+                <hr />
+                <ds-input placeholder="Placeholder..." size="small"></ds-input>
+                <ds-input placeholder="Placeholder..."></ds-input>
+                <ds-input placeholder="Placeholder..." size="large"></ds-input>
+                <ds-input placeholder="Placeholder..." size="huge"></ds-input>
+                <hr />
+                <ds-input value="Disabled" disabled></ds-input>
+                <hr />
+                <ds-input
+                    icon="user:solid"
+                    value="Very$ecretP@$$0rd"
+                    type="password"
+                    label="Password"
+                ></ds-input>
+                <ds-input
+                    value="Very$ecretP@$$0rd"
+                    type="password"
+                    label="Password"
+                    error="Please provide a valid value"
+                    icon-right="user:solid"
+                    placeholder="Password"
+                    show-validation-icon
+                ></ds-input>
+                <ds-input
+                    value="Very$ecretP@$$0rd"
+                    type="password"
+                    label="Password"
+                    error="Please provide a valid value"
+                    icon="user:solid"
+                    icon-right="user:solid"
+                    placeholder="Password"
+                    show-validation-icon
+                    shape="pill"
+                ></ds-input>
+                <hr />
+                <ds-checkbox checked>Option 1s</ds-checkbox>
+                <ds-checkbox>Option 2</ds-checkbox>
+                <ds-checkbox>Option 3</ds-checkbox>
+                <hr />
+                <ds-checkbox size="small">Small</ds-checkbox>
+                <ds-checkbox checked label="Checkbox">Medium</ds-checkbox>
+                <ds-checkbox size="large">Large</ds-checkbox>
+                <ds-checkbox size="huge">Huge</ds-checkbox>
+                <hr />
+                <ds-checkbox>
+                    Option 1
+                    <div slot="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Quisque suscipit leo at velit finibus suscipit. Nam
+                        lacinia, risus non accumsan tincidunt, magna ligula
+                        tempus felis, in sollicitudin orci metus in metus.
+                    </div>
+                </ds-checkbox>
+                <ds-checkbox>
+                    Option 2
+                    <div slot="description">
+                        Praesent faucibus a turpis vel accumsan. Nullam metus
+                        metus, venenatis eget rutrum ac, fermentum id lorem.
+                    </div>
+                </ds-checkbox>
+                <ds-checkbox>
+                    Option 3
+                    <div slot="description">
+                        Vestibulum a est at erat elementum euismod. Nullam
+                        gravida gravida mi, eu rhoncus lectus lacinia ac.
+                    </div>
+                </ds-checkbox>
+                <hr />
+                <ds-checkbox icon="smile:solid" checked style="--icon-size: 80%"
+                    >Custom icon</ds-checkbox
+                >
+                <hr />
+                <ds-checkbox checked disabled>Disabled checked</ds-checkbox>
+                <ds-checkbox disabled>Disabled unchecked</ds-checkbox>
+            </ds-app>
+        </main>
     </body>
 </html>
