@@ -28,13 +28,16 @@ const themeDark = css`
     --input-icon-color-l: 46%;
 
     --input-background-color-s: 0%;
-    --input-background-color-l: 14%;
+    --input-background-color-l: 12%;
 
     --input-label-colorsl: 0%;
     --input-label-color-l: 100%;
 
     --input-border-color-s: 0%;
-    --input-border-color-l: 32%;
+    --input-border-color-l: 36%;
+
+    --box-shadow: rgba(0, 0, 0, 0.2) ${size(0)} ${size(2)} ${size(4)},
+        rgba(0, 0, 0, 0.1) ${size(0)} ${size(1)} ${size(1)};
 `;
 
 export const global = css`
