@@ -6,7 +6,7 @@ const themeDark = css`
     --main-background-color-l: 10%;
 
     --text-color-s: 0%;
-    --text-color-l: 64%;
+    --text-color-l: 80%;
 
     --default-color-s: 0%;
     --default-color-l: 22%;
@@ -31,7 +31,7 @@ const themeDark = css`
     --input-background-color-l: 14%;
 
     --input-label-colorsl: 0%;
-    --input-label-color-l: 96%;
+    --input-label-color-l: 100%;
 
     --input-border-color-s: 0%;
     --input-border-color-l: 32%;
@@ -43,6 +43,22 @@ export const global = css`
             var(--main-background-color-h),
             var(--main-background-color-s),
             var(--main-background-color-l)
+        );
+
+        color: hsla(
+            var(--text-color-h),
+            var(--text-color-s),
+            var(--text-color-l),
+            var(--text-color-a)
+        );
+    }
+
+    ds-app a {
+        color: hsla(
+            var(--primary-color-h),
+            var(--primary-color-s),
+            var(--primary-color-l),
+            var(--primary-color-a)
         );
     }
 

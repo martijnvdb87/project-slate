@@ -22,7 +22,7 @@ export const main = css`
 
         --text-color-h: var(--primary-color-h);
         --text-color-s: 10%;
-        --text-color-l: 30%;
+        --text-color-l: 25%;
         --text-color-a: 1;
 
         --text-line-height: 1.6;
@@ -100,7 +100,7 @@ export const main = css`
 
         --input-label-color-h: var(--primary-color-h);
         --input-label-color-s: 10%;
-        --input-label-color-l: 8%;
+        --input-label-color-l: 4%;
         --input-label-color-a: 1;
 
         --input-label-font-weight: 500;
