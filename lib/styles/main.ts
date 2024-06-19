@@ -4,8 +4,8 @@ import { size } from "../util/style";
 
 export const main = css`
     :root {
-        --main-background-color-h: var(--primary-color-h);
-        --main-background-color-s: var(--primary-color-s);
+        --main-background-color-h: 0;
+        --main-background-color-s: 50%;
         --main-background-color-l: 100%;
 
         --font-sans: InterVariable, Inter, ui-sans-serif, system-ui, sans-serif,
@@ -20,7 +20,7 @@ export const main = css`
         --element-font-weight: 500;
         --input-font-weight: 350;
 
-        --text-color-h: var(--primary-color-h);
+        --text-color-h: 0;
         --text-color-s: 10%;
         --text-color-l: 25%;
         --text-color-a: 1;
