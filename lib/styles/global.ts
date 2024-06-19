@@ -18,8 +18,8 @@ const themeDark = css`
     --primary-accent-l: 96%;
     --secondary-color-l: 12%;
     --secondary-accent-l: 100%;
-    --error-color-l: 35%;
-    --success-color-l: 35%;
+    --error-color-l: 40%;
+    --success-color-l: 40%;
 
     --input-text-color-s: 0%;
     --input-text-color-l: 96%;
@@ -54,6 +54,8 @@ export const global = css`
             var(--text-color-l),
             var(--text-color-a)
         );
+
+        line-height: var(--text-line-height);
     }
 
     ds-app a {

@@ -5,6 +5,7 @@ import "@/lib/components/button";
 import "@/lib/components/checkbox";
 import "@/lib/components/input";
 import "@/lib/components/tabs";
+import "@/lib/components/textarea";
 import { global } from "./styles/global";
 import { reset } from "./styles/reset";
 import { main } from "./styles/main";
