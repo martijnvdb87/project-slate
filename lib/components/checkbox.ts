@@ -149,8 +149,8 @@ export class Input extends LitElement {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width: var(--checkbox-size);
+                height: var(--checkbox-size);
                 opacity: 0;
                 z-index: 999;
                 cursor: pointer;
