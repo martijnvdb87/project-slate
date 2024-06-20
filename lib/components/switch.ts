@@ -2,12 +2,11 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
-import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
-@customElement(`${config.prefix}-checkbox`)
-export class Input extends LitElement {
+@customElement(`${config.prefix}-switch`)
+export class Switch extends LitElement {
     public root: Ref<HTMLInputElement> = createRef();
     public input: Ref<HTMLInputElement> = createRef();
 
@@ -56,18 +55,18 @@ export class Input extends LitElement {
     protected render() {
         return html`
             <div ${ref(this.root)} part="main">
-                <div part="checkbox-container">
-                    <input
-                        ${ref(this.input)}
-                        type="checkbox"
-                        part="input"
-                        id="${this.elementId}"
-                        name="${this.name}"
-                        .checked="${this.checked}"
-                        ?disabled="${this.disabled}"
-                        @input="${this.handleInput}"
-                    />
-                    <div part="input-container">${renderIcon(this.icon)}</div>
+                <input
+                    ${ref(this.input)}
+                    type="checkbox"
+                    part="input"
+                    id="${this.elementId}"
+                    name="${this.name}"
+                    .checked="${this.checked}"
+                    ?disabled="${this.disabled}"
+                    @input="${this.handleInput}"
+                />
+                <div part="handle-container">
+                    <div part="handle"></div>
                 </div>
                 <div part="label-container">
                     <label for="${this.elementId}" part="label"
@@ -107,25 +106,11 @@ export class Input extends LitElement {
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
 
-                --icon-color-h: var(--primary-accent-h);
-                --icon-color-s: var(--primary-accent-s);
-                --icon-color-l: var(--primary-accent-l);
-                --icon-color-a: var(--primary-accent-a);
-
-                --icon-color: hsla(
-                    var(--icon-color-h),
-                    var(--icon-color-s),
-                    var(--icon-color-l),
-                    var(--icon-color-a)
-                );
-
-                --icon-size: 100%;
-
                 --gap: ${size(16)};
 
                 --font-size: var(--font-size-medium);
 
-                --checkbox-size: ${size(22)};
+                --handle-size: ${size(22)};
 
                 --outline-width: var(--input-outline-width);
 
@@ -141,8 +126,42 @@ export class Input extends LitElement {
                 line-height: var(--text-line-height);
             }
 
-            [part="checkbox-container"] {
+            [part="handle-container"] {
                 position: relative;
+                flex-shrink: 0;
+                display: flex;
+                width: calc(var(--handle-size) * 1.75);
+                height: var(--handle-size);
+
+                border-radius: var(--element-border-radius);
+                border-radius: 999rem;
+                border-width: var(--border-width);
+                border-style: solid;
+                border-color: hsla(
+                    var(--border-color-h),
+                    var(--border-color-s),
+                    var(--border-color-l),
+                    var(--border-color-a)
+                );
+
+                background-color: hsla(
+                    var(--border-color-h),
+                    var(--border-color-s),
+                    var(--border-color-l),
+                    var(--border-color-a)
+                );
+
+                outline: 0 solid
+                    hsla(
+                        var(--primary-color-h),
+                        var(--primary-color-s),
+                        var(--primary-color-l),
+                        0
+                    );
+                outline-offset: ${size(2)};
+                box-shadow: var(--box-shadow);
+                transition: border-color 160ms ease-in-out,
+                    background-color 160ms ease-in-out;
             }
 
             [part="input"] {
@@ -156,7 +175,7 @@ export class Input extends LitElement {
                 cursor: pointer;
             }
 
-            [part="input"]:focus-visible + [part="input-container"] {
+            [part="input"]:focus-visible + [part="handle-container"] {
                 border-color: hsl(
                     var(--primary-color-h),
                     var(--primary-color-s),
@@ -179,7 +198,7 @@ export class Input extends LitElement {
                 opacity: 0;
             }
 
-            [part="input"]:checked + [part="input-container"] {
+            [part="input"]:checked + [part="handle-container"] {
                 --background-color-h: var(--primary-color-h);
                 --background-color-s: var(--primary-color-s);
                 --background-color-l: var(--primary-color-l);
@@ -191,44 +210,49 @@ export class Input extends LitElement {
                 --border-color-a: var(--primary-color-a);
             }
 
-            [part="input"]:checked
-                + [part="input-container"]
-                [part="icon-container"] {
-                opacity: 1;
+            [part="input"]:checked + [part="handle-container"] [part="handle"] {
+                left: calc(var(--handle-size) * 0.75 - var(--border-width));
             }
 
-            [part="input-container"] {
+            [part="handle"] {
+                position: absolute;
+                top: calc(0px - var(--border-width));
+                left: calc(0px - var(--border-width));
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 pointer-events: none;
-                width: var(--checkbox-size);
-                height: var(--checkbox-size);
+                width: var(--handle-size);
+                height: var(--handle-size);
+                transition: left 160ms ease-in-out;
+            }
 
+            [part="handle"]::before {
+                content: "";
+                display: block;
+                width: calc(100% - var(--border-width) * 4);
+                height: calc(100% - var(--border-width) * 4);
                 border-radius: var(--element-border-radius);
-                border-width: var(--border-width);
-                border-style: solid;
-                border-color: hsla(
-                    var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
-                    var(--border-color-a)
-                );
-
+                border-radius: 999rem;
                 background-color: hsla(
-                    var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
-                    var(--background-color-a)
+                    var(--primary-accent-h),
+                    var(--primary-accent-s),
+                    var(--primary-accent-l),
+                    var(--primary-accent-a)
                 );
-                outline: 0 solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        0
-                    );
-                outline-offset: ${size(2)};
+                box-shadow: var(--box-shadow);
+                transition: background-color 160ms ease-in-out;
+            }
+
+            [part="input"]:checked
+                + [part="handle-container"]
+                [part="handle"]::before {
+                background-color: hsla(
+                    var(--primary-accent-h),
+                    var(--primary-accent-s),
+                    var(--primary-accent-l),
+                    var(--primary-accent-a)
+                );
                 box-shadow: var(--box-shadow);
             }
 
@@ -236,8 +260,8 @@ export class Input extends LitElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: var(--icon-size);
-                height: var(--icon-size);
+                width: 100%;
+                height: 100%;
                 max-width: 100%;
                 max-height: 100%;
                 pointer-events: none;
@@ -288,17 +312,17 @@ export class Input extends LitElement {
 
             :host([size="small"]) {
                 --font-size: var(--font-size-small);
-                --checkbox-size: ${size(18)};
+                --handle-size: ${size(18)};
             }
 
             :host([size="large"]) {
                 --font-size: var(--font-size-large);
-                --checkbox-size: ${size(26)};
+                --handle-size: ${size(26)};
             }
 
             :host([size="huge"]) {
                 --font-size: var(--font-size-huge);
-                --checkbox-size: ${size(30)};
+                --handle-size: ${size(30)};
             }
 
             :host([disabled]) {
@@ -311,6 +335,6 @@ export class Input extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "ds-checkbox": Input;
+        "ds-switch": Switch;
     }
 }

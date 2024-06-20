@@ -116,7 +116,7 @@ export class Textarea extends LitElement {
                 display: var(--display);
                 vertical-align: bottom;
 
-                --display: inline-flex;
+                --display: flex;
                 --gap: ${size(6)};
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--input-font-weight);
@@ -320,16 +320,8 @@ export class Textarea extends LitElement {
                 --sub-height: ${size(28)};
             }
 
-            :host([width="full"]) {
-                --display: flex;
-            }
-
             :host([shape="square"]) {
                 --element-border-radius: 0;
-            }
-
-            :host([shape="pill"]) {
-                --element-border-radius: var(--shape-pill-radius);
             }
 
             :host([disabled]) {
