@@ -312,7 +312,7 @@ export class Tabs extends LitElement {
                 position: absolute;
                 top: 0;
                 left: 0;
-                transform: translate(var(--tab-left, 0), var(--tab-top, 0));
+                left: var(--tab-left, 0);
                 width: var(--tab-width);
                 height: var(--tab-height);
                 pointer-events: none;

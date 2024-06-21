@@ -160,8 +160,7 @@ export class Switch extends LitElement {
                     );
                 outline-offset: ${size(2)};
                 box-shadow: var(--box-shadow);
-                transition: border-color 160ms ease-in-out,
-                    background-color 160ms ease-in-out;
+                transition: border-color 160ms ease, background-color 160ms ease;
             }
 
             [part="input"] {
@@ -224,7 +223,7 @@ export class Switch extends LitElement {
                 pointer-events: none;
                 width: var(--handle-size);
                 height: var(--handle-size);
-                transition: left 160ms ease-in-out;
+                transition: left 160ms ease;
             }
 
             [part="handle"]::before {
@@ -241,7 +240,7 @@ export class Switch extends LitElement {
                     var(--primary-accent-a)
                 );
                 box-shadow: var(--box-shadow);
-                transition: background-color 160ms ease-in-out;
+                transition: background-color 160ms ease;
             }
 
             [part="input"]:checked
