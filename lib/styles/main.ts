@@ -17,7 +17,7 @@ export const main = css`
             "Liberation Mono", "Courier New", monospace;
 
         --font-family: var(--font-sans);
-        --element-font-weight: 500;
+        --element-font-weight: 550;
         --input-font-weight: 350;
 
         --text-color-h: 0;

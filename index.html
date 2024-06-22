@@ -32,6 +32,7 @@
                         name="firstName"
                         label="First name"
                         width="full"
+                        required
                         style="flex: 1"
                     ></ds-input>
                     <ds-input
@@ -61,9 +62,6 @@
                 <ds-radio name="gender" value="female">Female</ds-radio>
                 <ds-radio name="gender" value="other">Other</ds-radio>
                 <ds-radio name="gender" value="unknown">Unknown</ds-radio>
-
-                <hr />
-                <ds-switch name="switch">Switch</ds-switch>
                 <hr />
                 <ds-checkbox name="terms">
                     Accept Terms and Conditions
@@ -81,6 +79,23 @@
                         at any time.
                     </div>
                 </ds-checkbox>
+                <hr />
+                <ds-switch name="terms-switch">
+                    Accept Terms and Conditions
+                    <div slot="description">
+                        By checking this box, I confirm that I have read,
+                        understood, and agree to the Terms and Conditions,
+                        Privacy Policy, and Refund Policy.
+                    </div></ds-switch
+                >
+                <ds-switch name="newsletter-switch">
+                    Sign Up for Our Newsletter
+                    <div slot="description">
+                        By checking this box, I agree to receive promotional
+                        emails and updates. I understand that I can unsubscribe
+                        at any time.
+                    </div></ds-switch
+                >
                 <hr />
                 <div style="display: flex; gap: 0.5rem; justify-content: end">
                     <ds-button submit type="primary">Submit</ds-button>

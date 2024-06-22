@@ -48,7 +48,28 @@ export class Input extends LitElement {
     protected showValidationIcon = false;
 
     @property({ type: Boolean })
+    protected readonly = false;
+
+    @property({ type: Boolean })
     protected disabled = false;
+
+    @property({ type: Boolean })
+    protected required = false;
+
+    @property({ type: Boolean, attribute: "autofocus" })
+    protected inputAutofocus = false;
+
+    @property({ type: Number, attribute: "maxlength" })
+    protected maxLength = null;
+
+    @property({ type: Number })
+    protected min = null;
+
+    @property({ type: Number })
+    protected max = null;
+
+    @property({ type: Number })
+    protected step = null;
 
     @state()
     protected elementId = "";
@@ -112,7 +133,14 @@ export class Input extends LitElement {
                             type="${inputType}"
                             placeholder="${this.placeholder}"
                             .value="${this.value}"
+                            ?readonly="${this.readonly}"
                             ?disabled="${this.disabled}"
+                            ?required="${this.required}"
+                            ?autofocus="${this.inputAutofocus}"
+                            maxlength="${this.maxLength}"
+                            min="${this.min}"
+                            max="${this.max}"
+                            step="${this.step}"
                             @input="${this.handleInput}"
                         />
                         ${renderIcon(this.iconRight, "icon-right")}
@@ -276,9 +304,7 @@ export class Input extends LitElement {
 
             [part="main"] {
                 position: relative;
-                display: flex;
                 flex-grow: 1;
-                flex-direction: column;
             }
 
             [part="label"] {

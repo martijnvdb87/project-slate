@@ -23,9 +23,6 @@ export class Input extends LitElement {
     @property({ type: String })
     protected icon = "check";
 
-    @property({ attribute: "icon-padding", type: String })
-    protected iconPadding = "10px";
-
     @property({ type: Boolean })
     protected disabled = false;
 
@@ -255,8 +252,7 @@ export class Input extends LitElement {
             }
 
             [part="label-container"] {
-                display: flex;
-                flex-direction: column;
+                display: block;
                 color: hsla(
                     var(--input-label-color-h),
                     var(--input-label-color-s),

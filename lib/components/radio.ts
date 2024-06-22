@@ -2,7 +2,6 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
-import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
@@ -22,12 +21,6 @@ export class Radio extends LitElement {
 
     @state()
     protected originalChecked = false;
-
-    @property({ type: String })
-    protected icon = "check";
-
-    @property({ attribute: "icon-padding", type: String })
-    protected iconPadding = "10px";
 
     @property({ type: Boolean })
     protected disabled = false;
@@ -82,7 +75,7 @@ export class Radio extends LitElement {
                         ?disabled="${this.disabled}"
                         @input="${this.handleInput}"
                     />
-                    <div part="input-container">${renderIcon(this.icon)}</div>
+                    <div part="input-container"></div>
                 </div>
                 <div part="label-container">
                     <label for="${this.elementId}" part="label"
@@ -123,20 +116,6 @@ export class Radio extends LitElement {
                 --background-color-s: var(--input-background-color-s);
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
-
-                --icon-color-h: var(--primary-accent-h);
-                --icon-color-s: var(--primary-accent-s);
-                --icon-color-l: var(--primary-accent-l);
-                --icon-color-a: var(--primary-accent-a);
-
-                --icon-color: hsla(
-                    var(--icon-color-h),
-                    var(--icon-color-s),
-                    var(--icon-color-l),
-                    var(--icon-color-a)
-                );
-
-                --icon-size: 100%;
 
                 --gap: ${size(16)};
 
@@ -191,11 +170,6 @@ export class Radio extends LitElement {
                     );
             }
 
-            [part="icon-container"] {
-                display: flex;
-                opacity: 0;
-            }
-
             [part="input"]:checked + [part="input-container"] {
                 --background-color-h: var(--primary-color-h);
                 --background-color-s: var(--primary-color-s);
@@ -208,12 +182,6 @@ export class Radio extends LitElement {
                 --border-color-a: var(--primary-color-a);
             }
 
-            [part="input"]:checked
-                + [part="input-container"]
-                [part="icon-container"] {
-                opacity: 1;
-            }
-
             [part="input-container"] {
                 display: flex;
                 align-items: center;
@@ -222,7 +190,7 @@ export class Radio extends LitElement {
                 width: var(--radio-size);
                 height: var(--radio-size);
 
-                border-radius: var(--element-border-radius);
+                border-radius: 999rem;
                 border-width: var(--border-width);
                 border-style: solid;
                 border-color: hsla(
@@ -249,31 +217,28 @@ export class Radio extends LitElement {
                 box-shadow: var(--box-shadow);
             }
 
-            [part="icon"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: var(--icon-size);
-                height: var(--icon-size);
-                max-width: 100%;
-                max-height: 100%;
-                pointer-events: none;
+            [part="input-container"]::after {
+                content: "";
+                display: block;
+                width: 40%;
+                height: 40%;
+                border-radius: 999rem;
+                background-color: hsla(
+                    var(--input-background-color-h),
+                    var(--input-background-color-s),
+                    var(--input-background-color-l),
+                    var(--input-background-color-a)
+                );
+                opacity: 0;
+                box-shadow: var(--box-shadow);
             }
 
-            [part="icon-container"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-                max-width: 100%;
-                max-height: 100%;
-                pointer-events: none;
+            [part="input"]:checked + [part="input-container"]::after {
+                opacity: 1;
             }
 
             [part="label-container"] {
-                display: flex;
-                flex-direction: column;
+                display: block;
                 color: hsla(
                     var(--input-label-color-h),
                     var(--input-label-color-s),

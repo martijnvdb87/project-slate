@@ -99,7 +99,7 @@ export class Button extends LitElement {
                 --text-color-l: var(--default-accent-l);
                 --text-color-a: var(--default-accent-a);
 
-                --padding-x: ${size(14)};
+                --padding-x: ${size(16)};
                 --gap: ${size(6)};
 
                 --font-size: var(--font-size-medium);
@@ -325,7 +325,7 @@ export class Button extends LitElement {
             :host([size="small"]) {
                 --height: ${size(28)};
                 --icon-size: ${size(12)};
-                --padding-x: ${size(10)};
+                --padding-x: ${size(12)};
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
             }
@@ -333,7 +333,7 @@ export class Button extends LitElement {
             :host([size="large"]) {
                 --height: ${size(44)};
                 --icon-size: ${size(18)};
-                --padding-x: ${size(16)};
+                --padding-x: ${size(18)};
                 --gap: ${size(8)};
                 --font-size: var(--font-size-large);
             }
@@ -341,7 +341,7 @@ export class Button extends LitElement {
             :host([size="huge"]) {
                 --height: ${size(52)};
                 --icon-size: ${size(24)};
-                --padding-x: ${size(20)};
+                --padding-x: ${size(22)};
                 --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
             }
