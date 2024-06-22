@@ -5,6 +5,7 @@ import "@/lib/components/button";
 import "@/lib/components/checkbox";
 import "@/lib/components/input";
 import "@/lib/components/radio";
+import "@/lib/components/select";
 import "@/lib/components/switch";
 import "@/lib/components/tabs";
 import "@/lib/components/textarea";
