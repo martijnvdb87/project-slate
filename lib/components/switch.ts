@@ -96,15 +96,11 @@ export class Switch extends LitElement {
 
                 --element-border-radius: var(--border-radius);
                 --border-width: var(--input-border-width);
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
 
-                --background-color-h: var(--input-background-color-h);
-                --background-color-s: var(--input-background-color-s);
-                --background-color-l: var(--input-background-color-l);
-                --background-color-a: var(--input-background-color-a);
+                --background-color-h: var(--input-border-color-h);
+                --background-color-s: var(--input-border-color-s);
+                --background-color-l: var(--input-border-color-l);
+                --background-color-a: var(--input-border-color-a);
 
                 --gap: ${size(16)};
 
@@ -130,25 +126,17 @@ export class Switch extends LitElement {
                 position: relative;
                 flex-shrink: 0;
                 display: flex;
-                width: calc(var(--handle-size) * 1.75);
-                height: var(--handle-size);
-
-                border-radius: var(--element-border-radius);
-                border-radius: 999rem;
-                border-width: var(--border-width);
-                border-style: solid;
-                border-color: hsla(
-                    var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
-                    var(--border-color-a)
+                width: calc(
+                    var(--handle-size) * 1.75 + var(--border-width) * 2
                 );
+                height: calc(var(--handle-size) + var(--border-width) * 2);
+                border-radius: 999rem;
 
                 background-color: hsla(
-                    var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
-                    var(--border-color-a)
+                    var(--background-color-h),
+                    var(--background-color-s),
+                    var(--background-color-l),
+                    var(--background-color-a)
                 );
 
                 outline: 0 solid
@@ -159,7 +147,6 @@ export class Switch extends LitElement {
                         0
                     );
                 outline-offset: ${size(2)};
-                box-shadow: var(--box-shadow);
                 transition: border-color 160ms ease, background-color 160ms ease;
             }
 
@@ -175,11 +162,6 @@ export class Switch extends LitElement {
             }
 
             [part="input"]:focus-visible + [part="handle-container"] {
-                border-color: hsl(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l)
-                );
                 outline: calc(
                         var(--input-outline-width) + var(--input-border-width)
                     )
@@ -202,21 +184,16 @@ export class Switch extends LitElement {
                 --background-color-s: var(--primary-color-s);
                 --background-color-l: var(--primary-color-l);
                 --background-color-a: var(--primary-color-a);
-
-                --border-color-h: var(--primary-color-h);
-                --border-color-s: var(--primary-color-s);
-                --border-color-l: var(--primary-color-l);
-                --border-color-a: var(--primary-color-a);
             }
 
             [part="input"]:checked + [part="handle-container"] [part="handle"] {
-                left: calc(var(--handle-size) * 0.75 - var(--border-width));
+                left: calc(var(--handle-size) * 0.75 + var(--border-width));
             }
 
             [part="handle"] {
                 position: absolute;
-                top: calc(0px - var(--border-width));
-                left: calc(0px - var(--border-width));
+                top: calc(0px + var(--border-width));
+                left: calc(0px + var(--border-width));
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -229,30 +206,18 @@ export class Switch extends LitElement {
             [part="handle"]::before {
                 content: "";
                 display: block;
-                width: calc(100% - var(--border-width) * 4);
-                height: calc(100% - var(--border-width) * 4);
+                width: calc(100% - var(--border-width) * 2);
+                height: calc(100% - var(--border-width) * 2);
                 border-radius: var(--element-border-radius);
                 border-radius: 999rem;
                 background-color: hsla(
-                    var(--primary-accent-h),
-                    var(--primary-accent-s),
-                    var(--primary-accent-l),
-                    var(--primary-accent-a)
+                    var(--input-background-color-h),
+                    var(--input-background-color-s),
+                    var(--input-background-color-l),
+                    var(--input-background-color-a)
                 );
                 box-shadow: var(--box-shadow);
                 transition: background-color 160ms ease;
-            }
-
-            [part="input"]:checked
-                + [part="handle-container"]
-                [part="handle"]::before {
-                background-color: hsla(
-                    var(--primary-accent-h),
-                    var(--primary-accent-s),
-                    var(--primary-accent-l),
-                    var(--primary-accent-a)
-                );
-                box-shadow: var(--box-shadow);
             }
 
             [part="icon"] {
