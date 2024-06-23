@@ -130,9 +130,10 @@ export class Button extends LitElement {
                 flex: auto;
                 align-items: center;
                 justify-content: center;
-                height: var(--height);
+                min-height: var(--height);
                 width: var(--width);
-                padding: 0 var(--padding-x);
+                padding: calc(var(--padding-x) * 0.5) var(--padding-x);
+                line-height: 1.4;
                 gap: var(--gap);
                 font-size: var(--font-size);
                 font-family: var(--font-family);
