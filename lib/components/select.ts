@@ -58,7 +58,13 @@ export class Select extends LitElement {
     }
 
     protected render() {
-        const defaultSlot = Array.from(this.querySelectorAll("*:not([slot])"));
+        Array.from(this.querySelectorAll("option")).forEach((option) => {
+            if (option.value === this.value) {
+                option.setAttribute("selected", "selected");
+            } else {
+                option.removeAttribute("selected");
+            }
+        });
 
         return html`
             <div ${ref(this.root)} part="main">
@@ -84,9 +90,9 @@ export class Select extends LitElement {
                         ?autofocus="${this.inputAutofocus}"
                         @input="${this.handleInput}"
                     >
-                        ${defaultSlot.map((child) => {
-                            return child.cloneNode(true);
-                        })}
+                        ${Array.from(
+                            this.querySelectorAll("*:not([slot])")
+                        ).map((child) => child.cloneNode(true))}
                     </select>
                 </div>
             </div>
