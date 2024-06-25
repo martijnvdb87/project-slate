@@ -100,6 +100,7 @@ export class Button extends LitElement {
                 --text-color-a: var(--default-accent-a);
 
                 --padding-x: ${size(16)};
+                --padding-y: ${size(6)};
                 --gap: ${size(6)};
 
                 --font-size: var(--font-size-medium);
@@ -132,8 +133,7 @@ export class Button extends LitElement {
                 justify-content: center;
                 min-height: var(--height);
                 width: var(--width);
-                padding: calc(var(--padding-x) * 0.5) var(--padding-x);
-                line-height: 1.4;
+                padding: var(--padding-y) var(--padding-x);
                 gap: var(--gap);
                 font-size: var(--font-size);
                 font-family: var(--font-family);
@@ -327,6 +327,7 @@ export class Button extends LitElement {
                 --height: ${size(28)};
                 --icon-size: ${size(12)};
                 --padding-x: ${size(12)};
+                --padding-y: ${size(4)};
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
             }
@@ -335,6 +336,7 @@ export class Button extends LitElement {
                 --height: ${size(44)};
                 --icon-size: ${size(18)};
                 --padding-x: ${size(18)};
+                --padding-y: ${size(8)};
                 --gap: ${size(8)};
                 --font-size: var(--font-size-large);
             }
@@ -343,6 +345,7 @@ export class Button extends LitElement {
                 --height: ${size(52)};
                 --icon-size: ${size(24)};
                 --padding-x: ${size(22)};
+                --padding-y: ${size(10)};
                 --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
             }
@@ -361,6 +364,7 @@ export class Button extends LitElement {
 
             :host([shape="circle"]) {
                 --padding-x: 0;
+                --padding-y: 0;
                 --element-border-radius: 50%;
                 --width: var(--height);
             }
