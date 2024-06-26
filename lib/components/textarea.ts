@@ -121,8 +121,6 @@ export class Textarea extends LitElement {
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--input-font-weight);
 
-                --sub-height: ${size(20)};
-
                 --text-color-h: var(--input-text-color-h);
                 --text-color-s: var(--input-text-color-s);
                 --text-color-l: var(--input-text-color-l);
@@ -299,7 +297,6 @@ export class Textarea extends LitElement {
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
                 --validation-font-size: ${size(11)};
-                --sub-height: ${size(16)};
             }
 
             :host([size="large"]) {
@@ -307,7 +304,6 @@ export class Textarea extends LitElement {
                 --gap: ${size(8)};
                 --font-size: var(--font-size-large);
                 --validation-font-size: ${size(14)};
-                --sub-height: ${size(24)};
             }
 
             :host([size="huge"]) {
@@ -315,7 +311,6 @@ export class Textarea extends LitElement {
                 --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
                 --validation-font-size: ${size(16)};
-                --sub-height: ${size(28)};
             }
 
             :host([shape="square"]) {

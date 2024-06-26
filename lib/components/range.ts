@@ -2,7 +2,7 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
-import { getRandomId } from "../util/general";
+import { getPart, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-range`)
@@ -80,23 +80,25 @@ export class Range extends LitElement {
                     >${this.label}</label
                 >
                 <div part="input-container">
-                    <div part="input-inner-container">
-                        <input
-                            ${ref(this.input)}
-                            id="${this.elementId}"
-                            name="${this.name}"
-                            part="input"
-                            type="range"
-                            .value="${this.value}"
-                            ?readonly="${this.readonly}"
-                            ?disabled="${this.disabled}"
-                            ?required="${this.required}"
-                            ?autofocus="${this.inputAutofocus}"
-                            min="${this.min}"
-                            max="${this.max}"
-                            step="${this.step}"
-                            @input="${this.handleInput}"
-                        />
+                    <input
+                        ${ref(this.input)}
+                        id="${this.elementId}"
+                        name="${this.name}"
+                        part="input"
+                        type="range"
+                        .value="${this.value}"
+                        ?readonly="${this.readonly}"
+                        ?disabled="${this.disabled}"
+                        ?required="${this.required}"
+                        ?autofocus="${this.inputAutofocus}"
+                        min="${this.min}"
+                        max="${this.max}"
+                        step="${this.step}"
+                        @input="${this.handleInput}"
+                    />
+                    <div part="slider-container">
+                        <div part="slider-filled"></div>
+                        <div part="slider-handle"></div>
                     </div>
                 </div>
             </div>
@@ -107,6 +109,11 @@ export class Range extends LitElement {
         const target = e.target as HTMLInputElement;
         this.value = target.value;
         this.internals.setFormValue(this.value);
+
+        getPart(this, "main").style.setProperty(
+            "--value-percent",
+            `${this.value}%`
+        );
     }
 
     public static styles = [
@@ -116,24 +123,21 @@ export class Range extends LitElement {
                 display: var(--display);
                 vertical-align: bottom;
 
+                --value-percent: 0%;
+
                 --display: inline-flex;
                 --height: ${size(36)};
                 --gap: ${size(6)};
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--input-font-weight);
 
-                --sub-height: ${size(20)};
+                --handle-height: ${size(20)};
+                --slider-height: ${size(12)};
 
                 --text-color-h: var(--input-text-color-h);
                 --text-color-s: var(--input-text-color-s);
                 --text-color-l: var(--input-text-color-l);
                 --text-color-a: var(--input-text-color-a);
-
-                --placeholder-color-h: var(--input-placeholder-color-h);
-                --placeholder-color-s: var(--input-placeholder-color-s);
-                --placeholder-color-l: var(--input-placeholder-color-l);
-                --placeholder-color-a: var(--input-placeholder-color-a);
-                --placeholder-weight: var(--input-placeholder-weight);
 
                 --label-font-weight: var(--input-label-font-weight);
                 --label-font-size: var(--input-label-font-size);
@@ -142,8 +146,6 @@ export class Range extends LitElement {
                 --label-color-s: var(--input-label-color-s);
                 --label-color-l: var(--input-label-color-l);
                 --label-color-a: var(--input-label-color-a);
-
-                --input-padding-x: ${size(100)};
 
                 --background-color-h: var(--input-background-color-h);
                 --background-color-s: var(--input-background-color-s);
@@ -160,41 +162,9 @@ export class Range extends LitElement {
                 --outline-width: var(--input-outline-width);
 
                 --focus-outline-width: var(--input-focus-outline-width);
-
-                --validation-font-size: ${size(12)};
             }
 
             input {
-                display: flex;
-                flex-grow: 1;
-                align-items: center;
-                justify-content: center;
-                vertical-align: middle;
-                height: calc(var(--height) - var(--border-width) * 2);
-                width: 100%;
-                padding: 0 var(--input-padding-x);
-                background: transparent;
-                font-family: var(--font-family);
-                font-size: var(--font-size);
-                font-weight: var(--font-weight);
-                color: hsla(
-                    var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
-                    var(--text-color-a)
-                );
-                border: none;
-                outline: none;
-            }
-
-            input::placeholder {
-                color: hsla(
-                    var(--placeholder-color-h),
-                    var(--placeholder-color-s),
-                    var(--placeholder-color-l),
-                    var(--placeholder-color-a)
-                );
-                font-weight: var(--placeholder-weight);
             }
 
             [part="main"] {
@@ -216,124 +186,91 @@ export class Range extends LitElement {
                 );
             }
 
-            [part="validation-message"] {
-                padding-top: ${size(6)};
-                font-size: var(--validation-font-size);
-                color: hsl(
-                    var(--validation-border-color-h),
-                    var(--validation-border-color-s),
-                    var(--validation-border-color-l),
-                    var(--validation-border-color-a)
-                );
-            }
-
-            [part="input-container"] {
+            [part="slider-container"] {
                 position: relative;
-                display: flex;
-                align-items: center;
-                height: var(--height);
+                height: var(--slider-height);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-                border-radius: var(--element-border-radius);
-                border-width: var(--border-width);
-                border-style: solid;
+                border-radius: 999rem;
                 border-color: hsla(
-                    var(--validation-border-color-h, var(--border-color-h)),
-                    var(--validation-border-color-s, var(--border-color-s)),
-                    var(--validation-border-color-l, var(--border-color-l)),
-                    var(--validation-border-color-a, var(--border-color-a))
+                    var(--border-color-h),
+                    var(--border-color-s),
+                    var(--border-color-l),
+                    var(--border-color-a)
                 );
-                outline: 0 solid
-                    hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
-                        0
-                    );
-                box-shadow: var(--box-shadow);
+                border-style: solid;
+                border-width: var(--border-width);
             }
 
-            [part="input-inner-container"] {
-                position: relative;
-                display: flex;
-                flex-grow: 1;
-                align-items: center;
+            [part="slider-filled"] {
+                position: absolute;
+                top: calc(0px - var(--border-width));
+                left: calc(0px - var(--border-width));
+                right: calc(0px - var(--border-width));
+                height: var(--slider-height);
+                width: var(--value-percent);
+                background-color: hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    calc(var(--primary-color-l) + 15%),
+                    1
+                );
+                border-radius: 999rem 0 0 999rem;
             }
 
-            [part="input-container"]:focus-within {
-                border-color: hsl(
-                    var(--validation-border-color-h, var(--primary-color-h)),
-                    var(--validation-border-color-s, var(--primary-color-s)),
-                    var(--validation-border-color-l, var(--primary-color-l))
+            [part="slider-handle"] {
+                position: absolute;
+                top: calc(
+                    var(--slider-height) / 2 - var(--handle-height) / 2 -
+                        var(--border-width)
                 );
-                outline: var(--input-outline-width) solid
-                    hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
-                        var(--input-outline-opacity)
-                    );
+                bottom: 0;
+                left: calc(
+                    var(--value-percent) - var(--handle-height) / 2 -
+                        var(--border-width)
+                );
+                right: 0;
+                height: var(--handle-height);
+                width: var(--handle-height);
+                background-color: hsla(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l),
+                    var(--primary-color-a)
+                );
+                border-radius: 999rem;
             }
 
             :host([size="small"]) {
                 --height: ${size(28)};
-                --input-padding-x: ${size(10)};
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
                 --validation-font-size: ${size(11)};
-                --sub-height: ${size(16)};
+                --handle-height: ${size(16)};
             }
 
             :host([size="large"]) {
                 --height: ${size(44)};
-                --input-padding-x: ${size(14)};
                 --gap: ${size(8)};
                 --font-size: var(--font-size-large);
                 --validation-font-size: ${size(14)};
-                --sub-height: ${size(24)};
+                --handle-height: ${size(24)};
             }
 
             :host([size="huge"]) {
                 --height: ${size(52)};
-                --input-padding-x: ${size(16)};
                 --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
                 --validation-font-size: ${size(16)};
-                --sub-height: ${size(28)};
+                --handle-height: ${size(28)};
             }
 
             :host([width="full"]) {
                 --display: flex;
-            }
-
-            :host([shape="square"]) {
-                --element-border-radius: 0;
-            }
-
-            :host([shape="pill"]) {
-                --element-border-radius: var(--shape-pill-radius);
             }
 
             :host([disabled]) {

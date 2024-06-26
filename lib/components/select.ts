@@ -142,8 +142,6 @@ export class Select extends LitElement {
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--input-font-weight);
 
-                --sub-height: ${size(20)};
-
                 --text-color-h: var(--input-text-color-h);
                 --text-color-s: var(--input-text-color-s);
                 --text-color-l: var(--input-text-color-l);
@@ -180,8 +178,6 @@ export class Select extends LitElement {
                 --outline-width: var(--input-outline-width);
 
                 --focus-outline-width: var(--input-focus-outline-width);
-
-                --validation-font-size: ${size(12)};
             }
 
             select {
@@ -236,17 +232,6 @@ export class Select extends LitElement {
                 );
             }
 
-            [part="validation-message"] {
-                padding-top: ${size(6)};
-                font-size: var(--validation-font-size);
-                color: hsl(
-                    var(--validation-border-color-h),
-                    var(--validation-border-color-s),
-                    var(--validation-border-color-l),
-                    var(--validation-border-color-a)
-                );
-            }
-
             [part="input-container"] {
                 position: relative;
                 display: flex;
@@ -262,25 +247,16 @@ export class Select extends LitElement {
                 border-width: var(--border-width);
                 border-style: solid;
                 border-color: hsla(
-                    var(--validation-border-color-h, var(--border-color-h)),
-                    var(--validation-border-color-s, var(--border-color-s)),
-                    var(--validation-border-color-l, var(--border-color-l)),
-                    var(--validation-border-color-a, var(--border-color-a))
+                    var(--border-color-h),
+                    var(--border-color-s),
+                    var(--border-color-l),
+                    var(--border-color-a)
                 );
                 outline: 0 solid
                     hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
+                        var(--primary-color-h),
+                        var(--primary-color-s),
+                        var(--primary-color-l),
                         0
                     );
                 box-shadow: var(--box-shadow);
@@ -331,24 +307,15 @@ export class Select extends LitElement {
 
             [part="input-container"]:focus-within {
                 border-color: hsl(
-                    var(--validation-border-color-h, var(--primary-color-h)),
-                    var(--validation-border-color-s, var(--primary-color-s)),
-                    var(--validation-border-color-l, var(--primary-color-l))
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l)
                 );
                 outline: var(--input-outline-width) solid
                     hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
+                        var(--primary-color-h),
+                        var(--primary-color-s),
+                        var(--primary-color-l),
                         var(--input-outline-opacity)
                     );
             }
@@ -359,8 +326,6 @@ export class Select extends LitElement {
                 --input-padding-x: ${size(10)};
                 --gap: ${size(4)};
                 --font-size: var(--font-size-small);
-                --validation-font-size: ${size(11)};
-                --sub-height: ${size(16)};
             }
 
             :host([size="large"]) {
@@ -369,8 +334,6 @@ export class Select extends LitElement {
                 --input-padding-x: ${size(14)};
                 --gap: ${size(8)};
                 --font-size: var(--font-size-large);
-                --validation-font-size: ${size(14)};
-                --sub-height: ${size(24)};
             }
 
             :host([size="huge"]) {
@@ -379,8 +342,6 @@ export class Select extends LitElement {
                 --input-padding-x: ${size(16)};
                 --gap: ${size(10)};
                 --font-size: var(--font-size-huge);
-                --validation-font-size: ${size(16)};
-                --sub-height: ${size(28)};
             }
 
             :host([width="full"]) {
