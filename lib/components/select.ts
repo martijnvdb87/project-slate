@@ -137,7 +137,13 @@ export class Select extends LitElement {
                     var(--default-accent-s),
                     var(--default-accent-l)
                 );
-                --icon-size: ${size(16)};
+                --icon-size: ${size(24)};
+                --icon-color: hsla(
+                    var(--input-text-color-h),
+                    var(--input-text-color-s),
+                    var(--input-text-color-l),
+                    var(--input-text-color-a)
+                );
                 --gap: ${size(6)};
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--input-font-weight);
