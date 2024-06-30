@@ -264,8 +264,6 @@ export class Input extends LitElement {
 
                 --outline-width: var(--input-outline-width);
 
-                --focus-outline-width: var(--input-focus-outline-width);
-
                 --validation-font-size: ${size(12)};
             }
 

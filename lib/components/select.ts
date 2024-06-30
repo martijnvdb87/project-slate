@@ -180,10 +180,6 @@ export class Select extends LitElement {
                 --border-color-s: var(--input-border-color-s);
                 --border-color-l: var(--input-border-color-l);
                 --border-color-a: var(--input-border-color-a);
-
-                --outline-width: var(--input-outline-width);
-
-                --focus-outline-width: var(--input-focus-outline-width);
             }
 
             select {

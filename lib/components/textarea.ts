@@ -154,10 +154,6 @@ export class Textarea extends LitElement {
                 --border-color-l: var(--input-border-color-l);
                 --border-color-a: var(--input-border-color-a);
 
-                --outline-width: var(--input-outline-width);
-
-                --focus-outline-width: var(--input-focus-outline-width);
-
                 --validation-font-size: ${size(12)};
             }
 

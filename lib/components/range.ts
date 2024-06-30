@@ -38,13 +38,13 @@ export class Range extends LitElement {
     protected inputAutofocus = false;
 
     @property({ type: Number })
-    protected min = null;
+    protected min = 0;
 
     @property({ type: Number })
-    protected max = null;
+    protected max = 100;
 
     @property({ type: Number })
-    protected step = null;
+    protected step = 1;
 
     @state()
     protected elementId = "";
@@ -79,26 +79,29 @@ export class Range extends LitElement {
                     for="${this.elementId}"
                     >${this.label}</label
                 >
+                <input
+                    ${ref(this.input)}
+                    id="${this.elementId}"
+                    name="${this.name}"
+                    part="input"
+                    type="range"
+                    .value="${this.value}"
+                    ?readonly="${this.readonly}"
+                    ?disabled="${this.disabled}"
+                    ?required="${this.required}"
+                    ?autofocus="${this.inputAutofocus}"
+                    min="${this.min}"
+                    max="${this.max}"
+                    step="${this.step}"
+                    @input="${this.handleInput}"
+                />
                 <div part="input-container">
-                    <input
-                        ${ref(this.input)}
-                        id="${this.elementId}"
-                        name="${this.name}"
-                        part="input"
-                        type="range"
-                        .value="${this.value}"
-                        ?readonly="${this.readonly}"
-                        ?disabled="${this.disabled}"
-                        ?required="${this.required}"
-                        ?autofocus="${this.inputAutofocus}"
-                        min="${this.min}"
-                        max="${this.max}"
-                        step="${this.step}"
-                        @input="${this.handleInput}"
-                    />
                     <div part="slider-container">
                         <div part="slider-filled"></div>
-                        <div part="slider-handle"></div>
+                        <div
+                            part="slider-handle"
+                            @pointerdown="${this.onHandlePointerDown}"
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -107,13 +110,54 @@ export class Range extends LitElement {
 
     protected handleInput(e: Event) {
         const target = e.target as HTMLInputElement;
-        this.value = target.value;
+        this.setValue(target.value);
+    }
+
+    protected setValue(value: string) {
+        this.value = value;
         this.internals.setFormValue(this.value);
+
+        const percent =
+            (parseFloat(this.value) - this.min) / (this.max - this.min);
 
         getPart(this, "main").style.setProperty(
             "--value-percent",
-            `${this.value}%`
+            `${percent}`
         );
+    }
+
+    protected onHandlePointerDown(e: Event) {
+        const onPointerMove = (e: PointerEvent) =>
+            this.onHandlePointerMove(e.clientX);
+
+        const onPointerUp = () =>
+            this.onHandlePointerUp(onPointerMove, onPointerUp);
+
+        window.addEventListener("pointermove", onPointerMove);
+        window.addEventListener("pointerup", onPointerUp);
+    }
+
+    protected onHandlePointerUp(
+        onPointerMove: (e: PointerEvent) => void,
+        onPointerUp: () => void
+    ) {
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+    }
+
+    protected onHandlePointerMove(startX: number) {
+        const container = getPart(this, "slider-container");
+        const containerRect = container.getBoundingClientRect();
+
+        const x = startX - containerRect.left;
+        const percent = Math.max(Math.min(x / containerRect.width, 1), 0);
+        const value = this.min + percent * (this.max - this.min);
+
+        this.setValue(value.toString());
+    }
+
+    protected firstUpdated() {
+        this.setValue(this.value);
     }
 
     public static styles = [
@@ -122,8 +166,9 @@ export class Range extends LitElement {
             :host {
                 display: var(--display);
                 vertical-align: bottom;
+                user-select: none;
 
-                --value-percent: 0%;
+                --value-percent: 0;
 
                 --display: inline-flex;
                 --height: ${size(36)};
@@ -158,13 +203,13 @@ export class Range extends LitElement {
                 --border-color-s: var(--input-border-color-s);
                 --border-color-l: var(--input-border-color-l);
                 --border-color-a: var(--input-border-color-a);
-
-                --outline-width: var(--input-outline-width);
-
-                --focus-outline-width: var(--input-focus-outline-width);
             }
 
             input {
+                pointer-events: none;
+                height: 0;
+                width: 0;
+                opacity: 0;
             }
 
             [part="main"] {
@@ -184,6 +229,11 @@ export class Range extends LitElement {
                     var(--label-color-l),
                     var(--label-color-a)
                 );
+            }
+
+            [part="input-container"] {
+                padding: ${size(4)} ${size(0)};
+                border-radius: 999rem;
             }
 
             [part="slider-container"] {
@@ -210,9 +260,22 @@ export class Range extends LitElement {
                 position: absolute;
                 top: calc(0px - var(--border-width));
                 left: calc(0px - var(--border-width));
-                right: calc(0px - var(--border-width));
                 height: var(--slider-height);
-                width: var(--value-percent);
+                width: calc(var(--value-percent) * 100%);
+
+                width: calc(
+                    var(--value-percent) * 100% -
+                        (var(--handle-height) * var(--value-percent)) +
+                        var(--slider-height) / 2
+                );
+                width: calc(
+                    (
+                            var(--value-percent) *
+                                (100% + var(--border-width) * 2) -
+                                (var(--handle-height) * var(--value-percent)) -
+                                var(--border-width)
+                        ) + var(--handle-height) / 2
+                );
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
@@ -228,12 +291,11 @@ export class Range extends LitElement {
                     var(--slider-height) / 2 - var(--handle-height) / 2 -
                         var(--border-width)
                 );
-                bottom: 0;
                 left: calc(
-                    var(--value-percent) - var(--handle-height) / 2 -
+                    var(--value-percent) * (100% + var(--border-width) * 2) -
+                        (var(--handle-height) * var(--value-percent)) -
                         var(--border-width)
                 );
-                right: 0;
                 height: var(--handle-height);
                 width: var(--handle-height);
                 background-color: hsla(
@@ -243,6 +305,25 @@ export class Range extends LitElement {
                     var(--primary-color-a)
                 );
                 border-radius: 999rem;
+            }
+
+            [part="input"]:focus-visible + [part="input-container"] {
+                border-color: hsl(
+                    var(--primary-color-h),
+                    var(--primary-color-s),
+                    var(--primary-color-l)
+                );
+                outline: calc(
+                        var(--input-outline-width) + var(--input-border-width)
+                    )
+                    solid
+                    hsla(
+                        var(--primary-color-h),
+                        var(--primary-color-s),
+                        var(--primary-color-l),
+                        var(--input-outline-opacity)
+                    );
+                outline-offset: ${size(2)};
             }
 
             :host([size="small"]) {

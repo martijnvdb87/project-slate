@@ -123,10 +123,6 @@ export class Input extends LitElement {
                 --font-size: var(--font-size-medium);
 
                 --checkbox-size: ${size(22)};
-
-                --outline-width: var(--input-outline-width);
-
-                --focus-outline-width: var(--input-focus-outline-width);
             }
 
             [part="main"] {
