@@ -215,6 +215,7 @@ export class Range extends LitElement {
             [part="main"] {
                 position: relative;
                 flex-grow: 1;
+                touch-action: pan-y;
             }
 
             [part="label"] {
@@ -289,13 +290,22 @@ export class Range extends LitElement {
                 position: absolute;
                 top: calc(
                     var(--slider-height) / 2 - var(--handle-height) / 2 -
-                        var(--border-width)
+                        var(--border-width) - ${size(8)}
                 );
                 left: calc(
                     var(--value-percent) * (100% + var(--border-width) * 2) -
                         (var(--handle-height) * var(--value-percent)) -
-                        var(--border-width)
+                        var(--border-width) - ${size(8)}
                 );
+                height: calc(var(--handle-height) + ${size(16)});
+                width: calc(var(--handle-height) + ${size(16)});
+                border-radius: 999rem;
+            }
+            [part="slider-handle"]::before {
+                content: "";
+                position: absolute;
+                top: ${size(8)};
+                left: ${size(8)};
                 height: var(--handle-height);
                 width: var(--handle-height);
                 background-color: hsla(
