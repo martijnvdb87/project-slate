@@ -20,6 +20,12 @@ export class Range extends LitElement {
     protected value = "";
 
     @state()
+    protected minValue = 0;
+
+    @state()
+    protected maxValue = 0;
+
+    @state()
     protected originalValue = "";
 
     @property({ type: String })
@@ -99,8 +105,14 @@ export class Range extends LitElement {
                     <div part="slider-container">
                         <div part="slider-filled"></div>
                         <div
-                            part="slider-handle"
-                            @pointerdown="${this.onHandlePointerDown}"
+                            part="slider-handle-min"
+                            @pointerdown="${(e: Event) =>
+                                this.onHandlePointerDown(e, "min")}"
+                        ></div>
+                        <div
+                            part="slider-handle-max"
+                            @pointerdown="${(e: Event) =>
+                                this.onHandlePointerDown(e, "max")}"
                         ></div>
                     </div>
                 </div>
@@ -113,7 +125,13 @@ export class Range extends LitElement {
         this.setValue(target.value);
     }
 
-    protected setValue(value: string) {
+    protected setValue(value: string, type: "min" | "max" = "max") {
+        if (type === "min") {
+            this.minValue = parseFloat(value);
+        } else {
+            this.maxValue = parseFloat(value);
+        }
+
         this.value = value;
         this.internals.setFormValue(this.value);
 
@@ -121,14 +139,14 @@ export class Range extends LitElement {
             (parseFloat(this.value) - this.min) / (this.max - this.min);
 
         getPart(this, "main").style.setProperty(
-            "--value-percent",
+            `--value-percent-${type}`,
             `${percent}`
         );
     }
 
-    protected onHandlePointerDown(e: Event) {
+    protected onHandlePointerDown(e: Event, type: "min" | "max") {
         const onPointerMove = (e: PointerEvent) =>
-            this.onHandlePointerMove(e.clientX);
+            this.onHandlePointerMove(e.clientX, type);
 
         const onPointerUp = () =>
             this.onHandlePointerUp(onPointerMove, onPointerUp);
@@ -145,7 +163,7 @@ export class Range extends LitElement {
         window.removeEventListener("pointerup", onPointerUp);
     }
 
-    protected onHandlePointerMove(startX: number) {
+    protected onHandlePointerMove(startX: number, type: "min" | "max") {
         const container = getPart(this, "slider-container");
         const containerRect = container.getBoundingClientRect();
 
@@ -153,7 +171,23 @@ export class Range extends LitElement {
         const percent = Math.max(Math.min(x / containerRect.width, 1), 0);
         const value = this.min + percent * (this.max - this.min);
 
-        this.setValue(value.toString());
+        if (type === "min" && value > this.maxValue) {
+            type = "max";
+        }
+
+        if (type === "max" && value < this.minValue) {
+            type = "min";
+        }
+
+        console.log(type);
+
+        if (type === "min") {
+            this.minValue = value;
+        } else {
+            this.maxValue = value;
+        }
+
+        this.setValue(value.toString(), type);
     }
 
     protected firstUpdated() {
@@ -168,7 +202,8 @@ export class Range extends LitElement {
                 vertical-align: bottom;
                 user-select: none;
 
-                --value-percent: 0;
+                --value-percent-min: 0;
+                --value-percent-max: 0;
 
                 --display: inline-flex;
                 --height: ${size(36)};
@@ -261,20 +296,25 @@ export class Range extends LitElement {
                 position: absolute;
                 top: calc(0px - var(--border-width));
                 left: calc(0px - var(--border-width));
-                height: var(--slider-height);
-                width: calc(var(--value-percent) * 100%);
-
-                width: calc(
-                    var(--value-percent) * 100% -
-                        (var(--handle-height) * var(--value-percent)) +
-                        var(--slider-height) / 2
+                left: calc(
+                    var(--value-percent-min) * (100% + var(--border-width) * 2) -
+                        (var(--handle-height) * var(--value-percent-min)) -
+                        var(--border-width)
                 );
+                height: var(--slider-height);
                 width: calc(
                     (
-                            var(--value-percent) *
-                                (100% + var(--border-width) * 2) -
-                                (var(--handle-height) * var(--value-percent)) -
-                                var(--border-width)
+                            (
+                                    var(--value-percent-max) -
+                                        var(--value-percent-min)
+                                ) * (100% + var(--border-width) * 2) -
+                                (
+                                    var(--handle-height) *
+                                        (
+                                            var(--value-percent-max) -
+                                                var(--value-percent-min)
+                                        )
+                                ) - var(--border-width)
                         ) + var(--handle-height) / 2
                 );
                 background-color: hsla(
@@ -286,22 +326,36 @@ export class Range extends LitElement {
                 border-radius: 999rem 0 0 999rem;
             }
 
-            [part="slider-handle"] {
+            [part="slider-handle-min"],
+            [part="slider-handle-max"] {
                 position: absolute;
                 top: calc(
                     var(--slider-height) / 2 - var(--handle-height) / 2 -
-                        var(--border-width) - ${size(8)}
-                );
-                left: calc(
-                    var(--value-percent) * (100% + var(--border-width) * 2) -
-                        (var(--handle-height) * var(--value-percent)) -
                         var(--border-width) - ${size(8)}
                 );
                 height: calc(var(--handle-height) + ${size(16)});
                 width: calc(var(--handle-height) + ${size(16)});
                 border-radius: 999rem;
             }
-            [part="slider-handle"]::before {
+
+            [part="slider-handle-min"] {
+                left: calc(
+                    var(--value-percent-min) * (100% + var(--border-width) * 2) -
+                        (var(--handle-height) * var(--value-percent-min)) -
+                        var(--border-width) - ${size(8)}
+                );
+            }
+
+            [part="slider-handle-max"] {
+                left: calc(
+                    var(--value-percent-max) * (100% + var(--border-width) * 2) -
+                        (var(--handle-height) * var(--value-percent-max)) -
+                        var(--border-width) - ${size(8)}
+                );
+            }
+
+            [part="slider-handle-min"]::before,
+            [part="slider-handle-max"]::before {
                 content: "";
                 position: absolute;
                 top: ${size(8)};
