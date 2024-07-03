@@ -129,6 +129,10 @@ export class Range extends LitElement {
     }
 
     protected setValue(value: string) {
+        if (this.activeHandle === null) {
+            return;
+        }
+
         if (this.activeHandle === "min") {
             this.minValue = parseFloat(value);
         } else {
