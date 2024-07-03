@@ -60,6 +60,9 @@ export class Range extends LitElement {
 
     protected static formAssociated = true;
 
+    @state()
+    protected activeHandle: "min" | "max" | null = null;
+
     public constructor() {
         super();
 
@@ -125,8 +128,8 @@ export class Range extends LitElement {
         this.setValue(target.value);
     }
 
-    protected setValue(value: string, type: "min" | "max" = "max") {
-        if (type === "min") {
+    protected setValue(value: string) {
+        if (this.activeHandle === "min") {
             this.minValue = parseFloat(value);
         } else {
             this.maxValue = parseFloat(value);
@@ -139,14 +142,16 @@ export class Range extends LitElement {
             (parseFloat(this.value) - this.min) / (this.max - this.min);
 
         getPart(this, "main").style.setProperty(
-            `--value-percent-${type}`,
+            `--value-percent-${this.activeHandle}`,
             `${percent}`
         );
     }
 
     protected onHandlePointerDown(e: Event, type: "min" | "max") {
+        this.activeHandle = type;
+
         const onPointerMove = (e: PointerEvent) =>
-            this.onHandlePointerMove(e.clientX, type);
+            this.onHandlePointerMove(e.clientX);
 
         const onPointerUp = () =>
             this.onHandlePointerUp(onPointerMove, onPointerUp);
@@ -161,9 +166,11 @@ export class Range extends LitElement {
     ) {
         window.removeEventListener("pointermove", onPointerMove);
         window.removeEventListener("pointerup", onPointerUp);
+
+        this.activeHandle = null;
     }
 
-    protected onHandlePointerMove(startX: number, type: "min" | "max") {
+    protected onHandlePointerMove(startX: number) {
         const container = getPart(this, "slider-container");
         const containerRect = container.getBoundingClientRect();
 
@@ -171,23 +178,21 @@ export class Range extends LitElement {
         const percent = Math.max(Math.min(x / containerRect.width, 1), 0);
         const value = this.min + percent * (this.max - this.min);
 
-        if (type === "min" && value > this.maxValue) {
-            type = "max";
+        if (value < this.minValue) {
+            if (this.activeHandle === "max") {
+                this.setValue(this.minValue.toString());
+            }
+
+            this.activeHandle = "min";
+        } else if (value >= this.maxValue) {
+            if (this.activeHandle === "min") {
+                this.setValue(this.maxValue.toString());
+            }
+
+            this.activeHandle = "max";
         }
 
-        if (type === "max" && value < this.minValue) {
-            type = "min";
-        }
-
-        console.log(type);
-
-        if (type === "min") {
-            this.minValue = value;
-        } else {
-            this.maxValue = value;
-        }
-
-        this.setValue(value.toString(), type);
+        this.setValue(value.toString());
     }
 
     protected firstUpdated() {
