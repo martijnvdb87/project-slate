@@ -86,7 +86,7 @@ export class Range extends LitElement {
 
     protected render() {
         return html`
-            <div ${ref(this.root)} part="main">
+            <div ${ref(this.root)} part="main" class="type-${this.type}">
                 <label
                     ?hidden="${this.label === null}"
                     part="label"
@@ -315,28 +315,7 @@ export class Range extends LitElement {
             [part="slider-filled"] {
                 position: absolute;
                 top: calc(0px - var(--border-width));
-                left: calc(0px - var(--border-width));
-                left: calc(
-                    var(--value-percent-min) * (100% + var(--border-width) * 2) -
-                        (var(--handle-height) * var(--value-percent-min)) -
-                        var(--border-width)
-                );
                 height: var(--slider-height);
-                width: calc(
-                    (
-                            (
-                                    var(--value-percent-max) -
-                                        var(--value-percent-min)
-                                ) * (100% + var(--border-width) * 2) -
-                                (
-                                    var(--handle-height) *
-                                        (
-                                            var(--value-percent-max) -
-                                                var(--value-percent-min)
-                                        )
-                                ) - var(--border-width)
-                        ) + var(--handle-height) / 2
-                );
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
@@ -344,6 +323,33 @@ export class Range extends LitElement {
                     1
                 );
                 border-radius: 999rem 0 0 999rem;
+            }
+
+            .type-single [part="slider-filled"] {
+                left: calc(
+                    var(--value-percent-min) *
+                        (100% - var(--handle-height) + var(--border-width) * 2) -
+                        var(--border-width)
+                );
+                width: calc(
+                    (var(--value-percent-max) - var(--value-percent-min)) *
+                        (100% - var(--handle-height) + var(--border-width) * 2) +
+                        var(--handle-height) / 2
+                );
+                border-radius: 999rem 0 0 999rem;
+            }
+
+            .type-multiple [part="slider-filled"] {
+                left: calc(
+                    var(--value-percent-min) *
+                        (100% - var(--handle-height) + var(--border-width) * 2) -
+                        var(--border-width) + var(--handle-height) / 2
+                );
+                width: calc(
+                    (var(--value-percent-max) - var(--value-percent-min)) *
+                        (100% - var(--handle-height) + var(--border-width) * 2)
+                );
+                border-radius: 0;
             }
 
             [part="slider-handle-min"],
