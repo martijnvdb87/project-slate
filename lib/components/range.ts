@@ -140,6 +140,8 @@ export class Range extends LitElement {
             return;
         }
 
+        value = String(Math.round(parseFloat(value) / this.step) * this.step);
+
         if (this.activeHandle === "min") {
             this.minValue = parseFloat(value);
         } else {
