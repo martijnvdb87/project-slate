@@ -14,9 +14,6 @@ export class Range extends LitElement {
     protected name = null;
 
     @property({ type: String })
-    protected type = "single";
-
-    @property({ type: String })
     protected value = "";
 
     @state()
@@ -53,6 +50,9 @@ export class Range extends LitElement {
     protected step = 1;
 
     @state()
+    protected type: "single" | "multiple" = "single";
+
+    @state()
     protected elementId = "";
 
     @state()
@@ -61,15 +61,20 @@ export class Range extends LitElement {
     protected static formAssociated = true;
 
     @state()
-    protected activeHandle: "min" | "max" | null = null;
+    protected activeHandle: "min" | "max" | null = "max";
 
     public constructor() {
         super();
 
-        this.originalValue = this.getAttribute("value") ?? "";
+        const value = this.getAttribute("value") ?? "";
+
+        this.type = value.includes(",") ? "multiple" : "single";
+
+        this.originalValue = value;
+        this.value = value;
 
         this.internals = this.attachInternals();
-        this.internals.setFormValue(this.value);
+        this.internals.setFormValue(value);
 
         this.elementId = getRandomId();
     }
@@ -107,11 +112,13 @@ export class Range extends LitElement {
                 <div part="input-container">
                     <div part="slider-container">
                         <div part="slider-filled"></div>
-                        <div
-                            part="slider-handle-min"
-                            @pointerdown="${(e: Event) =>
-                                this.onHandlePointerDown(e, "min")}"
-                        ></div>
+                        ${this.type === "multiple"
+                            ? html` <div
+                                  part="slider-handle-min"
+                                  @pointerdown="${(e: Event) =>
+                                      this.onHandlePointerDown(e, "min")}"
+                              ></div>`
+                            : html``}
                         <div
                             part="slider-handle-max"
                             @pointerdown="${(e: Event) =>
@@ -139,11 +146,15 @@ export class Range extends LitElement {
             this.maxValue = parseFloat(value);
         }
 
-        this.value = value;
+        if (this.type === "multiple") {
+            this.value = `${this.minValue},${this.maxValue}`;
+        } else {
+            this.value = value;
+        }
+
         this.internals.setFormValue(this.value);
 
-        const percent =
-            (parseFloat(this.value) - this.min) / (this.max - this.min);
+        const percent = (parseFloat(value) - this.min) / (this.max - this.min);
 
         getPart(this, "main").style.setProperty(
             `--value-percent-${this.activeHandle}`,
