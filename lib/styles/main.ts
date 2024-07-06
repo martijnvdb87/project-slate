@@ -119,6 +119,8 @@ export const main = css`
         --input-outline-opacity: 1;
 
         --input-validation-message-font-weight: 350;
+
+        --input-range-slider-filled-color-l-modifier: 15%;
     }
 
     :host [hidden] {

@@ -372,7 +372,10 @@ export class Range extends LitElement {
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
-                    calc(var(--primary-color-l) + 15%),
+                    calc(
+                        var(--primary-color-l) +
+                            var(--input-range-slider-filled-color-l-modifier)
+                    ),
                     1
                 );
                 border-radius: 999rem 0 0 999rem;

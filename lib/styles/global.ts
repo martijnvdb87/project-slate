@@ -38,6 +38,8 @@ const themeDark = css`
 
     --box-shadow: rgba(0, 0, 0, 0.2) ${size(0)} ${size(2)} ${size(4)},
         rgba(0, 0, 0, 0.1) ${size(0)} ${size(1)} ${size(1)};
+
+    --input-range-slider-filled-color-l-modifier: -10%;
 `;
 
 export const global = css`
