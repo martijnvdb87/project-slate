@@ -63,6 +63,9 @@ export class Range extends LitElement {
     @state()
     protected activeHandle: "min" | "max" | null = "max";
 
+    @state()
+    protected showFocusVisual = false;
+
     public constructor() {
         super();
 
@@ -85,40 +88,65 @@ export class Range extends LitElement {
     }
 
     protected render() {
+        const classes = [`type-${this.type}`];
+
+        if (this.showFocusVisual) {
+            classes.push("show-focus-visual");
+        }
+
         return html`
-            <div ${ref(this.root)} part="main" class="type-${this.type}">
+            <div ${ref(this.root)} part="main" class="${classes.join(" ")}">
                 <label
                     ?hidden="${this.label === null}"
                     part="label"
                     for="${this.elementId}"
                     >${this.label}</label
                 >
-                <input
-                    ${ref(this.input)}
-                    id="${this.elementId}"
-                    name="${this.name}"
-                    part="input"
-                    type="range"
-                    .value="${this.value}"
-                    ?readonly="${this.readonly}"
-                    ?disabled="${this.disabled}"
-                    ?required="${this.required}"
-                    ?autofocus="${this.inputAutofocus}"
-                    min="${this.min}"
-                    max="${this.max}"
-                    step="${this.step}"
-                    @input="${this.handleInput}"
-                />
                 <div part="input-container">
                     <div part="slider-container">
                         <div part="slider-filled"></div>
                         ${this.type === "multiple"
-                            ? html` <div
-                                  part="slider-handle-min"
-                                  @pointerdown="${(e: Event) =>
-                                      this.onHandlePointerDown(e, "min")}"
-                              ></div>`
+                            ? html` <input
+                                      ${ref(this.input)}
+                                      id="${this.elementId}-min"
+                                      name="${this.name}-min"
+                                      part="input-min"
+                                      type="range"
+                                      .value="${this.minValue}"
+                                      ?readonly="${this.readonly}"
+                                      ?disabled="${this.disabled}"
+                                      ?required="${this.required}"
+                                      min="${this.min}"
+                                      max="${this.max}"
+                                      step="${this.step}"
+                                      @input="${(e: Event) =>
+                                          this.handleInput(e, "min")}"
+                                      @focus="${() =>
+                                          (this.showFocusVisual = true)}"
+                                  />
+                                  <div
+                                      part="slider-handle-min"
+                                      @pointerdown="${(e: Event) =>
+                                          this.onHandlePointerDown(e, "min")}"
+                                  ></div>`
                             : html``}
+                        <input
+                            ${ref(this.input)}
+                            id="${this.elementId}-max"
+                            name="${this.name}-max"
+                            part="input-max"
+                            type="range"
+                            .value="${this.maxValue}"
+                            ?readonly="${this.readonly}"
+                            ?disabled="${this.disabled}"
+                            ?required="${this.required}"
+                            ?autofocus="${this.inputAutofocus}"
+                            min="${this.min}"
+                            max="${this.max}"
+                            step="${this.step}"
+                            @input="${(e: Event) => this.handleInput(e, "max")}"
+                            @focus="${() => (this.showFocusVisual = true)}"
+                        />
                         <div
                             part="slider-handle-max"
                             @pointerdown="${(e: Event) =>
@@ -130,9 +158,30 @@ export class Range extends LitElement {
         `;
     }
 
-    protected handleInput(e: Event) {
+    protected handleInput(e: Event, type: "min" | "max") {
+        this.showFocusVisual = true;
+
+        const value = parseFloat((e.target as HTMLInputElement).value);
+
+        const newType = (() => {
+            if (type === "max" && value < this.minValue) {
+                this.setValue(this.minValue.toString());
+                return "min";
+            } else if (type === "min" && value > this.maxValue) {
+                this.setValue(this.maxValue.toString());
+                return "max";
+            }
+
+            return type;
+        })();
+
+        this.activeHandle = newType;
         const target = e.target as HTMLInputElement;
         this.setValue(target.value);
+
+        if (type !== newType) {
+            getPart(this, "input-" + newType)?.focus();
+        }
     }
 
     protected setValue(value: string) {
@@ -183,7 +232,9 @@ export class Range extends LitElement {
     ) {
         window.removeEventListener("pointermove", onPointerMove);
         window.removeEventListener("pointerup", onPointerUp);
+        getPart(this, "input-" + this.activeHandle)?.focus();
 
+        this.showFocusVisual = false;
         this.activeHandle = null;
     }
 
@@ -399,12 +450,8 @@ export class Range extends LitElement {
                 border-radius: 999rem;
             }
 
-            [part="input"]:focus-visible + [part="input-container"] {
-                border-color: hsl(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l)
-                );
+            .show-focus-visual [part="input-min"]:focus-visible + div,
+            .show-focus-visual [part="input-max"]:focus-visible + div {
                 outline: calc(
                         var(--input-outline-width) + var(--input-border-width)
                     )
@@ -415,7 +462,7 @@ export class Range extends LitElement {
                         var(--primary-color-l),
                         var(--input-outline-opacity)
                     );
-                outline-offset: ${size(2)};
+                outline-offset: ${size(-6)};
             }
 
             :host([size="small"]) {
