@@ -123,7 +123,6 @@ export class Button extends LitElement {
                 --outline-colored-offset: ${size(2)};
 
                 --outline-width: var(--input-outline-width);
-                --shadow: none;
             }
 
             button {
@@ -169,7 +168,6 @@ export class Button extends LitElement {
                     );
                 outline-offset: var(--outline-offset);
                 transition: background 120ms ease-in-out;
-                box-shadow: var(--shadow);
             }
 
             button:hover {
@@ -250,7 +248,6 @@ export class Button extends LitElement {
                     var(--input-outline-width) + var(--input-border-width)
                 );
                 --outline-offset: var(--outline-colored-offset);
-                --shadow: var(--box-shadow);
             }
 
             :host([type="secondary"]) {
@@ -279,7 +276,6 @@ export class Button extends LitElement {
                     var(--input-outline-width) + var(--input-border-width)
                 );
                 --outline-offset: var(--outline-colored-offset);
-                --shadow: var(--box-shadow);
             }
 
             :host([type="ghost"]) {
@@ -289,7 +285,6 @@ export class Button extends LitElement {
                 --border-color-s: var(--input-border-color-s);
                 --border-color-l: var(--input-border-color-l);
                 --border-color-a: var(--input-border-color-a);
-                --shadow: var(--box-shadow);
             }
 
             :host([type="ghost"]) button:hover {

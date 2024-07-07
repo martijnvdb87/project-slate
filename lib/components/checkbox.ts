@@ -222,7 +222,6 @@ export class Input extends LitElement {
                         0
                     );
                 outline-offset: ${size(2)};
-                box-shadow: var(--box-shadow);
             }
 
             [part="icon"] {

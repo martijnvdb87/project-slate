@@ -34,9 +34,6 @@ export const main = css`
 
         --shape-pill-radius: ${size(960)};
 
-        --box-shadow: rgba(0, 0, 0, 0.05) ${size(0)} ${size(2)} ${size(4)},
-            rgba(0, 0, 0, 0.025) ${size(0)} ${size(1)} ${size(1)};
-
         --default-color-h: var(--primary-color-h);
         --default-color-s: 10%;
         --default-color-l: 92%;

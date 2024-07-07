@@ -261,7 +261,6 @@ export class Select extends LitElement {
                         var(--primary-color-l),
                         0
                     );
-                box-shadow: var(--box-shadow);
             }
 
             [part="value-container"] {

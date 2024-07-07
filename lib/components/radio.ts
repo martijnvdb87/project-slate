@@ -211,7 +211,6 @@ export class Radio extends LitElement {
                         0
                     );
                 outline-offset: ${size(2)};
-                box-shadow: var(--box-shadow);
             }
 
             [part="input-container"]::after {
@@ -227,7 +226,6 @@ export class Radio extends LitElement {
                     var(--input-background-color-a)
                 );
                 opacity: 0;
-                box-shadow: var(--box-shadow);
             }
 
             [part="input"]:checked + [part="input-container"]::after {

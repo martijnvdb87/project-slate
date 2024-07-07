@@ -209,7 +209,6 @@ export class Switch extends LitElement {
                     var(--input-background-color-l),
                     var(--input-background-color-a)
                 );
-                box-shadow: var(--box-shadow);
                 transition: background-color 160ms ease;
             }
 

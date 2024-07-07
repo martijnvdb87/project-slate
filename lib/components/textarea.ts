@@ -254,7 +254,6 @@ export class Textarea extends LitElement {
                         ),
                         0
                     );
-                box-shadow: var(--box-shadow);
             }
 
             [part="input-inner-container"] {
