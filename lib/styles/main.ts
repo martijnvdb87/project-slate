@@ -25,7 +25,7 @@ export const main = css`
         --text-color-l: 25%;
         --text-color-a: 1;
 
-        --text-line-height: 1.6;
+        --text-line-height: 1.5;
 
         --font-size-small: ${size(12)};
         --font-size-medium: ${size(14)};
