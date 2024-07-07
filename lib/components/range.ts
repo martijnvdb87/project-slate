@@ -279,10 +279,6 @@ export class Range extends LitElement {
                 --value-percent-max: 0;
 
                 --display: inline-flex;
-                --height: ${size(36)};
-                --gap: ${size(6)};
-                --font-size: var(--font-size-medium);
-                --font-weight: var(--input-font-weight);
 
                 --handle-height: ${size(20)};
                 --slider-height: ${size(10)};
@@ -469,25 +465,22 @@ export class Range extends LitElement {
             }
 
             :host([size="small"]) {
-                --height: ${size(28)};
-                --gap: ${size(4)};
-                --font-size: var(--font-size-small);
+                --handle-height: ${size(16)};
+                --slider-height: ${size(8)};
                 --validation-font-size: ${size(11)};
                 --handle-height: ${size(16)};
             }
 
             :host([size="large"]) {
-                --height: ${size(44)};
-                --gap: ${size(8)};
-                --font-size: var(--font-size-large);
+                --handle-height: ${size(24)};
+                --slider-height: ${size(12)};
                 --validation-font-size: ${size(14)};
                 --handle-height: ${size(24)};
             }
 
             :host([size="huge"]) {
-                --height: ${size(52)};
-                --gap: ${size(10)};
-                --font-size: var(--font-size-huge);
+                --handle-height: ${size(28)};
+                --slider-height: ${size(14)};
                 --validation-font-size: ${size(16)};
                 --handle-height: ${size(28)};
             }

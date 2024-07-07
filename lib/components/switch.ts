@@ -268,17 +268,17 @@ export class Switch extends LitElement {
 
             :host([size="small"]) {
                 --font-size: var(--font-size-small);
-                --handle-size: ${size(18)};
+                --handle-size: ${size(16)};
             }
 
             :host([size="large"]) {
                 --font-size: var(--font-size-large);
-                --handle-size: ${size(26)};
+                --handle-size: ${size(24)};
             }
 
             :host([size="huge"]) {
                 --font-size: var(--font-size-huge);
-                --handle-size: ${size(30)};
+                --handle-size: ${size(28)};
             }
 
             :host([disabled]) {
