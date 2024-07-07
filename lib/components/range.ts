@@ -285,7 +285,7 @@ export class Range extends LitElement {
                 --font-weight: var(--input-font-weight);
 
                 --handle-height: ${size(20)};
-                --slider-height: ${size(12)};
+                --slider-height: ${size(10)};
 
                 --text-color-h: var(--input-text-color-h);
                 --text-color-s: var(--input-text-color-s);

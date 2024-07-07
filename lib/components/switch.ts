@@ -103,7 +103,7 @@ export class Switch extends LitElement {
 
                 --font-size: var(--font-size-medium);
 
-                --handle-size: ${size(22)};
+                --handle-size: ${size(20)};
             }
 
             [part="main"] {

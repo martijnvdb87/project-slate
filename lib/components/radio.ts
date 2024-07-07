@@ -121,7 +121,8 @@ export class Radio extends LitElement {
 
                 --font-size: var(--font-size-medium);
 
-                --radio-size: ${size(22)};
+                --radio-size: ${size(20)};
+                --radio-inner-size: ${size(8)};
             }
 
             [part="main"] {
@@ -216,8 +217,8 @@ export class Radio extends LitElement {
             [part="input-container"]::after {
                 content: "";
                 display: block;
-                width: 40%;
-                height: 40%;
+                width: var(--radio-inner-size);
+                height: var(--radio-inner-size);
                 border-radius: 999rem;
                 background-color: hsla(
                     var(--input-background-color-h),
@@ -266,17 +267,20 @@ export class Radio extends LitElement {
 
             :host([size="small"]) {
                 --font-size: var(--font-size-small);
-                --radio-size: ${size(18)};
+                --radio-size: ${size(16)};
+                --radio-inner-size: ${size(6)};
             }
 
             :host([size="large"]) {
                 --font-size: var(--font-size-large);
-                --radio-size: ${size(26)};
+                --radio-size: ${size(24)};
+                --radio-inner-size: ${size(10)};
             }
 
             :host([size="huge"]) {
                 --font-size: var(--font-size-huge);
-                --radio-size: ${size(30)};
+                --radio-size: ${size(28)};
+                --radio-inner-size: ${size(12)};
             }
 
             :host([disabled]) {

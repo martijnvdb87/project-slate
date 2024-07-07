@@ -122,7 +122,7 @@ export class Input extends LitElement {
 
                 --font-size: var(--font-size-medium);
 
-                --checkbox-size: ${size(22)};
+                --checkbox-size: ${size(20)};
             }
 
             [part="main"] {
