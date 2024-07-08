@@ -17,6 +17,12 @@ export class Range extends LitElement {
     protected value = "";
 
     @state()
+    protected minPercent = 0;
+
+    @state()
+    protected maxPercent = 0;
+
+    @state()
     protected minValue = 0;
 
     @state()
@@ -71,8 +77,6 @@ export class Range extends LitElement {
 
         const value = this.getAttribute("value") ?? "";
 
-        this.type = value.includes(",") ? "multiple" : "single";
-
         this.originalValue = value;
         this.value = value;
 
@@ -87,15 +91,65 @@ export class Range extends LitElement {
         this.internals.setFormValue(this.value);
     }
 
+    protected getMinMaxValues(value: string) {
+        if (this.getSingleOrMultiple(value) === "multiple") {
+            const [min, max] = value.split(",");
+            return [parseFloat(min), parseFloat(max)];
+        }
+
+        return [this.min, parseFloat(value)];
+    }
+
+    protected getSingleOrMultiple(value: string) {
+        return value.split(",").length === 1 ? "single" : "multiple";
+    }
+
+    protected rendeHandles(minValue: number, maxValue: number) {
+        this.minPercent = this.getPercent(minValue);
+        this.maxPercent = this.getPercent(maxValue);
+
+        // console.log(minPercent, maxPercent);
+
+        // getPart(this, "main")?.style.setProperty(
+        //     `--value-percent-min`,
+        //     `${minPercent}`
+        // );
+
+        // getPart(this, "main")?.style.setProperty(
+        //     `--value-percent-max`,
+        //     `${maxPercent}`
+        // );
+    }
+
+    protected getPercent(value: number) {
+        return (value - this.min) / (this.max - this.min);
+    }
+
+    protected updateValue(value: string) {
+        this.value = value;
+        this.internals.setFormValue(value);
+
+        const [minValue, maxValue] = this.getMinMaxValues(value);
+        this.rendeHandles(minValue, maxValue);
+    }
+
     protected render() {
-        const classes = [`type-${this.type}`];
+        this.updateValue(this.value);
+        const [minValue, maxValue] = this.getMinMaxValues(this.value);
+        const classes = [`type-${this.getSingleOrMultiple(this.value)}`];
 
         if (this.showFocusVisual) {
             classes.push("show-focus-visual");
         }
 
         return html`
-            <div ${ref(this.root)} part="main" class="${classes.join(" ")}">
+            <div
+                ${ref(this.root)}
+                part="main"
+                class="${classes.join(" ")}"
+                style="--value-percent-min: ${this
+                    .minPercent}; --value-percent-max: ${this.maxPercent};"
+            >
                 <label
                     ?hidden="${this.label === null}"
                     part="label"
@@ -105,14 +159,14 @@ export class Range extends LitElement {
                 <div part="input-container">
                     <div part="slider-container">
                         <div part="slider-filled"></div>
-                        ${this.type === "multiple"
+                        ${this.getSingleOrMultiple(this.value) === "multiple"
                             ? html` <input
                                       ${ref(this.input)}
                                       id="${this.elementId}-min"
                                       name="${this.name}-min"
                                       part="input-min"
                                       type="range"
-                                      .value="${this.minValue}"
+                                      .value="${minValue}"
                                       ?readonly="${this.readonly}"
                                       ?disabled="${this.disabled}"
                                       ?required="${this.required}"
@@ -136,7 +190,7 @@ export class Range extends LitElement {
                             name="${this.name}-max"
                             part="input-max"
                             type="range"
-                            .value="${this.maxValue}"
+                            .value="${maxValue}"
                             ?readonly="${this.readonly}"
                             ?disabled="${this.disabled}"
                             ?required="${this.required}"
@@ -159,28 +213,32 @@ export class Range extends LitElement {
     }
 
     protected handleInput(e: Event, type: "min" | "max") {
+        const value = parseFloat((e.target as HTMLInputElement).value);
+        console.log(value);
+
         this.showFocusVisual = true;
 
-        const value = parseFloat((e.target as HTMLInputElement).value);
+        if (this.getSingleOrMultiple(this.value) === "single") {
+            this.updateValue(`${value}`);
+            return;
+        }
 
-        const newType = (() => {
-            if (type === "max" && value < this.minValue) {
-                this.setValue(this.minValue.toString());
-                return "min";
-            } else if (type === "min" && value > this.maxValue) {
-                this.setValue(this.maxValue.toString());
-                return "max";
-            }
+        this.updateRenderedValue(value, type);
+    }
 
-            return type;
-        })();
+    protected updateRenderedValue(value: number, type: "min" | "max") {
+        const [minValue, maxValue] = this.getMinMaxValues(this.value);
 
-        this.activeHandle = newType;
-        const target = e.target as HTMLInputElement;
-        this.setValue(target.value);
-
-        if (type !== newType) {
-            getPart(this, "input-" + newType)?.focus();
+        if (type === "min" && value > maxValue) {
+            this.updateValue(`${maxValue},${value}`);
+            getPart(this, "input-max")?.focus();
+        } else if (type === "max" && value < minValue) {
+            this.updateValue(`${value},${minValue}`);
+            getPart(this, "input-min")?.focus();
+        } else if (type === "min") {
+            this.updateValue(`${value},${maxValue}`);
+        } else if (type === "max") {
+            this.updateValue(`${minValue},${value}`);
         }
     }
 
@@ -197,7 +255,7 @@ export class Range extends LitElement {
             this.maxValue = parseFloat(value);
         }
 
-        if (this.type === "multiple") {
+        if (this.getSingleOrMultiple(this.value) === "multiple") {
             this.value = `${this.minValue},${this.maxValue}`;
         } else {
             this.value = value;
@@ -239,6 +297,10 @@ export class Range extends LitElement {
     }
 
     protected onHandlePointerMove(startX: number) {
+        if (!this.activeHandle) {
+            return;
+        }
+
         const container = getPart(this, "slider-container");
         const containerRect = container.getBoundingClientRect();
 
@@ -246,25 +308,27 @@ export class Range extends LitElement {
         const percent = Math.max(Math.min(x / containerRect.width, 1), 0);
         const value = this.min + percent * (this.max - this.min);
 
-        if (value < this.minValue) {
-            if (this.activeHandle === "max") {
-                this.setValue(this.minValue.toString());
-            }
+        this.updateRenderedValue(value, this.activeHandle);
 
-            this.activeHandle = "min";
-        } else if (value >= this.maxValue) {
-            if (this.activeHandle === "min") {
-                this.setValue(this.maxValue.toString());
-            }
+        // if (value < this.minValue) {
+        //     if (this.activeHandle === "max") {
+        //         this.setValue(this.minValue.toString());
+        //     }
 
-            this.activeHandle = "max";
-        }
+        //     this.activeHandle = "min";
+        // } else if (value >= this.maxValue) {
+        //     if (this.activeHandle === "min") {
+        //         this.setValue(this.maxValue.toString());
+        //     }
 
-        this.setValue(value.toString());
+        //     this.activeHandle = "max";
+        // }
+
+        // this.setValue(value.toString());
     }
 
     protected firstUpdated() {
-        this.setValue(this.value);
+        // this.setValue(this.value);
     }
 
     public static styles = [
