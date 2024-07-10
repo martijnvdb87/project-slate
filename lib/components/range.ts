@@ -107,18 +107,6 @@ export class Range extends LitElement {
     protected rendeHandles(minValue: number, maxValue: number) {
         this.minPercent = this.getPercent(minValue);
         this.maxPercent = this.getPercent(maxValue);
-
-        // console.log(minPercent, maxPercent);
-
-        // getPart(this, "main")?.style.setProperty(
-        //     `--value-percent-min`,
-        //     `${minPercent}`
-        // );
-
-        // getPart(this, "main")?.style.setProperty(
-        //     `--value-percent-max`,
-        //     `${maxPercent}`
-        // );
     }
 
     protected getPercent(value: number) {
@@ -180,8 +168,8 @@ export class Range extends LitElement {
                                   />
                                   <div
                                       part="slider-handle-min"
-                                      @pointerdown="${(e: Event) =>
-                                          this.onHandlePointerDown(e, "min")}"
+                                      @pointerdown="${() =>
+                                          this.onHandlePointerDown("min")}"
                                   ></div>`
                             : html``}
                         <input
@@ -203,8 +191,8 @@ export class Range extends LitElement {
                         />
                         <div
                             part="slider-handle-max"
-                            @pointerdown="${(e: Event) =>
-                                this.onHandlePointerDown(e, "max")}"
+                            @pointerdown="${() =>
+                                this.onHandlePointerDown("max")}"
                         ></div>
                     </div>
                 </div>
@@ -213,65 +201,51 @@ export class Range extends LitElement {
     }
 
     protected handleInput(e: Event, type: "min" | "max") {
+        this.activeHandle = type;
+
         const value = parseFloat((e.target as HTMLInputElement).value);
-        console.log(value);
 
         this.showFocusVisual = true;
 
         if (this.getSingleOrMultiple(this.value) === "single") {
             this.updateValue(`${value}`);
+
             return;
         }
 
-        this.updateRenderedValue(value, type);
+        this.updateRenderedValue(value);
     }
 
-    protected updateRenderedValue(value: number, type: "min" | "max") {
+    protected updateRenderedValue(value: number) {
+        value = Math.round(value / this.step) * this.step;
+        const showFocusVisual = this.showFocusVisual;
+
         const [minValue, maxValue] = this.getMinMaxValues(this.value);
 
-        if (type === "min" && value > maxValue) {
+        if (this.getSingleOrMultiple(this.value) === "single") {
+            this.updateValue(value.toString());
+
+            return;
+        }
+
+        if (this.activeHandle === "min" && value > maxValue) {
             this.updateValue(`${maxValue},${value}`);
+            this.activeHandle = "max";
             getPart(this, "input-max")?.focus();
-        } else if (type === "max" && value < minValue) {
+            this.showFocusVisual = showFocusVisual;
+        } else if (this.activeHandle === "max" && value < minValue) {
             this.updateValue(`${value},${minValue}`);
+            this.activeHandle = "min";
             getPart(this, "input-min")?.focus();
-        } else if (type === "min") {
+            this.showFocusVisual = showFocusVisual;
+        } else if (this.activeHandle === "min") {
             this.updateValue(`${value},${maxValue}`);
-        } else if (type === "max") {
+        } else if (this.activeHandle === "max") {
             this.updateValue(`${minValue},${value}`);
         }
     }
 
-    protected setValue(value: string) {
-        if (this.activeHandle === null) {
-            return;
-        }
-
-        value = String(Math.round(parseFloat(value) / this.step) * this.step);
-
-        if (this.activeHandle === "min") {
-            this.minValue = parseFloat(value);
-        } else {
-            this.maxValue = parseFloat(value);
-        }
-
-        if (this.getSingleOrMultiple(this.value) === "multiple") {
-            this.value = `${this.minValue},${this.maxValue}`;
-        } else {
-            this.value = value;
-        }
-
-        this.internals.setFormValue(this.value);
-
-        const percent = (parseFloat(value) - this.min) / (this.max - this.min);
-
-        getPart(this, "main").style.setProperty(
-            `--value-percent-${this.activeHandle}`,
-            `${percent}`
-        );
-    }
-
-    protected onHandlePointerDown(e: Event, type: "min" | "max") {
+    protected onHandlePointerDown(type: "min" | "max") {
         this.activeHandle = type;
 
         const onPointerMove = (e: PointerEvent) =>
@@ -301,6 +275,8 @@ export class Range extends LitElement {
             return;
         }
 
+        this.showFocusVisual = false;
+
         const container = getPart(this, "slider-container");
         const containerRect = container.getBoundingClientRect();
 
@@ -308,27 +284,7 @@ export class Range extends LitElement {
         const percent = Math.max(Math.min(x / containerRect.width, 1), 0);
         const value = this.min + percent * (this.max - this.min);
 
-        this.updateRenderedValue(value, this.activeHandle);
-
-        // if (value < this.minValue) {
-        //     if (this.activeHandle === "max") {
-        //         this.setValue(this.minValue.toString());
-        //     }
-
-        //     this.activeHandle = "min";
-        // } else if (value >= this.maxValue) {
-        //     if (this.activeHandle === "min") {
-        //         this.setValue(this.maxValue.toString());
-        //     }
-
-        //     this.activeHandle = "max";
-        // }
-
-        // this.setValue(value.toString());
-    }
-
-    protected firstUpdated() {
-        // this.setValue(this.value);
+        this.updateRenderedValue(value);
     }
 
     public static styles = [
