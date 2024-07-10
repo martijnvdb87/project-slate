@@ -123,4 +123,10 @@ export const main = css`
     :host [hidden] {
         display: none;
     }
+
+    @keyframes rotate {
+        to {
+            transform: rotate(360deg);
+        }
+    }
 `;

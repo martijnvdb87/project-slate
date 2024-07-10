@@ -28,6 +28,9 @@ export class Button extends LitElement {
     @property({ type: Boolean })
     protected reset = false;
 
+    @property({ type: Boolean })
+    protected loading = false;
+
     @state()
     protected internals;
 
@@ -39,6 +42,12 @@ export class Button extends LitElement {
     }
 
     protected render() {
+        const classes: string[] = [];
+
+        if (this.loading) {
+            classes.push("is-loading");
+        }
+
         return html`
             <button
                 ${ref(this.root)}
@@ -48,7 +57,11 @@ export class Button extends LitElement {
                 ?disabled="${this.disabled}"
                 type="${this.submit ? "submit" : "button"}"
                 @click="${this.handleClick}"
+                class="${classes.join(" ")}"
             >
+                <div part="loader">
+                    <div part="loader-icon">${renderIcon("loader-alt")}</div>
+                </div>
                 ${renderIcon(this.icon)}
                 <slot></slot>
                 ${renderIcon(this.iconRight)}
@@ -56,7 +69,9 @@ export class Button extends LitElement {
         `;
     }
 
-    protected handleClick() {
+    protected handleClick(e: Event) {
+        e.preventDefault();
+
         if (this.submit) {
             this.internals.form?.submit();
         }
@@ -318,6 +333,29 @@ export class Button extends LitElement {
                 --background-color-a: 0.4;
             }
 
+            [part="loader"] {
+                width: 0px;
+                opacity: 0;
+                margin-right: calc(0px - var(--gap));
+                transform: scale(0);
+                transition: transform 160ms, width 160ms, opacity 160ms;
+            }
+
+            .is-loading [part="loader"] {
+                width: calc(var(--icon-size) + var(--gap));
+                transform: none;
+                opacity: 1;
+            }
+
+            [part="loader-icon"] {
+                display: flex;
+                align-items: center;
+                height: var(--icon-size);
+                width: var(--icon-size);
+                transform-origin: center;
+                animation: rotate 840ms linear infinite;
+            }
+
             :host([size="small"]) {
                 --height: ${size(28)};
                 --icon-size: ${size(12)};
@@ -364,7 +402,8 @@ export class Button extends LitElement {
                 --width: var(--height);
             }
 
-            :host([disabled]) {
+            :host([disabled]),
+            :host([loading]) {
                 opacity: 0.75;
                 --text-color-a: 0.5;
                 pointer-events: none;

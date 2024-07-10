@@ -118,6 +118,9 @@
                 >
                 <hr />
                 <div style="display: flex; gap: 0.5rem; justify-content: end">
+                    <ds-button id="loading-action" type="primary"
+                        >Loading action</ds-button
+                    >
                     <ds-button submit type="primary">Submit</ds-button>
                     <ds-button reset type="ghost">Reset</ds-button>
                 </div>
@@ -635,5 +638,19 @@
                 <ds-checkbox disabled>Disabled unchecked</ds-checkbox>
             </main>
         </ds-app>
+
+        <script>
+            const loadingAction = document.getElementById("loading-action");
+
+            loadingAction.addEventListener("click", (e) => {
+                const target = e.currentTarget;
+
+                target.setAttribute("loading", "");
+
+                setTimeout(() => {
+                    target.removeAttribute("loading");
+                }, 3000);
+            });
+        </script>
     </body>
 </html>
