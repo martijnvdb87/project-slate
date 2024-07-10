@@ -116,7 +116,7 @@ export class Button extends LitElement {
 
                 --padding-x: ${size(16)};
                 --padding-y: ${size(6)};
-                --gap: ${size(6)};
+                --gap: ${size(8)};
 
                 --font-size: var(--font-size-medium);
                 --font-weight: var(--element-font-weight);
@@ -338,11 +338,13 @@ export class Button extends LitElement {
                 opacity: 0;
                 margin-right: calc(0px - var(--gap));
                 transform: scale(0);
-                transition: transform 160ms, width 160ms, opacity 160ms;
+                transition: transform 160ms, width 160ms, margin-right 160ms,
+                    opacity 160ms;
             }
 
             .is-loading [part="loader"] {
-                width: calc(var(--icon-size) + var(--gap));
+                width: var(--icon-size);
+                margin-right: 0px;
                 transform: none;
                 opacity: 1;
             }
@@ -361,7 +363,7 @@ export class Button extends LitElement {
                 --icon-size: ${size(12)};
                 --padding-x: ${size(12)};
                 --padding-y: ${size(4)};
-                --gap: ${size(4)};
+                --gap: ${size(6)};
                 --font-size: var(--font-size-small);
             }
 
@@ -370,7 +372,7 @@ export class Button extends LitElement {
                 --icon-size: ${size(18)};
                 --padding-x: ${size(18)};
                 --padding-y: ${size(8)};
-                --gap: ${size(8)};
+                --gap: ${size(10)};
                 --font-size: var(--font-size-large);
             }
 
@@ -379,7 +381,7 @@ export class Button extends LitElement {
                 --icon-size: ${size(24)};
                 --padding-x: ${size(22)};
                 --padding-y: ${size(10)};
-                --gap: ${size(10)};
+                --gap: ${size(12)};
                 --font-size: var(--font-size-huge);
             }
 
