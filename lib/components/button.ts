@@ -5,6 +5,11 @@ import { mainCss, size } from "@/lib/util/style";
 import { renderIcon } from "@/lib/util/icons";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
+enum State {
+    Default = "default",
+    Loading = "loading",
+}
+
 @customElement(`${config.prefix}-button`)
 export class Button extends LitElement {
     public root: Ref<HTMLInputElement> = createRef();
@@ -28,8 +33,8 @@ export class Button extends LitElement {
     @property({ type: Boolean })
     protected reset = false;
 
-    @property({ type: Boolean })
-    protected loading = false;
+    @property({ type: String })
+    protected state: State = State.Default;
 
     @state()
     protected internals;
@@ -44,10 +49,6 @@ export class Button extends LitElement {
     protected render() {
         const classes: string[] = [];
 
-        if (this.loading) {
-            classes.push("is-loading");
-        }
-
         return html`
             <button
                 ${ref(this.root)}
@@ -58,13 +59,16 @@ export class Button extends LitElement {
                 type="${this.submit ? "submit" : "button"}"
                 @click="${this.handleClick}"
                 class="${classes.join(" ")}"
+                state="${this.state}"
             >
                 <div part="loader">
                     <div part="loader-icon">${renderIcon("loader-alt")}</div>
                 </div>
-                ${renderIcon(this.icon)}
-                <slot></slot>
-                ${renderIcon(this.iconRight)}
+                <div part="content">
+                    ${renderIcon(this.icon)}
+                    <slot></slot>
+                    ${renderIcon(this.iconRight)}
+                </div>
             </button>
         `;
     }
@@ -141,14 +145,8 @@ export class Button extends LitElement {
             }
 
             button {
-                display: flex;
-                flex: auto;
-                align-items: center;
-                justify-content: center;
-                min-height: var(--height);
-                width: var(--width);
-                padding: var(--padding-y) var(--padding-x);
-                gap: var(--gap);
+                position: relative;
+                padding: 0;
                 font-size: var(--font-size);
                 font-family: var(--font-family);
                 font-weight: var(--font-weight);
@@ -333,20 +331,38 @@ export class Button extends LitElement {
                 --background-color-a: 0.4;
             }
 
-            [part="loader"] {
-                width: 0px;
-                opacity: 0;
-                margin-right: calc(0px - var(--gap));
-                transform: scale(0);
-                transition: transform 160ms, width 160ms, margin-right 160ms,
-                    opacity 160ms;
+            [part="content"] {
+                display: flex;
+                flex: auto;
+                align-items: center;
+                justify-content: center;
+                min-height: var(--height);
+                width: var(--width);
+                padding: var(--padding-y) var(--padding-x);
+                gap: var(--gap);
+                transition: opacity 160ms;
             }
 
-            .is-loading [part="loader"] {
-                width: var(--icon-size);
-                margin-right: 0px;
-                transform: none;
+            [part="loader"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+                pointer-events: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: opacity 160ms;
+            }
+
+            [state="loading"] [part="loader"] {
                 opacity: 1;
+            }
+
+            [state="loading"] [part="content"] {
+                opacity: 0;
             }
 
             [part="loader-icon"] {
@@ -405,7 +421,7 @@ export class Button extends LitElement {
             }
 
             :host([disabled]),
-            :host([loading]) {
+            :host([state="loading"]) {
                 opacity: 0.75;
                 --text-color-a: 0.5;
                 pointer-events: none;

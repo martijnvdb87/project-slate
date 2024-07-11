@@ -645,10 +645,10 @@
             loadingAction.addEventListener("click", (e) => {
                 const target = e.currentTarget;
 
-                target.setAttribute("loading", "");
+                target.setAttribute("state", "loading");
 
                 setTimeout(() => {
-                    target.removeAttribute("loading");
+                    target.removeAttribute("state");
                 }, 3000);
             });
         </script>
