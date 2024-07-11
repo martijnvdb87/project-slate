@@ -104,10 +104,10 @@ export class Input extends LitElement {
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
 
-                --icon-color-h: var(--primary-accent-h);
-                --icon-color-s: var(--primary-accent-s);
-                --icon-color-l: var(--primary-accent-l);
-                --icon-color-a: var(--primary-accent-a);
+                --icon-color-h: var(--input-checkbox-icon-color-h);
+                --icon-color-s: var(--input-checkbox-icon-color-s);
+                --icon-color-l: var(--input-checkbox-icon-color-l);
+                --icon-color-a: var(--input-checkbox-icon-color-a);
 
                 --icon-color: hsla(
                     var(--icon-color-h),

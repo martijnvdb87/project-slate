@@ -118,6 +118,11 @@ export const main = css`
         --input-validation-message-font-weight: 350;
 
         --input-range-slider-filled-color-l-modifier: 15%;
+
+        --input-checkbox-icon-color-h: var(--primary-accent-h);
+        --input-checkbox-icon-color-s: var(--primary-accent-s);
+        --input-checkbox-icon-color-l: var(--primary-accent-l);
+        --input-checkbox-icon-color-a: var(--primary-accent-a);
     }
 
     :host [hidden] {

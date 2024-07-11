@@ -37,6 +37,11 @@ const themeDark = css`
     --input-border-color-l: 36%;
 
     --input-range-slider-filled-color-l-modifier: -10%;
+
+    --input-checkbox-icon-color-h: var(--primary-accent-h);
+    --input-checkbox-icon-color-s: var(--main-background-color-s);
+    --input-checkbox-icon-color-l: var(--main-background-color-l);
+    --input-checkbox-icon-color-a: var(--primary-accent-a);
 `;
 
 export const global = css`
