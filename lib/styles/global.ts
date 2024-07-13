@@ -46,6 +46,10 @@ const themeDark = css`
 
 export const global = css`
     :root {
+        /* ---- Global ---- */
+        --global-border-radius: 5;
+        --global-border-width: 1;
+
         /* ---- Size ---- */
         --size-tiny: 24;
         --size-small: 32;
@@ -58,7 +62,8 @@ export const global = css`
         --outline-offset: 2;
 
         /* ---- Button ---- */
-        --button-border-width: 1;
+        --button-border-width: var(--global-border-width);
+        --button-border-radius: var(--global-border-radius);
         --button-padding-x: 16;
         --button-padding-y: 4;
         --button-gap: 8;
@@ -69,10 +74,10 @@ export const global = css`
         --button-font-size-large: 16;
         --button-font-size-huge: 18;
         --button-font-weight: 500;
-        --button-border-radius: 5;
 
         /* ---- Input ---- */
-        --input-border-width: 1;
+        --input-border-width: var(--global-border-width);
+        --input-border-radius: var(--global-border-radius);
         --input-padding-x: 14;
         --input-icon-size: 20;
         --input-font-size-tiny: 13;
@@ -81,7 +86,6 @@ export const global = css`
         --input-font-size-large: 18;
         --input-font-size-huge: 21;
         --input-font-weight: 400;
-        --input-border-radius: 5;
         --input-label-font-size-tiny: 12;
         --input-label-font-size-small: 13;
         --input-label-font-size-medium: 14;

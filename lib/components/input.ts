@@ -254,7 +254,7 @@ export class Input extends LitElement {
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
 
-                --element-border-radius: var(--border-radius);
+                --border-radius: calc(var(--input-border-radius) * 0.0625rem);
                 --border-width: ${varSize("input-border-width")};
                 --border-color-h: var(--input-border-color-h);
                 --border-color-s: var(--input-border-color-s);
@@ -359,7 +359,7 @@ export class Input extends LitElement {
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-                border-radius: var(--element-border-radius);
+                border-radius: var(--border-radius);
                 border-width: var(--border-width);
                 border-style: solid;
                 border-color: hsla(
@@ -432,7 +432,6 @@ export class Input extends LitElement {
                 width: ${sizer(32)};
                 height: ${sizer(32)};
                 background: transparent;
-                border-radius: var(--element-border-radius);
                 border-radius: 999rem;
                 border: none;
                 cursor: pointer;
@@ -511,11 +510,11 @@ export class Input extends LitElement {
             }
 
             :host([shape="square"]) {
-                --element-border-radius: 0;
+                --border-radius: 0;
             }
 
             :host([shape="pill"]) {
-                --element-border-radius: var(--shape-pill-radius);
+                --border-radius: var(--shape-pill-radius);
             }
 
             :host([disabled]) {
