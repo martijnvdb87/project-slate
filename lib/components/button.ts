@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, sizer, varSize } from "@/lib/util/style";
+import { mainCss, varSize } from "@/lib/util/style";
 import { renderIcon } from "@/lib/util/icons";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
@@ -136,12 +136,9 @@ export class Button extends LitElement {
                 --outline-color-h: var(--primary-color-h);
                 --outline-color-s: var(--primary-color-s);
                 --outline-color-l: var(--primary-color-l);
-                --outline-color-a: var(--primary-color-a);
+                --outline-color-a: 0;
 
-                --outline-offset: ${sizer(0)};
-                --outline-colored-offset: ${sizer(2)};
-
-                --outline-width: var(--input-outline-width);
+                --element-outline-offset: calc(0px - var(--border-width));
 
                 width: var(--width);
                 height: var(--height);
@@ -177,14 +174,17 @@ export class Button extends LitElement {
                 );
                 border-radius: var(--border-radius);
                 cursor: pointer;
-                outline: 0 solid
-                    hsla(
-                        var(--outline-color-h),
-                        var(--outline-color-s),
-                        var(--outline-color-l),
-                        0
-                    );
-                outline-offset: var(--outline-offset);
+
+                outline-width: var(--outline-width-rem);
+                outline-offset: var(--element-outline-offset);
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
+                );
+
                 transition: background 120ms ease-in-out;
             }
 
@@ -207,37 +207,7 @@ export class Button extends LitElement {
             }
 
             button:focus-visible {
-                outline: var(--outline-width) solid
-                    hsla(
-                        var(--outline-color-h),
-                        var(--outline-color-s),
-                        var(--outline-color-l),
-                        var(--input-outline-opacity)
-                    );
-            }
-
-            button:focus-visible {
-                border-width: var(--input-border-width);
-                border-color: hsla(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
-                    var(--primary-color-a)
-                );
-                padding: 0 calc(var(--padding-x) - var(--input-border-width));
-            }
-
-            :host([type="secondary"]) button:focus-visible {
-                border-color: hsla(
-                    var(--secondary-color-h),
-                    var(--secondary-color-s),
-                    var(--secondary-color-l),
-                    var(--secondary-color-a)
-                );
-            }
-
-            :host([type="ghost"]) button:focus-visible {
-                padding: 0 var(--padding-x);
+                --outline-color-a: 1;
             }
 
             :host([type="primary"]) {
@@ -262,10 +232,7 @@ export class Button extends LitElement {
                 --border-color-l: var(--primary-color-l);
                 --border-color-a: var(--primary-color-a);
 
-                --outline-width: calc(
-                    var(--input-outline-width) + var(--input-border-width)
-                );
-                --outline-offset: var(--outline-colored-offset);
+                --element-outline-offset: var(--outline-offset-rem);
             }
 
             :host([type="secondary"]) {
@@ -290,10 +257,7 @@ export class Button extends LitElement {
                 --border-color-l: var(--secondary-color-l);
                 --border-color-a: var(--secondary-color-a);
 
-                --outline-width: calc(
-                    var(--input-outline-width) + var(--input-border-width)
-                );
-                --outline-offset: var(--outline-colored-offset);
+                --element-outline-offset: var(--outline-offset-rem);
             }
 
             :host([type="ghost"]) {
@@ -341,8 +305,7 @@ export class Button extends LitElement {
                 flex: auto;
                 align-items: center;
                 justify-content: center;
-                padding: calc(var(--padding-y) - var(--border-width))
-                    var(--padding-x);
+                padding: var(--padding-y) var(--padding-x);
                 gap: ${varSize("button-gap")};
                 transition: opacity 160ms;
             }

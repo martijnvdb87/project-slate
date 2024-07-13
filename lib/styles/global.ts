@@ -53,6 +53,10 @@ export const global = css`
         --size-large: 48;
         --size-huge: 56;
 
+        /* ---- Outline ---- */
+        --outline-width: 2;
+        --outline-offset: 2;
+
         /* ---- Button ---- */
         --button-border-width: 1;
         --button-padding-x: 16;
@@ -66,6 +70,24 @@ export const global = css`
         --button-font-size-huge: 18;
         --button-font-weight: 500;
         --button-border-radius: 5;
+
+        /* ---- Input ---- */
+        --input-border-width: 1;
+        --input-padding-x: 14;
+        --input-icon-size: 20;
+        --input-font-size-tiny: 13;
+        --input-font-size-small: 14;
+        --input-font-size-medium: 15;
+        --input-font-size-large: 18;
+        --input-font-size-huge: 21;
+        --input-font-weight: 400;
+        --input-border-radius: 5;
+        --input-label-font-size-tiny: 12;
+        --input-label-font-size-small: 13;
+        --input-label-font-size-medium: 14;
+        --input-label-font-size-large: 15;
+        --input-label-font-size-huge: 16;
+        --input-label-font-weight: 500;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
@@ -81,7 +103,6 @@ export const global = css`
 
         --font-family: var(--font-sans);
         --element-font-weight: 550;
-        --input-font-weight: 350;
 
         --text-color-h: 0;
         --text-color-s: 10%;
@@ -163,15 +184,12 @@ export const global = css`
         --input-label-color-l: 4%;
         --input-label-color-a: 1;
 
-        --input-label-font-weight: 500;
         --input-label-font-size: ${size(14)};
 
         --input-border-color-h: var(--primary-color-h);
         --input-border-color-s: 10%;
         --input-border-color-l: 82%;
         --input-border-color-a: 1;
-
-        --input-border-width: ${size(1)};
 
         --border-radius: ${size(5)};
 

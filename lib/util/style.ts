@@ -10,24 +10,13 @@ export function size(value: number) {
     return unsafeCSS(`${size}rem`);
 }
 
-export function sizer(value: number, rounding?: "up" | "down" | "nearest") {
-    if (rounding) {
-        return unsafeCSS(
-            `round(${rounding}, calc((${value} / var(--size-medium)) * var(--base-size) * 1rem), 2px)`
-        );
-    }
-
+export function sizer(value: number) {
     return unsafeCSS(
         `calc((${value} / var(--size-medium)) * var(--base-size) * 1rem)`
     );
 }
 
-export function varSize(varName: string, rounding?: "up" | "down" | "nearest") {
-    if (rounding) {
-        return unsafeCSS(
-            `round(${rounding}, calc((${varName} / var(--size-medium)) * var(--base-size) * 1rem), 2px)`
-        );
-    }
+export function varSize(varName: string) {
     return unsafeCSS(
         `calc((var(--${varName}) / var(--size-medium)) * var(--base-size) * 1rem)`
     );

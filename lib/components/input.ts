@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
+import { mainCss, sizer, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
@@ -211,16 +211,17 @@ export class Input extends LitElement {
                 vertical-align: bottom;
 
                 --display: inline-flex;
-                --height: ${size(36)};
-                --gap: ${size(6)};
-                --icon-size: ${size(16)};
-                --icon-container-size: calc(
-                    var(--height) - var(--border-width) * 2
-                );
-                --font-size: var(--font-size-medium);
-                --font-weight: var(--input-font-weight);
+                --input-size: var(--base-size-rem);
 
-                --sub-height: ${size(20)};
+                --padding-left: ${varSize("input-padding-x")};
+                --padding-right: ${varSize("input-padding-x")};
+
+                --icon-size: ${varSize("input-icon-size")};
+                --icon-container-size: calc(
+                    var(--input-size) - var(--border-width) * 2
+                );
+                --font-size: calc(var(--input-font-size-medium) * 0.0625rem);
+                --font-weight: var(--input-font-weight);
 
                 --text-color-h: var(--input-text-color-h);
                 --text-color-s: var(--input-text-color-s);
@@ -234,7 +235,7 @@ export class Input extends LitElement {
                 --placeholder-weight: var(--input-placeholder-weight);
 
                 --label-font-weight: var(--input-label-font-weight);
-                --label-font-size: var(--input-label-font-size);
+                --label-font-size: ${varSize("input-label-font-size-medium")};
 
                 --label-color-h: var(--input-label-color-h);
                 --label-color-s: var(--input-label-color-s);
@@ -248,15 +249,13 @@ export class Input extends LitElement {
                     var(--input-icon-color-a)
                 );
 
-                --input-padding-x: ${size(12)};
-
                 --background-color-h: var(--input-background-color-h);
                 --background-color-s: var(--input-background-color-s);
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
 
                 --element-border-radius: var(--border-radius);
-                --border-width: var(--input-border-width);
+                --border-width: ${varSize("input-border-width")};
                 --border-color-h: var(--input-border-color-h);
                 --border-color-s: var(--input-border-color-s);
                 --border-color-l: var(--input-border-color-l);
@@ -264,7 +263,7 @@ export class Input extends LitElement {
 
                 --outline-width: var(--input-outline-width);
 
-                --validation-font-size: ${size(12)};
+                --validation-font-size: ${sizer(12)};
             }
 
             input {
@@ -273,9 +272,9 @@ export class Input extends LitElement {
                 align-items: center;
                 justify-content: center;
                 vertical-align: middle;
-                height: calc(var(--height) - var(--border-width) * 2);
+                height: var(--input-size);
                 width: 100%;
-                padding: 0 var(--input-padding-x);
+                padding: 0 var(--padding-right) 0 var(--padding-left);
                 background: transparent;
                 font-family: var(--font-family);
                 font-size: var(--font-size);
@@ -307,7 +306,7 @@ export class Input extends LitElement {
 
             [part="label"] {
                 display: inline-block;
-                padding-bottom: ${size(8)};
+                padding-bottom: ${sizer(8)};
                 font-size: var(--label-font-size);
                 font-weight: var(--label-font-weight);
 
@@ -320,7 +319,7 @@ export class Input extends LitElement {
             }
 
             [part="validation-message"] {
-                padding-top: ${size(6)};
+                padding-top: ${sizer(6)};
                 font-size: var(--validation-font-size);
                 color: hsl(
                     var(--validation-border-color-h),
@@ -353,7 +352,7 @@ export class Input extends LitElement {
                 position: relative;
                 display: flex;
                 align-items: center;
-                height: var(--height);
+                height: var(--input-size);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
@@ -430,8 +429,8 @@ export class Input extends LitElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: var(--sub-height);
-                height: var(--sub-height);
+                width: ${sizer(32)};
+                height: ${sizer(32)};
                 background: transparent;
                 border-radius: var(--element-border-radius);
                 border-radius: 999rem;
@@ -487,51 +486,24 @@ export class Input extends LitElement {
                 );
             }
 
-            .has-icon-left input {
-                padding-left: var(--icon-container-size);
+            .has-icon-left {
+                --padding-left: var(--icon-container-size);
             }
 
-            .has-icon-right input,
-            :host([show-validation-icon]) input {
-                padding-right: var(--icon-container-size);
+            .has-icon-right,
+            :host([show-validation-icon]) {
+                --padding-right: calc(var(--icon-container-size) * 2);
             }
 
             .has-icon-right .icon-validation {
                 right: var(--icon-container-size);
             }
 
-            :host([show-validation-icon]) .has-icon-right input {
-                padding-right: calc(var(--icon-container-size) * 2);
-            }
-
-            :host([size="small"]) {
-                --height: ${size(28)};
-                --icon-size: ${size(12)};
-                --input-padding-x: ${size(10)};
-                --gap: ${size(4)};
-                --font-size: var(--font-size-small);
-                --validation-font-size: ${size(11)};
-                --sub-height: ${size(16)};
-            }
-
-            :host([size="large"]) {
-                --height: ${size(44)};
-                --icon-size: ${size(18)};
-                --input-padding-x: ${size(14)};
-                --gap: ${size(8)};
-                --font-size: var(--font-size-large);
-                --validation-font-size: ${size(14)};
-                --sub-height: ${size(24)};
-            }
-
-            :host([size="huge"]) {
-                --height: ${size(52)};
-                --icon-size: ${size(24)};
-                --input-padding-x: ${size(16)};
-                --gap: ${size(10)};
-                --font-size: var(--font-size-huge);
-                --validation-font-size: ${size(16)};
-                --sub-height: ${size(28)};
+            :host([show-validation-icon]) .has-icon-right {
+                --padding-right: calc(
+                    ${varSize("input-padding-x")} + var(--icon-container-size) *
+                        2
+                );
             }
 
             :host([width="full"]) {
@@ -569,6 +541,31 @@ export class Input extends LitElement {
                 --validation-icon-color-s: var(--success-color-s);
                 --validation-icon-color-l: var(--success-color-l);
                 --validation-icon-color-a: var(--success-color-a);
+            }
+
+            :host([size="tiny"]) {
+                --font-size: ${varSize("input-font-size-tiny")};
+                --label-font-size: ${varSize("input-label-font-size-tiny")};
+            }
+
+            :host([size="small"]) {
+                --font-size: ${varSize("input-font-size-small")};
+                --label-font-size: ${varSize("input-label-font-size-small")};
+            }
+
+            :host([size="medium"]) {
+                --font-size: ${varSize("input-font-size-medium")};
+                --label-font-size: ${varSize("input-label-font-size-medium")};
+            }
+
+            :host([size="large"]) {
+                --font-size: ${varSize("input-font-size-large")};
+                --label-font-size: ${varSize("input-label-font-size-large")};
+            }
+
+            :host([size="huge"]) {
+                --font-size: ${varSize("input-font-size-huge")};
+                --label-font-size: ${varSize("input-label-font-size-huge")};
             }
         `,
     ];

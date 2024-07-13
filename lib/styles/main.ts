@@ -5,6 +5,9 @@ export const main = css`
     :host {
         --base-size: calc(var(--size-medium) / 16);
         --base-size-rem: calc(var(--base-size) * 1rem);
+
+        --outline-width-rem: calc(var(--outline-width) * 0.0625rem);
+        --outline-offset-rem: calc(var(--outline-offset) * 0.0625rem);
     }
 
     :host [hidden] {
