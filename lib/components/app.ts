@@ -1,8 +1,7 @@
-import { LitElement, css, html } from "lit";
+import { LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { Ref, createRef, ref } from "lit/directives/ref.js";
-import { mainCss } from "../util/style";
+import { Ref, createRef } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-app`)
 export class App extends LitElement {
