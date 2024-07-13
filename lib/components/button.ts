@@ -142,6 +142,7 @@ export class Button extends LitElement {
                 --outline-colored-offset: ${size(2)};
 
                 --outline-width: var(--input-outline-width);
+                min-height: calc(var(--height) - var(--border-width));
             }
 
             button {
@@ -336,9 +337,9 @@ export class Button extends LitElement {
                 flex: auto;
                 align-items: center;
                 justify-content: center;
-                min-height: var(--height);
                 width: var(--width);
-                padding: var(--padding-y) var(--padding-x);
+                padding: calc(var(--padding-y) - var(--border-width))
+                    var(--padding-x);
                 gap: var(--gap);
                 transition: opacity 160ms;
             }
