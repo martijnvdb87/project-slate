@@ -107,6 +107,8 @@ export class Button extends LitElement {
                 --icon-size: ${varSize("button-icon-size")};
 
                 --width: auto;
+                --height: auto;
+                --button-size: var(--base-size-rem);
 
                 --background-color-h: var(--default-color-h);
                 --background-color-s: var(--default-color-s);
@@ -123,7 +125,7 @@ export class Button extends LitElement {
 
                 --font-weight: var(--element-font-weight);
 
-                --element-border-radius: var(--border-radius);
+                --border-radius: calc(var(--button-border-radius) * 0.0625rem);
                 --border-width: 0px;
 
                 --border-color-h: var(--default-color-h);
@@ -140,12 +142,16 @@ export class Button extends LitElement {
                 --outline-colored-offset: ${sizer(2)};
 
                 --outline-width: var(--input-outline-width);
-                min-height: calc(var(--base-size-rem) - var(--border-width));
+
+                width: var(--width);
+                height: var(--height);
+                min-height: var(--button-size);
             }
 
             button {
                 position: relative;
                 padding: 0;
+                width: 100%;
                 font-size: calc(var(--button-font-size-medium) * 0.0625rem);
                 font-family: var(--font-family);
                 font-weight: var(--button-font-weight);
@@ -169,7 +175,7 @@ export class Button extends LitElement {
                     var(--border-color-l),
                     var(--border-color-a)
                 );
-                border-radius: var(--element-border-radius);
+                border-radius: var(--border-radius);
                 cursor: pointer;
                 outline: 0 solid
                     hsla(
@@ -335,7 +341,6 @@ export class Button extends LitElement {
                 flex: auto;
                 align-items: center;
                 justify-content: center;
-                width: var(--width);
                 padding: calc(var(--padding-y) - var(--border-width))
                     var(--padding-x);
                 gap: ${varSize("button-gap")};
@@ -378,18 +383,19 @@ export class Button extends LitElement {
             }
 
             :host([shape="square"]) {
-                --element-border-radius: 0;
+                --border-radius: 0;
             }
 
             :host([shape="pill"]) {
-                --element-border-radius: var(--shape-pill-radius);
+                --border-radius: var(--shape-pill-radius);
             }
 
             :host([shape="circle"]) {
+                --height: var(--button-size);
+                --width: var(--button-size);
                 --padding-x: 0;
                 --padding-y: 0;
-                --element-border-radius: 50%;
-                --width: var(--base-size-rem);
+                --border-radius: 50%;
             }
 
             :host([disabled]),

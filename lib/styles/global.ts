@@ -65,6 +65,7 @@ export const global = css`
         --button-font-size-large: 16;
         --button-font-size-huge: 18;
         --button-font-weight: 500;
+        --button-border-radius: 5;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
