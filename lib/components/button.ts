@@ -118,10 +118,9 @@ export class Button extends LitElement {
                 --text-color-l: var(--default-accent-l);
                 --text-color-a: var(--default-accent-a);
 
-                --padding-x: ${varSize("button-padding")};
-                --padding-y: ${sizer(4)};
+                --padding-x: ${varSize("button-padding-x")};
+                --padding-y: ${varSize("button-padding-y")};
 
-                --font-size: var(--font-size-medium);
                 --font-weight: var(--element-font-weight);
 
                 --element-border-radius: var(--border-radius);
@@ -147,9 +146,9 @@ export class Button extends LitElement {
             button {
                 position: relative;
                 padding: 0;
-                font-size: var(--font-size);
+                font-size: calc(var(--button-font-size-medium) * 0.0625rem);
                 font-family: var(--font-family);
-                font-weight: var(--font-weight);
+                font-weight: var(--button-font-weight);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
@@ -293,7 +292,7 @@ export class Button extends LitElement {
 
             :host([type="ghost"]) {
                 --background-color-a: 0;
-                --border-width: var(--input-border-width);
+                --border-width: ${varSize("button-border-width")};
                 --border-color-h: var(--input-border-color-h);
                 --border-color-s: var(--input-border-color-s);
                 --border-color-l: var(--input-border-color-l);
@@ -407,6 +406,26 @@ export class Button extends LitElement {
                 width: var(--icon-size);
                 height: var(--icon-size);
                 pointer-events: none;
+            }
+
+            :host([size="tiny"]) button {
+                font-size: calc(var(--button-font-size-tiny) * 0.0625rem);
+            }
+
+            :host([size="small"]) button {
+                font-size: calc(var(--button-font-size-small) * 0.0625rem);
+            }
+
+            :host([size="medium"]) button {
+                font-size: calc(var(--button-font-size-medium) * 0.0625rem);
+            }
+
+            :host([size="large"]) button {
+                font-size: calc(var(--button-font-size-large) * 0.0625rem);
+            }
+
+            :host([size="huge"]) button {
+                font-size: calc(var(--button-font-size-huge) * 0.0625rem);
             }
         `,
     ];

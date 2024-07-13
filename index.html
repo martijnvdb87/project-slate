@@ -381,11 +381,24 @@
 
                 <hr />
 
-                <ds-tabs active-index="1">
+                <ds-tabs active-index="2">
+                    <div slot="tab">Tiny</div>
                     <div slot="tab">Small</div>
                     <div slot="tab">Medium</div>
                     <div slot="tab">Large</div>
                     <div slot="tab">Huge</div>
+
+                    <div slot="panel">
+                        <ds-button size="tiny" type="primary"
+                            >Primary</ds-button
+                        >
+                        <ds-button size="tiny" type="secondary"
+                            >Secondary</ds-button
+                        >
+                        <ds-button size="tiny">Default</ds-button>
+                        <ds-button size="tiny" type="ghost">Ghost</ds-button>
+                        <ds-button size="tiny" type="link">Link</ds-button>
+                    </div>
 
                     <div slot="panel">
                         <ds-button size="small" type="primary"
@@ -514,6 +527,7 @@
                     shape="circle"
                 ></ds-button>
                 <hr />
+                <ds-button size="tiny" icon="rocket:solid">Icon</ds-button>
                 <ds-button size="small" icon="rocket:solid">Icon</ds-button>
                 <ds-button icon="rocket:solid">Icon</ds-button>
                 <ds-button size="large" icon="rocket:solid">Icon</ds-button>

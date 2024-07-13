@@ -54,9 +54,17 @@ export const global = css`
         --size-huge: 56;
 
         /* ---- Button ---- */
-        --button-padding: 16;
+        --button-border-width: 1;
+        --button-padding-x: 16;
+        --button-padding-y: 4;
         --button-gap: 8;
         --button-icon-size: 20;
+        --button-font-size-tiny: 12;
+        --button-font-size-small: 13;
+        --button-font-size-medium: 14;
+        --button-font-size-large: 16;
+        --button-font-size-huge: 18;
+        --button-font-weight: 500;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
