@@ -16,7 +16,11 @@ export function sizer(value: number) {
     );
 }
 
-export function varSize(varName: string) {
+export function varSize(varName: string, fixed: boolean = false) {
+    if (fixed) {
+        return unsafeCSS(`calc(var(--${varName}) * 0.0625rem)`);
+    }
+
     return unsafeCSS(
         `calc((var(--${varName}) / var(--size-medium)) * var(--base-size) * 1rem)`
     );

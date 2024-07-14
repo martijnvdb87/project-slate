@@ -123,9 +123,10 @@ export class Button extends LitElement {
                 --padding-x: ${varSize("button-padding-x")};
                 --padding-y: ${varSize("button-padding-y")};
 
+                --font-size: ${varSize("button-font-size-medium", true)};
                 --font-weight: var(--element-font-weight);
 
-                --border-radius: calc(var(--button-border-radius) * 0.0625rem);
+                --border-radius: ${varSize("button-border-radius", true)};
                 --border-width: 0px;
 
                 --border-color-h: var(--default-color-h);
@@ -149,7 +150,7 @@ export class Button extends LitElement {
                 position: relative;
                 padding: 0;
                 width: 100%;
-                font-size: calc(var(--button-font-size-medium) * 0.0625rem);
+                font-size: var(--font-size);
                 font-family: var(--font-family);
                 font-weight: var(--button-font-weight);
                 background: hsla(
@@ -377,24 +378,24 @@ export class Button extends LitElement {
                 pointer-events: none;
             }
 
-            :host([size="tiny"]) button {
-                font-size: calc(var(--button-font-size-tiny) * 0.0625rem);
+            :host([size="tiny"]) {
+                --font-size: ${varSize("button-font-size-tiny", true)};
             }
 
-            :host([size="small"]) button {
-                font-size: calc(var(--button-font-size-small) * 0.0625rem);
+            :host([size="small"]) {
+                --font-size: ${varSize("button-font-size-small", true)};
             }
 
-            :host([size="medium"]) button {
-                font-size: calc(var(--button-font-size-medium) * 0.0625rem);
+            :host([size="medium"]) {
+                --font-size: ${varSize("button-font-size-medium", true)};
             }
 
-            :host([size="large"]) button {
-                font-size: calc(var(--button-font-size-large) * 0.0625rem);
+            :host([size="large"]) {
+                --font-size: ${varSize("button-font-size-large", true)};
             }
 
-            :host([size="huge"]) button {
-                font-size: calc(var(--button-font-size-huge) * 0.0625rem);
+            :host([size="huge"]) {
+                --font-size: ${varSize("button-font-size-huge", true)};
             }
         `,
     ];

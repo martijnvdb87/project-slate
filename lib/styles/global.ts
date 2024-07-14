@@ -78,7 +78,7 @@ export const global = css`
         /* ---- Input ---- */
         --input-border-width: var(--global-border-width);
         --input-border-radius: var(--global-border-radius);
-        --input-padding-x: 14;
+        --input-padding-x: 12;
         --input-icon-size: 20;
         --input-font-size-tiny: 13;
         --input-font-size-small: 14;

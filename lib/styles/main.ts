@@ -1,13 +1,14 @@
 import { css } from "lit";
 import "@/lib/assets/fonts/inter/inter.css";
+import { varSize } from "../util/style";
 
 export const main = css`
     :host {
         --base-size: calc(var(--size-medium) / 16);
         --base-size-rem: calc(var(--base-size) * 1rem);
 
-        --outline-width-rem: calc(var(--outline-width) * 0.0625rem);
-        --outline-offset-rem: calc(var(--outline-offset) * 0.0625rem);
+        --outline-width-rem: ${varSize("outline-width", true)};
+        --outline-offset-rem: ${varSize("outline-offset", true)};
     }
 
     :host [hidden] {

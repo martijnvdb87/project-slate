@@ -220,7 +220,7 @@ export class Input extends LitElement {
                 --icon-container-size: calc(
                     var(--input-size) - var(--border-width) * 2
                 );
-                --font-size: calc(var(--input-font-size-medium) * 0.0625rem);
+                --font-size: ${varSize("input-font-size-medium", true)};
                 --font-weight: var(--input-font-weight);
 
                 --text-color-h: var(--input-text-color-h);
@@ -235,7 +235,10 @@ export class Input extends LitElement {
                 --placeholder-weight: var(--input-placeholder-weight);
 
                 --label-font-weight: var(--input-label-font-weight);
-                --label-font-size: ${varSize("input-label-font-size-medium")};
+                --label-font-size: ${varSize(
+                    "input-label-font-size-medium",
+                    true
+                )};
 
                 --label-color-h: var(--input-label-color-h);
                 --label-color-s: var(--input-label-color-s);
@@ -254,7 +257,7 @@ export class Input extends LitElement {
                 --background-color-l: var(--input-background-color-l);
                 --background-color-a: var(--input-background-color-a);
 
-                --border-radius: calc(var(--input-border-radius) * 0.0625rem);
+                --border-radius: ${varSize("input-border-radius", true)};
                 --border-width: ${varSize("input-border-width")};
                 --border-color-h: var(--input-border-color-h);
                 --border-color-s: var(--input-border-color-s);
@@ -543,28 +546,43 @@ export class Input extends LitElement {
             }
 
             :host([size="tiny"]) {
-                --font-size: ${varSize("input-font-size-tiny")};
-                --label-font-size: ${varSize("input-label-font-size-tiny")};
+                --font-size: ${varSize("input-font-size-tiny", true)};
+                --label-font-size: ${varSize(
+                    "input-label-font-size-tiny",
+                    true
+                )};
             }
 
             :host([size="small"]) {
-                --font-size: ${varSize("input-font-size-small")};
-                --label-font-size: ${varSize("input-label-font-size-small")};
+                --font-size: ${varSize("input-font-size-small", true)};
+                --label-font-size: ${varSize(
+                    "input-label-font-size-small",
+                    true
+                )};
             }
 
             :host([size="medium"]) {
-                --font-size: ${varSize("input-font-size-medium")};
-                --label-font-size: ${varSize("input-label-font-size-medium")};
+                --font-size: ${varSize("input-font-size-medium", true)};
+                --label-font-size: ${varSize(
+                    "input-label-font-size-medium",
+                    true
+                )};
             }
 
             :host([size="large"]) {
-                --font-size: ${varSize("input-font-size-large")};
-                --label-font-size: ${varSize("input-label-font-size-large")};
+                --font-size: ${varSize("input-font-size-large", true)};
+                --label-font-size: ${varSize(
+                    "input-label-font-size-large",
+                    true
+                )};
             }
 
             :host([size="huge"]) {
-                --font-size: ${varSize("input-font-size-huge")};
-                --label-font-size: ${varSize("input-label-font-size-huge")};
+                --font-size: ${varSize("input-font-size-huge", true)};
+                --label-font-size: ${varSize(
+                    "input-label-font-size-huge",
+                    true
+                )};
             }
         `,
     ];
