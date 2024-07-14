@@ -106,16 +106,16 @@ export class Radio extends LitElement {
                 --margin-bottom: var(--element-margin-bottom);
 
                 --element-border-radius: var(--border-radius);
-                --border-width: var(--input-border-width);
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
+                --border-width: var(--form-field-border-width);
+                --border-color-h: var(--form-field-border-color-h);
+                --border-color-s: var(--form-field-border-color-s);
+                --border-color-l: var(--form-field-border-color-l);
+                --border-color-a: var(--form-field-border-color-a);
 
-                --background-color-h: var(--input-background-color-h);
-                --background-color-s: var(--input-background-color-s);
-                --background-color-l: var(--input-background-color-l);
-                --background-color-a: var(--input-background-color-a);
+                --background-color-h: var(--form-field-background-color-h);
+                --background-color-s: var(--form-field-background-color-s);
+                --background-color-l: var(--form-field-background-color-l);
+                --background-color-a: var(--form-field-background-color-a);
 
                 --gap: ${size(16)};
 
@@ -129,7 +129,7 @@ export class Radio extends LitElement {
                 position: relative;
                 display: flex;
                 gap: var(--gap);
-                font-family: var(--font-family);
+                font-family: var(--global-font-family);
                 font-size: var(--font-size);
                 line-height: var(--text-line-height);
             }
@@ -156,14 +156,15 @@ export class Radio extends LitElement {
                     var(--primary-color-l)
                 );
                 outline: calc(
-                        var(--input-outline-width) + var(--input-border-width)
+                        var(--form-field-outline-width) +
+                            var(--form-field-border-width)
                     )
                     solid
                     hsla(
                         var(--primary-color-h),
                         var(--primary-color-s),
                         var(--primary-color-l),
-                        var(--input-outline-opacity)
+                        var(--form-field-outline-opacity)
                     );
             }
 
@@ -220,10 +221,10 @@ export class Radio extends LitElement {
                 height: var(--radio-inner-size);
                 border-radius: 999rem;
                 background-color: hsla(
-                    var(--input-background-color-h),
-                    var(--input-background-color-s),
-                    var(--input-background-color-l),
-                    var(--input-background-color-a)
+                    var(--form-field-background-color-h),
+                    var(--form-field-background-color-s),
+                    var(--form-field-background-color-l),
+                    var(--form-field-background-color-a)
                 );
                 opacity: 0;
             }
@@ -235,10 +236,10 @@ export class Radio extends LitElement {
             [part="label-container"] {
                 display: block;
                 color: hsla(
-                    var(--input-label-color-h),
-                    var(--input-label-color-s),
-                    var(--input-label-color-l),
-                    var(--input-label-color-a)
+                    var(--form-field-label-color-h),
+                    var(--form-field-label-color-s),
+                    var(--form-field-label-color-l),
+                    var(--form-field-label-color-a)
                 );
             }
 

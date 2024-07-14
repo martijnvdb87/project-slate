@@ -1,10 +1,11 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
+import { mainCss, varSize } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { renderIcon } from "../util/icons";
+import { formField } from "../styles/formField";
 
 @customElement(`${config.prefix}-select`)
 export class Select extends LitElement {
@@ -125,63 +126,8 @@ export class Select extends LitElement {
 
     public static styles = [
         mainCss,
+        formField,
         css`
-            :host {
-                display: var(--display);
-                vertical-align: bottom;
-
-                --display: inline-flex;
-                --select-size: var(--base-size-rem);
-                --icon-color: hsl(
-                    var(--default-accent-h),
-                    var(--default-accent-s),
-                    var(--default-accent-l)
-                );
-                --icon-size: ${size(24)};
-                --icon-color: hsla(
-                    var(--input-text-color-h),
-                    var(--input-text-color-s),
-                    var(--input-text-color-l),
-                    var(--input-text-color-a)
-                );
-                --gap: ${size(6)};
-                --font-size: var(--font-size-medium);
-                --font-weight: var(--input-font-weight);
-
-                --text-color-h: var(--input-text-color-h);
-                --text-color-s: var(--input-text-color-s);
-                --text-color-l: var(--input-text-color-l);
-                --text-color-a: var(--input-text-color-a);
-
-                --placeholder-color-h: var(--input-placeholder-color-h);
-                --placeholder-color-s: var(--input-placeholder-color-s);
-                --placeholder-color-l: var(--input-placeholder-color-l);
-                --placeholder-color-a: var(--input-placeholder-color-a);
-                --placeholder-weight: var(--input-placeholder-weight);
-
-                --label-font-weight: var(--form-label-font-weight);
-                --label-font-size: var(--form-label-font-size);
-
-                --label-color-h: var(--input-label-color-h);
-                --label-color-s: var(--input-label-color-s);
-                --label-color-l: var(--input-label-color-l);
-                --label-color-a: var(--input-label-color-a);
-
-                --input-padding-x: ${size(12)};
-
-                --background-color-h: var(--input-background-color-h);
-                --background-color-s: var(--input-background-color-s);
-                --background-color-l: var(--input-background-color-l);
-                --background-color-a: var(--input-background-color-a);
-
-                --element-border-radius: var(--border-radius);
-                --border-width: var(--input-border-width);
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
-            }
-
             select {
                 display: flex;
                 flex-grow: 1;
@@ -190,7 +136,7 @@ export class Select extends LitElement {
                 vertical-align: middle;
                 height: 100%;
                 width: 100%;
-                padding: 0 var(--input-padding-x);
+                padding: 0 var(--padding-x);
                 background: transparent;
                 font-family: var(--font-family);
                 font-size: var(--font-size);
@@ -222,7 +168,7 @@ export class Select extends LitElement {
 
             [part="label"] {
                 display: inline-block;
-                padding-bottom: ${size(8)};
+                margin-bottom: ${varSize("form-label-margin-bottom")};
                 font-size: var(--label-font-size);
                 font-weight: var(--label-font-weight);
 
@@ -238,14 +184,14 @@ export class Select extends LitElement {
                 position: relative;
                 display: flex;
                 align-items: center;
-                height: var(--select-size);
+                height: var(--field-size);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-                border-radius: var(--element-border-radius);
+                border-radius: var(--border-radius);
                 border-width: var(--border-width);
                 border-style: solid;
                 border-color: hsla(
@@ -271,7 +217,7 @@ export class Select extends LitElement {
                 width: 100%;
                 height: 100%;
                 pointer-events: none;
-                border-radius: var(--element-border-radius);
+                border-radius: var(--border-radius);
                 background-color: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
@@ -286,8 +232,8 @@ export class Select extends LitElement {
                 flex-grow: 1;
                 align-items: center;
                 vertical-align: middle;
-                padding: 0 var(--input-padding-x);
-                font-family: var(--font-family);
+                padding: 0 var(--padding-x);
+                font-family: var(--global-font-family);
                 font-size: var(--font-size);
                 font-weight: var(--font-weight);
                 color: hsla(
@@ -302,8 +248,8 @@ export class Select extends LitElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                height: calc(var(--height) - var(--border-width) * 2);
-                width: calc(var(--height) - var(--border-width) * 2);
+                height: calc(var(--field-size) - var(--border-width) * 2);
+                width: calc(var(--field-size) - var(--border-width) * 2);
             }
 
             [part="input-container"]:focus-within {
@@ -312,69 +258,18 @@ export class Select extends LitElement {
                     var(--primary-color-s),
                     var(--primary-color-l)
                 );
-                outline: var(--input-outline-width) solid
+                outline: var(--form-field-outline-width) solid
                     hsla(
                         var(--primary-color-h),
                         var(--primary-color-s),
                         var(--primary-color-l),
-                        var(--input-outline-opacity)
+                        var(--form-field-outline-opacity)
                     );
-            }
-
-            :host([size="small"]) {
-                --height: ${size(28)};
-                --icon-size: ${size(12)};
-                --input-padding-x: ${size(10)};
-                --gap: ${size(4)};
-                --font-size: var(--font-size-small);
-            }
-
-            :host([size="large"]) {
-                --height: ${size(44)};
-                --icon-size: ${size(18)};
-                --input-padding-x: ${size(14)};
-                --gap: ${size(8)};
-                --font-size: var(--font-size-large);
-            }
-
-            :host([size="huge"]) {
-                --height: ${size(52)};
-                --icon-size: ${size(24)};
-                --input-padding-x: ${size(16)};
-                --gap: ${size(10)};
-                --font-size: var(--font-size-huge);
-            }
-
-            :host([width="full"]) {
-                --display: flex;
-            }
-
-            :host([shape="square"]) {
-                --element-border-radius: 0;
-            }
-
-            :host([shape="pill"]) {
-                --element-border-radius: var(--shape-pill-radius);
-            }
-
-            :host([disabled]) {
-                opacity: 0.75;
-                --text-color-a: 0.5;
-                pointer-events: none;
             }
 
             :host([disabled]) select,
             :host([disabled]) [part="handle"] {
                 opacity: 0;
-            }
-
-            [part="icon"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: var(--icon-size);
-                height: var(--icon-size);
-                pointer-events: none;
             }
         `,
     ];

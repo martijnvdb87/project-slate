@@ -303,30 +303,30 @@ export class Range extends LitElement {
                 --handle-height: ${size(20)};
                 --slider-height: ${size(10)};
 
-                --text-color-h: var(--input-text-color-h);
-                --text-color-s: var(--input-text-color-s);
-                --text-color-l: var(--input-text-color-l);
-                --text-color-a: var(--input-text-color-a);
+                --text-color-h: var(--form-field-text-color-h);
+                --text-color-s: var(--form-field-text-color-s);
+                --text-color-l: var(--form-field-text-color-l);
+                --text-color-a: var(--form-field-text-color-a);
 
                 --label-font-weight: var(--form-label-font-weight);
                 --label-font-size: var(--form-label-font-size);
 
-                --label-color-h: var(--input-label-color-h);
-                --label-color-s: var(--input-label-color-s);
-                --label-color-l: var(--input-label-color-l);
-                --label-color-a: var(--input-label-color-a);
+                --label-color-h: var(--form-field-label-color-h);
+                --label-color-s: var(--form-field-label-color-s);
+                --label-color-l: var(--form-field-label-color-l);
+                --label-color-a: var(--form-field-label-color-a);
 
-                --background-color-h: var(--input-background-color-h);
-                --background-color-s: var(--input-background-color-s);
-                --background-color-l: var(--input-background-color-l);
-                --background-color-a: var(--input-background-color-a);
+                --background-color-h: var(--form-field-background-color-h);
+                --background-color-s: var(--form-field-background-color-s);
+                --background-color-l: var(--form-field-background-color-l);
+                --background-color-a: var(--form-field-background-color-a);
 
                 --element-border-radius: var(--border-radius);
-                --border-width: var(--input-border-width);
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
+                --border-width: var(--form-field-border-width);
+                --border-color-h: var(--form-field-border-color-h);
+                --border-color-s: var(--form-field-border-color-s);
+                --border-color-l: var(--form-field-border-color-l);
+                --border-color-a: var(--form-field-border-color-a);
             }
 
             input {
@@ -390,7 +390,9 @@ export class Range extends LitElement {
                     var(--primary-color-s),
                     calc(
                         var(--primary-color-l) +
-                            var(--input-range-slider-filled-color-l-modifier)
+                            var(
+                                --form-field-range-slider-filled-color-l-modifier
+                            )
                     ),
                     1
                 );
@@ -472,14 +474,15 @@ export class Range extends LitElement {
             .show-focus-visual [part="input-min"]:focus-visible + div,
             .show-focus-visual [part="input-max"]:focus-visible + div {
                 outline: calc(
-                        var(--input-outline-width) + var(--input-border-width)
+                        var(--form-field-outline-width) +
+                            var(--form-field-border-width)
                     )
                     solid
                     hsla(
                         var(--primary-color-h),
                         var(--primary-color-s),
                         var(--primary-color-l),
-                        var(--input-outline-opacity)
+                        var(--form-field-outline-opacity)
                     );
                 outline-offset: ${size(-6)};
             }

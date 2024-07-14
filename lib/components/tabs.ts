@@ -273,12 +273,12 @@ export class Tabs extends LitElement {
                 margin: 0;
                 padding: 0;
                 width: 100%;
-                border-bottom: var(--input-border-width) solid
+                border-bottom: var(--form-field-border-width) solid
                     hsla(
-                        var(--input-border-color-h),
-                        var(--input-border-color-s),
-                        var(--input-border-color-l),
-                        var(--input-border-color-a)
+                        var(--form-field-border-color-h),
+                        var(--form-field-border-color-s),
+                        var(--form-field-border-color-l),
+                        var(--form-field-border-color-a)
                     );
             }
 
@@ -328,7 +328,7 @@ export class Tabs extends LitElement {
                 content: "";
                 position: absolute;
                 left: 0;
-                bottom: calc(0px - var(--input-border-width));
+                bottom: calc(0px - var(--form-field-border-width));
                 width: 100%;
                 height: ${size(4)};
                 background-color: hsla(

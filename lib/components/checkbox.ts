@@ -93,21 +93,21 @@ export class Input extends LitElement {
                 --margin-bottom: var(--element-margin-bottom);
 
                 --element-border-radius: var(--border-radius);
-                --border-width: var(--input-border-width);
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
+                --border-width: var(--form-field-border-width);
+                --border-color-h: var(--form-field-border-color-h);
+                --border-color-s: var(--form-field-border-color-s);
+                --border-color-l: var(--form-field-border-color-l);
+                --border-color-a: var(--form-field-border-color-a);
 
-                --background-color-h: var(--input-background-color-h);
-                --background-color-s: var(--input-background-color-s);
-                --background-color-l: var(--input-background-color-l);
-                --background-color-a: var(--input-background-color-a);
+                --background-color-h: var(--form-field-background-color-h);
+                --background-color-s: var(--form-field-background-color-s);
+                --background-color-l: var(--form-field-background-color-l);
+                --background-color-a: var(--form-field-background-color-a);
 
-                --icon-color-h: var(--input-checkbox-icon-color-h);
-                --icon-color-s: var(--input-checkbox-icon-color-s);
-                --icon-color-l: var(--input-checkbox-icon-color-l);
-                --icon-color-a: var(--input-checkbox-icon-color-a);
+                --icon-color-h: var(--form-field-checkbox-icon-color-h);
+                --icon-color-s: var(--form-field-checkbox-icon-color-s);
+                --icon-color-l: var(--form-field-checkbox-icon-color-l);
+                --icon-color-a: var(--form-field-checkbox-icon-color-a);
 
                 --icon-color: hsla(
                     var(--icon-color-h),
@@ -129,7 +129,7 @@ export class Input extends LitElement {
                 position: relative;
                 display: flex;
                 gap: var(--gap);
-                font-family: var(--font-family);
+                font-family: var(--global-font-family);
                 font-size: var(--font-size);
                 line-height: var(--text-line-height);
             }
@@ -156,14 +156,15 @@ export class Input extends LitElement {
                     var(--primary-color-l)
                 );
                 outline: calc(
-                        var(--input-outline-width) + var(--input-border-width)
+                        var(--form-field-outline-width) +
+                            var(--form-field-border-width)
                     )
                     solid
                     hsla(
                         var(--primary-color-h),
                         var(--primary-color-s),
                         var(--primary-color-l),
-                        var(--input-outline-opacity)
+                        var(--form-field-outline-opacity)
                     );
             }
 
@@ -249,10 +250,10 @@ export class Input extends LitElement {
             [part="label-container"] {
                 display: block;
                 color: hsla(
-                    var(--input-label-color-h),
-                    var(--input-label-color-s),
-                    var(--input-label-color-l),
-                    var(--input-label-color-a)
+                    var(--form-field-label-color-h),
+                    var(--form-field-label-color-s),
+                    var(--form-field-label-color-l),
+                    var(--form-field-label-color-a)
                 );
             }
 

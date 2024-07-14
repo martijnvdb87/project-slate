@@ -126,7 +126,7 @@ export class Button extends LitElement {
                 --font-size: ${varSize("button-font-size-medium", true)};
                 --font-weight: var(--element-font-weight);
 
-                --border-radius: ${varSize("button-border-radius", true)};
+                --border-radius: ${varSize("form-field-border-radius", true)};
                 --border-width: 0px;
 
                 --border-color-h: var(--default-color-h);
@@ -151,7 +151,7 @@ export class Button extends LitElement {
                 padding: 0;
                 width: 100%;
                 font-size: var(--font-size);
-                font-family: var(--font-family);
+                font-family: var(--button-font-family);
                 font-weight: var(--button-font-weight);
                 background: hsla(
                     var(--background-color-h),
@@ -263,31 +263,31 @@ export class Button extends LitElement {
 
             :host([type="ghost"]) {
                 --background-color-a: 0;
-                --border-width: ${varSize("button-border-width")};
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
+                --border-width: ${varSize("form-field-border-width")};
+                --border-color-h: var(--form-field-border-color-h);
+                --border-color-s: var(--form-field-border-color-s);
+                --border-color-l: var(--form-field-border-color-l);
+                --border-color-a: var(--form-field-border-color-a);
             }
 
             :host([type="ghost"]) button:hover {
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: calc(var(--input-border-color-l) - 8%);
-                --border-color-a: var(--input-border-color-a);
+                --border-color-h: var(--form-field-border-color-h);
+                --border-color-s: var(--form-field-border-color-s);
+                --border-color-l: calc(var(--form-field-border-color-l) - 8%);
+                --border-color-a: var(--form-field-border-color-a);
             }
 
             :host([type="ghost"]) button:active {
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: calc(var(--input-border-color-l) - 24%);
-                --border-color-a: var(--input-border-color-a);
+                --border-color-h: var(--form-field-border-color-h);
+                --border-color-s: var(--form-field-border-color-s);
+                --border-color-l: calc(var(--form-field-border-color-l) - 24%);
+                --border-color-a: var(--form-field-border-color-a);
             }
 
             :host([type="link"]) {
-                --background-color-h: var(--input-border-color-h);
-                --background-color-s: var(--input-border-color-s);
-                --background-color-l: var(--input-border-color-l);
+                --background-color-h: var(--form-field-border-color-h);
+                --background-color-s: var(--form-field-border-color-s);
+                --background-color-l: var(--form-field-border-color-l);
                 --background-color-a: 0;
 
                 --border-color-a: 0;

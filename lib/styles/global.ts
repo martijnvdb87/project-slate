@@ -21,27 +21,27 @@ const themeDark = css`
     --error-color-l: 40%;
     --success-color-l: 40%;
 
-    --input-text-color-s: 0%;
-    --input-text-color-l: 96%;
+    --form-field-text-color-s: 0%;
+    --form-field-text-color-l: 96%;
 
-    --input-icon-color-s: 0%;
-    --input-icon-color-l: 46%;
+    --form-field-icon-color-s: 0%;
+    --form-field-icon-color-l: 46%;
 
-    --input-background-color-s: 0%;
-    --input-background-color-l: 12%;
+    --form-field-background-color-s: 0%;
+    --form-field-background-color-l: 12%;
 
-    --input-label-colorsl: 0%;
-    --input-label-color-l: 100%;
+    --form-field-label-colorsl: 0%;
+    --form-field-label-color-l: 100%;
 
-    --input-border-color-s: 0%;
-    --input-border-color-l: 36%;
+    --form-field-border-color-s: 0%;
+    --form-field-border-color-l: 36%;
 
-    --input-range-slider-filled-color-l-modifier: -10%;
+    --form-field-range-slider-filled-color-l-modifier: -10%;
 
-    --input-checkbox-icon-color-h: var(--primary-accent-h);
-    --input-checkbox-icon-color-s: var(--main-background-color-s);
-    --input-checkbox-icon-color-l: var(--main-background-color-l);
-    --input-checkbox-icon-color-a: var(--primary-accent-a);
+    --form-field-checkbox-icon-color-h: var(--primary-accent-h);
+    --form-field-checkbox-icon-color-s: var(--main-background-color-s);
+    --form-field-checkbox-icon-color-l: var(--main-background-color-l);
+    --form-field-checkbox-icon-color-a: var(--primary-accent-a);
 `;
 
 export const global = css`
@@ -49,6 +49,15 @@ export const global = css`
         /* ---- Global ---- */
         --global-border-radius: 5;
         --global-border-width: 1;
+        --global-font-family: var(--global-font-sans);
+
+        --global-font-sans: InterVariable, Inter, ui-sans-serif, system-ui,
+            sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+            "Noto Color Emoji";
+        --global-font-serif: ui-serif, Georgia, Cambria, "Times New Roman",
+            Times, serif;
+        --global-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco,
+            Consolas, "Liberation Mono", "Courier New", monospace;
 
         /* ---- Size ---- */
         --size-tiny: 24;
@@ -62,12 +71,12 @@ export const global = css`
         --outline-offset: 2;
 
         /* ---- Button ---- */
-        --button-border-width: var(--global-border-width);
-        --button-border-radius: var(--global-border-radius);
         --button-padding-x: 16;
         --button-padding-y: 4;
         --button-gap: 8;
         --button-icon-size: 20;
+
+        --button-font-family: var(--global-font-sans);
         --button-font-size-tiny: 12;
         --button-font-size-small: 13;
         --button-font-size-medium: 14;
@@ -75,17 +84,71 @@ export const global = css`
         --button-font-size-huge: 18;
         --button-font-weight: 500;
 
-        /* ---- Input ---- */
-        --input-border-width: var(--global-border-width);
-        --input-border-radius: var(--global-border-radius);
-        --input-padding-x: 12;
-        --input-icon-size: 20;
-        --input-font-size-tiny: 13;
-        --input-font-size-small: 14;
-        --input-font-size-medium: 15;
-        --input-font-size-large: 18;
-        --input-font-size-huge: 21;
-        --input-font-weight: 400;
+        /* ---- Form field ---- */
+        --form-field-border-width: var(--global-border-width);
+        --form-field-border-radius: var(--global-border-radius);
+        --form-field-padding-y: 8;
+        --form-field-padding-x: 12;
+        --form-field-icon-size: 20;
+
+        --form-field-font-family: var(--global-font-sans);
+        --form-field-font-size-tiny: 13;
+        --form-field-font-size-small: 14;
+        --form-field-font-size-medium: 15;
+        --form-field-font-size-large: 18;
+        --form-field-font-size-huge: 21;
+        --form-field-font-weight: 400;
+
+        --form-field-text-color-h: var(--primary-color-h);
+        --form-field-text-color-s: 10%;
+        --form-field-text-color-l: 16%;
+        --form-field-text-color-a: 1;
+
+        --form-field-icon-color-h: var(--primary-color-h);
+        --form-field-icon-color-s: 10%;
+        --form-field-icon-color-l: 46%;
+        --form-field-icon-color-a: 1;
+
+        --form-field-background-color-h: var(--primary-color-h);
+        --form-field-background-color-s: 10%;
+        --form-field-background-color-l: 100%;
+        --form-field-background-color-a: 1;
+
+        --form-field-placeholder-color-h: var(--primary-color-h);
+        --form-field-placeholder-color-s: 10%;
+        --form-field-placeholder-color-l: 46%;
+        --form-field-placeholder-color-a: 0.75;
+        --form-field-placeholder-weight: 350;
+
+        --form-field-label-color-h: var(--primary-color-h);
+        --form-field-label-color-s: 10%;
+        --form-field-label-color-l: 4%;
+        --form-field-label-color-a: 1;
+
+        --form-field-border-color-h: var(--primary-color-h);
+        --form-field-border-color-s: 10%;
+        --form-field-border-color-l: 82%;
+        --form-field-border-color-a: 1;
+
+        --form-field-outline-width: ${size(1)};
+        --form-field-outline-opacity: 1;
+
+        --form-field-validation-message-font-weight: 350;
+
+        --form-field-range-slider-filled-color-l-modifier: 15%;
+
+        --form-field-checkbox-icon-color-h: var(--primary-accent-h);
+        --form-field-checkbox-icon-color-s: var(--primary-accent-s);
+        --form-field-checkbox-icon-color-l: var(--primary-accent-l);
+        --form-field-checkbox-icon-color-a: var(--primary-accent-a);
+
+        --form-field-validation-font-size-tiny: 12;
+        --form-field-validation-font-size-small: 13;
+        --form-field-validation-font-size-medium: 14;
+        --form-field-validation-font-size-large: 16;
+        --form-field-validation-font-size-huge: 18;
+        --form-field-validation-font-weight: 400;
+        --form-field-validation-margin-top: 8;
 
         /* ---- Select ---- */
         --select-border-width: var(--global-border-width);
@@ -112,15 +175,6 @@ export const global = css`
         --main-background-color-s: 50%;
         --main-background-color-l: 100%;
 
-        --font-sans: InterVariable, Inter, ui-sans-serif, system-ui, sans-serif,
-            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-            "Noto Color Emoji";
-        --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times,
-            serif;
-        --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-            "Liberation Mono", "Courier New", monospace;
-
-        --font-family: var(--font-sans);
         --element-font-weight: 550;
 
         --text-color-h: 0;
@@ -177,52 +231,9 @@ export const global = css`
         --success-color-l: 55%;
         --success-color-a: 1;
 
-        --input-text-color-h: var(--primary-color-h);
-        --input-text-color-s: 10%;
-        --input-text-color-l: 16%;
-        --input-text-color-a: 1;
-
-        --input-icon-color-h: var(--primary-color-h);
-        --input-icon-color-s: 10%;
-        --input-icon-color-l: 46%;
-        --input-icon-color-a: 1;
-
-        --input-background-color-h: var(--primary-color-h);
-        --input-background-color-s: 10%;
-        --input-background-color-l: 100%;
-        --input-background-color-a: 1;
-
-        --input-placeholder-color-h: var(--primary-color-h);
-        --input-placeholder-color-s: 10%;
-        --input-placeholder-color-l: 46%;
-        --input-placeholder-color-a: 0.75;
-        --input-placeholder-weight: 350;
-
-        --input-label-color-h: var(--primary-color-h);
-        --input-label-color-s: 10%;
-        --input-label-color-l: 4%;
-        --input-label-color-a: 1;
-
         --form-label-font-size: ${size(14)};
 
-        --input-border-color-h: var(--primary-color-h);
-        --input-border-color-s: 10%;
-        --input-border-color-l: 82%;
-        --input-border-color-a: 1;
-
         --border-radius: ${size(5)};
-
-        --input-outline-width: ${size(1)};
-        --input-outline-opacity: 1;
-
-        --input-validation-message-font-weight: 350;
-
-        --input-range-slider-filled-color-l-modifier: 15%;
-
-        --input-checkbox-icon-color-h: var(--primary-accent-h);
-        --input-checkbox-icon-color-s: var(--primary-accent-s);
-        --input-checkbox-icon-color-l: var(--primary-accent-l);
-        --input-checkbox-icon-color-a: var(--primary-accent-a);
     }
 
     ds-app {
@@ -258,10 +269,10 @@ export const global = css`
         border: none;
 
         background-color: hsla(
-            var(--input-border-color-h),
-            var(--input-border-color-s),
-            var(--input-border-color-l),
-            var(--input-border-color-a)
+            var(--form-field-border-color-h),
+            var(--form-field-border-color-s),
+            var(--form-field-border-color-l),
+            var(--form-field-border-color-a)
         );
     }
 

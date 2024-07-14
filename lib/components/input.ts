@@ -5,6 +5,7 @@ import { mainCss, sizer, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { formField } from "../styles/formField";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
@@ -122,8 +123,8 @@ export class Input extends LitElement {
                     for="${this.elementId}"
                     >${this.label}</label
                 >
-                <div part="input-container">
-                    <div part="input-inner-container">
+                <div part="form-field-container">
+                    <div part="form-field-inner-container">
                         ${renderIcon(this.icon, "icon-left")}
                         <input
                             ${ref(this.input)}
@@ -205,71 +206,11 @@ export class Input extends LitElement {
 
     public static styles = [
         mainCss,
+        formField,
         css`
             :host {
-                display: var(--display);
-                vertical-align: bottom;
-
-                --display: inline-flex;
-                --input-size: var(--base-size-rem);
-
-                --padding-left: ${varSize("input-padding-x")};
-                --padding-right: ${varSize("input-padding-x")};
-
-                --icon-size: ${varSize("input-icon-size")};
-                --icon-container-size: calc(
-                    var(--input-size) - var(--border-width) * 2
-                );
-                --font-size: ${varSize("input-font-size-medium", true)};
-                --font-weight: var(--input-font-weight);
-
-                --text-color-h: var(--input-text-color-h);
-                --text-color-s: var(--input-text-color-s);
-                --text-color-l: var(--input-text-color-l);
-                --text-color-a: var(--input-text-color-a);
-
-                --placeholder-color-h: var(--input-placeholder-color-h);
-                --placeholder-color-s: var(--input-placeholder-color-s);
-                --placeholder-color-l: var(--input-placeholder-color-l);
-                --placeholder-color-a: var(--input-placeholder-color-a);
-                --placeholder-weight: var(--input-placeholder-weight);
-
-                --label-font-weight: var(--form-label-font-weight);
-                --label-font-size: ${varSize(
-                    "form-label-font-size-medium",
-                    true
-                )};
-
-                --label-color-h: var(--input-label-color-h);
-                --label-color-s: var(--input-label-color-s);
-                --label-color-l: var(--input-label-color-l);
-                --label-color-a: var(--input-label-color-a);
-
-                --icon-color: hsla(
-                    var(--input-icon-color-h),
-                    var(--input-icon-color-s),
-                    var(--input-icon-color-l),
-                    var(--input-icon-color-a)
-                );
-
-                --background-color-h: var(--input-background-color-h);
-                --background-color-s: var(--input-background-color-s);
-                --background-color-l: var(--input-background-color-l);
-                --background-color-a: var(--input-background-color-a);
-
-                --border-radius: ${varSize("input-border-radius", true)};
-                --border-width: ${varSize("input-border-width")};
-                --border-color-h: var(--input-border-color-h);
-                --border-color-s: var(--input-border-color-s);
-                --border-color-l: var(--input-border-color-l);
-                --border-color-a: var(--input-border-color-a);
-
-                --outline-color-h: var(--primary-color-h);
-                --outline-color-s: var(--primary-color-s);
-                --outline-color-l: var(--primary-color-l);
-                --outline-color-a: 0;
-
-                --validation-font-size: ${sizer(12)};
+                --padding-left: ${varSize("form-field-padding-x")};
+                --padding-right: ${varSize("form-field-padding-x")};
             }
 
             input {
@@ -278,7 +219,7 @@ export class Input extends LitElement {
                 align-items: center;
                 justify-content: center;
                 vertical-align: middle;
-                height: var(--input-size);
+                height: var(--field-size);
                 width: 100%;
                 padding: 0 var(--padding-right) 0 var(--padding-left);
                 background: transparent;
@@ -325,7 +266,7 @@ export class Input extends LitElement {
             }
 
             [part="validation-message"] {
-                padding-top: ${sizer(6)};
+                margin-top: ${varSize("form-field-validation-margin-top")};
                 font-size: var(--validation-font-size);
                 color: hsl(
                     var(--validation-border-color-h),
@@ -354,11 +295,11 @@ export class Input extends LitElement {
                 pointer-events: none;
             }
 
-            [part="input-container"] {
+            [part="form-field-container"] {
                 position: relative;
                 display: flex;
                 align-items: center;
-                height: var(--input-size);
+                height: var(--field-size);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
@@ -386,14 +327,14 @@ export class Input extends LitElement {
                 );
             }
 
-            [part="input-inner-container"] {
+            [part="form-field-inner-container"] {
                 position: relative;
                 display: flex;
                 flex-grow: 1;
                 align-items: center;
             }
 
-            [part="input-container"]:focus-within {
+            [part="form-field-container"]:focus-within {
                 --outline-color-h: var(
                     --validation-border-color-h,
                     var(--primary-color-h)
@@ -421,8 +362,16 @@ export class Input extends LitElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: ${sizer(32)};
-                height: ${sizer(32)};
+                width: calc(
+                    var(--field-size) -
+                        (${varSize("form-field-border-width")} * 2) -
+                        ${sizer(8)}
+                );
+                height: calc(
+                    var(--field-size) -
+                        (${varSize("form-field-border-width")} * 2) -
+                        ${sizer(8)}
+                );
                 background: transparent;
                 border-radius: 999rem;
                 border: none;
@@ -430,28 +379,19 @@ export class Input extends LitElement {
             }
 
             .button-show-password button:focus-visible {
-                border-color: hsl(
-                    var(--validation-border-color-h, var(--primary-color-h)),
-                    var(--validation-border-color-s, var(--primary-color-s)),
-                    var(--validation-border-color-l, var(--primary-color-l))
+                --outline-color-h: var(
+                    --validation-border-color-h,
+                    var(--primary-color-h)
                 );
-                outline: calc(var(--input-outline-width) + var(--outline-width))
-                    solid
-                    hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
-                        var(--input-outline-opacity)
-                    );
+                --outline-color-s: var(
+                    --validation-border-color-s,
+                    var(--primary-color-s)
+                );
+                --outline-color-l: var(
+                    --validation-border-color-l,
+                    var(--primary-color-l)
+                );
+                --outline-color-a: 1;
             }
 
             .icon-container {
@@ -492,86 +432,9 @@ export class Input extends LitElement {
 
             :host([show-validation-icon]) .has-icon-right {
                 --padding-right: calc(
-                    ${varSize("input-padding-x")} + var(--icon-container-size) *
-                        2
+                    ${varSize("form-field-padding-x")} +
+                        var(--icon-container-size) * 2
                 );
-            }
-
-            :host([width="full"]) {
-                --display: flex;
-            }
-
-            :host([shape="square"]) {
-                --border-radius: 0;
-            }
-
-            :host([shape="pill"]) {
-                --border-radius: var(--shape-pill-radius);
-            }
-
-            :host([disabled]) {
-                opacity: 0.75;
-                --text-color-a: 0.5;
-                pointer-events: none;
-            }
-
-            :host([error]) {
-                --validation-border-color-h: var(--error-color-h);
-                --validation-border-color-s: var(--error-color-s);
-                --validation-border-color-l: var(--error-color-l);
-                --validation-border-color-a: var(--error-color-a);
-
-                --validation-icon-color-h: var(--error-color-h);
-                --validation-icon-color-s: var(--error-color-s);
-                --validation-icon-color-l: var(--error-color-l);
-                --validation-icon-color-a: var(--error-color-a);
-            }
-
-            :host([success]) {
-                --validation-icon-color-h: var(--success-color-h);
-                --validation-icon-color-s: var(--success-color-s);
-                --validation-icon-color-l: var(--success-color-l);
-                --validation-icon-color-a: var(--success-color-a);
-            }
-
-            :host([size="tiny"]) {
-                --font-size: ${varSize("input-font-size-tiny", true)};
-                --label-font-size: ${varSize(
-                    "form-label-font-size-tiny",
-                    true
-                )};
-            }
-
-            :host([size="small"]) {
-                --font-size: ${varSize("input-font-size-small", true)};
-                --label-font-size: ${varSize(
-                    "form-label-font-size-small",
-                    true
-                )};
-            }
-
-            :host([size="medium"]) {
-                --font-size: ${varSize("input-font-size-medium", true)};
-                --label-font-size: ${varSize(
-                    "form-label-font-size-medium",
-                    true
-                )};
-            }
-
-            :host([size="large"]) {
-                --font-size: ${varSize("input-font-size-large", true)};
-                --label-font-size: ${varSize(
-                    "form-label-font-size-large",
-                    true
-                )};
-            }
-
-            :host([size="huge"]) {
-                --font-size: ${varSize("input-font-size-huge", true)};
-                --label-font-size: ${varSize(
-                    "form-label-font-size-huge",
-                    true
-                )};
             }
         `,
     ];
