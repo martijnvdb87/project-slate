@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
+import { mainCss, size, varSize } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
@@ -132,8 +132,8 @@ export class Textarea extends LitElement {
                 --placeholder-color-a: var(--input-placeholder-color-a);
                 --placeholder-weight: var(--input-placeholder-weight);
 
-                --label-font-weight: var(--input-label-font-weight);
-                --label-font-size: var(--input-label-font-size);
+                --label-font-weight: var(--form-label-font-weight);
+                --label-font-size: var(--form-label-font-size);
 
                 --label-color-h: var(--input-label-color-h);
                 --label-color-s: var(--input-label-color-s);
@@ -196,7 +196,7 @@ export class Textarea extends LitElement {
 
             [part="label"] {
                 display: inline-block;
-                padding-bottom: ${size(8)};
+                margin-bottom: ${varSize("form-label-margin-bottom")};
                 font-size: var(--label-font-size);
                 font-weight: var(--label-font-weight);
 

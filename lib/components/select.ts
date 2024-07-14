@@ -131,7 +131,7 @@ export class Select extends LitElement {
                 vertical-align: bottom;
 
                 --display: inline-flex;
-                --height: ${size(36)};
+                --select-size: var(--base-size-rem);
                 --icon-color: hsl(
                     var(--default-accent-h),
                     var(--default-accent-s),
@@ -159,8 +159,8 @@ export class Select extends LitElement {
                 --placeholder-color-a: var(--input-placeholder-color-a);
                 --placeholder-weight: var(--input-placeholder-weight);
 
-                --label-font-weight: var(--input-label-font-weight);
-                --label-font-size: var(--input-label-font-size);
+                --label-font-weight: var(--form-label-font-weight);
+                --label-font-size: var(--form-label-font-size);
 
                 --label-color-h: var(--input-label-color-h);
                 --label-color-s: var(--input-label-color-s);
@@ -188,7 +188,7 @@ export class Select extends LitElement {
                 align-items: center;
                 justify-content: center;
                 vertical-align: middle;
-                height: calc(var(--height) - var(--border-width) * 2);
+                height: 100%;
                 width: 100%;
                 padding: 0 var(--input-padding-x);
                 background: transparent;
@@ -238,7 +238,7 @@ export class Select extends LitElement {
                 position: relative;
                 display: flex;
                 align-items: center;
-                height: var(--height);
+                height: var(--select-size);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),

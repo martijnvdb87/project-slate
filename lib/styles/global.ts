@@ -86,12 +86,27 @@ export const global = css`
         --input-font-size-large: 18;
         --input-font-size-huge: 21;
         --input-font-weight: 400;
-        --input-label-font-size-tiny: 12;
-        --input-label-font-size-small: 13;
-        --input-label-font-size-medium: 14;
-        --input-label-font-size-large: 15;
-        --input-label-font-size-huge: 16;
-        --input-label-font-weight: 500;
+
+        /* ---- Select ---- */
+        --select-border-width: var(--global-border-width);
+        --select-border-radius: var(--global-border-radius);
+        --select-padding-x: 12;
+        --select-icon-size: 20;
+        --select-font-size-tiny: 13;
+        --select-font-size-small: 14;
+        --select-font-size-medium: 15;
+        --select-font-size-large: 18;
+        --select-font-size-huge: 21;
+        --select-font-weight: 400;
+
+        /* ---- Form label ---- */
+        --form-label-font-size-tiny: 12;
+        --form-label-font-size-small: 13;
+        --form-label-font-size-medium: 14;
+        --form-label-font-size-large: 15;
+        --form-label-font-size-huge: 16;
+        --form-label-font-weight: 500;
+        --form-label-margin-bottom: 8;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
@@ -188,7 +203,7 @@ export const global = css`
         --input-label-color-l: 4%;
         --input-label-color-a: 1;
 
-        --input-label-font-size: ${size(14)};
+        --form-label-font-size: ${size(14)};
 
         --input-border-color-h: var(--primary-color-h);
         --input-border-color-s: 10%;

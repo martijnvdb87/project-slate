@@ -234,9 +234,9 @@ export class Input extends LitElement {
                 --placeholder-color-a: var(--input-placeholder-color-a);
                 --placeholder-weight: var(--input-placeholder-weight);
 
-                --label-font-weight: var(--input-label-font-weight);
+                --label-font-weight: var(--form-label-font-weight);
                 --label-font-size: ${varSize(
-                    "input-label-font-size-medium",
+                    "form-label-font-size-medium",
                     true
                 )};
 
@@ -264,7 +264,10 @@ export class Input extends LitElement {
                 --border-color-l: var(--input-border-color-l);
                 --border-color-a: var(--input-border-color-a);
 
-                --outline-width: var(--input-outline-width);
+                --outline-color-h: var(--primary-color-h);
+                --outline-color-s: var(--primary-color-s);
+                --outline-color-l: var(--primary-color-l);
+                --outline-color-a: 0;
 
                 --validation-font-size: ${sizer(12)};
             }
@@ -309,7 +312,7 @@ export class Input extends LitElement {
 
             [part="label"] {
                 display: inline-block;
-                padding-bottom: ${sizer(8)};
+                margin-bottom: ${varSize("form-label-margin-bottom")};
                 font-size: var(--label-font-size);
                 font-weight: var(--label-font-weight);
 
@@ -371,22 +374,16 @@ export class Input extends LitElement {
                     var(--validation-border-color-l, var(--border-color-l)),
                     var(--validation-border-color-a, var(--border-color-a))
                 );
-                outline: 0 solid
-                    hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
-                        0
-                    );
+
+                outline-width: var(--outline-width-rem);
+                outline-offset: calc(0px - var(--border-width));
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
+                );
             }
 
             [part="input-inner-container"] {
@@ -397,27 +394,19 @@ export class Input extends LitElement {
             }
 
             [part="input-container"]:focus-within {
-                border-color: hsl(
-                    var(--validation-border-color-h, var(--primary-color-h)),
-                    var(--validation-border-color-s, var(--primary-color-s)),
-                    var(--validation-border-color-l, var(--primary-color-l))
+                --outline-color-h: var(
+                    --validation-border-color-h,
+                    var(--primary-color-h)
                 );
-                outline: var(--input-outline-width) solid
-                    hsla(
-                        var(
-                            --validation-border-color-h,
-                            var(--primary-color-h)
-                        ),
-                        var(
-                            --validation-border-color-s,
-                            var(--primary-color-s)
-                        ),
-                        var(
-                            --validation-border-color-l,
-                            var(--primary-color-l)
-                        ),
-                        var(--input-outline-opacity)
-                    );
+                --outline-color-s: var(
+                    --validation-border-color-s,
+                    var(--primary-color-s)
+                );
+                --outline-color-l: var(
+                    --validation-border-color-l,
+                    var(--primary-color-l)
+                );
+                --outline-color-a: 1;
             }
 
             .button-show-password {
@@ -548,7 +537,7 @@ export class Input extends LitElement {
             :host([size="tiny"]) {
                 --font-size: ${varSize("input-font-size-tiny", true)};
                 --label-font-size: ${varSize(
-                    "input-label-font-size-tiny",
+                    "form-label-font-size-tiny",
                     true
                 )};
             }
@@ -556,7 +545,7 @@ export class Input extends LitElement {
             :host([size="small"]) {
                 --font-size: ${varSize("input-font-size-small", true)};
                 --label-font-size: ${varSize(
-                    "input-label-font-size-small",
+                    "form-label-font-size-small",
                     true
                 )};
             }
@@ -564,7 +553,7 @@ export class Input extends LitElement {
             :host([size="medium"]) {
                 --font-size: ${varSize("input-font-size-medium", true)};
                 --label-font-size: ${varSize(
-                    "input-label-font-size-medium",
+                    "form-label-font-size-medium",
                     true
                 )};
             }
@@ -572,7 +561,7 @@ export class Input extends LitElement {
             :host([size="large"]) {
                 --font-size: ${varSize("input-font-size-large", true)};
                 --label-font-size: ${varSize(
-                    "input-label-font-size-large",
+                    "form-label-font-size-large",
                     true
                 )};
             }
@@ -580,7 +569,7 @@ export class Input extends LitElement {
             :host([size="huge"]) {
                 --font-size: ${varSize("input-font-size-huge", true)};
                 --label-font-size: ${varSize(
-                    "input-label-font-size-huge",
+                    "form-label-font-size-huge",
                     true
                 )};
             }

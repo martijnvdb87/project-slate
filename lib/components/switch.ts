@@ -250,9 +250,8 @@ export class Switch extends LitElement {
             }
 
             slot:not([name]) {
-                font-weight: var(--input-label-font-weight);
-
-                font-size: var(--input-label-font-size);
+                font-weight: var(--form-label-font-weight);
+                font-size: var(--form-label-font-size);
             }
 
             ::slotted([slot="description"]) {

@@ -308,8 +308,8 @@ export class Range extends LitElement {
                 --text-color-l: var(--input-text-color-l);
                 --text-color-a: var(--input-text-color-a);
 
-                --label-font-weight: var(--input-label-font-weight);
-                --label-font-size: var(--input-label-font-size);
+                --label-font-weight: var(--form-label-font-weight);
+                --label-font-size: var(--form-label-font-size);
 
                 --label-color-h: var(--input-label-color-h);
                 --label-color-s: var(--input-label-color-s);
