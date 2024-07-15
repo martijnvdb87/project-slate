@@ -70,6 +70,31 @@ export const formField = css`
         )};
     }
 
+    [part="label"] {
+        display: inline-block;
+        margin-bottom: ${varSize("form-label-margin-bottom")};
+        font-size: var(--label-font-size);
+        font-weight: var(--label-font-weight);
+
+        color: hsla(
+            var(--label-color-h),
+            var(--label-color-s),
+            var(--label-color-l),
+            var(--label-color-a)
+        );
+    }
+
+    [part="validation-message"] {
+        margin-top: ${varSize("form-field-validation-margin-top")};
+        font-size: var(--validation-font-size);
+        color: hsl(
+            var(--validation-border-color-h),
+            var(--validation-border-color-s),
+            var(--validation-border-color-l),
+            var(--validation-border-color-a)
+        );
+    }
+
     :host([size="tiny"]) {
         --font-size: ${varSize("form-field-font-size-tiny", true)};
         --label-font-size: ${varSize("form-label-font-size-tiny", true)};

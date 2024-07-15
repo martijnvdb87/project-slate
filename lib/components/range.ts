@@ -1,9 +1,10 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
+import { mainCss, varSize } from "../util/style";
 import { getPart, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { formField } from "../styles/formField";
 
 @customElement(`${config.prefix}-range`)
 export class Range extends LitElement {
@@ -289,44 +290,19 @@ export class Range extends LitElement {
 
     public static styles = [
         mainCss,
+        formField,
         css`
             :host {
-                display: var(--display);
-                vertical-align: bottom;
                 user-select: none;
 
                 --value-percent-min: 0;
                 --value-percent-max: 0;
 
-                --display: inline-flex;
+                --handle-size: ${varSize("range-handle-size")};
+                --slider-size: ${varSize("range-slider-size")};
 
-                --handle-height: ${size(20)};
-                --slider-height: ${size(10)};
-
-                --text-color-h: var(--form-field-text-color-h);
-                --text-color-s: var(--form-field-text-color-s);
-                --text-color-l: var(--form-field-text-color-l);
-                --text-color-a: var(--form-field-text-color-a);
-
-                --label-font-weight: var(--form-label-font-weight);
-                --label-font-size: var(--form-label-font-size);
-
-                --label-color-h: var(--form-field-label-color-h);
-                --label-color-s: var(--form-field-label-color-s);
-                --label-color-l: var(--form-field-label-color-l);
-                --label-color-a: var(--form-field-label-color-a);
-
-                --background-color-h: var(--form-field-background-color-h);
-                --background-color-s: var(--form-field-background-color-s);
-                --background-color-l: var(--form-field-background-color-l);
-                --background-color-a: var(--form-field-background-color-a);
-
-                --element-border-radius: var(--border-radius);
-                --border-width: var(--form-field-border-width);
-                --border-color-h: var(--form-field-border-color-h);
-                --border-color-s: var(--form-field-border-color-s);
-                --border-color-l: var(--form-field-border-color-l);
-                --border-color-a: var(--form-field-border-color-a);
+                --border-width: ${varSize("range-border-width")};
+                --border-radius: ${varSize("range-border-radius")};
             }
 
             input {
@@ -342,35 +318,22 @@ export class Range extends LitElement {
                 touch-action: pan-y;
             }
 
-            [part="label"] {
-                display: inline-block;
-                padding-bottom: ${size(8)};
-                font-size: var(--label-font-size);
-                font-weight: var(--label-font-weight);
-
-                color: hsla(
-                    var(--label-color-h),
-                    var(--label-color-s),
-                    var(--label-color-l),
-                    var(--label-color-a)
-                );
-            }
-
             [part="input-container"] {
-                padding: ${size(4)} ${size(0)};
-                border-radius: 999rem;
+                padding: ${varSize("range-padding-y")}
+                    ${varSize("range-padding-x")};
+                border-radius: var(--border-radius);
             }
 
             [part="slider-container"] {
                 position: relative;
-                height: var(--slider-height);
+                height: var(--slider-size);
                 background: hsla(
                     var(--background-color-h),
                     var(--background-color-s),
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-                border-radius: 999rem;
+                border-radius: var(--border-radius);
                 border-color: hsla(
                     var(--border-color-h),
                     var(--border-color-s),
@@ -384,7 +347,7 @@ export class Range extends LitElement {
             [part="slider-filled"] {
                 position: absolute;
                 top: calc(0px - var(--border-width));
-                height: var(--slider-height);
+                height: var(--slider-size);
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
@@ -396,32 +359,32 @@ export class Range extends LitElement {
                     ),
                     1
                 );
-                border-radius: 999rem 0 0 999rem;
+                border-radius: var(--border-radius) 0 0 var(--border-radius);
             }
 
             .type-single [part="slider-filled"] {
                 left: calc(
                     var(--value-percent-min) *
-                        (100% - var(--handle-height) + var(--border-width) * 2) -
+                        (100% - var(--handle-size) + var(--border-width) * 2) -
                         var(--border-width)
                 );
                 width: calc(
                     (var(--value-percent-max) - var(--value-percent-min)) *
-                        (100% - var(--handle-height) + var(--border-width) * 2) +
-                        var(--handle-height) / 2
+                        (100% - var(--handle-size) + var(--border-width) * 2) +
+                        var(--handle-size) / 2
                 );
-                border-radius: 999rem 0 0 999rem;
+                border-radius: var(--border-radius) 0 0 var(--border-radius);
             }
 
             .type-multiple [part="slider-filled"] {
                 left: calc(
                     var(--value-percent-min) *
-                        (100% - var(--handle-height) + var(--border-width) * 2) -
-                        var(--border-width) + var(--handle-height) / 2
+                        (100% - var(--handle-size) + var(--border-width) * 2) -
+                        var(--border-width) + var(--handle-size) / 2
                 );
                 width: calc(
                     (var(--value-percent-max) - var(--value-percent-min)) *
-                        (100% - var(--handle-height) + var(--border-width) * 2)
+                        (100% - var(--handle-size) + var(--border-width) * 2)
                 );
                 border-radius: 0;
             }
@@ -430,27 +393,34 @@ export class Range extends LitElement {
             [part="slider-handle-max"] {
                 position: absolute;
                 top: calc(
-                    var(--slider-height) / 2 - var(--handle-height) / 2 -
-                        var(--border-width) - ${size(8)}
+                    var(--slider-size) / 2 - var(--handle-size) / 2 -
+                        var(--border-width) -
+                        ${varSize("range-pointer-padding")}
                 );
-                height: calc(var(--handle-height) + ${size(16)});
-                width: calc(var(--handle-height) + ${size(16)});
-                border-radius: 999rem;
+                height: calc(
+                    var(--handle-size) + ${varSize("range-pointer-padding")} * 2
+                );
+                width: calc(
+                    var(--handle-size) + ${varSize("range-pointer-padding")} * 2
+                );
+                border-radius: var(--border-radius);
             }
 
             [part="slider-handle-min"] {
                 left: calc(
                     var(--value-percent-min) * (100% + var(--border-width) * 2) -
-                        (var(--handle-height) * var(--value-percent-min)) -
-                        var(--border-width) - ${size(8)}
+                        (var(--handle-size) * var(--value-percent-min)) -
+                        var(--border-width) -
+                        ${varSize("range-pointer-padding")}
                 );
             }
 
             [part="slider-handle-max"] {
                 left: calc(
                     var(--value-percent-max) * (100% + var(--border-width) * 2) -
-                        (var(--handle-height) * var(--value-percent-max)) -
-                        var(--border-width) - ${size(8)}
+                        (var(--handle-size) * var(--value-percent-max)) -
+                        var(--border-width) -
+                        ${varSize("range-pointer-padding")}
                 );
             }
 
@@ -458,64 +428,51 @@ export class Range extends LitElement {
             [part="slider-handle-max"]::before {
                 content: "";
                 position: absolute;
-                top: ${size(8)};
-                left: ${size(8)};
-                height: var(--handle-height);
-                width: var(--handle-height);
+                top: ${varSize("range-pointer-padding")};
+                left: ${varSize("range-pointer-padding")};
+                height: var(--handle-size);
+                width: var(--handle-size);
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
                     var(--primary-color-l),
                     var(--primary-color-a)
                 );
-                border-radius: 999rem;
+                border-radius: var(--border-radius);
+            }
+
+            .show-focus-visual [part="input-min"] + div,
+            .show-focus-visual [part="input-max"] + div {
+                outline-width: var(--outline-width-rem);
+                outline-offset: calc(
+                    0px - var(--border-width) -
+                        ${varSize("range-pointer-padding")} +
+                        ${varSize("range-outline-offset")}
+                );
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
+                );
             }
 
             .show-focus-visual [part="input-min"]:focus-visible + div,
             .show-focus-visual [part="input-max"]:focus-visible + div {
-                outline: calc(
-                        var(--form-field-outline-width) +
-                            var(--form-field-border-width)
-                    )
-                    solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        var(--form-field-outline-opacity)
-                    );
-                outline-offset: ${size(-6)};
-            }
-
-            :host([size="small"]) {
-                --handle-height: ${size(16)};
-                --slider-height: ${size(8)};
-                --validation-font-size: ${size(11)};
-                --handle-height: ${size(16)};
-            }
-
-            :host([size="large"]) {
-                --handle-height: ${size(24)};
-                --slider-height: ${size(12)};
-                --validation-font-size: ${size(14)};
-                --handle-height: ${size(24)};
-            }
-
-            :host([size="huge"]) {
-                --handle-height: ${size(28)};
-                --slider-height: ${size(14)};
-                --validation-font-size: ${size(16)};
-                --handle-height: ${size(28)};
-            }
-
-            :host([width="full"]) {
-                --display: flex;
-            }
-
-            :host([disabled]) {
-                opacity: 0.75;
-                --text-color-a: 0.5;
-                pointer-events: none;
+                --outline-color-h: var(
+                    --validation-border-color-h,
+                    var(--primary-color-h)
+                );
+                --outline-color-s: var(
+                    --validation-border-color-s,
+                    var(--primary-color-s)
+                );
+                --outline-color-l: var(
+                    --validation-border-color-l,
+                    var(--primary-color-l)
+                );
+                --outline-color-a: 1;
             }
         `,
     ];

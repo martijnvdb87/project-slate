@@ -151,31 +151,6 @@ export class Textarea extends LitElement {
                 flex-grow: 1;
             }
 
-            [part="label"] {
-                display: inline-block;
-                margin-bottom: ${varSize("form-label-margin-bottom")};
-                font-size: var(--label-font-size);
-                font-weight: var(--label-font-weight);
-
-                color: hsla(
-                    var(--label-color-h),
-                    var(--label-color-s),
-                    var(--label-color-l),
-                    var(--label-color-a)
-                );
-            }
-
-            [part="validation-message"] {
-                margin-top: ${varSize("form-field-validation-margin-top")};
-                font-size: var(--validation-font-size);
-                color: hsl(
-                    var(--validation-border-color-h),
-                    var(--validation-border-color-s),
-                    var(--validation-border-color-l),
-                    var(--validation-border-color-a)
-                );
-            }
-
             [part="input-container"] {
                 position: relative;
                 display: flex;

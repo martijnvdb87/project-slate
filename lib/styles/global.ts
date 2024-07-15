@@ -162,6 +162,16 @@ export const global = css`
         --select-font-size-huge: 21;
         --select-font-weight: 400;
 
+        /* ---- Range ---- */
+        --range-border-width: var(--global-border-width);
+        --range-border-radius: 999;
+        --range-slider-size: 10;
+        --range-handle-size: 20;
+        --range-pointer-padding: 8;
+        --range-padding-x: 0;
+        --range-padding-y: 4;
+        --range-outline-offset: 4;
+
         /* ---- Form label ---- */
         --form-label-font-size-tiny: 12;
         --form-label-font-size-small: 13;
