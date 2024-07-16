@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
+import { mainCss, size, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
@@ -88,12 +88,15 @@ export class Input extends LitElement {
             :host {
                 display: flex;
                 vertical-align: bottom;
-                margin-bottom: var(--margin-bottom);
 
-                --margin-bottom: var(--element-margin-bottom);
+                --width: auto;
+                --height: auto;
+                --field-size: var(--base-size-rem);
+                --box-size: ${varSize("checkbox-size")};
 
-                --element-border-radius: var(--border-radius);
-                --border-width: var(--form-field-border-width);
+                --border-radius: ${varSize("checkbox-border-radius")};
+                --border-width: ${varSize("checkbox-border-width")};
+
                 --border-color-h: var(--form-field-border-color-h);
                 --border-color-s: var(--form-field-border-color-s);
                 --border-color-l: var(--form-field-border-color-l);
@@ -116,13 +119,16 @@ export class Input extends LitElement {
                     var(--icon-color-a)
                 );
 
-                --icon-size: 100%;
+                --icon-size: ${varSize("checkbox-icon-size")};
 
                 --gap: ${size(16)};
 
                 --font-size: var(--font-size-medium);
 
-                --checkbox-size: ${size(20)};
+                --outline-color-h: var(--primary-color-h);
+                --outline-color-s: var(--primary-color-s);
+                --outline-color-l: var(--primary-color-l);
+                --outline-color-a: 0;
             }
 
             [part="main"] {
@@ -136,14 +142,21 @@ export class Input extends LitElement {
 
             [part="checkbox-container"] {
                 position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: var(--field-size);
+                height: var(--field-size);
+                flex-shrink: 0;
+                flex-grow: 0;
             }
 
             [part="input"] {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: var(--checkbox-size);
-                height: var(--checkbox-size);
+                width: 100%;
+                height: 100%;
                 opacity: 0;
                 z-index: 999;
                 cursor: pointer;
@@ -155,17 +168,7 @@ export class Input extends LitElement {
                     var(--primary-color-s),
                     var(--primary-color-l)
                 );
-                outline: calc(
-                        var(--form-field-outline-width) +
-                            var(--form-field-border-width)
-                    )
-                    solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        var(--form-field-outline-opacity)
-                    );
+                --outline-color-a: 1;
             }
 
             [part="icon-container"] {
@@ -196,10 +199,10 @@ export class Input extends LitElement {
                 align-items: center;
                 justify-content: center;
                 pointer-events: none;
-                width: var(--checkbox-size);
-                height: var(--checkbox-size);
+                width: var(--box-size);
+                height: var(--box-size);
 
-                border-radius: var(--element-border-radius);
+                border-radius: var(--border-radius);
                 border-width: var(--border-width);
                 border-style: solid;
                 border-color: hsla(
@@ -215,14 +218,19 @@ export class Input extends LitElement {
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-                outline: 0 solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        0
-                    );
-                outline-offset: ${size(2)};
+
+                outline-width: var(--outline-width-rem);
+                outline-offset: calc(
+                    0px - var(--border-width) +
+                        ${varSize("checkbox-outline-offset")}
+                );
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
+                );
             }
 
             [part="icon"] {
@@ -231,8 +239,6 @@ export class Input extends LitElement {
                 justify-content: center;
                 width: var(--icon-size);
                 height: var(--icon-size);
-                max-width: 100%;
-                max-height: 100%;
                 pointer-events: none;
             }
 
@@ -245,6 +251,7 @@ export class Input extends LitElement {
                 max-width: 100%;
                 max-height: 100%;
                 pointer-events: none;
+                overflow: hidden;
             }
 
             [part="label-container"] {
@@ -279,17 +286,14 @@ export class Input extends LitElement {
 
             :host([size="small"]) {
                 --font-size: var(--font-size-small);
-                --checkbox-size: ${size(16)};
             }
 
             :host([size="large"]) {
                 --font-size: var(--font-size-large);
-                --checkbox-size: ${size(24)};
             }
 
             :host([size="huge"]) {
                 --font-size: var(--font-size-huge);
-                --checkbox-size: ${size(28)};
             }
 
             :host([disabled]) {

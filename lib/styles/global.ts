@@ -170,7 +170,15 @@ export const global = css`
         --range-pointer-padding: 8;
         --range-padding-x: 0;
         --range-padding-y: 4;
-        --range-outline-offset: 4;
+        --range-outline-offset: var(--outline-offset);
+
+        /* ---- Checkbox ---- */
+        --checkbox-size: 24;
+        --checkbox-border-width: var(--global-border-width);
+        --checkbox-border-radius: var(--global-border-radius);
+        --checkbox-outline-offset: 4;
+        --checkbox-outline-width: ${size(1)};
+        --checkbox-icon-size: 24;
 
         /* ---- Form label ---- */
         --form-label-font-size-tiny: 12;

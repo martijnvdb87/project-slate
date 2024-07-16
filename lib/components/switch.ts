@@ -87,9 +87,6 @@ export class Switch extends LitElement {
             :host {
                 display: flex;
                 vertical-align: bottom;
-                margin-bottom: var(--margin-bottom);
-
-                --margin-bottom: var(--element-margin-bottom);
 
                 --element-border-radius: var(--border-radius);
                 --border-width: var(--form-field-border-width);
