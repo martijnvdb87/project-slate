@@ -181,6 +181,23 @@ export const global = css`
         --checkbox-icon-size: 22;
         --checkbox-gap: 16;
         --checkbox-label-margin-bottom: 4;
+        --checkbox-card-border-width: var(--global-border-width);
+        --checkbox-card-border-radius: var(--global-border-radius);
+
+        /* ---- Form card ---- */
+        --form-card-border-width: var(--global-border-width);
+        --form-card-border-style: solid;
+        --form-card-border-radius: var(--global-border-radius);
+        --form-card-padding-y: 16;
+        --form-card-padding-x: 16;
+        --form-card-border-color-h: var(--form-field-border-color-h);
+        --form-card-border-color-s: var(--form-field-border-color-s);
+        --form-card-border-color-l: var(--form-field-border-color-l);
+        --form-card-border-color-a: var(--form-field-border-color-a);
+        --form-card-background-color-h: var(--form-field-background-color-h);
+        --form-card-background-color-s: var(--form-field-background-color-s);
+        --form-card-background-color-l: var(--form-field-background-color-l);
+        --form-card-background-color-a: var(--form-field-background-color-a);
 
         /* ---- Form label ---- */
         --form-label-font-size-tiny: 12;

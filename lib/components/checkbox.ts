@@ -127,6 +127,20 @@ export class Input extends LitElement {
                 --outline-color-s: var(--primary-color-s);
                 --outline-color-l: var(--primary-color-l);
                 --outline-color-a: 0;
+
+                --card-border-width: initial;
+                --card-border-style: initial;
+                --card-border-radius: initial;
+                --card-padding-y: initial;
+                --card-padding-x: initial;
+                --card-border-color-h: initial;
+                --card-border-color-s: initial;
+                --card-border-color-l: initial;
+                --card-border-color-a: initial;
+                --card-background-color-h: initial;
+                --card-background-color-s: initial;
+                --card-background-color-l: initial;
+                --card-background-color-a: initial;
             }
 
             [part="main"] {
@@ -136,6 +150,28 @@ export class Input extends LitElement {
                 font-family: var(--global-font-family);
                 font-size: var(--font-size);
                 line-height: var(--text-line-height);
+                border-width: var(--card-border-width);
+                border-style: var(--card-border-style);
+                border-radius: var(--card-border-radius);
+                border-color: hsla(
+                    var(--card-border-color-h),
+                    var(--card-border-color-s),
+                    var(--card-border-color-l),
+                    var(--card-border-color-a)
+                );
+                border-color: hsla(
+                    var(--card-border-color-h),
+                    var(--card-border-color-s),
+                    var(--card-border-color-l),
+                    var(--card-border-color-a)
+                );
+                background-color: hsla(
+                    var(--card-background-color-h),
+                    var(--card-background-color-s),
+                    var(--card-background-color-l),
+                    var(--card-background-color-a)
+                );
+                padding: var(--card-padding-y) var(--card-padding-x);
             }
 
             [part="checkbox-container"] {
@@ -311,6 +347,22 @@ export class Input extends LitElement {
             :host([disabled]) {
                 opacity: 0.75;
                 pointer-events: none;
+            }
+
+            :host([card]) {
+                --card-border-width: ${varSize("form-card-border-width")};
+                --card-border-style: var(--form-card-border-style);
+                --card-border-radius: ${varSize("form-card-border-radius")};
+                --card-padding-y: ${varSize("form-card-padding-y")};
+                --card-padding-x: ${varSize("form-card-padding-x")};
+                --card-border-color-h: var(--form-card-border-color-h);
+                --card-border-color-s: var(--form-card-border-color-s);
+                --card-border-color-l: var(--form-card-border-color-l);
+                --card-border-color-a: var(--form-card-border-color-a);
+                --card-background-color-h: var(--form-card-background-color-h);
+                --card-background-color-s: var(--form-card-background-color-s);
+                --card-background-color-l: var(--form-card-background-color-l);
+                --card-background-color-a: var(--form-card-background-color-a);
             }
         `,
     ];
