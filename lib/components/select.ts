@@ -200,13 +200,16 @@ export class Select extends LitElement {
                     var(--border-color-l),
                     var(--border-color-a)
                 );
-                outline: 0 solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        0
-                    );
+
+                outline-width: var(--outline-width-rem);
+                outline-offset: calc(0px - var(--border-width));
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
+                );
             }
 
             [part="value-container"] {
@@ -253,18 +256,7 @@ export class Select extends LitElement {
             }
 
             [part="input-container"]:focus-within {
-                border-color: hsl(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l)
-                );
-                outline: var(--form-field-outline-width) solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        var(--form-field-outline-opacity)
-                    );
+                --outline-color-a: 1;
             }
 
             :host([disabled]) select,

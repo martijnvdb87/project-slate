@@ -53,24 +53,28 @@ export class Input extends LitElement {
     protected render() {
         return html`
             <div ${ref(this.root)} part="main">
-                <div part="checkbox-container">
-                    <input
-                        ${ref(this.input)}
-                        type="checkbox"
-                        part="input"
-                        id="${this.elementId}"
-                        name="${this.name}"
-                        .checked="${this.checked}"
-                        ?disabled="${this.disabled}"
-                        @input="${this.handleInput}"
-                    />
-                    <div part="input-container">${renderIcon(this.icon)}</div>
-                </div>
-                <div part="label-container">
-                    <label for="${this.elementId}" part="label"
-                        ><slot></slot
-                    ></label>
-                    <slot name="description"></slot>
+                <input
+                    ${ref(this.input)}
+                    type="checkbox"
+                    part="input"
+                    id="${this.elementId}"
+                    name="${this.name}"
+                    .checked="${this.checked}"
+                    ?disabled="${this.disabled}"
+                    @input="${this.handleInput}"
+                />
+                <div ${ref(this.root)} part="card">
+                    <div part="checkbox-container">
+                        <div part="input-container">
+                            ${renderIcon(this.icon)}
+                        </div>
+                    </div>
+                    <div part="label-container">
+                        <label for="${this.elementId}" part="label"
+                            ><slot></slot
+                        ></label>
+                        <slot name="description"></slot>
+                    </div>
                 </div>
             </div>
         `;
@@ -141,15 +145,22 @@ export class Input extends LitElement {
                 --card-background-color-s: initial;
                 --card-background-color-l: initial;
                 --card-background-color-a: initial;
+                --card-outline-color-h: var(--primary-color-h);
+                --card-outline-color-s: var(--primary-color-s);
+                --card-outline-color-l: var(--primary-color-l);
+                --card-outline-color-a: 0;
             }
 
             [part="main"] {
                 position: relative;
-                display: flex;
-                gap: var(--gap);
                 font-family: var(--global-font-family);
                 font-size: var(--font-size);
                 line-height: var(--text-line-height);
+            }
+
+            [part="card"] {
+                display: flex;
+                gap: var(--gap);
                 border-width: var(--card-border-width);
                 border-style: var(--card-border-style);
                 border-radius: var(--card-border-radius);
@@ -172,6 +183,15 @@ export class Input extends LitElement {
                     var(--card-background-color-a)
                 );
                 padding: var(--card-padding-y) var(--card-padding-x);
+                outline-width: var(--outline-width-rem);
+                outline-offset: calc(0px - var(--card-border-width));
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--card-outline-color-h),
+                    var(--card-outline-color-s),
+                    var(--card-outline-color-l),
+                    var(--card-outline-color-a)
+                );
             }
 
             [part="checkbox-container"] {
@@ -189,14 +209,18 @@ export class Input extends LitElement {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width: var(--field-size);
+                height: var(--field-size);
                 opacity: 0;
                 z-index: 999;
                 cursor: pointer;
             }
+            :host([card]) [part="input"] {
+                width: 100%;
+                height: 100%;
+            }
 
-            [part="input"]:focus-visible + [part="input-container"] {
+            [part="input"]:focus-visible + [part="card"] {
                 --outline-color-a: 1;
             }
 
@@ -205,7 +229,7 @@ export class Input extends LitElement {
                 opacity: 0;
             }
 
-            [part="input"]:checked + [part="input-container"] {
+            [part="input"]:checked + [part="card"] {
                 --background-color-h: var(--primary-color-h);
                 --background-color-s: var(--primary-color-s);
                 --background-color-l: var(--primary-color-l);
@@ -217,9 +241,7 @@ export class Input extends LitElement {
                 --border-color-a: var(--primary-color-a);
             }
 
-            [part="input"]:checked
-                + [part="input-container"]
-                [part="icon-container"] {
+            [part="input"]:checked + [part="card"] [part="icon-container"] {
                 opacity: 1;
             }
 
@@ -287,6 +309,7 @@ export class Input extends LitElement {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                align-items: flex-start;
                 color: hsla(
                     var(--form-field-label-color-h),
                     var(--form-field-label-color-s),
@@ -363,6 +386,13 @@ export class Input extends LitElement {
                 --card-background-color-s: var(--form-card-background-color-s);
                 --card-background-color-l: var(--form-card-background-color-l);
                 --card-background-color-a: var(--form-card-background-color-a);
+
+                --outline-color-a: 0;
+            }
+
+            :host([card]) [part="input"]:focus-visible + [part="card"] {
+                --outline-color-a: 0;
+                --card-outline-color-a: 1;
             }
         `,
     ];

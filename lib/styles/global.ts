@@ -130,9 +130,6 @@ export const global = css`
         --form-field-border-color-l: 82%;
         --form-field-border-color-a: 1;
 
-        --form-field-outline-width: ${size(1)};
-        --form-field-outline-opacity: 1;
-
         --form-field-validation-message-font-weight: 350;
 
         --form-field-range-slider-filled-color-l-modifier: 15%;
@@ -170,13 +167,13 @@ export const global = css`
         --range-pointer-padding: 8;
         --range-padding-x: 0;
         --range-padding-y: 4;
-        --range-outline-offset: 4;
+        --range-outline-offset: 3;
 
         /* ---- Checkbox ---- */
         --checkbox-size: 22;
         --checkbox-border-width: var(--global-border-width);
         --checkbox-border-radius: var(--global-border-radius);
-        --checkbox-outline-offset: 4;
+        --checkbox-outline-offset: 3;
         --checkbox-outline-width: ${size(1)};
         --checkbox-icon-size: 22;
         --checkbox-gap: 16;
@@ -198,6 +195,8 @@ export const global = css`
         --form-card-background-color-s: var(--form-field-background-color-s);
         --form-card-background-color-l: var(--form-field-background-color-l);
         --form-card-background-color-a: var(--form-field-background-color-a);
+        --form-card-outline-offset: 4;
+        --form-card-outline-width: ${size(1)};
 
         /* ---- Form label ---- */
         --form-label-font-size-tiny: 12;
