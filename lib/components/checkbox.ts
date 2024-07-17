@@ -296,6 +296,18 @@ export class Input extends LitElement {
                 --font-size: var(--font-size-huge);
             }
 
+            :host([shape="square"]) {
+                --border-radius: 0;
+            }
+
+            :host([shape="pill"]) {
+                --border-radius: var(--shape-pill-radius);
+            }
+
+            :host([shape="circle"]) {
+                --border-radius: 50%;
+            }
+
             :host([disabled]) {
                 opacity: 0.75;
                 pointer-events: none;
