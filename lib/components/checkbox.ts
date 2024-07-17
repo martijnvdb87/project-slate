@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size, varSize } from "../util/style";
+import { mainCss, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
@@ -89,8 +89,6 @@ export class Input extends LitElement {
                 display: flex;
                 vertical-align: bottom;
 
-                --width: auto;
-                --height: auto;
                 --field-size: var(--base-size-rem);
                 --box-size: ${varSize("checkbox-size")};
 
@@ -121,7 +119,7 @@ export class Input extends LitElement {
 
                 --icon-size: ${varSize("checkbox-icon-size")};
 
-                --gap: ${size(16)};
+                --gap: ${varSize("checkbox-gap")};
 
                 --font-size: var(--font-size-medium);
 
@@ -163,11 +161,6 @@ export class Input extends LitElement {
             }
 
             [part="input"]:focus-visible + [part="input-container"] {
-                border-color: hsl(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l)
-                );
                 --outline-color-a: 1;
             }
 
@@ -255,18 +248,25 @@ export class Input extends LitElement {
             }
 
             [part="label-container"] {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
                 color: hsla(
                     var(--form-field-label-color-h),
                     var(--form-field-label-color-s),
                     var(--form-field-label-color-l),
                     var(--form-field-label-color-a)
                 );
+                padding: calc(
+                        (var(--base-size-rem) - ${varSize("checkbox-size")}) / 2
+                    )
+                    0;
             }
 
             [part="label"] {
                 display: inline-flex;
                 cursor: pointer;
+                margin-bottom: ${varSize("checkbox-label-margin-bottom")};
             }
 
             slot:not([name]) {
