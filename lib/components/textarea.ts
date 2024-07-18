@@ -1,10 +1,10 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
+import { mainCss } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
-import { formField } from "../styles/formField";
+import { formInput } from "../styles/formInput";
 
 @customElement(`${config.prefix}-textarea`)
 export class Textarea extends LitElement {
@@ -112,7 +112,7 @@ export class Textarea extends LitElement {
 
     public static styles = [
         mainCss,
-        formField,
+        formInput,
         css`
             textarea {
                 display: flex;

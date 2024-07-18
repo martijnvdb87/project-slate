@@ -5,7 +5,7 @@ import { mainCss, sizer, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
-import { formField } from "../styles/formField";
+import { formInput } from "../styles/formInput";
 
 @customElement(`${config.prefix}-input`)
 export class Input extends LitElement {
@@ -206,7 +206,7 @@ export class Input extends LitElement {
 
     public static styles = [
         mainCss,
-        formField,
+        formInput,
         css`
             :host {
                 --padding-left: ${varSize("form-field-padding-x")};

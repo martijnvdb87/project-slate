@@ -4,7 +4,7 @@ import { config } from "@/lib/config";
 import { mainCss, varSize } from "../util/style";
 import { getPart, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
-import { formField } from "../styles/formField";
+import { formInput } from "../styles/formInput";
 
 @customElement(`${config.prefix}-range`)
 export class Range extends LitElement {
@@ -290,7 +290,7 @@ export class Range extends LitElement {
 
     public static styles = [
         mainCss,
-        formField,
+        formInput,
         css`
             :host {
                 user-select: none;

@@ -2,7 +2,7 @@ import { css } from "lit";
 import "@/lib/assets/fonts/inter/inter.css";
 import { varSize } from "../util/style";
 
-export const formField = css`
+export const formInput = css`
     :host {
         display: var(--display);
         vertical-align: bottom;

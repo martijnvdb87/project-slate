@@ -1,9 +1,10 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
-import { getRandomId } from "../util/general";
+import { mainCss } from "../util/style";
+import { getOptions, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { formToggle } from "../styles/formToggle";
 
 @customElement(`${config.prefix}-radio`)
 export class Radio extends LitElement {
@@ -11,10 +12,10 @@ export class Radio extends LitElement {
     public input: Ref<HTMLInputElement> = createRef();
 
     @property({ type: String })
-    protected name = "";
+    protected name = null;
 
     @property({ type: String })
-    protected value = "";
+    protected value = null;
 
     @property({ type: Boolean })
     protected checked = false;
@@ -36,136 +37,118 @@ export class Radio extends LitElement {
     public constructor() {
         super();
 
-        this.originalChecked = Boolean(this.getAttribute("checked"));
+        this.originalChecked = this.getAttribute("checked") !== null;
 
         this.internals = this.attachInternals();
-
-        if (this.originalChecked) {
-            this.internals.setFormValue(this.value);
-        }
+        this.internals.setFormValue(this.checked ? "on" : "off");
 
         this.elementId = getRandomId();
     }
 
     public formResetCallback() {
         this.checked = this.originalChecked;
-        this.internals.setFormValue(this.value);
-    }
-
-    public formDisabledCallback(disabled: boolean) {
-        this.disabled = disabled;
-    }
-
-    public formAssociatedCallback() {
-        this.internals.setFormValue(this.checked ? this.value : "");
+        this.internals.setFormValue(this.checked ? "on" : "off");
     }
 
     protected render() {
+        const options = getOptions(this);
+
         return html`
-            <div ${ref(this.root)} part="main">
-                <div part="radio-container">
-                    <input
-                        ${ref(this.input)}
-                        type="radio"
-                        part="input"
-                        id="${this.elementId}"
-                        name="${this.name}"
-                        value="${this.value}"
-                        .checked="${this.checked}"
-                        ?disabled="${this.disabled}"
-                        @input="${this.handleInput}"
-                    />
-                    <div part="input-container"></div>
-                </div>
-                <div part="label-container">
-                    <label for="${this.elementId}" part="label"
-                        ><slot></slot
-                    ></label>
-                    <slot name="description"></slot>
-                </div>
+            <div part="group">
+                ${options.map((option) => {
+                    return html`
+                        <div ${ref(this.root)} part="main">
+                            <input
+                                ${ref(this.input)}
+                                type="radio"
+                                part="input"
+                                id="${this.elementId}"
+                                name="${this.name}"
+                                .checked="${this.value === option.value}"
+                                ?disabled="${this.disabled}"
+                                @input="${this.handleInput}"
+                                value="${option.value}"
+                            />
+                            <div ${ref(this.root)} part="card">
+                                <div part="toggle-container">
+                                    <div part="input-container"></div>
+                                </div>
+                                <div part="label-container">
+                                    <label for="${this.elementId}" part="label"
+                                        >${option.label.text}</label
+                                    ></label>
+                                    ${
+                                        option.description
+                                            ? html`${option.description.text}`
+                                            : null
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })}
             </div>
         `;
     }
 
     protected handleInput(e: Event) {
-        for (const radio of this.internals.form?.[this.name]) {
-            radio.checked = radio.value === this.value;
-
-            radio.internals.setFormValue(radio === this ? this.value : null);
-        }
+        const target = e.target as HTMLInputElement;
+        this.checked = target.checked;
+        this.internals.setFormValue(this.checked ? "on" : "off");
     }
 
     public static styles = [
         mainCss,
+        formToggle,
         css`
             :host {
-                display: flex;
-                vertical-align: bottom;
-
-                --element-border-radius: var(--border-radius);
-                --border-width: var(--form-field-border-width);
-                --border-color-h: var(--form-field-border-color-h);
-                --border-color-s: var(--form-field-border-color-s);
-                --border-color-l: var(--form-field-border-color-l);
-                --border-color-a: var(--form-field-border-color-a);
-
-                --background-color-h: var(--form-field-background-color-h);
-                --background-color-s: var(--form-field-background-color-s);
-                --background-color-l: var(--form-field-background-color-l);
-                --background-color-a: var(--form-field-background-color-a);
-
-                --gap: ${size(16)};
-
-                --font-size: var(--font-size-medium);
-
-                --radio-size: ${size(20)};
-                --radio-inner-size: ${size(8)};
+                --border-radius: 999rem;
             }
 
             [part="main"] {
                 position: relative;
-                display: flex;
-                gap: var(--gap);
                 font-family: var(--global-font-family);
                 font-size: var(--font-size);
                 line-height: var(--text-line-height);
             }
 
-            [part="radio-container"] {
-                position: relative;
-            }
-
-            [part="input"] {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: var(--radio-size);
-                height: var(--radio-size);
-                opacity: 0;
-                z-index: 999;
-                cursor: pointer;
-            }
-
-            [part="input"]:focus-visible + [part="input-container"] {
-                border-color: hsl(
-                    var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l)
+            [part="card"] {
+                display: flex;
+                gap: var(--gap);
+                border-width: var(--card-border-width);
+                border-style: var(--card-border-style);
+                border-radius: var(--card-border-radius);
+                border-color: hsla(
+                    var(--card-border-color-h),
+                    var(--card-border-color-s),
+                    var(--card-border-color-l),
+                    var(--card-border-color-a)
                 );
-                outline: calc(
-                        var(--form-field-outline-width) +
-                            var(--form-field-border-width)
-                    )
-                    solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        var(--form-field-outline-opacity)
-                    );
+                border-color: hsla(
+                    var(--card-border-color-h),
+                    var(--card-border-color-s),
+                    var(--card-border-color-l),
+                    var(--card-border-color-a)
+                );
+                background-color: hsla(
+                    var(--card-background-color-h),
+                    var(--card-background-color-s),
+                    var(--card-background-color-l),
+                    var(--card-background-color-a)
+                );
+                padding: var(--card-padding-y) var(--card-padding-x);
+                outline-width: var(--outline-width-rem);
+                outline-offset: calc(0px - var(--card-border-width));
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--card-outline-color-h),
+                    var(--card-outline-color-s),
+                    var(--card-outline-color-l),
+                    var(--card-outline-color-a)
+                );
             }
 
-            [part="input"]:checked + [part="input-container"] {
+            [part="input"]:checked + [part="card"] {
                 --background-color-h: var(--primary-color-h);
                 --background-color-s: var(--primary-color-s);
                 --background-color-l: var(--primary-color-l);
@@ -177,110 +160,9 @@ export class Radio extends LitElement {
                 --border-color-a: var(--primary-color-a);
             }
 
-            [part="input-container"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                pointer-events: none;
-                width: var(--radio-size);
-                height: var(--radio-size);
-
-                border-radius: 999rem;
-                border-width: var(--border-width);
-                border-style: solid;
-                border-color: hsla(
-                    var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
-                    var(--border-color-a)
-                );
-
-                background-color: hsla(
-                    var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
-                    var(--background-color-a)
-                );
-                outline: 0 solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        0
-                    );
-                outline-offset: ${size(2)};
-            }
-
-            [part="input-container"]::after {
-                content: "";
-                display: block;
-                width: var(--radio-inner-size);
-                height: var(--radio-inner-size);
-                border-radius: 999rem;
-                background-color: hsla(
-                    var(--form-field-background-color-h),
-                    var(--form-field-background-color-s),
-                    var(--form-field-background-color-l),
-                    var(--form-field-background-color-a)
-                );
-                opacity: 0;
-            }
-
-            [part="input"]:checked + [part="input-container"]::after {
-                opacity: 1;
-            }
-
-            [part="label-container"] {
-                display: block;
-                color: hsla(
-                    var(--form-field-label-color-h),
-                    var(--form-field-label-color-s),
-                    var(--form-field-label-color-l),
-                    var(--form-field-label-color-a)
-                );
-            }
-
-            [part="label"] {
-                display: inline-flex;
-                cursor: pointer;
-            }
-
-            slot:not([name]) {
-                font-weight: var(--form-label-font-weight);
-                font-size: var(--form-label-font-size);
-            }
-
-            ::slotted([slot="description"]) {
-                color: hsla(
-                    var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
-                    var(--text-color-a)
-                );
-                margin-bottom: var(--margin-bottom);
-            }
-
-            :host([size="small"]) {
-                --font-size: var(--font-size-small);
-                --radio-size: ${size(16)};
-                --radio-inner-size: ${size(6)};
-            }
-
-            :host([size="large"]) {
-                --font-size: var(--font-size-large);
-                --radio-size: ${size(24)};
-                --radio-inner-size: ${size(10)};
-            }
-
-            :host([size="huge"]) {
-                --font-size: var(--font-size-huge);
-                --radio-size: ${size(28)};
-                --radio-inner-size: ${size(12)};
-            }
-
-            :host([disabled]) {
-                opacity: 0.75;
-                pointer-events: none;
+            :host([card]) [part="input"]:focus-visible + [part="card"] {
+                --outline-color-a: 0;
+                --card-outline-color-a: 1;
             }
         `,
     ];

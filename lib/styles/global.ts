@@ -134,11 +134,6 @@ export const global = css`
 
         --form-field-range-slider-filled-color-l-modifier: 15%;
 
-        --form-field-checkbox-icon-color-h: var(--primary-accent-h);
-        --form-field-checkbox-icon-color-s: var(--primary-accent-s);
-        --form-field-checkbox-icon-color-l: var(--primary-accent-l);
-        --form-field-checkbox-icon-color-a: var(--primary-accent-a);
-
         --form-field-validation-font-size-tiny: 12;
         --form-field-validation-font-size-small: 13;
         --form-field-validation-font-size-medium: 14;
@@ -170,16 +165,22 @@ export const global = css`
         --range-outline-offset: 3;
 
         /* ---- Checkbox ---- */
-        --checkbox-size: 22;
-        --checkbox-border-width: var(--global-border-width);
-        --checkbox-border-radius: var(--global-border-radius);
-        --checkbox-outline-offset: 3;
-        --checkbox-outline-width: ${size(1)};
+        --checkbox-icon-color-h: var(--primary-accent-h);
+        --checkbox-icon-color-s: var(--primary-accent-s);
+        --checkbox-icon-color-l: var(--primary-accent-l);
+        --checkbox-icon-color-a: var(--primary-accent-a);
         --checkbox-icon-size: 22;
-        --checkbox-gap: 16;
-        --checkbox-label-margin-bottom: 4;
-        --checkbox-card-border-width: var(--global-border-width);
-        --checkbox-card-border-radius: var(--global-border-radius);
+
+        /* ---- Form toggle ---- */
+        --form-toggle-size: 22;
+        --form-toggle-border-width: var(--global-border-width);
+        --form-toggle-border-radius: var(--global-border-radius);
+        --form-toggle-outline-offset: 3;
+        --form-toggle-outline-width: ${size(1)};
+        --form-toggle-gap: 16;
+        --form-toggle-label-margin-bottom: 4;
+        --form-toggle-card-border-width: var(--global-border-width);
+        --form-toggle-card-border-radius: var(--global-border-radius);
 
         /* ---- Form card ---- */
         --form-card-border-width: var(--global-border-width);

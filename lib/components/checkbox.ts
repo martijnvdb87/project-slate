@@ -5,9 +5,10 @@ import { mainCss, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { formToggle } from "../styles/formToggle";
 
 @customElement(`${config.prefix}-checkbox`)
-export class Input extends LitElement {
+export class Checkbox extends LitElement {
     public root: Ref<HTMLInputElement> = createRef();
     public input: Ref<HTMLInputElement> = createRef();
 
@@ -64,7 +65,7 @@ export class Input extends LitElement {
                     @input="${this.handleInput}"
                 />
                 <div ${ref(this.root)} part="card">
-                    <div part="checkbox-container">
+                    <div part="toggle-container">
                         <div part="input-container">
                             ${renderIcon(this.icon)}
                         </div>
@@ -88,31 +89,13 @@ export class Input extends LitElement {
 
     public static styles = [
         mainCss,
+        formToggle,
         css`
             :host {
-                display: flex;
-                vertical-align: bottom;
-
-                --field-size: var(--base-size-rem);
-                --box-size: ${varSize("checkbox-size")};
-
-                --border-radius: ${varSize("checkbox-border-radius")};
-                --border-width: ${varSize("checkbox-border-width")};
-
-                --border-color-h: var(--form-field-border-color-h);
-                --border-color-s: var(--form-field-border-color-s);
-                --border-color-l: var(--form-field-border-color-l);
-                --border-color-a: var(--form-field-border-color-a);
-
-                --background-color-h: var(--form-field-background-color-h);
-                --background-color-s: var(--form-field-background-color-s);
-                --background-color-l: var(--form-field-background-color-l);
-                --background-color-a: var(--form-field-background-color-a);
-
-                --icon-color-h: var(--form-field-checkbox-icon-color-h);
-                --icon-color-s: var(--form-field-checkbox-icon-color-s);
-                --icon-color-l: var(--form-field-checkbox-icon-color-l);
-                --icon-color-a: var(--form-field-checkbox-icon-color-a);
+                --icon-color-h: var(--checkbox-icon-color-h);
+                --icon-color-s: var(--checkbox-icon-color-s);
+                --icon-color-l: var(--checkbox-icon-color-l);
+                --icon-color-a: var(--checkbox-icon-color-a);
 
                 --icon-color: hsla(
                     var(--icon-color-h),
@@ -122,33 +105,6 @@ export class Input extends LitElement {
                 );
 
                 --icon-size: ${varSize("checkbox-icon-size")};
-
-                --gap: ${varSize("checkbox-gap")};
-
-                --font-size: var(--font-size-medium);
-
-                --outline-color-h: var(--primary-color-h);
-                --outline-color-s: var(--primary-color-s);
-                --outline-color-l: var(--primary-color-l);
-                --outline-color-a: 0;
-
-                --card-border-width: initial;
-                --card-border-style: initial;
-                --card-border-radius: initial;
-                --card-padding-y: initial;
-                --card-padding-x: initial;
-                --card-border-color-h: initial;
-                --card-border-color-s: initial;
-                --card-border-color-l: initial;
-                --card-border-color-a: initial;
-                --card-background-color-h: initial;
-                --card-background-color-s: initial;
-                --card-background-color-l: initial;
-                --card-background-color-a: initial;
-                --card-outline-color-h: var(--primary-color-h);
-                --card-outline-color-s: var(--primary-color-s);
-                --card-outline-color-l: var(--primary-color-l);
-                --card-outline-color-a: 0;
             }
 
             [part="main"] {
@@ -194,36 +150,6 @@ export class Input extends LitElement {
                 );
             }
 
-            [part="checkbox-container"] {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: var(--field-size);
-                height: var(--field-size);
-                flex-shrink: 0;
-                flex-grow: 0;
-            }
-
-            [part="input"] {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: var(--field-size);
-                height: var(--field-size);
-                opacity: 0;
-                z-index: 999;
-                cursor: pointer;
-            }
-            :host([card]) [part="input"] {
-                width: 100%;
-                height: 100%;
-            }
-
-            [part="input"]:focus-visible + [part="card"] {
-                --outline-color-a: 1;
-            }
-
             [part="icon-container"] {
                 display: flex;
                 opacity: 0;
@@ -243,45 +169,6 @@ export class Input extends LitElement {
 
             [part="input"]:checked + [part="card"] [part="icon-container"] {
                 opacity: 1;
-            }
-
-            [part="input-container"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                pointer-events: none;
-                width: var(--box-size);
-                height: var(--box-size);
-
-                border-radius: var(--border-radius);
-                border-width: var(--border-width);
-                border-style: solid;
-                border-color: hsla(
-                    var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
-                    var(--border-color-a)
-                );
-
-                background-color: hsla(
-                    var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
-                    var(--background-color-a)
-                );
-
-                outline-width: var(--outline-width-rem);
-                outline-offset: calc(
-                    0px - var(--border-width) +
-                        ${varSize("checkbox-outline-offset")}
-                );
-                outline-style: solid;
-                outline-color: hsla(
-                    var(--outline-color-h),
-                    var(--outline-color-s),
-                    var(--outline-color-l),
-                    var(--outline-color-a)
-                );
             }
 
             [part="icon"] {
@@ -305,91 +192,6 @@ export class Input extends LitElement {
                 overflow: hidden;
             }
 
-            [part="label-container"] {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                color: hsla(
-                    var(--form-field-label-color-h),
-                    var(--form-field-label-color-s),
-                    var(--form-field-label-color-l),
-                    var(--form-field-label-color-a)
-                );
-                padding: calc(
-                        (var(--base-size-rem) - ${varSize("checkbox-size")}) / 2
-                    )
-                    0;
-            }
-
-            [part="label"] {
-                display: inline-flex;
-                cursor: pointer;
-                margin-bottom: ${varSize("checkbox-label-margin-bottom")};
-            }
-
-            slot:not([name]) {
-                font-weight: var(--form-label-font-weight);
-                font-size: var(--form-label-font-size);
-            }
-
-            ::slotted([slot="description"]) {
-                color: hsla(
-                    var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
-                    var(--text-color-a)
-                );
-                margin-bottom: var(--margin-bottom);
-            }
-
-            :host([size="small"]) {
-                --font-size: var(--font-size-small);
-            }
-
-            :host([size="large"]) {
-                --font-size: var(--font-size-large);
-            }
-
-            :host([size="huge"]) {
-                --font-size: var(--font-size-huge);
-            }
-
-            :host([shape="square"]) {
-                --border-radius: 0;
-            }
-
-            :host([shape="pill"]) {
-                --border-radius: var(--shape-pill-radius);
-            }
-
-            :host([shape="circle"]) {
-                --border-radius: 50%;
-            }
-
-            :host([disabled]) {
-                opacity: 0.75;
-                pointer-events: none;
-            }
-
-            :host([card]) {
-                --card-border-width: ${varSize("form-card-border-width")};
-                --card-border-style: var(--form-card-border-style);
-                --card-border-radius: ${varSize("form-card-border-radius")};
-                --card-padding-y: ${varSize("form-card-padding-y")};
-                --card-padding-x: ${varSize("form-card-padding-x")};
-                --card-border-color-h: var(--form-card-border-color-h);
-                --card-border-color-s: var(--form-card-border-color-s);
-                --card-border-color-l: var(--form-card-border-color-l);
-                --card-border-color-a: var(--form-card-border-color-a);
-                --card-background-color-h: var(--form-card-background-color-h);
-                --card-background-color-s: var(--form-card-background-color-s);
-                --card-background-color-l: var(--form-card-background-color-l);
-                --card-background-color-a: var(--form-card-background-color-a);
-
-                --outline-color-a: 0;
-            }
-
             :host([card]) [part="input"]:focus-visible + [part="card"] {
                 --outline-color-a: 0;
                 --card-outline-color-a: 1;
@@ -400,6 +202,6 @@ export class Input extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "ds-checkbox": Input;
+        "ds-checkbox": Checkbox;
     }
 }

@@ -4,6 +4,7 @@ import "@/lib/components/app";
 import "@/lib/components/button";
 import "@/lib/components/checkbox";
 import "@/lib/components/input";
+import "@/lib/components/option";
 import "@/lib/components/radio";
 import "@/lib/components/range";
 import "@/lib/components/select";

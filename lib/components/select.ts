@@ -5,7 +5,7 @@ import { mainCss, varSize } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { renderIcon } from "../util/icons";
-import { formField } from "../styles/formField";
+import { formInput } from "../styles/formInput";
 
 @customElement(`${config.prefix}-select`)
 export class Select extends LitElement {
@@ -126,7 +126,7 @@ export class Select extends LitElement {
 
     public static styles = [
         mainCss,
-        formField,
+        formInput,
         css`
             select {
                 display: flex;
