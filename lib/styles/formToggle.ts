@@ -23,8 +23,9 @@ export const formToggle = css`
         --background-color-l: var(--form-field-background-color-l);
         --background-color-a: var(--form-field-background-color-a);
 
-        --gap: ${varSize("form-toggle-gap")};
+        --gap: ${varSize("form-toggle-column-gap")};
 
+        --label-font-size: var(--form-label-font-size-medium);
         --font-size: var(--font-size-medium);
 
         --outline-color-h: var(--primary-color-h);
@@ -49,6 +50,17 @@ export const formToggle = css`
         --card-outline-color-s: var(--primary-color-s);
         --card-outline-color-l: var(--primary-color-l);
         --card-outline-color-a: 0;
+    }
+
+    [part="main"] {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: ${varSize("form-toggle-row-gap")};
+        font-family: var(--global-font-family);
+        font-size: var(--font-size);
+        line-height: var(--text-line-height);
     }
 
     [part="toggle-container"] {
@@ -156,11 +168,11 @@ export const formToggle = css`
         );
     }
 
-    [part="label-container"] {
+    [part="text-container"] {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: flex-start;
+        gap: ${varSize("form-toggle-row-gap")};
         color: hsla(
             var(--form-field-label-color-h),
             var(--form-field-label-color-s),
@@ -176,12 +188,8 @@ export const formToggle = css`
     [part="label"] {
         display: inline-flex;
         cursor: pointer;
-        margin-bottom: ${varSize("form-toggle-label-margin-bottom")};
-    }
-
-    slot:not([name]) {
         font-weight: var(--form-label-font-weight);
-        font-size: var(--form-label-font-size);
+        font-size: var(--label-font-size);
     }
 
     ::slotted([slot="description"]) {

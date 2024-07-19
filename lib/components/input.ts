@@ -246,11 +246,6 @@ export class Input extends LitElement {
                 font-weight: var(--placeholder-weight);
             }
 
-            [part="main"] {
-                position: relative;
-                flex-grow: 1;
-            }
-
             [part="icon"] {
                 display: flex;
                 align-items: center;

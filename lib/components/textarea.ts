@@ -146,11 +146,6 @@ export class Textarea extends LitElement {
                 font-weight: var(--placeholder-weight);
             }
 
-            [part="main"] {
-                position: relative;
-                flex-grow: 1;
-            }
-
             [part="input-container"] {
                 position: relative;
                 display: flex;

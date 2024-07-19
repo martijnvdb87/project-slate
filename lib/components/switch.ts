@@ -4,6 +4,7 @@ import { config } from "@/lib/config";
 import { mainCss, size } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { formToggle } from "../styles/formToggle";
 
 @customElement(`${config.prefix}-switch`)
 export class Switch extends LitElement {
@@ -65,7 +66,7 @@ export class Switch extends LitElement {
                 <div part="handle-container">
                     <div part="handle"></div>
                 </div>
-                <div part="label-container">
+                <div part="text-container">
                     <label for="${this.elementId}" part="label"
                         ><slot></slot
                     ></label>
@@ -83,6 +84,7 @@ export class Switch extends LitElement {
 
     public static styles = [
         mainCss,
+        formToggle,
         css`
             :host {
                 display: flex;
@@ -101,15 +103,6 @@ export class Switch extends LitElement {
                 --font-size: var(--font-size-medium);
 
                 --handle-size: ${size(20)};
-            }
-
-            [part="main"] {
-                position: relative;
-                display: flex;
-                gap: var(--gap);
-                font-family: var(--global-font-family);
-                font-size: var(--font-size);
-                line-height: var(--text-line-height);
             }
 
             [part="handle-container"] {
@@ -232,7 +225,7 @@ export class Switch extends LitElement {
                 pointer-events: none;
             }
 
-            [part="label-container"] {
+            [part="text-container"] {
                 display: block;
                 color: hsla(
                     var(--form-field-label-color-h),
@@ -240,11 +233,6 @@ export class Switch extends LitElement {
                     var(--form-field-label-color-l),
                     var(--form-field-label-color-a)
                 );
-            }
-
-            [part="label"] {
-                display: inline-flex;
-                cursor: pointer;
             }
 
             slot:not([name]) {

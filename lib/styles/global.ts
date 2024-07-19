@@ -89,6 +89,7 @@ export const global = css`
         --form-field-border-radius: var(--global-border-radius);
         --form-field-padding-y: 8;
         --form-field-padding-x: 12;
+        --form-field-row-gap: 8;
         --form-field-icon-size: 20;
 
         --form-field-font-family: var(--global-font-sans);
@@ -170,8 +171,8 @@ export const global = css`
         --form-toggle-border-radius: var(--global-border-radius);
         --form-toggle-outline-offset: 3;
         --form-toggle-outline-width: ${size(1)};
-        --form-toggle-gap: 16;
-        --form-toggle-label-margin-bottom: 4;
+        --form-toggle-column-gap: 16;
+        --form-toggle-row-gap: 2;
         --form-toggle-card-border-width: var(--global-border-width);
         --form-toggle-card-border-radius: var(--global-border-radius);
 
@@ -211,7 +212,6 @@ export const global = css`
         --form-label-font-size-large: 15;
         --form-label-font-size-huge: 16;
         --form-label-font-weight: 500;
-        --form-label-margin-bottom: 8;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;

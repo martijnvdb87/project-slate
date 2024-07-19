@@ -52,6 +52,10 @@ export class Checkbox extends LitElement {
     }
 
     protected render() {
+        const hasDescription = Boolean(
+            Boolean(this.querySelector("[slot='description']"))
+        );
+
         return html`
             <div ${ref(this.root)} part="main">
                 <input
@@ -70,11 +74,15 @@ export class Checkbox extends LitElement {
                             ${renderIcon(this.icon)}
                         </div>
                     </div>
-                    <div part="label-container">
+                    <div part="text-container">
                         <label for="${this.elementId}" part="label"
                             ><slot></slot
                         ></label>
-                        <slot name="description"></slot>
+                        ${hasDescription
+                            ? html`<div part="description">
+                                  <slot name="description"></slot>
+                              </div>`
+                            : null}
                     </div>
                 </div>
             </div>
@@ -105,13 +113,6 @@ export class Checkbox extends LitElement {
                 );
 
                 --icon-size: ${varSize("checkbox-icon-size")};
-            }
-
-            [part="main"] {
-                position: relative;
-                font-family: var(--global-font-family);
-                font-size: var(--font-size);
-                line-height: var(--text-line-height);
             }
 
             [part="icon-container"] {

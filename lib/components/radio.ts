@@ -74,15 +74,17 @@ export class Radio extends LitElement {
                                 <div part="toggle-container">
                                     <div part="input-container"></div>
                                 </div>
-                                <div part="label-container">
+                                <div part="text-container">
                                     <label for="${this.elementId}-${
                         option.value
                     }" part="label"
                                         >${option.label.text}</label
                                     ></label>
                                     ${
-                                        option.description
-                                            ? html`${option.description.text}`
+                                        option.description.text
+                                            ? html`<div part="description">
+                                                  ${option.description.text}
+                                              </div>`
                                             : null
                                     }
                                 </div>
@@ -112,13 +114,6 @@ export class Radio extends LitElement {
                 display: flex;
                 flex-direction: var(--radio-card-direction);
                 gap: ${varSize("radio-card-gap")};
-            }
-
-            [part="main"] {
-                position: relative;
-                font-family: var(--global-font-family);
-                font-size: var(--font-size);
-                line-height: var(--text-line-height);
             }
 
             [part="input-container"]::before {

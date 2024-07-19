@@ -313,7 +313,6 @@ export class Range extends LitElement {
             }
 
             [part="main"] {
-                position: relative;
                 flex-grow: 1;
                 touch-action: pan-y;
             }

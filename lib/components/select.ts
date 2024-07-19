@@ -161,25 +161,6 @@ export class Select extends LitElement {
                 font-weight: var(--placeholder-weight);
             }
 
-            [part="main"] {
-                position: relative;
-                flex-grow: 1;
-            }
-
-            [part="label"] {
-                display: inline-block;
-                margin-bottom: ${varSize("form-label-margin-bottom")};
-                font-size: var(--label-font-size);
-                font-weight: var(--label-font-weight);
-
-                color: hsla(
-                    var(--label-color-h),
-                    var(--label-color-s),
-                    var(--label-color-l),
-                    var(--label-color-a)
-                );
-            }
-
             [part="input-container"] {
                 position: relative;
                 display: flex;

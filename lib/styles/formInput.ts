@@ -70,9 +70,16 @@ export const formInput = css`
         )};
     }
 
+    [part="main"] {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: ${varSize("form-field-row-gap")};
+    }
+
     [part="label"] {
         display: inline-block;
-        margin-bottom: ${varSize("form-label-margin-bottom")};
         font-size: var(--label-font-size);
         font-weight: var(--label-font-weight);
 
