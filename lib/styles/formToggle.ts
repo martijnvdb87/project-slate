@@ -82,6 +82,7 @@ export const formToggle = css`
     }
 
     [part="input-container"] {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -116,6 +117,42 @@ export const formToggle = css`
             var(--outline-color-s),
             var(--outline-color-l),
             var(--outline-color-a)
+        );
+    }
+
+    [part="card"] {
+        display: flex;
+        gap: var(--gap);
+        border-width: var(--card-border-width);
+        border-style: var(--card-border-style);
+        border-radius: var(--card-border-radius);
+        border-color: hsla(
+            var(--card-border-color-h),
+            var(--card-border-color-s),
+            var(--card-border-color-l),
+            var(--card-border-color-a)
+        );
+        border-color: hsla(
+            var(--card-border-color-h),
+            var(--card-border-color-s),
+            var(--card-border-color-l),
+            var(--card-border-color-a)
+        );
+        background-color: hsla(
+            var(--card-background-color-h),
+            var(--card-background-color-s),
+            var(--card-background-color-l),
+            var(--card-background-color-a)
+        );
+        padding: var(--card-padding-y) var(--card-padding-x);
+        outline-width: var(--outline-width-rem);
+        outline-offset: calc(0px - var(--card-border-width));
+        outline-style: solid;
+        outline-color: hsla(
+            var(--card-outline-color-h),
+            var(--card-outline-color-s),
+            var(--card-outline-color-l),
+            var(--card-outline-color-a)
         );
     }
 

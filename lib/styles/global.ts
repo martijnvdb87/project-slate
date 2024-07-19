@@ -164,13 +164,6 @@ export const global = css`
         --range-padding-y: 4;
         --range-outline-offset: 3;
 
-        /* ---- Checkbox ---- */
-        --checkbox-icon-color-h: var(--primary-accent-h);
-        --checkbox-icon-color-s: var(--primary-accent-s);
-        --checkbox-icon-color-l: var(--primary-accent-l);
-        --checkbox-icon-color-a: var(--primary-accent-a);
-        --checkbox-icon-size: 22;
-
         /* ---- Form toggle ---- */
         --form-toggle-size: 22;
         --form-toggle-border-width: var(--global-border-width);
@@ -181,6 +174,18 @@ export const global = css`
         --form-toggle-label-margin-bottom: 4;
         --form-toggle-card-border-width: var(--global-border-width);
         --form-toggle-card-border-radius: var(--global-border-radius);
+
+        /* ---- Checkbox ---- */
+        --checkbox-icon-color-h: var(--primary-accent-h);
+        --checkbox-icon-color-s: var(--primary-accent-s);
+        --checkbox-icon-color-l: var(--primary-accent-l);
+        --checkbox-icon-color-a: var(--primary-accent-a);
+        --checkbox-icon-size: 22;
+
+        /* ---- Radio ---- */
+        --radio-dot-size: 8;
+        --radio-card-gap: 16;
+        --radio-card-direction: column;
 
         /* ---- Form card ---- */
         --form-card-border-width: var(--global-border-width);

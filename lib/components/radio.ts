@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "../util/style";
+import { mainCss, varSize } from "../util/style";
 import { getOptions, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { formToggle } from "../styles/formToggle";
@@ -15,13 +15,13 @@ export class Radio extends LitElement {
     protected name = null;
 
     @property({ type: String })
-    protected value = null;
+    protected value = "";
 
     @property({ type: Boolean })
     protected checked = false;
 
     @state()
-    protected originalChecked = false;
+    protected originalValue = "";
 
     @property({ type: Boolean })
     protected disabled = false;
@@ -37,17 +37,18 @@ export class Radio extends LitElement {
     public constructor() {
         super();
 
-        this.originalChecked = this.getAttribute("checked") !== null;
+        this.value = this.getAttribute("value") ?? "";
+        this.originalValue = this.value;
 
         this.internals = this.attachInternals();
-        this.internals.setFormValue(this.checked ? "on" : "off");
+        this.internals.setFormValue(this.value);
 
         this.elementId = getRandomId();
     }
 
     public formResetCallback() {
-        this.checked = this.originalChecked;
-        this.internals.setFormValue(this.checked ? "on" : "off");
+        this.value = this.originalValue;
+        this.internals.setFormValue(this.value);
     }
 
     protected render() {
@@ -62,7 +63,7 @@ export class Radio extends LitElement {
                                 ${ref(this.input)}
                                 type="radio"
                                 part="input"
-                                id="${this.elementId}"
+                                id="${this.elementId}-${option.value}"
                                 name="${this.name}"
                                 .checked="${this.value === option.value}"
                                 ?disabled="${this.disabled}"
@@ -74,7 +75,9 @@ export class Radio extends LitElement {
                                     <div part="input-container"></div>
                                 </div>
                                 <div part="label-container">
-                                    <label for="${this.elementId}" part="label"
+                                    <label for="${this.elementId}-${
+                        option.value
+                    }" part="label"
                                         >${option.label.text}</label
                                     ></label>
                                     ${
@@ -93,8 +96,8 @@ export class Radio extends LitElement {
 
     protected handleInput(e: Event) {
         const target = e.target as HTMLInputElement;
-        this.checked = target.checked;
-        this.internals.setFormValue(this.checked ? "on" : "off");
+        this.value = target.value;
+        this.internals.setFormValue(this.value);
     }
 
     public static styles = [
@@ -105,6 +108,12 @@ export class Radio extends LitElement {
                 --border-radius: 999rem;
             }
 
+            [part="group"] {
+                display: flex;
+                flex-direction: var(--radio-card-direction);
+                gap: ${varSize("radio-card-gap")};
+            }
+
             [part="main"] {
                 position: relative;
                 font-family: var(--global-font-family);
@@ -112,40 +121,15 @@ export class Radio extends LitElement {
                 line-height: var(--text-line-height);
             }
 
-            [part="card"] {
-                display: flex;
-                gap: var(--gap);
-                border-width: var(--card-border-width);
-                border-style: var(--card-border-style);
-                border-radius: var(--card-border-radius);
-                border-color: hsla(
-                    var(--card-border-color-h),
-                    var(--card-border-color-s),
-                    var(--card-border-color-l),
-                    var(--card-border-color-a)
-                );
-                border-color: hsla(
-                    var(--card-border-color-h),
-                    var(--card-border-color-s),
-                    var(--card-border-color-l),
-                    var(--card-border-color-a)
-                );
-                background-color: hsla(
-                    var(--card-background-color-h),
-                    var(--card-background-color-s),
-                    var(--card-background-color-l),
-                    var(--card-background-color-a)
-                );
-                padding: var(--card-padding-y) var(--card-padding-x);
-                outline-width: var(--outline-width-rem);
-                outline-offset: calc(0px - var(--card-border-width));
-                outline-style: solid;
-                outline-color: hsla(
-                    var(--card-outline-color-h),
-                    var(--card-outline-color-s),
-                    var(--card-outline-color-l),
-                    var(--card-outline-color-a)
-                );
+            [part="input-container"]::before {
+                content: "";
+                position: absolute;
+                top: calc(-${varSize("radio-dot-size")} / 2);
+                left: calc(-${varSize("radio-dot-size")} / 2);
+                width: ${varSize("radio-dot-size")};
+                height: ${varSize("radio-dot-size")};
+                border-radius: var(--border-radius);
+                background-color: white;
             }
 
             [part="input"]:checked + [part="card"] {
