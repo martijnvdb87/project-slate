@@ -231,6 +231,7 @@ export const global = css`
 
         --text-line-height: 1.5;
 
+        --font-size-tiny: ${size(11)};
         --font-size-small: ${size(12)};
         --font-size-medium: ${size(14)};
         --font-size-large: ${size(16)};

@@ -207,16 +207,20 @@ export const formToggle = css`
         margin-bottom: var(--margin-bottom);
     }
 
+    :host([size="tiny"]) {
+        --font-size: ${varSize("font-size-tiny", true)};
+    }
+
     :host([size="small"]) {
-        --font-size: var(--font-size-small);
+        --font-size: ${varSize("font-size-small", true)};
     }
 
     :host([size="large"]) {
-        --font-size: var(--font-size-large);
+        --font-size: ${varSize("font-size-large", true)};
     }
 
     :host([size="huge"]) {
-        --font-size: var(--font-size-huge);
+        --font-size: ${varSize("font-size-huge", true)};
     }
 
     :host([shape="square"]) {
