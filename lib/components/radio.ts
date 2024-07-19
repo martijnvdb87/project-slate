@@ -138,11 +138,6 @@ export class Radio extends LitElement {
                 --border-color-l: var(--primary-color-l);
                 --border-color-a: var(--primary-color-a);
             }
-
-            :host([card]) [part="input"]:focus-visible + [part="card"] {
-                --outline-color-a: 0;
-                --card-outline-color-a: 1;
-            }
         `,
     ];
 }

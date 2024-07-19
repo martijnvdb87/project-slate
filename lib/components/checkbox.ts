@@ -68,7 +68,7 @@ export class Checkbox extends LitElement {
                     ?disabled="${this.disabled}"
                     @input="${this.handleInput}"
                 />
-                <div ${ref(this.root)} part="card">
+                <div part="card">
                     <div part="toggle-container">
                         <div part="input-container">
                             ${renderIcon(this.icon)}
@@ -155,11 +155,6 @@ export class Checkbox extends LitElement {
                 max-height: 100%;
                 pointer-events: none;
                 overflow: hidden;
-            }
-
-            :host([card]) [part="input"]:focus-visible + [part="card"] {
-                --outline-color-a: 0;
-                --card-outline-color-a: 1;
             }
         `,
     ];

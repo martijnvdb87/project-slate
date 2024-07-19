@@ -188,6 +188,12 @@ export const global = css`
         --radio-card-gap: 16;
         --radio-card-direction: column;
 
+        /* ---- Switch ---- */
+        --switch-size: var(--size-medium);
+        --switch-handle-size: 18;
+        --switch-handle-offset: 2;
+        --switch-outline-offset: 3;
+
         /* ---- Form card ---- */
         --form-card-border-width: var(--global-border-width);
         --form-card-border-style: solid;

@@ -93,6 +93,11 @@ export const formToggle = css`
         --outline-color-a: 1;
     }
 
+    :host([card]) [part="input"]:focus-visible + [part="card"] {
+        --outline-color-a: 0;
+        --card-outline-color-a: 1;
+    }
+
     [part="input-container"] {
         position: relative;
         display: flex;

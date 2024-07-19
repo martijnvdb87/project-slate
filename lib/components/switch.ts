@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
+import { mainCss, varSize } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { formToggle } from "../styles/formToggle";
@@ -19,9 +19,6 @@ export class Switch extends LitElement {
 
     @state()
     protected originalChecked = false;
-
-    @property({ type: String })
-    protected icon = "check";
 
     @property({ type: Boolean })
     protected disabled = false;
@@ -51,6 +48,10 @@ export class Switch extends LitElement {
     }
 
     protected render() {
+        const hasDescription = Boolean(
+            Boolean(this.querySelector("[slot='description']"))
+        );
+
         return html`
             <div ${ref(this.root)} part="main">
                 <input
@@ -63,14 +64,22 @@ export class Switch extends LitElement {
                     ?disabled="${this.disabled}"
                     @input="${this.handleInput}"
                 />
-                <div part="handle-container">
-                    <div part="handle"></div>
-                </div>
-                <div part="text-container">
-                    <label for="${this.elementId}" part="label"
-                        ><slot></slot
-                    ></label>
-                    <slot name="description"></slot>
+                <div part="card">
+                    <div part="toggle-container">
+                        <div part="input-container">
+                            <div part="handle"></div>
+                        </div>
+                    </div>
+                    <div part="text-container">
+                        <label for="${this.elementId}" part="label"
+                            ><slot></slot
+                        ></label>
+                        ${hasDescription
+                            ? html`<div part="description">
+                                  <slot name="description"></slot>
+                              </div>`
+                            : null}
+                    </div>
                 </div>
             </div>
         `;
@@ -90,29 +99,36 @@ export class Switch extends LitElement {
                 display: flex;
                 vertical-align: bottom;
 
-                --element-border-radius: var(--border-radius);
-                --border-width: var(--form-field-border-width);
-
                 --background-color-h: var(--form-field-border-color-h);
                 --background-color-s: var(--form-field-border-color-s);
                 --background-color-l: var(--form-field-border-color-l);
                 --background-color-a: var(--form-field-border-color-a);
 
-                --gap: ${size(16)};
+                --handle-color-h: var(--form-field-background-color-h);
+                --handle-color-s: var(--form-field-background-color-s);
+                --handle-color-l: var(--form-field-background-color-l);
+                --handle-color-a: var(--form-field-background-color-a);
 
-                --font-size: var(--font-size-medium);
-
-                --handle-size: ${size(20)};
+                --handle-size: ${varSize("switch-handle-size")};
             }
 
-            [part="handle-container"] {
+            [part="toggle-container"] {
                 position: relative;
                 flex-shrink: 0;
                 display: flex;
-                width: calc(
-                    var(--handle-size) * 1.75 + var(--border-width) * 2
+                width: var(--field-size);
+                height: var(--field-size);
+            }
+
+            [part="input-container"] {
+                position: absolute;
+                width: ${varSize("switch-size")};
+                height: calc(
+                    ${varSize("switch-handle-size")} +
+                        ${varSize("switch-handle-offset")} * 2
                 );
-                height: calc(var(--handle-size) + var(--border-width) * 2);
+                border-radius: var(--element-border-radius);
+                border-width: 0;
                 border-radius: 999rem;
 
                 background-color: hsla(
@@ -121,153 +137,37 @@ export class Switch extends LitElement {
                     var(--background-color-l),
                     var(--background-color-a)
                 );
-
-                outline: 0 solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        0
-                    );
-                outline-offset: ${size(2)};
-                transition: border-color 160ms ease, background-color 160ms ease;
+                transition: background-color 160ms ease;
             }
 
-            [part="input"] {
+            [part="handle"] {
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: calc(var(--handle-size) * 1.75);
+                top: ${varSize("switch-handle-offset")};
+                left: ${varSize("switch-handle-offset")};
+                width: var(--handle-size);
                 height: var(--handle-size);
-                opacity: 0;
-                z-index: 999;
-                cursor: pointer;
+                border-radius: 999rem;
+                background-color: hsla(
+                    var(--handle-color-h),
+                    var(--handle-color-s),
+                    var(--handle-color-l),
+                    var(--handle-color-a)
+                );
+                transition: left 160ms ease;
             }
 
-            [part="input"]:focus-visible + [part="handle-container"] {
-                outline: calc(
-                        var(--form-field-outline-width) +
-                            var(--form-field-border-width)
-                    )
-                    solid
-                    hsla(
-                        var(--primary-color-h),
-                        var(--primary-color-s),
-                        var(--primary-color-l),
-                        var(--form-field-outline-opacity)
-                    );
-            }
-
-            [part="icon-container"] {
-                display: flex;
-                opacity: 0;
-            }
-
-            [part="input"]:checked + [part="handle-container"] {
+            [part="input"]:checked + [part="card"] {
                 --background-color-h: var(--primary-color-h);
                 --background-color-s: var(--primary-color-s);
                 --background-color-l: var(--primary-color-l);
                 --background-color-a: var(--primary-color-a);
             }
 
-            [part="input"]:checked + [part="handle-container"] [part="handle"] {
-                left: calc(var(--handle-size) * 0.75 + var(--border-width));
-            }
-
-            [part="handle"] {
-                position: absolute;
-                top: calc(0px + var(--border-width));
-                left: calc(0px + var(--border-width));
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                pointer-events: none;
-                width: var(--handle-size);
-                height: var(--handle-size);
-                transition: left 160ms ease;
-            }
-
-            [part="handle"]::before {
-                content: "";
-                display: block;
-                width: calc(100% - var(--border-width) * 2);
-                height: calc(100% - var(--border-width) * 2);
-                border-radius: var(--element-border-radius);
-                border-radius: 999rem;
-                background-color: hsla(
-                    var(--form-field-background-color-h),
-                    var(--form-field-background-color-s),
-                    var(--form-field-background-color-l),
-                    var(--form-field-background-color-a)
+            [part="input"]:checked + [part="card"] [part="handle"] {
+                left: calc(
+                    ${varSize("switch-size")} - ${varSize("switch-handle-size")} -
+                        ${varSize("switch-handle-offset")}
                 );
-                transition: background-color 160ms ease;
-            }
-
-            [part="icon"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-                max-width: 100%;
-                max-height: 100%;
-                pointer-events: none;
-            }
-
-            [part="icon-container"] {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-                max-width: 100%;
-                max-height: 100%;
-                pointer-events: none;
-            }
-
-            [part="text-container"] {
-                display: block;
-                color: hsla(
-                    var(--form-field-label-color-h),
-                    var(--form-field-label-color-s),
-                    var(--form-field-label-color-l),
-                    var(--form-field-label-color-a)
-                );
-            }
-
-            slot:not([name]) {
-                font-weight: var(--form-label-font-weight);
-                font-size: var(--form-label-font-size);
-            }
-
-            ::slotted([slot="description"]) {
-                color: hsla(
-                    var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
-                    var(--text-color-a)
-                );
-                margin-bottom: var(--margin-bottom);
-            }
-
-            :host([size="small"]) {
-                --font-size: var(--font-size-small);
-                --handle-size: ${size(16)};
-            }
-
-            :host([size="large"]) {
-                --font-size: var(--font-size-large);
-                --handle-size: ${size(24)};
-            }
-
-            :host([size="huge"]) {
-                --font-size: var(--font-size-huge);
-                --handle-size: ${size(28)};
-            }
-
-            :host([disabled]) {
-                opacity: 0.75;
-                pointer-events: none;
             }
         `,
     ];
