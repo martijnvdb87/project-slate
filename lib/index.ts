@@ -7,7 +7,7 @@ import "@/lib/components/input";
 import "@/lib/components/option";
 import "@/lib/components/radio";
 import "@/lib/components/range";
-import "@/lib/components/select";
+import "@/lib/components/selectNative";
 import "@/lib/components/switch";
 import "@/lib/components/tabs";
 import "@/lib/components/textarea";

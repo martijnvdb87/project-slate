@@ -70,7 +70,7 @@ export class Radio extends LitElement {
                                 @input="${this.handleInput}"
                                 value="${option.value}"
                             />
-                            <div ${ref(this.root)} part="card">
+                            <div part="card">
                                 <div part="toggle-container">
                                     <div part="input-container"></div>
                                 </div>

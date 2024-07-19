@@ -1,14 +1,14 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
-import { getRandomId } from "../util/general";
+import { mainCss } from "../util/style";
+import { getOptions, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { renderIcon } from "../util/icons";
 import { formInput } from "../styles/formInput";
 
-@customElement(`${config.prefix}-select`)
-export class Select extends LitElement {
+@customElement(`${config.prefix}-select-native`)
+export class SelectNative extends LitElement {
     public root: Ref<HTMLInputElement> = createRef();
     public input: Ref<HTMLInputElement> = createRef();
 
@@ -59,13 +59,7 @@ export class Select extends LitElement {
     }
 
     protected render() {
-        Array.from(this.querySelectorAll("option")).forEach((option) => {
-            if (option.value === this.value) {
-                option.setAttribute("selected", "selected");
-            } else {
-                option.removeAttribute("selected");
-            }
-        });
+        const options = getOptions(this);
 
         return html`
             <div ${ref(this.root)} part="main">
@@ -91,9 +85,16 @@ export class Select extends LitElement {
                         ?autofocus="${this.inputAutofocus}"
                         @input="${this.handleInput}"
                     >
-                        ${Array.from(
-                            this.querySelectorAll("*:not([slot])")
-                        ).map((child) => child.cloneNode(true))}
+                        ${options.map((option) => {
+                            return html`
+                                <option
+                                    value="${option.value}"
+                                    ?selected="${this.value === option.value}"
+                                >
+                                    ${option.label.text}
+                                </option>
+                            `;
+                        })}
                     </select>
                 </div>
             </div>
@@ -107,9 +108,10 @@ export class Select extends LitElement {
     }
 
     private getValueLabel() {
-        const value = this.value;
-        const options = Array.from(this.querySelectorAll("option"));
-        return options.find((option) => option.value === value)?.textContent;
+        const options = getOptions(this);
+        const current = options.find((option) => option.value === this.value);
+
+        return current?.label.text ?? options[0]?.label.text ?? "";
     }
 
     private getDefaultValue() {
@@ -250,6 +252,6 @@ export class Select extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "ds-select": Select;
+        "ds-select-native": SelectNative;
     }
 }
