@@ -92,7 +92,6 @@ export const formInput = css`
     }
 
     [part="validation-message"] {
-        margin-top: ${varSize("form-field-validation-margin-top")};
         font-size: var(--validation-font-size);
         color: hsl(
             var(--validation-border-color-h),

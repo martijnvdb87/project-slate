@@ -141,7 +141,6 @@ export const global = css`
         --form-field-validation-font-size-large: 16;
         --form-field-validation-font-size-huge: 18;
         --form-field-validation-font-weight: 400;
-        --form-field-validation-margin-top: 8;
 
         /* ---- Select ---- */
         --select-border-width: var(--global-border-width);
