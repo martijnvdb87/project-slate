@@ -23,10 +23,10 @@ export const formToggle = css`
         --background-color-l: var(--form-field-background-color-l);
         --background-color-a: var(--form-field-background-color-a);
 
-        --gap: ${varSize("form-toggle-column-gap")};
+        --gap: ${varSize("form-toggle-column-gap", true)};
 
-        --label-font-size: var(--form-label-font-size-medium);
-        --font-size: var(--font-size-medium);
+        --label-font-size: ${varSize("form-label-font-size-medium", true)};
+        --font-size: ${varSize("font-size-medium", true)};
 
         --outline-color-h: var(--primary-color-h);
         --outline-color-s: var(--primary-color-s);
@@ -210,18 +210,22 @@ export const formToggle = css`
 
     :host([size="tiny"]) {
         --font-size: ${varSize("font-size-tiny", true)};
+        --label-font-size: ${varSize("form-label-font-size-tiny", true)};
     }
 
     :host([size="small"]) {
         --font-size: ${varSize("font-size-small", true)};
+        --label-font-size: ${varSize("form-label-font-size-small", true)};
     }
 
     :host([size="large"]) {
         --font-size: ${varSize("font-size-large", true)};
+        --label-font-size: ${varSize("form-label-font-size-large", true)};
     }
 
     :host([size="huge"]) {
         --font-size: ${varSize("font-size-huge", true)};
+        --label-font-size: ${varSize("form-label-font-size-huge", true)};
     }
 
     :host([shape="square"]) {

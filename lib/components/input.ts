@@ -117,12 +117,14 @@ export class Input extends LitElement {
 
         return html`
             <div ${ref(this.root)} part="main" class="${mainClasses.join(" ")}">
-                <label
-                    ?hidden="${this.label === null}"
-                    part="label"
-                    for="${this.elementId}"
-                    >${this.label}</label
-                >
+                <div part="label-container">
+                    <label
+                        ?hidden="${this.label === null}"
+                        part="label"
+                        for="${this.elementId}"
+                        >${this.label}</label
+                    >
+                </div>
                 <div part="form-field-container">
                     <div part="form-field-inner-container">
                         ${renderIcon(this.icon, "icon-left")}

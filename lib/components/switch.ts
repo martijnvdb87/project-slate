@@ -71,9 +71,11 @@ export class Switch extends LitElement {
                         </div>
                     </div>
                     <div part="text-container">
-                        <label for="${this.elementId}" part="label"
-                            ><slot></slot
-                        ></label>
+                        <div part="label-container">
+                            <label for="${this.elementId}" part="label"
+                                ><slot></slot
+                            ></label>
+                        </div>
                         ${hasDescription
                             ? html`<div part="description">
                                   <slot name="description"></slot>

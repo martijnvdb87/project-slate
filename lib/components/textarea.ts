@@ -68,12 +68,14 @@ export class Textarea extends LitElement {
     protected render() {
         return html`
             <div ${ref(this.root)} part="main">
-                <label
-                    ?hidden="${this.label === null}"
-                    part="label"
-                    for="${this.elementId}"
-                    >${this.label}</label
-                >
+                <div part="label-container">
+                    <label
+                        ?hidden="${this.label === null}"
+                        part="label"
+                        for="${this.elementId}"
+                        >${this.label}</label
+                    >
+                </div>
                 <div part="input-container">
                     <div part="input-inner-container">
                         <textarea

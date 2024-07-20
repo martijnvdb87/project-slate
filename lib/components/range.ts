@@ -139,12 +139,14 @@ export class Range extends LitElement {
                 style="--value-percent-min: ${this
                     .minPercent}; --value-percent-max: ${this.maxPercent};"
             >
-                <label
-                    ?hidden="${this.label === null}"
-                    part="label"
-                    for="${this.elementId}"
-                    >${this.label}</label
-                >
+                <div part="label-container">
+                    <label
+                        ?hidden="${this.label === null}"
+                        part="label"
+                        for="${this.elementId}"
+                        >${this.label}</label
+                    >
+                </div>
                 <div part="input-container">
                     <div part="slider-container">
                         <div part="slider-filled"></div>

@@ -66,6 +66,13 @@ export const global = css`
         --size-large: 48;
         --size-huge: 56;
 
+        /* ---- Font ---- */
+        --font-size-tiny: 11;
+        --font-size-small: 12;
+        --font-size-medium: 14;
+        --font-size-large: 16;
+        --font-size-huge: 20;
+
         /* ---- Outline ---- */
         --outline-width: 2;
         --outline-offset: 2;
@@ -93,11 +100,11 @@ export const global = css`
         --form-field-icon-size: 20;
 
         --form-field-font-family: var(--global-font-sans);
-        --form-field-font-size-tiny: 13;
-        --form-field-font-size-small: 14;
-        --form-field-font-size-medium: 15;
-        --form-field-font-size-large: 18;
-        --form-field-font-size-huge: 21;
+        --form-field-font-size-tiny: 11;
+        --form-field-font-size-small: 12;
+        --form-field-font-size-medium: 14;
+        --form-field-font-size-large: 16;
+        --form-field-font-size-huge: 20;
         --form-field-font-weight: 400;
 
         --form-field-text-color-h: var(--primary-color-h);
@@ -211,11 +218,11 @@ export const global = css`
         --form-card-outline-width: ${size(1)};
 
         /* ---- Form label ---- */
-        --form-label-font-size-tiny: 12;
-        --form-label-font-size-small: 13;
+        --form-label-font-size-tiny: 11;
+        --form-label-font-size-small: 12;
         --form-label-font-size-medium: 14;
-        --form-label-font-size-large: 15;
-        --form-label-font-size-huge: 16;
+        --form-label-font-size-large: 16;
+        --form-label-font-size-huge: 20;
         --form-label-font-weight: 500;
 
         --main-background-color-h: 0;
@@ -230,12 +237,6 @@ export const global = css`
         --text-color-a: 1;
 
         --text-line-height: 1.5;
-
-        --font-size-tiny: ${size(11)};
-        --font-size-small: ${size(12)};
-        --font-size-medium: ${size(14)};
-        --font-size-large: ${size(16)};
-        --font-size-huge: ${size(20)};
 
         --shape-pill-radius: ${size(960)};
 

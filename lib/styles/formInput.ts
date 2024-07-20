@@ -119,15 +119,6 @@ export const formInput = css`
         )};
     }
 
-    :host([size="medium"]) {
-        --font-size: ${varSize("form-field-font-size-medium", true)};
-        --label-font-size: ${varSize("form-label-font-size-medium", true)};
-        --validation-font-size: ${varSize(
-            "form-field-validation-font-size-medium",
-            true
-        )};
-    }
-
     :host([size="large"]) {
         --font-size: ${varSize("form-field-font-size-large", true)};
         --label-font-size: ${varSize("form-label-font-size-large", true)};

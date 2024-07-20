@@ -75,11 +75,13 @@ export class Radio extends LitElement {
                                     <div part="input-container"></div>
                                 </div>
                                 <div part="text-container">
+                                <div part="label-container">
                                     <label for="${this.elementId}-${
                         option.value
                     }" part="label"
                                         >${option.label.text}</label
                                     ></label>
+                                </div>
                                     ${
                                         option.description.text
                                             ? html`<div part="description">
