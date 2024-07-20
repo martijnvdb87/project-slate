@@ -1,12 +1,13 @@
 import { LitElement, css, html } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import {
     customElement,
     property,
     queryAssignedElements,
 } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, size } from "../util/style";
-import { getPart, getParts } from "../util/general";
+import { mainCss, varSize } from "../util/style";
+import { getOptions, getPart, getParts } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-tabs`)
@@ -23,73 +24,52 @@ export class Tabs extends LitElement {
     protected panels!: HTMLElement[];
 
     protected render() {
+        const options = getOptions(this);
+
         return html` <div ${ref(this.root)} part="main">
             <div part="head">
-                <slot name="tab"></slot>
-                <div part="tabs"></div>
+                <div part="tabs">
+                    ${options.map((option, index) => {
+                        return html`
+                            <div
+                                part="tab"
+                                @click="${() => this.onClick(index)}"
+                            >
+                                ${unsafeHTML(option.label.raw)}
+                                <div part="indicator"></div>
+                            </div>
+                        `;
+                    })}
+                </div>
                 <div part="transition-indicator"></div>
             </div>
             <div part="content">
-                <slot name="panel"></slot>
-                <div part="panels"></div>
+                <div part="panels">
+                    ${options.map((option, index) => {
+                        return html`
+                            <div
+                                part="panel"
+                                aria-hidden="${index !== this.activeIndex}"
+                            >
+                                ${unsafeHTML(option.content.raw)}
+                            </div>
+                        `;
+                    })}
+                </div>
             </div>
         </div>`;
     }
 
     protected firstUpdated() {
-        this.renderTabs();
-        this.renderPanels();
         this.setupTransitionEnd();
-
         this.setActive(this.activeIndex, true);
-    }
-
-    protected renderTabs() {
-        const root = getPart(this, "tabs");
-
-        root.innerHTML = "";
-
-        this.tabs.forEach((tab, index) => {
-            const tabRoot = document.createElement("div");
-            tabRoot.setAttribute("part", "tab");
-            tabRoot.appendChild(tab);
-
-            const indicator = document.createElement("div");
-            indicator.setAttribute("part", "indicator");
-            tabRoot.appendChild(indicator);
-
-            tabRoot.addEventListener("click", () => {
-                this.disableIndicatorTransition();
-                this.disablePanelTransition();
-                this.moveIndicatorToTab(this.activeIndex);
-                this.setPanelsHeight(this.activeIndex);
-                this.enableIndicatorTransition();
-                this.enablePanelTransition();
-                this.setActive(index);
-            });
-
-            root.appendChild(tabRoot);
-        });
-    }
-
-    protected renderPanels() {
-        const root = getPart(this, "panels");
-
-        root.innerHTML = "";
-
-        this.panels.forEach((panel) => {
-            const panelRoot = document.createElement("div");
-            panelRoot.setAttribute("part", "panel");
-            panelRoot.appendChild(panel);
-            root.appendChild(panelRoot);
-        });
     }
 
     protected setupTransitionEnd() {
         const indicator = getPart(this, "transition-indicator");
 
         indicator.addEventListener("transitionend", (e) => {
-            if (e.propertyName === "transform") {
+            if (["left", "top"].includes(e.propertyName)) {
                 this.disableIndicatorTransition();
             }
         });
@@ -102,6 +82,20 @@ export class Tabs extends LitElement {
                 }
             });
         });
+    }
+
+    protected onClick(index: number) {
+        if (index === this.activeIndex) {
+            return;
+        }
+
+        this.disableIndicatorTransition();
+        this.disablePanelTransition();
+        this.moveIndicatorToTab(this.activeIndex);
+        this.setPanelsHeight(this.activeIndex);
+        this.enableIndicatorTransition();
+        this.enablePanelTransition();
+        this.setActive(index);
     }
 
     protected setActive(index: number, firstUpdated = false) {
@@ -136,13 +130,9 @@ export class Tabs extends LitElement {
     }
 
     protected getAllTabs() {
-        const root = getPart(this, "tabs");
-
-        if (!root) {
-            return [];
-        }
-
-        const tabs = [...root.children].filter(
+        const tabs = [
+            ...(this.shadowRoot?.querySelectorAll("[part='tab']") ?? []),
+        ].filter(
             (node) => node.nodeType === Node.ELEMENT_NODE
         ) as HTMLElement[];
 
@@ -190,13 +180,9 @@ export class Tabs extends LitElement {
     }
 
     protected getAllPanels() {
-        const root = getPart(this, "panels");
-
-        if (!root) {
-            return [];
-        }
-
-        const panels = [...root.children].filter(
+        const panels = [
+            ...(this.shadowRoot?.querySelectorAll("[part='panel']") ?? []),
+        ].filter(
             (node) => node.nodeType === Node.ELEMENT_NODE
         ) as HTMLElement[];
 
@@ -261,11 +247,6 @@ export class Tabs extends LitElement {
                 position: relative;
             }
 
-            slot[name="tab"],
-            slot[name="panel"] {
-                display: none;
-            }
-
             [part="tabs"] {
                 position: relative;
                 display: flex;
@@ -273,7 +254,7 @@ export class Tabs extends LitElement {
                 margin: 0;
                 padding: 0;
                 width: 100%;
-                border-bottom: var(--form-field-border-width) solid
+                border-bottom: ${varSize("form-field-border-width")} solid
                     hsla(
                         var(--form-field-border-color-h),
                         var(--form-field-border-color-s),
@@ -284,7 +265,8 @@ export class Tabs extends LitElement {
 
             [part="tab"] {
                 position: relative;
-                padding: ${size(12)} ${size(24)};
+                padding: ${varSize("tabs-tab-padding-x")}
+                    ${varSize("tabs-tab-padding-y")};
                 cursor: pointer;
             }
 
@@ -310,8 +292,7 @@ export class Tabs extends LitElement {
             [part="transition-indicator"] {
                 display: none;
                 position: absolute;
-                top: 0;
-                left: 0;
+                top: var(--tab-top, 0);
                 left: var(--tab-left, 0);
                 width: var(--tab-width);
                 height: var(--tab-height);
@@ -320,7 +301,7 @@ export class Tabs extends LitElement {
 
             [part="transition-indicator"][enable-indicator-transition] {
                 display: block;
-                transition: all 320ms ease;
+                transition: all var(--tabs-indicator-transition-duration) ease;
             }
 
             [part="indicator"]::after,
@@ -328,9 +309,9 @@ export class Tabs extends LitElement {
                 content: "";
                 position: absolute;
                 left: 0;
-                bottom: calc(0px - var(--form-field-border-width));
+                bottom: calc(0px - ${varSize("form-field-border-width")});
                 width: 100%;
-                height: ${size(4)};
+                height: ${varSize("tabs-indicator-height")};
                 background-color: hsla(
                     var(--primary-color-h),
                     var(--primary-color-s),
@@ -355,7 +336,8 @@ export class Tabs extends LitElement {
                 left: 0;
                 opacity: 0;
                 visibility: hidden;
-                padding: ${size(16)} ${size(16)};
+                padding: ${varSize("tabs-panel-padding-x")}
+                    ${varSize("tabs-panel-padding-y")};
                 pointer-events: none;
             }
 
@@ -367,11 +349,11 @@ export class Tabs extends LitElement {
             }
 
             [part="panel"][enable-panel-transition] {
-                transition: all 320ms ease;
+                transition: all var(--tabs-panel-transition-duration) ease;
             }
 
             [part="panel"][enable-panel-transition][active] {
-                transition-delay: 160ms;
+                transition-delay: var(--tabs-indicator-transition-delay);
             }
         `,
     ];

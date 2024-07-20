@@ -26,6 +26,10 @@ export function getOptions(root: HTMLElement) {
                 text: cleanText(option.description),
                 raw: option.description,
             },
+            content: {
+                text: cleanText(option.content),
+                raw: option.content,
+            },
             value: option.value,
         };
     });

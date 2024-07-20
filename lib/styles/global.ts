@@ -225,6 +225,16 @@ export const global = css`
         --form-label-font-size-huge: 20;
         --form-label-font-weight: 500;
 
+        /* ---- Tabs ---- */
+        --tabs-tab-padding-x: 12;
+        --tabs-tab-padding-y: 24;
+        --tabs-indicator-height: 4;
+        --tabs-panel-padding-x: 16;
+        --tabs-panel-padding-y: 16;
+        --tabs-panel-transition-duration: 320ms;
+        --tabs-indicator-transition-duration: 320ms;
+        --tabs-indicator-transition-delay: 160ms;
+
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
         --main-background-color-l: 100%;

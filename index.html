@@ -131,6 +131,45 @@
         <ds-app>
             <main>
                 <ds-tabs>
+                    <ds-option
+                        >Tab 1
+                        <div slot="content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Pellentesque massa purus, mattis sed dolor ac,
+                            convallis porttitor felis. Cras ultricies fringilla
+                            volutpat. Sed vitae venenatis est. Morbi leo odio,
+                            mattis ut ultrices eget, pretium non metus. Nunc
+                            tortor odio, luctus sed magna sed, aliquam blandit
+                            risus. Sed pulvinar ligula ac metus blandit, eu
+                            faucibus dui lacinia. Sed vel dui a ante vulputate
+                            ultrices. Praesent eleifend libero eu felis rhoncus,
+                            non semper felis commodo. Quisque a velit orci. Ut
+                            velit diam, rutrum et vulputate dapibus, semper id
+                            purus. Phasellus mauris dui, varius sit amet
+                            tincidunt a, tempor non ipsum.
+                        </div>
+                    </ds-option>
+                    <ds-option
+                        >Tab 2
+                        <div slot="content">
+                            Sed fringilla pretium hendrerit. Morbi eget quam sed
+                            nisl tincidunt suscipit. Pellentesque dictum rutrum
+                            magna, quis bibendum mi fermentum sit amet.
+                            Suspendisse risus lorem, faucibus ut tortor vel,
+                            auctor commodo sem. Mauris posuere lacinia nibh
+                            vitae congue. Donec mattis est eget egestas aliquam.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Integer ut
+                            tellus vulputate, blandit risus non, placerat felis.
+                            Phasellus condimentum libero vestibulum sodales
+                            malesuada. Aenean quis facilisis arcu. Suspendisse
+                            bibendum arcu at arcu porttitor, ut pellentesque
+                            elit tincidunt. Maecenas ullamcorper nibh ex, et
+                            pellentesque turpis maximus sed. Aliquam mattis ut
+                            est quis molestie. In iaculis euismod sapien, id
+                            viverra odio imperdiet vel. Nam nec euismod tortor.
+                        </div>
+                    </ds-option>
                     <div slot="tab">Tab 1</div>
                     <div slot="tab">Tab 2</div>
                     <div slot="tab">Tab 3</div>
@@ -379,134 +418,6 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <hr />
-
-                <ds-tabs active-index="2">
-                    <div slot="tab">Tiny</div>
-                    <div slot="tab">Small</div>
-                    <div slot="tab">Medium</div>
-                    <div slot="tab">Large</div>
-                    <div slot="tab">Huge</div>
-
-                    <div slot="panel">
-                        <ds-button size="tiny" type="primary"
-                            >Primary</ds-button
-                        >
-                        <ds-button size="tiny" type="secondary"
-                            >Secondary</ds-button
-                        >
-                        <ds-button size="tiny">Default</ds-button>
-                        <ds-button size="tiny" type="ghost">Ghost</ds-button>
-                        <ds-button size="tiny" type="link">Link</ds-button>
-                    </div>
-
-                    <div slot="panel">
-                        <ds-button size="small" type="primary"
-                            >Primary</ds-button
-                        >
-                        <ds-button size="small" type="secondary"
-                            >Secondary</ds-button
-                        >
-                        <ds-button size="small">Default</ds-button>
-                        <ds-button size="small" type="ghost">Ghost</ds-button>
-                        <ds-button size="small" type="link">Link</ds-button>
-                    </div>
-                    <div slot="panel">
-                        <ds-button type="primary">Primary</ds-button>
-                        <ds-button type="secondary">Secondary</ds-button>
-                        <ds-button>Default</ds-button>
-                        <ds-button type="ghost">Ghost</ds-button>
-                        <ds-button type="link">Link</ds-button>
-                    </div>
-                    <div slot="panel">
-                        <ds-button size="large" type="primary"
-                            >Primary</ds-button
-                        >
-                        <ds-button size="large" type="secondary"
-                            >Secondary</ds-button
-                        >
-                        <ds-button size="large">Default</ds-button>
-                        <ds-button size="large" type="ghost">Ghost</ds-button>
-                        <ds-button size="large" type="link">Link</ds-button>
-                    </div>
-                    <div slot="panel">
-                        <ds-button size="huge" type="primary"
-                            >Primary</ds-button
-                        >
-                        <ds-button size="huge" type="secondary"
-                            >Secondary</ds-button
-                        >
-                        <ds-button size="huge">Default</ds-button>
-                        <ds-button size="huge" type="ghost">Ghost</ds-button>
-                        <ds-button size="huge" type="link">Link</ds-button>
-                    </div>
-                </ds-tabs>
-
-                <hr />
-
-                <ds-tabs>
-                    <div slot="tab">Rounded</div>
-                    <div slot="tab">Pill</div>
-                    <div slot="tab">Square</div>
-                    <div slot="tab">Circle</div>
-
-                    <div slot="panel">
-                        <ds-button type="primary">Primary</ds-button>
-                        <ds-button type="secondary">Secondary</ds-button>
-                        <ds-button>Default</ds-button>
-                        <ds-button type="ghost">Ghost</ds-button>
-                        <ds-button type="link">Link</ds-button>
-                    </div>
-                    <div slot="panel">
-                        <ds-button shape="pill" type="primary"
-                            >Primary</ds-button
-                        >
-                        <ds-button shape="pill" type="secondary"
-                            >Secondary</ds-button
-                        >
-                        <ds-button shape="pill">Default</ds-button>
-                        <ds-button shape="pill" type="ghost">Ghost</ds-button>
-                        <ds-button shape="pill" type="link">Link</ds-button>
-                    </div>
-                    <div slot="panel">
-                        <ds-button shape="square" type="primary"
-                            >Primary</ds-button
-                        >
-                        <ds-button shape="square" type="secondary"
-                            >Secondary</ds-button
-                        >
-                        <ds-button shape="square">Default</ds-button>
-                        <ds-button shape="square" type="ghost">Ghost</ds-button>
-                        <ds-button shape="square" type="link">Link</ds-button>
-                    </div>
-                    <div slot="panel">
-                        <ds-button
-                            icon="rocket:solid"
-                            shape="circle"
-                            type="primary"
-                        ></ds-button>
-                        <ds-button
-                            icon="rocket:solid"
-                            shape="circle"
-                            type="secondary"
-                        ></ds-button>
-                        <ds-button
-                            icon="rocket:solid"
-                            shape="circle"
-                        ></ds-button>
-                        <ds-button
-                            icon="rocket:solid"
-                            shape="circle"
-                            type="ghost"
-                        ></ds-button>
-                        <ds-button
-                            icon="rocket:solid"
-                            shape="circle"
-                            type="link"
-                        ></ds-button>
-                    </div>
-                </ds-tabs>
 
                 <hr />
 

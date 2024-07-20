@@ -11,15 +11,24 @@ export class Option extends LitElement {
     description = "";
 
     @state()
+    content = "";
+
+    @state()
     label = "";
 
     constructor() {
         super();
+
         this.description =
             this.querySelector("[slot='description']")?.innerHTML ?? "";
 
-        this.querySelectorAll("[slot]").forEach((slot) => slot.remove());
-        this.label = this.innerHTML;
+        this.content = this.querySelector("[slot='content']")?.innerHTML ?? "";
+
+        const temp = document.createElement("div");
+        temp.innerHTML = this.innerHTML;
+
+        temp.querySelectorAll("[slot]").forEach((slot) => slot.remove());
+        this.label = temp.innerHTML;
     }
 }
 
