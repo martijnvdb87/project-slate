@@ -28,20 +28,24 @@ export class Tabs extends LitElement {
 
         return html` <div ${ref(this.root)} part="main">
             <div part="head">
-                <div part="tabs">
-                    ${options.map((option, index) => {
-                        return html`
-                            <div
-                                part="tab"
-                                @click="${() => this.onClick(index)}"
-                            >
-                                ${unsafeHTML(option.label.raw)}
-                                <div part="indicator"></div>
-                            </div>
-                        `;
-                    })}
+                <div part="tabs-container">
+                    <div part="tabs">
+                        <div part="transition-indicator"></div>
+                        ${options.map((option, index) => {
+                            return html`
+                                <div
+                                    part="tab-container"
+                                    @click="${() => this.onClick(index)}"
+                                >
+                                    <div part="indicator"></div>
+                                    <div part="tab">
+                                        ${unsafeHTML(option.label.raw)}
+                                    </div>
+                                </div>
+                            `;
+                        })}
+                    </div>
                 </div>
-                <div part="transition-indicator"></div>
             </div>
             <div part="content">
                 <div part="panels">
@@ -131,7 +135,8 @@ export class Tabs extends LitElement {
 
     protected getAllTabs() {
         const tabs = [
-            ...(this.shadowRoot?.querySelectorAll("[part='tab']") ?? []),
+            ...(this.shadowRoot?.querySelectorAll("[part='tab-container']") ??
+                []),
         ].filter(
             (node) => node.nodeType === Node.ELEMENT_NODE
         ) as HTMLElement[];
@@ -247,13 +252,9 @@ export class Tabs extends LitElement {
                 position: relative;
             }
 
-            [part="tabs"] {
+            [part="tabs-container"] {
                 position: relative;
                 display: flex;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                width: 100%;
                 border-bottom: ${varSize("form-field-border-width")} solid
                     hsla(
                         var(--form-field-border-color-h),
@@ -263,11 +264,22 @@ export class Tabs extends LitElement {
                     );
             }
 
+            [part="tabs"] {
+                position: relative;
+                display: flex;
+                margin: 0;
+                padding: 0;
+            }
+
+            [part="tab-container"] {
+                position: relative;
+                cursor: pointer;
+            }
+
             [part="tab"] {
                 position: relative;
-                padding: ${varSize("tabs-tab-padding-x")}
-                    ${varSize("tabs-tab-padding-y")};
-                cursor: pointer;
+                padding: ${varSize("tabs-tab-padding-y")}
+                    ${varSize("tabs-tab-padding-x")};
             }
 
             [part="indicator"] {
@@ -280,11 +292,11 @@ export class Tabs extends LitElement {
                 pointer-events: none;
             }
 
-            [part="tab"][active] [part="indicator"] {
+            [part="tab-container"][active] [part="indicator"] {
                 display: block;
             }
 
-            [part="tab"][active]
+            [part="tab-container"][active]
                 [part="indicator"][enable-indicator-transition] {
                 display: none;
             }
@@ -326,7 +338,7 @@ export class Tabs extends LitElement {
             }
 
             [part="panels"][enable-panel-transition] {
-                transition: all 480ms ease;
+                transition: all var(--tabs-panel-transition-duration) ease;
                 overflow: hidden;
             }
 
@@ -354,6 +366,48 @@ export class Tabs extends LitElement {
 
             [part="panel"][enable-panel-transition][active] {
                 transition-delay: var(--tabs-indicator-transition-delay);
+            }
+
+            :host([type="solid"]) [part="tab"] {
+                padding: ${varSize("tabs-solid-tab-padding-y")}
+                    ${varSize("tabs-solid-tab-padding-x")};
+            }
+
+            :host([type="solid"]) [part="tabs"] {
+                background-color: hsla(
+                    var(--tabs-solid-tab-indicator-color-h),
+                    var(--tabs-solid-tab-indicator-color-s),
+                    var(--tabs-solid-tab-indicator-color-l),
+                    var(--tabs-solid-tab-indicator-color-a)
+                );
+                padding: ${varSize("tabs-solid-tab-offset")};
+            }
+
+            :host([type="solid"]) [part="tabs"] {
+                border-radius: calc(
+                    ${varSize("tabs-solid-tab-border-radius")} +
+                        ${varSize("tabs-solid-tab-offset")}
+                );
+            }
+
+            :host([type="solid"]) [part="tabs-container"] {
+                border: none;
+            }
+
+            :host([type="solid"]) [part="indicator"],
+            :host([type="solid"]) [part="transition-indicator"] {
+                background-color: hsla(
+                    var(--tabs-solid-tab-background-color-h),
+                    var(--tabs-solid-tab-background-color-s),
+                    var(--tabs-solid-tab-background-color-l),
+                    var(--tabs-solid-tab-background-color-a)
+                );
+                border-radius: ${varSize("tabs-solid-tab-border-radius")};
+            }
+
+            :host([type="solid"]) [part="indicator"]::after,
+            :host([type="solid"]) [part="transition-indicator"]::after {
+                display: none;
             }
         `,
     ];

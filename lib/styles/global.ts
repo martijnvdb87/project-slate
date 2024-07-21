@@ -226,14 +226,34 @@ export const global = css`
         --form-label-font-weight: 500;
 
         /* ---- Tabs ---- */
-        --tabs-tab-padding-x: 12;
-        --tabs-tab-padding-y: 24;
+        --tabs-tab-padding-x: 24;
+        --tabs-tab-padding-y: 12;
         --tabs-indicator-height: 4;
         --tabs-panel-padding-x: 16;
         --tabs-panel-padding-y: 16;
         --tabs-panel-transition-duration: 320ms;
         --tabs-indicator-transition-duration: 320ms;
         --tabs-indicator-transition-delay: 160ms;
+        --tabs-solid-tab-border-radius: var(--global-border-radius);
+        --tabs-solid-tab-offset: 4;
+        --tabs-solid-tab-padding-x: 22;
+        --tabs-solid-tab-padding-y: 8;
+        --tabs-solid-tab-indicator-color-h: var(--form-field-border-color-h);
+        --tabs-solid-tab-indicator-color-s: var(--form-field-border-color-s);
+        --tabs-solid-tab-indicator-color-l: 92%;
+        --tabs-solid-tab-indicator-color-a: var(--form-field-border-color-a);
+        --tabs-solid-tab-background-color-h: var(
+            --form-field-background-color-h
+        );
+        --tabs-solid-tab-background-color-s: var(
+            --form-field-background-color-s
+        );
+        --tabs-solid-tab-background-color-l: var(
+            --form-field-background-color-l
+        );
+        --tabs-solid-tab-background-color-a: var(
+            --form-field-background-color-a
+        );
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
