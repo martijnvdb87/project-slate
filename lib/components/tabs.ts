@@ -38,9 +38,9 @@ export class Tabs extends LitElement {
                                     @click="${() => this.onClick(index)}"
                                 >
                                     <div part="indicator"></div>
-                                    <div part="tab">
+                                    <button part="tab">
                                         ${unsafeHTML(option.label.raw)}
-                                    </div>
+                                    </button>
                                 </div>
                             `;
                         })}
@@ -245,6 +245,13 @@ export class Tabs extends LitElement {
     public static styles = [
         mainCss,
         css`
+            :host {
+                --outline-color-h: var(--primary-color-h);
+                --outline-color-s: var(--primary-color-s);
+                --outline-color-l: var(--primary-color-l);
+                --outline-color-a: 0;
+            }
+
             [part="main"] {
             }
 
@@ -278,8 +285,25 @@ export class Tabs extends LitElement {
 
             [part="tab"] {
                 position: relative;
+                border: none;
+                background: none;
                 padding: ${varSize("tabs-tab-padding-y")}
                     ${varSize("tabs-tab-padding-x")};
+
+                outline-width: var(--outline-width-rem);
+                outline-offset: 0;
+                outline-style: solid;
+                outline-color: hsla(
+                    var(--outline-color-h),
+                    var(--outline-color-s),
+                    var(--outline-color-l),
+                    var(--outline-color-a)
+                );
+            }
+
+            [part="tab"]:focus-visible {
+                --outline-color-a: 1;
+                z-index: 1;
             }
 
             [part="indicator"] {
@@ -371,6 +395,7 @@ export class Tabs extends LitElement {
             :host([type="solid"]) [part="tab"] {
                 padding: ${varSize("tabs-solid-tab-padding-y")}
                     ${varSize("tabs-solid-tab-padding-x")};
+                border-radius: ${varSize("tabs-solid-tab-border-radius")};
             }
 
             :host([type="solid"]) [part="tabs"] {
