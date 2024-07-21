@@ -280,7 +280,6 @@ export class Tabs extends LitElement {
 
             [part="tab-container"] {
                 position: relative;
-                cursor: pointer;
             }
 
             [part="tab"] {
@@ -299,6 +298,7 @@ export class Tabs extends LitElement {
                     var(--outline-color-l),
                     var(--outline-color-a)
                 );
+                cursor: pointer;
             }
 
             [part="tab"]:focus-visible {
