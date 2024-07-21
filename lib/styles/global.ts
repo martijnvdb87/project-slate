@@ -240,8 +240,8 @@ export const global = css`
         --tabs-solid-tab-padding-y: 8;
         --tabs-solid-tab-indicator-color-h: var(--form-field-border-color-h);
         --tabs-solid-tab-indicator-color-s: var(--form-field-border-color-s);
-        --tabs-solid-tab-indicator-color-l: 92%;
-        --tabs-solid-tab-indicator-color-a: var(--form-field-border-color-a);
+        --tabs-solid-tab-indicator-color-l: var(--form-field-border-color-l);
+        --tabs-solid-tab-indicator-color-a: 0.5;
         --tabs-solid-tab-background-color-h: var(
             --form-field-background-color-h
         );

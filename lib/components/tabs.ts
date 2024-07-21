@@ -289,6 +289,13 @@ export class Tabs extends LitElement {
                 padding: ${varSize("tabs-tab-padding-y")}
                     ${varSize("tabs-tab-padding-x")};
 
+                color: hsla(
+                    var(--form-field-label-color-h),
+                    var(--form-field-label-color-s),
+                    var(--form-field-label-color-l),
+                    var(--form-field-label-color-a)
+                );
+
                 outline-width: var(--outline-width-rem);
                 outline-offset: 0;
                 outline-style: solid;
