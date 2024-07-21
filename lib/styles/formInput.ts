@@ -136,7 +136,6 @@ export const formInput = css`
         )};
     }
 
-    ,
     :host([width="full"]) {
         --display: flex;
     }

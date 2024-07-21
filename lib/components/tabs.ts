@@ -250,6 +250,10 @@ export class Tabs extends LitElement {
                 --outline-color-s: var(--primary-color-s);
                 --outline-color-l: var(--primary-color-l);
                 --outline-color-a: 0;
+                --tab-font-size: ${varSize(
+                    "form-label-font-size-medium",
+                    true
+                )};
             }
 
             [part="main"] {
@@ -288,7 +292,8 @@ export class Tabs extends LitElement {
                 background: none;
                 padding: ${varSize("tabs-tab-padding-y")}
                     ${varSize("tabs-tab-padding-x")};
-
+                font-size: var(--tab-font-size);
+                font-weight: var(--form-label-font-weight);
                 color: hsla(
                     var(--form-field-label-color-h),
                     var(--form-field-label-color-s),
@@ -440,6 +445,22 @@ export class Tabs extends LitElement {
             :host([type="solid"]) [part="indicator"]::after,
             :host([type="solid"]) [part="transition-indicator"]::after {
                 display: none;
+            }
+
+            :host([size="tiny"]) {
+                --tab-font-size: ${varSize("form-label-font-size-tiny", true)};
+            }
+
+            :host([size="small"]) {
+                --tab-font-size: ${varSize("form-label-font-size-small", true)};
+            }
+
+            :host([size="large"]) {
+                --tab-font-size: ${varSize("form-label-font-size-large", true)};
+            }
+
+            :host([size="huge"]) {
+                --tab-font-size: ${varSize("form-label-font-size-huge", true)};
             }
         `,
     ];
