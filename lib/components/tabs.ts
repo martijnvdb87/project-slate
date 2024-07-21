@@ -290,6 +290,7 @@ export class Tabs extends LitElement {
                 position: relative;
                 border: none;
                 background: none;
+                width: 100%;
                 padding: ${varSize("tabs-tab-padding-y")}
                     ${varSize("tabs-tab-padding-x")};
                 font-size: var(--tab-font-size);
