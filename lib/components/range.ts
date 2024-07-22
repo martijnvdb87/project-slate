@@ -354,9 +354,7 @@ export class Range extends LitElement {
                     var(--primary-color-s),
                     calc(
                         var(--primary-color-l) +
-                            var(
-                                --form-field-range-slider-filled-color-l-modifier
-                            )
+                            var(--range-filled-color-l-modifier)
                     ),
                     1
                 );

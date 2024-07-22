@@ -36,7 +36,7 @@ const themeDark = css`
     --form-field-border-color-s: 0%;
     --form-field-border-color-l: 36%;
 
-    --form-field-range-slider-filled-color-l-modifier: -10%;
+    --range-filled-color-l-modifier: -10%;
 
     --form-field-checkbox-icon-color-h: var(--primary-accent-h);
     --form-field-checkbox-icon-color-s: var(--main-background-color-s);
@@ -140,8 +140,6 @@ export const global = css`
 
         --form-field-validation-message-font-weight: 350;
 
-        --form-field-range-slider-filled-color-l-modifier: 15%;
-
         --form-field-validation-font-size-tiny: 12;
         --form-field-validation-font-size-small: 13;
         --form-field-validation-font-size-medium: 14;
@@ -170,6 +168,7 @@ export const global = css`
         --range-padding-x: 0;
         --range-padding-y: 4;
         --range-outline-offset: 3;
+        --range-filled-color-l-modifier: 15%;
 
         /* ---- Form toggle ---- */
         --form-toggle-size: 22;
@@ -254,6 +253,21 @@ export const global = css`
         --tabs-solid-tab-background-color-a: var(
             --form-field-background-color-a
         );
+
+        /* ---- Alert ---- */
+        --alert-border-radius: var(--global-border-radius);
+        --alert-padding-x: 16;
+        --alert-padding-y: 12;
+        --alert-padding-y: 12;
+        --alert-row-gap: 2;
+        --alert-info-background-color-h: 206;
+        --alert-info-background-color-s: 84%;
+        --alert-info-background-color-l: 90%;
+        --alert-info-background-color-a: 1;
+        --alert-info-accent-color-h: 206;
+        --alert-info-accent-color-s: 84%;
+        --alert-info-accent-color-l: 15%;
+        --alert-info-accent-color-a: 1;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;

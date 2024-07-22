@@ -1,5 +1,6 @@
 import "boxicons";
 
+import "@/lib/components/alert";
 import "@/lib/components/app";
 import "@/lib/components/button";
 import "@/lib/components/checkbox";
