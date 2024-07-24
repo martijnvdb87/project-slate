@@ -17,7 +17,9 @@ export class Alert extends LitElement {
                 <div part="header" ?hidden="${!this.header}">
                     ${this.header}
                 </div>
-                <slot></slot>
+                <div part="content">
+                    <slot></slot>
+                </div>
             </div>
         `;
     }
@@ -35,15 +37,15 @@ export class Alert extends LitElement {
                 --label-font-weight: var(--form-label-font-weight);
                 --font-size: ${varSize("font-size-medium", true)};
 
-                --accent-color-h: var(--alert-info-accent-color-h);
-                --accent-color-s: var(--alert-info-accent-color-s);
-                --accent-color-l: var(--alert-info-accent-color-l);
-                --accent-color-a: var(--alert-info-accent-color-a);
+                --accent-color-h: var(--alert-info-accent-h);
+                --accent-color-s: var(--alert-info-accent-s);
+                --accent-color-l: var(--alert-info-accent-l);
+                --accent-color-a: var(--alert-info-accent-a);
 
-                --background-color-h: var(--alert-info-background-color-h);
-                --background-color-s: var(--alert-info-background-color-s);
-                --background-color-l: var(--alert-info-background-color-l);
-                --background-color-a: var(--alert-info-background-color-a);
+                --background-color-h: var(--alert-info-color-h);
+                --background-color-s: var(--alert-info-color-s);
+                --background-color-l: var(--alert-info-color-l);
+                --background-color-a: var(--alert-info-color-a);
             }
 
             [part="main"] {
@@ -54,7 +56,7 @@ export class Alert extends LitElement {
                 color: hsla(
                     var(--accent-color-h),
                     var(--accent-color-s),
-                    calc(var(--accent-color-l) + 5%),
+                    var(--accent-color-l),
                     var(--accent-color-a)
                 );
                 background-color: hsla(
@@ -75,9 +77,13 @@ export class Alert extends LitElement {
                 color: hsla(
                     var(--accent-color-h),
                     var(--accent-color-s),
-                    calc(var(--accent-color-l) - 5%),
+                    var(--accent-color-l),
                     var(--accent-color-a)
                 );
+            }
+
+            [part="content"] {
+                opacity: var(--alert-content-opacity);
             }
 
             :host([size="tiny"]) {
@@ -110,6 +116,42 @@ export class Alert extends LitElement {
                     true
                 )};
                 --font-size: ${varSize("font-size-huge", true)};
+            }
+
+            :host([type="success"]) {
+                --accent-color-h: var(--alert-success-accent-h);
+                --accent-color-s: var(--alert-success-accent-s);
+                --accent-color-l: var(--alert-success-accent-l);
+                --accent-color-a: var(--alert-success-accent-a);
+
+                --background-color-h: var(--alert-success-color-h);
+                --background-color-s: var(--alert-success-color-s);
+                --background-color-l: var(--alert-success-color-l);
+                --background-color-a: var(--alert-success-color-a);
+            }
+
+            :host([type="warning"]) {
+                --accent-color-h: var(--alert-warning-accent-h);
+                --accent-color-s: var(--alert-warning-accent-s);
+                --accent-color-l: var(--alert-warning-accent-l);
+                --accent-color-a: var(--alert-warning-accent-a);
+
+                --background-color-h: var(--alert-warning-color-h);
+                --background-color-s: var(--alert-warning-color-s);
+                --background-color-l: var(--alert-warning-color-l);
+                --background-color-a: var(--alert-warning-color-a);
+            }
+
+            :host([type="error"]) {
+                --accent-color-h: var(--alert-error-accent-h);
+                --accent-color-s: var(--alert-error-accent-s);
+                --accent-color-l: var(--alert-error-accent-l);
+                --accent-color-a: var(--alert-error-accent-a);
+
+                --background-color-h: var(--alert-error-color-h);
+                --background-color-s: var(--alert-error-color-s);
+                --background-color-l: var(--alert-error-color-l);
+                --background-color-a: var(--alert-error-color-a);
             }
         `,
     ];

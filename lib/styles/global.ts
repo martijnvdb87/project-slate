@@ -260,14 +260,47 @@ export const global = css`
         --alert-padding-y: 12;
         --alert-padding-y: 12;
         --alert-row-gap: 2;
-        --alert-info-background-color-h: 206;
-        --alert-info-background-color-s: 84%;
-        --alert-info-background-color-l: 90%;
-        --alert-info-background-color-a: 1;
-        --alert-info-accent-color-h: 206;
-        --alert-info-accent-color-s: 84%;
-        --alert-info-accent-color-l: 15%;
-        --alert-info-accent-color-a: 1;
+        --alert-content-opacity: 0.75;
+
+        --alert-info-accent-h: 206;
+        --alert-info-accent-s: 84%;
+        --alert-info-accent-l: 15%;
+        --alert-info-accent-a: 1;
+
+        --alert-info-color-h: 206;
+        --alert-info-color-s: 84%;
+        --alert-info-color-l: 90%;
+        --alert-info-color-a: 1;
+
+        --alert-success-accent-h: 106;
+        --alert-success-accent-s: 45%;
+        --alert-success-accent-l: 15%;
+        --alert-success-accent-a: 1;
+
+        --alert-success-color-h: 106;
+        --alert-success-color-s: 45%;
+        --alert-success-color-l: 85%;
+        --alert-success-color-a: 1;
+
+        --alert-warning-accent-h: 36;
+        --alert-warning-accent-s: 70%;
+        --alert-warning-accent-l: 20%;
+        --alert-warning-accent-a: 1;
+
+        --alert-warning-color-h: 36;
+        --alert-warning-color-s: 70%;
+        --alert-warning-color-l: 87%;
+        --alert-warning-color-a: 1;
+
+        --alert-error-accent-h: 0;
+        --alert-error-accent-s: 55%;
+        --alert-error-accent-l: 20%;
+        --alert-error-accent-a: 1;
+
+        --alert-error-color-h: 0;
+        --alert-error-color-s: 55%;
+        --alert-error-color-l: 87%;
+        --alert-error-color-a: 1;
 
         --main-background-color-h: 0;
         --main-background-color-s: 50%;
