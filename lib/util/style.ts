@@ -25,3 +25,12 @@ export function varSize(varName: string, fixed: boolean = false) {
         `calc((var(--${varName}) / var(--size-medium)) * var(--base-size) * 1rem)`
     );
 }
+
+export function themeModifier(
+    lightMode: string | number,
+    darkMode: string | number
+) {
+    return unsafeCSS(
+        `calc(${lightMode} * var(--global-light-mode) + ${darkMode} * var(--global-dark-mode))`
+    );
+}

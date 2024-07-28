@@ -2,6 +2,8 @@ import { css } from "lit";
 import { size } from "../util/style";
 
 const themeDark = css`
+    --global-light-mode: 0;
+    --global-dark-mode: 1;
     --main-background-color-s: 0%;
     --main-background-color-l: 10%;
 
@@ -47,6 +49,8 @@ const themeDark = css`
 export const global = css`
     :root {
         /* ---- Global ---- */
+        --global-light-mode: 1;
+        --global-dark-mode: 0;
         --global-border-radius: 5;
         --global-border-width: 1;
         --global-font-family: var(--global-font-sans);
@@ -317,6 +321,8 @@ export const global = css`
 
         --shape-pill-radius: ${size(960)};
 
+        /* ---- Colors ---- */
+
         --default-color-h: var(--primary-color-h);
         --default-color-s: 10%;
         --default-color-l: 92%;
@@ -351,6 +357,11 @@ export const global = css`
         --error-color-s: 71%;
         --error-color-l: 55%;
         --error-color-a: 1;
+
+        --warning-color-h: 36;
+        --warning-color-s: 70%;
+        --warning-color-l: 55%;
+        --warning-color-a: 1;
 
         --success-color-h: 106;
         --success-color-s: 45%;

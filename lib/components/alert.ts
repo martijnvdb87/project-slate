@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
+import { mainCss, themeModifier, varSize } from "../util/style";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-alert`)
@@ -46,6 +46,23 @@ export class Alert extends LitElement {
                 --background-color-s: var(--alert-info-color-s);
                 --background-color-l: var(--alert-info-color-l);
                 --background-color-a: var(--alert-info-color-a);
+
+                /* ---- TESTING ---- */
+
+                --main-color-h: var(--primary-color-h);
+                --main-color-s: var(--primary-color-s);
+                --main-color-l: var(--primary-color-l);
+                --main-color-a: var(--primary-color-a);
+
+                --accent-color-h: var(--main-color-h);
+                --accent-color-s: var(--main-color-s);
+                --accent-color-l: ${themeModifier("5%", "95%")};
+                --accent-color-a: var(--main-color-a);
+
+                --background-color-h: var(--main-color-h);
+                --background-color-s: var(--main-color-s);
+                --background-color-l: var(--main-color-l);
+                --background-color-a: ${themeModifier(0.3, 0.4)};
             }
 
             [part="main"] {
@@ -119,39 +136,24 @@ export class Alert extends LitElement {
             }
 
             :host([type="success"]) {
-                --accent-color-h: var(--alert-success-accent-h);
-                --accent-color-s: var(--alert-success-accent-s);
-                --accent-color-l: var(--alert-success-accent-l);
-                --accent-color-a: var(--alert-success-accent-a);
-
-                --background-color-h: var(--alert-success-color-h);
-                --background-color-s: var(--alert-success-color-s);
-                --background-color-l: var(--alert-success-color-l);
-                --background-color-a: var(--alert-success-color-a);
+                --main-color-h: var(--success-color-h);
+                --main-color-s: var(--success-color-s);
+                --main-color-l: var(--success-color-l);
+                --main-color-a: var(--success-color-a);
             }
 
             :host([type="warning"]) {
-                --accent-color-h: var(--alert-warning-accent-h);
-                --accent-color-s: var(--alert-warning-accent-s);
-                --accent-color-l: var(--alert-warning-accent-l);
-                --accent-color-a: var(--alert-warning-accent-a);
-
-                --background-color-h: var(--alert-warning-color-h);
-                --background-color-s: var(--alert-warning-color-s);
-                --background-color-l: var(--alert-warning-color-l);
-                --background-color-a: var(--alert-warning-color-a);
+                --main-color-h: var(--warning-color-h);
+                --main-color-s: var(--warning-color-s);
+                --main-color-l: var(--warning-color-l);
+                --main-color-a: var(--warning-color-a);
             }
 
             :host([type="error"]) {
-                --accent-color-h: var(--alert-error-accent-h);
-                --accent-color-s: var(--alert-error-accent-s);
-                --accent-color-l: var(--alert-error-accent-l);
-                --accent-color-a: var(--alert-error-accent-a);
-
-                --background-color-h: var(--alert-error-color-h);
-                --background-color-s: var(--alert-error-color-s);
-                --background-color-l: var(--alert-error-color-l);
-                --background-color-a: var(--alert-error-color-a);
+                --main-color-h: var(--error-color-h);
+                --main-color-s: var(--error-color-s);
+                --main-color-l: var(--error-color-l);
+                --main-color-a: var(--error-color-a);
             }
         `,
     ];
