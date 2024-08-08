@@ -34,3 +34,34 @@ export function themeModifier(
         `calc(${lightMode} * var(--global-light-mode) + ${darkMode} * var(--global-dark-mode))`
     );
 }
+
+export function varPercent(varName: string) {
+    return unsafeCSS(`calc(var(--${varName}) * 1%)`);
+}
+
+export function varPercentContrast(
+    varName: string,
+    contrastVarName?: string,
+    unit: string = "%"
+) {
+    const value = `var(--${varName})`;
+    const contrast = `var(--${contrastVarName})`;
+    const normalizedContrast = `(max(min(max(${contrast}, ${contrast} * -1), 1), -1))`;
+
+    const isHighValue = `(round(${value} / 100))`;
+    const isLowValue = `(1 - ${isHighValue})`;
+
+    const contrastPrecision = `0.0000001`;
+    const isPositiveContrast = `(min(max(round(up, ${contrast} + ${contrastPrecision}), 0), 1))`;
+    const isNegativeContrast = `(1 - ${isPositiveContrast})`;
+
+    const positiveRest = `(max(100 - ${value}, ${value}))`;
+    const negativeRest = `(min(100 - ${value}, ${value}))`;
+
+    return unsafeCSS(`calc((
+        ${isHighValue} * ${isPositiveContrast} * (${positiveRest} - ${positiveRest} * ${normalizedContrast}) +
+        ${isHighValue} * ${isNegativeContrast} * (${negativeRest} * ${normalizedContrast} + ${positiveRest}) +
+        ${isLowValue} * ${isPositiveContrast} * (${positiveRest} * ${normalizedContrast} + ${negativeRest}) +
+        ${isLowValue} * ${isNegativeContrast} * (${negativeRest} - ${negativeRest} * ${normalizedContrast})
+    ) * 1${unit})`);
+}

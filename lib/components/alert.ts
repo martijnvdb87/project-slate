@@ -37,18 +37,6 @@ export class Alert extends LitElement {
                 --label-font-weight: var(--form-label-font-weight);
                 --font-size: ${varSize("font-size-medium", true)};
 
-                --accent-color-h: var(--alert-info-accent-h);
-                --accent-color-s: var(--alert-info-accent-s);
-                --accent-color-l: var(--alert-info-accent-l);
-                --accent-color-a: var(--alert-info-accent-a);
-
-                --background-color-h: var(--alert-info-color-h);
-                --background-color-s: var(--alert-info-color-s);
-                --background-color-l: var(--alert-info-color-l);
-                --background-color-a: var(--alert-info-color-a);
-
-                /* ---- TESTING ---- */
-
                 --main-color-h: var(--primary-color-h);
                 --main-color-s: var(--primary-color-s);
                 --main-color-l: var(--primary-color-l);
@@ -62,7 +50,7 @@ export class Alert extends LitElement {
                 --background-color-h: var(--main-color-h);
                 --background-color-s: var(--main-color-s);
                 --background-color-l: var(--main-color-l);
-                --background-color-a: ${themeModifier(0.3, 0.4)};
+                --background-color-a: ${themeModifier(0.3, 0.3)};
             }
 
             [part="main"] {

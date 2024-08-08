@@ -20,8 +20,6 @@ const themeDark = css`
     --primary-accent-l: 96%;
     --secondary-color-l: 12%;
     --secondary-accent-l: 100%;
-    --error-color-l: 40%;
-    --success-color-l: 40%;
 
     --form-field-text-color-s: 0%;
     --form-field-text-color-l: 96%;
@@ -324,9 +322,10 @@ export const global = css`
         /* ---- Colors ---- */
 
         --default-color-h: var(--primary-color-h);
-        --default-color-s: 10%;
-        --default-color-l: 92%;
+        --default-color-s: 10;
+        --default-color-l: 92;
         --default-color-a: 1;
+        --default-color-c: 0.75;
 
         --default-accent-h: var(--primary-color-h);
         --default-accent-s: 10%;

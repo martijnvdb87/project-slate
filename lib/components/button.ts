@@ -1,7 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "@/lib/util/style";
+import {
+    mainCss,
+    varPercent,
+    varPercentContrast,
+    varSize,
+} from "@/lib/util/style";
 import { renderIcon } from "@/lib/util/icons";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
@@ -141,6 +146,25 @@ export class Button extends LitElement {
 
                 --element-outline-offset: calc(0px - var(--border-width));
 
+                --main-color-h: var(--default-color-h);
+                --main-color-s: var(--default-color-s);
+                --main-color-l: var(--default-color-l);
+                --main-color-a: var(--default-color-a);
+                --main-color-c: var(--default-color-c);
+
+                --accent-color-h: var(--main-color-h);
+                --accent-color-s: ${varPercent("main-color-s")};
+                --accent-color-l: ${varPercentContrast(
+                    "main-color-l",
+                    "main-color-c"
+                )};
+                --accent-color-a: var(--main-color-a);
+
+                --background-color-h: var(--main-color-h);
+                --background-color-s: ${varPercent("main-color-s")};
+                --background-color-l: ${varPercent("main-color-l")};
+                --background-color-a: var(--main-color-a);
+
                 width: var(--width);
                 height: var(--height);
                 min-height: var(--button-size);
@@ -160,10 +184,10 @@ export class Button extends LitElement {
                     var(--background-color-a)
                 );
                 color: hsla(
-                    var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
-                    var(--text-color-a)
+                    var(--accent-color-h),
+                    var(--accent-color-s),
+                    var(--accent-color-l),
+                    var(--accent-color-a)
                 );
                 border-width: var(--border-width);
                 border-style: solid;
@@ -234,6 +258,11 @@ export class Button extends LitElement {
                 --border-color-a: var(--primary-color-a);
 
                 --element-outline-offset: var(--outline-offset-rem);
+
+                --main-color-h: var(--primary-color-h);
+                --main-color-s: var(--primary-color-s);
+                --main-color-l: var(--primary-color-l);
+                --main-color-a: var(--primary-color-a);
             }
 
             :host([type="secondary"]) {
@@ -259,6 +288,11 @@ export class Button extends LitElement {
                 --border-color-a: var(--secondary-color-a);
 
                 --element-outline-offset: var(--outline-offset-rem);
+
+                --main-color-h: var(--secondary-color-h);
+                --main-color-s: var(--secondary-color-s);
+                --main-color-l: var(--secondary-color-l);
+                --main-color-a: var(--secondary-color-a);
             }
 
             :host([type="ghost"]) {
