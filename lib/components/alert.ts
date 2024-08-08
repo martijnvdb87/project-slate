@@ -1,7 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, themeModifier, varSize } from "../util/style";
+import {
+    mainCss,
+    varPercent,
+    varPercentContrast,
+    varSize,
+} from "../util/style";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 @customElement(`${config.prefix}-alert`)
@@ -41,16 +46,20 @@ export class Alert extends LitElement {
                 --main-color-s: var(--primary-color-s);
                 --main-color-l: var(--primary-color-l);
                 --main-color-a: var(--primary-color-a);
-
-                --accent-color-h: var(--main-color-h);
-                --accent-color-s: var(--main-color-s);
-                --accent-color-l: ${themeModifier("5%", "95%")};
-                --accent-color-a: var(--main-color-a);
+                --main-color-c: var(--primary-color-c);
 
                 --background-color-h: var(--main-color-h);
-                --background-color-s: var(--main-color-s);
-                --background-color-l: var(--main-color-l);
-                --background-color-a: ${themeModifier(0.3, 0.3)};
+                --background-color-s: ${varPercent("main-color-s")};
+                --background-color-l: ${varPercent("main-color-l")};
+                --background-color-a: 1;
+
+                --accent-color-h: var(--main-color-h);
+                --accent-color-s: ${varPercent("main-color-s")};
+                --accent-color-l: ${varPercentContrast(
+                    "main-color-l",
+                    "main-color-c"
+                )};
+                --accent-color-a: var(--main-color-a);
             }
 
             [part="main"] {
@@ -85,10 +94,6 @@ export class Alert extends LitElement {
                     var(--accent-color-l),
                     var(--accent-color-a)
                 );
-            }
-
-            [part="content"] {
-                opacity: var(--alert-content-opacity);
             }
 
             :host([size="tiny"]) {
@@ -128,6 +133,7 @@ export class Alert extends LitElement {
                 --main-color-s: var(--success-color-s);
                 --main-color-l: var(--success-color-l);
                 --main-color-a: var(--success-color-a);
+                --main-color-c: var(--success-color-c);
             }
 
             :host([type="warning"]) {
@@ -135,6 +141,7 @@ export class Alert extends LitElement {
                 --main-color-s: var(--warning-color-s);
                 --main-color-l: var(--warning-color-l);
                 --main-color-a: var(--warning-color-a);
+                --main-color-c: var(--warning-color-a);
             }
 
             :host([type="error"]) {
@@ -142,6 +149,7 @@ export class Alert extends LitElement {
                 --main-color-s: var(--error-color-s);
                 --main-color-l: var(--error-color-l);
                 --main-color-a: var(--error-color-a);
+                --main-color-c: var(--error-color-c);
             }
         `,
     ];

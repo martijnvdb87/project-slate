@@ -6,7 +6,7 @@ import {
     queryAssignedElements,
 } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
+import { mainCss, varPercent, varSize } from "../util/style";
 import { getOptions, getPart, getParts } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
@@ -269,8 +269,8 @@ export class Tabs extends LitElement {
                 border-bottom: ${varSize("form-field-border-width")} solid
                     hsla(
                         var(--form-field-border-color-h),
-                        var(--form-field-border-color-s),
-                        var(--form-field-border-color-l),
+                        ${varPercent("form-field-border-color-s")},
+                        ${varPercent("form-field-border-color-l")},
                         var(--form-field-border-color-a)
                     );
             }
@@ -297,8 +297,8 @@ export class Tabs extends LitElement {
                 font-weight: var(--form-label-font-weight);
                 color: hsla(
                     var(--form-field-label-color-h),
-                    var(--form-field-label-color-s),
-                    var(--form-field-label-color-l),
+                    ${varPercent("form-field-label-color-s")},
+                    ${varPercent("form-field-label-color-l")},
                     var(--form-field-label-color-a)
                 );
 
@@ -307,8 +307,8 @@ export class Tabs extends LitElement {
                 outline-style: solid;
                 outline-color: hsla(
                     var(--outline-color-h),
-                    var(--outline-color-s),
-                    var(--outline-color-l),
+                    ${varPercent("outline-color-s")},
+                    ${varPercent("outline-color-l")},
                     var(--outline-color-a)
                 );
                 cursor: pointer;
@@ -363,8 +363,8 @@ export class Tabs extends LitElement {
                 height: ${varSize("tabs-indicator-height")};
                 background-color: hsla(
                     var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
+                    ${varPercent("primary-color-s")},
+                    ${varPercent("primary-color-l")},
                     var(--primary-color-a)
                 );
             }
@@ -414,8 +414,8 @@ export class Tabs extends LitElement {
             :host([type="solid"]) [part="tabs"] {
                 background-color: hsla(
                     var(--tabs-solid-tab-indicator-color-h),
-                    var(--tabs-solid-tab-indicator-color-s),
-                    var(--tabs-solid-tab-indicator-color-l),
+                    ${varPercent("tabs-solid-tab-indicator-color-s")},
+                    ${varPercent("tabs-solid-tab-indicator-color-l")},
                     var(--tabs-solid-tab-indicator-color-a)
                 );
                 padding: ${varSize("tabs-solid-tab-offset")};
@@ -436,8 +436,8 @@ export class Tabs extends LitElement {
             :host([type="solid"]) [part="transition-indicator"] {
                 background-color: hsla(
                     var(--tabs-solid-tab-background-color-h),
-                    var(--tabs-solid-tab-background-color-s),
-                    var(--tabs-solid-tab-background-color-l),
+                    ${varPercent("tabs-solid-tab-background-color-s")},
+                    ${varPercent("tabs-solid-tab-background-color-l")},
                     var(--tabs-solid-tab-background-color-a)
                 );
                 border-radius: ${varSize("tabs-solid-tab-border-radius")};

@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
+import { mainCss, varPercent, varSize } from "../util/style";
 import { getPart, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { formInput } from "../styles/formInput";
@@ -330,15 +330,15 @@ export class Range extends LitElement {
                 height: var(--slider-size);
                 background: hsla(
                     var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
+                    ${varPercent("background-color-s")},
+                    ${varPercent("background-color-l")},
                     var(--background-color-a)
                 );
                 border-radius: var(--border-radius);
                 border-color: hsla(
                     var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
+                    ${varPercent("border-color-s")},
+                    ${varPercent("border-color-l")},
                     var(--border-color-a)
                 );
                 border-style: solid;
@@ -351,10 +351,19 @@ export class Range extends LitElement {
                 height: var(--slider-size);
                 background-color: hsla(
                     var(--primary-color-h),
-                    var(--primary-color-s),
+                    ${varPercent("primary-color-s")},
                     calc(
-                        var(--primary-color-l) +
+                        ${varPercent("primary-color-l")} +
                             var(--range-filled-color-l-modifier)
+                    ),
+                    1
+                );
+                background-color: hsla(
+                    var(--primary-color-h),
+                    ${varPercent("primary-color-s")},
+                    calc(
+                        ${varPercent("primary-color-l")} +
+                            ${varPercent("range-filled-color-l-modifier")}
                     ),
                     1
                 );
@@ -433,8 +442,8 @@ export class Range extends LitElement {
                 width: var(--handle-size);
                 background-color: hsla(
                     var(--primary-color-h),
-                    var(--primary-color-s),
-                    var(--primary-color-l),
+                    ${varPercent("primary-color-s")},
+                    ${varPercent("primary-color-l")},
                     var(--primary-color-a)
                 );
                 border-radius: var(--border-radius);
@@ -451,8 +460,8 @@ export class Range extends LitElement {
                 outline-style: solid;
                 outline-color: hsla(
                     var(--outline-color-h),
-                    var(--outline-color-s),
-                    var(--outline-color-l),
+                    ${varPercent("outline-color-s")},
+                    ${varPercent("outline-color-l")},
                     var(--outline-color-a)
                 );
             }

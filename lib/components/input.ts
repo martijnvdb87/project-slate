@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, sizer, varSize } from "../util/style";
+import { mainCss, sizer, varPercent, varSize } from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
@@ -274,8 +274,8 @@ export class Input extends LitElement {
                 height: var(--field-size);
                 background: hsla(
                     var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
+                    ${varPercent("background-color-s")},
+                    ${varPercent("background-color-l")},
                     var(--background-color-a)
                 );
                 border-radius: var(--border-radius);
@@ -283,8 +283,14 @@ export class Input extends LitElement {
                 border-style: solid;
                 border-color: hsla(
                     var(--validation-border-color-h, var(--border-color-h)),
-                    var(--validation-border-color-s, var(--border-color-s)),
-                    var(--validation-border-color-l, var(--border-color-l)),
+                    calc(
+                        var(--validation-border-color-s, var(--border-color-s)) *
+                            1%
+                    ),
+                    calc(
+                        var(--validation-border-color-l, var(--border-color-l)) *
+                            1%
+                    ),
                     var(--validation-border-color-a, var(--border-color-a))
                 );
 
@@ -293,8 +299,8 @@ export class Input extends LitElement {
                 outline-style: solid;
                 outline-color: hsla(
                     var(--outline-color-h),
-                    var(--outline-color-s),
-                    var(--outline-color-l),
+                    ${varPercent("outline-color-s")},
+                    ${varPercent("outline-color-l")},
                     var(--outline-color-a)
                 );
             }

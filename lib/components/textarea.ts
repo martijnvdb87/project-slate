@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "../util/style";
+import { mainCss, varPercent } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { formInput } from "../styles/formInput";
@@ -130,8 +130,8 @@ export class Textarea extends LitElement {
                 font-weight: var(--font-weight);
                 color: hsla(
                     var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
+                    ${varPercent("text-color-s")},
+                    ${varPercent("text-color-l")},
                     var(--text-color-a)
                 );
                 border: none;
@@ -141,8 +141,8 @@ export class Textarea extends LitElement {
             textarea::placeholder {
                 color: hsla(
                     var(--placeholder-color-h),
-                    var(--placeholder-color-s),
-                    var(--placeholder-color-l),
+                    ${varPercent("placeholder-color-s")},
+                    ${varPercent("placeholder-color-l")},
                     var(--placeholder-color-a)
                 );
                 font-weight: var(--placeholder-weight);
@@ -154,8 +154,8 @@ export class Textarea extends LitElement {
                 align-items: center;
                 background: hsla(
                     var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
+                    ${varPercent("background-color-s")},
+                    ${varPercent("background-color-l")},
                     var(--background-color-a)
                 );
                 border-radius: var(--border-radius);
@@ -163,8 +163,14 @@ export class Textarea extends LitElement {
                 border-style: solid;
                 border-color: hsla(
                     var(--validation-border-color-h, var(--border-color-h)),
-                    var(--validation-border-color-s, var(--border-color-s)),
-                    var(--validation-border-color-l, var(--border-color-l)),
+                    calc(
+                        var(--validation-border-color-s, var(--border-color-s)) *
+                            1%
+                    ),
+                    calc(
+                        var(--validation-border-color-l, var(--border-color-l)) *
+                            1%
+                    ),
                     var(--validation-border-color-a, var(--border-color-a))
                 );
 
@@ -173,8 +179,8 @@ export class Textarea extends LitElement {
                 outline-style: solid;
                 outline-color: hsla(
                     var(--outline-color-h),
-                    var(--outline-color-s),
-                    var(--outline-color-l),
+                    ${varPercent("outline-color-s")},
+                    ${varPercent("outline-color-l")},
                     var(--outline-color-a)
                 );
             }

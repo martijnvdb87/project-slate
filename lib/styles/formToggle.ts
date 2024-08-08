@@ -1,6 +1,6 @@
 import { css } from "lit";
 import "@/lib/assets/fonts/inter/inter.css";
-import { varSize } from "../util/style";
+import { varPercent, varSize } from "../util/style";
 
 export const formToggle = css`
     :host {
@@ -112,15 +112,15 @@ export const formToggle = css`
         border-style: solid;
         border-color: hsla(
             var(--border-color-h),
-            var(--border-color-s),
-            var(--border-color-l),
+            ${varPercent("border-color-s")},
+            ${varPercent("border-color-l")},
             var(--border-color-a)
         );
 
         background-color: hsla(
             var(--background-color-h),
-            var(--background-color-s),
-            var(--background-color-l),
+            ${varPercent("background-color-s")},
+            ${varPercent("background-color-l")},
             var(--background-color-a)
         );
 
@@ -131,8 +131,8 @@ export const formToggle = css`
         outline-style: solid;
         outline-color: hsla(
             var(--outline-color-h),
-            var(--outline-color-s),
-            var(--outline-color-l),
+            ${varPercent("outline-color-s")},
+            ${varPercent("outline-color-l")},
             var(--outline-color-a)
         );
     }
@@ -145,20 +145,20 @@ export const formToggle = css`
         border-radius: var(--card-border-radius);
         border-color: hsla(
             var(--card-border-color-h),
-            var(--card-border-color-s),
-            var(--card-border-color-l),
+            ${varPercent("card-border-color-s")},
+            ${varPercent("card-border-color-l")},
             var(--card-border-color-a)
         );
         border-color: hsla(
             var(--card-border-color-h),
-            var(--card-border-color-s),
-            var(--card-border-color-l),
+            ${varPercent("card-border-color-s")},
+            ${varPercent("card-border-color-l")},
             var(--card-border-color-a)
         );
         background-color: hsla(
             var(--card-background-color-h),
-            var(--card-background-color-s),
-            var(--card-background-color-l),
+            ${varPercent("card-background-color-s")},
+            ${varPercent("card-background-color-l")},
             var(--card-background-color-a)
         );
         padding: var(--card-padding-y) var(--card-padding-x);
@@ -167,8 +167,8 @@ export const formToggle = css`
         outline-style: solid;
         outline-color: hsla(
             var(--card-outline-color-h),
-            var(--card-outline-color-s),
-            var(--card-outline-color-l),
+            ${varPercent("card-outline-color-s")},
+            ${varPercent("card-outline-color-l")},
             var(--card-outline-color-a)
         );
     }
@@ -181,8 +181,8 @@ export const formToggle = css`
         gap: ${varSize("form-toggle-row-gap")};
         color: hsla(
             var(--form-field-label-color-h),
-            var(--form-field-label-color-s),
-            var(--form-field-label-color-l),
+            ${varPercent("form-field-label-color-s")},
+            ${varPercent("form-field-label-color-l")},
             var(--form-field-label-color-a)
         );
         padding: calc(
@@ -201,8 +201,8 @@ export const formToggle = css`
     ::slotted([slot="description"]) {
         color: hsla(
             var(--text-color-h),
-            var(--text-color-s),
-            var(--text-color-l),
+            ${varPercent("text-color-s")},
+            ${varPercent("text-color-l")},
             var(--text-color-a)
         );
         margin-bottom: var(--margin-bottom);

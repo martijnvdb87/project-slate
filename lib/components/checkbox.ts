@@ -1,7 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
+import {
+    mainCss,
+    varPercent,
+    varPercentContrast,
+    varSize,
+} from "../util/style";
 import { renderIcon } from "../util/icons";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
@@ -102,10 +107,13 @@ export class Checkbox extends LitElement {
         formToggle,
         css`
             :host {
-                --icon-color-h: var(--checkbox-icon-color-h);
-                --icon-color-s: var(--checkbox-icon-color-s);
-                --icon-color-l: var(--checkbox-icon-color-l);
-                --icon-color-a: var(--checkbox-icon-color-a);
+                --icon-color-h: var(--primary-color-h);
+                --icon-color-s: ${varPercent("primary-color-s")};
+                --icon-color-l: ${varPercentContrast(
+                    "primary-color-l",
+                    "primary-color-c"
+                )};
+                --icon-color-a: var(--primary-color-a);
 
                 --icon-color: hsla(
                     var(--icon-color-h),

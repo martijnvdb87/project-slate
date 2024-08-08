@@ -59,9 +59,9 @@ export function varPercentContrast(
     const negativeRest = `(min(100 - ${value}, ${value}))`;
 
     return unsafeCSS(`calc((
-        ${isHighValue} * ${isPositiveContrast} * (${positiveRest} - ${positiveRest} * ${normalizedContrast}) +
-        ${isHighValue} * ${isNegativeContrast} * (${negativeRest} * ${normalizedContrast} + ${positiveRest}) +
-        ${isLowValue} * ${isPositiveContrast} * (${positiveRest} * ${normalizedContrast} + ${negativeRest}) +
-        ${isLowValue} * ${isNegativeContrast} * (${negativeRest} - ${negativeRest} * ${normalizedContrast})
-    ) * 1${unit})`);
+    ${isHighValue} * ${isPositiveContrast} * (${positiveRest} - ${positiveRest} * ${normalizedContrast}) +
+    ${isHighValue} * ${isNegativeContrast} * (${negativeRest} * ${normalizedContrast} + ${positiveRest}) +
+    ${isLowValue} * ${isPositiveContrast} * (${positiveRest} * ${normalizedContrast} + ${negativeRest}) +
+    ${isLowValue} * ${isNegativeContrast} * (${negativeRest} - ${negativeRest} * ${normalizedContrast})
+) * 1${unit})`);
 }

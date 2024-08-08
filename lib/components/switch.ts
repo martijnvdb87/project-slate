@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss, varSize } from "../util/style";
+import { mainCss, varPercent, varSize } from "../util/style";
 import { getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { formToggle } from "../styles/formToggle";
@@ -135,8 +135,8 @@ export class Switch extends LitElement {
 
                 background-color: hsla(
                     var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
+                    ${varPercent("background-color-s")},
+                    ${varPercent("background-color-l")},
                     var(--background-color-a)
                 );
                 transition: background-color 160ms ease;
@@ -151,8 +151,8 @@ export class Switch extends LitElement {
                 border-radius: 999rem;
                 background-color: hsla(
                     var(--handle-color-h),
-                    var(--handle-color-s),
-                    var(--handle-color-l),
+                    ${varPercent("handle-color-s")},
+                    ${varPercent("handle-color-l")},
                     var(--handle-color-a)
                 );
                 transition: left 160ms ease;

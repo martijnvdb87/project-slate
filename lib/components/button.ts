@@ -104,26 +104,11 @@ export class Button extends LitElement {
                 vertical-align: bottom;
 
                 --display: inline-flex;
-                --icon-color: hsl(
-                    var(--default-accent-h),
-                    var(--default-accent-s),
-                    var(--default-accent-l)
-                );
                 --icon-size: ${varSize("button-icon-size")};
 
                 --width: auto;
                 --height: auto;
                 --button-size: var(--base-size-rem);
-
-                --background-color-h: var(--default-color-h);
-                --background-color-s: var(--default-color-s);
-                --background-color-l: var(--default-color-l);
-                --background-color-a: var(--default-color-a);
-
-                --text-color-h: var(--default-accent-h);
-                --text-color-s: var(--default-accent-s);
-                --text-color-l: var(--default-accent-l);
-                --text-color-a: var(--default-accent-a);
 
                 --padding-x: ${varSize("button-padding-x")};
                 --padding-y: ${varSize("button-padding-y")};
@@ -134,14 +119,9 @@ export class Button extends LitElement {
                 --border-radius: ${varSize("form-field-border-radius", true)};
                 --border-width: 0px;
 
-                --border-color-h: var(--default-color-h);
-                --border-color-s: var(--default-color-s);
-                --border-color-l: var(--default-color-l);
-                --border-color-a: var(--default-color-a);
-
                 --outline-color-h: var(--primary-color-h);
-                --outline-color-s: var(--primary-color-s);
-                --outline-color-l: var(--primary-color-l);
+                --outline-color-s: ${varPercent("primary-color-s")};
+                --outline-color-l: ${varPercent("primary-color-l")};
                 --outline-color-a: 0;
 
                 --element-outline-offset: calc(0px - var(--border-width));
@@ -160,10 +140,22 @@ export class Button extends LitElement {
                 )};
                 --accent-color-a: var(--main-color-a);
 
+                --icon-color: hsla(
+                    var(--accent-color-h),
+                    var(--accent-color-s),
+                    var(--accent-color-l),
+                    var(--accent-color-a)
+                );
+
                 --background-color-h: var(--main-color-h);
                 --background-color-s: ${varPercent("main-color-s")};
                 --background-color-l: ${varPercent("main-color-l")};
                 --background-color-a: var(--main-color-a);
+
+                --border-color-h: var(--main-color-h);
+                --border-color-s: ${varPercent("main-color-s")};
+                --border-color-l: ${varPercent("main-color-l")};
+                --border-color-a: var(--main-color-a);
 
                 width: var(--width);
                 height: var(--height);
@@ -236,63 +228,23 @@ export class Button extends LitElement {
             }
 
             :host([type="primary"]) {
-                --icon-color: hsla(
-                    var(--primary-accent-h),
-                    var(--primary-accent-s),
-                    var(--primary-accent-l),
-                    var(--primary-accent-a)
-                );
-                --background-color-h: var(--primary-color-h);
-                --background-color-s: var(--primary-color-s);
-                --background-color-l: var(--primary-color-l);
-                --background-color-a: var(--primary-color-a);
-
-                --text-color-h: var(--primary-accent-h);
-                --text-color-s: var(--primary-accent-s);
-                --text-color-l: var(--primary-accent-l);
-                --text-color-a: var(--primary-accent-a);
-
-                --border-color-h: var(--primary-color-h);
-                --border-color-s: var(--primary-color-s);
-                --border-color-l: var(--primary-color-l);
-                --border-color-a: var(--primary-color-a);
-
                 --element-outline-offset: var(--outline-offset-rem);
 
                 --main-color-h: var(--primary-color-h);
                 --main-color-s: var(--primary-color-s);
                 --main-color-l: var(--primary-color-l);
                 --main-color-a: var(--primary-color-a);
+                --main-color-c: var(--primary-color-c);
             }
 
             :host([type="secondary"]) {
-                --icon-color: hsla(
-                    var(--secondary-accent-h),
-                    var(--secondary-accent-s),
-                    var(--secondary-accent-l),
-                    var(--secondary-accent-a)
-                );
-                --background-color-h: var(--secondary-color-h);
-                --background-color-s: var(--secondary-color-s);
-                --background-color-l: var(--secondary-color-l);
-                --background-color-a: var(--secondary-color-a);
-
-                --text-color-h: var(--secondary-accent-h);
-                --text-color-s: var(--secondary-accent-s);
-                --text-color-l: var(--secondary-accent-l);
-                --text-color-a: var(--secondary-accent-a);
-
-                --border-color-h: var(--secondary-color-h);
-                --border-color-s: var(--secondary-color-s);
-                --border-color-l: var(--secondary-color-l);
-                --border-color-a: var(--secondary-color-a);
-
                 --element-outline-offset: var(--outline-offset-rem);
 
                 --main-color-h: var(--secondary-color-h);
                 --main-color-s: var(--secondary-color-s);
                 --main-color-l: var(--secondary-color-l);
                 --main-color-a: var(--secondary-color-a);
+                --main-color-c: var(--secondary-color-c);
             }
 
             :host([type="ghost"]) {

@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { config } from "@/lib/config";
-import { mainCss } from "../util/style";
+import { mainCss, varPercent } from "../util/style";
 import { getOptions, getRandomId } from "../util/general";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { renderIcon } from "../util/icons";
@@ -145,8 +145,8 @@ export class SelectNative extends LitElement {
                 font-weight: var(--font-weight);
                 color: hsla(
                     var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
+                    ${varPercent("text-color-s")},
+                    ${varPercent("text-color-l")},
                     var(--text-color-a)
                 );
                 border: none;
@@ -156,8 +156,8 @@ export class SelectNative extends LitElement {
             input::placeholder {
                 color: hsla(
                     var(--placeholder-color-h),
-                    var(--placeholder-color-s),
-                    var(--placeholder-color-l),
+                    ${varPercent("placeholder-color-s")},
+                    ${varPercent("placeholder-color-l")},
                     var(--placeholder-color-a)
                 );
                 font-weight: var(--placeholder-weight);
@@ -170,8 +170,8 @@ export class SelectNative extends LitElement {
                 height: var(--field-size);
                 background: hsla(
                     var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
+                    ${varPercent("background-color-s")},
+                    ${varPercent("background-color-l")},
                     var(--background-color-a)
                 );
                 border-radius: var(--border-radius);
@@ -179,8 +179,8 @@ export class SelectNative extends LitElement {
                 border-style: solid;
                 border-color: hsla(
                     var(--border-color-h),
-                    var(--border-color-s),
-                    var(--border-color-l),
+                    ${varPercent("border-color-s")},
+                    ${varPercent("border-color-l")},
                     var(--border-color-a)
                 );
 
@@ -189,8 +189,8 @@ export class SelectNative extends LitElement {
                 outline-style: solid;
                 outline-color: hsla(
                     var(--outline-color-h),
-                    var(--outline-color-s),
-                    var(--outline-color-l),
+                    ${varPercent("outline-color-s")},
+                    ${varPercent("outline-color-l")},
                     var(--outline-color-a)
                 );
             }
@@ -206,8 +206,8 @@ export class SelectNative extends LitElement {
                 border-radius: var(--border-radius);
                 background-color: hsla(
                     var(--background-color-h),
-                    var(--background-color-s),
-                    var(--background-color-l),
+                    ${varPercent("background-color-s")},
+                    ${varPercent("background-color-l")},
                     var(--background-color-a)
                 );
                 overflow: hidden;
@@ -224,8 +224,8 @@ export class SelectNative extends LitElement {
                 font-weight: var(--font-weight);
                 color: hsla(
                     var(--text-color-h),
-                    var(--text-color-s),
-                    var(--text-color-l),
+                    ${varPercent("text-color-s")},
+                    ${varPercent("text-color-l")},
                     var(--text-color-a)
                 );
             }

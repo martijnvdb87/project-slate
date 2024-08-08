@@ -1,42 +1,42 @@
 import { css } from "lit";
-import { size } from "../util/style";
+import { size, varPercent } from "../util/style";
 
 const themeDark = css`
     --global-light-mode: 0;
     --global-dark-mode: 1;
-    --main-background-color-s: 0%;
-    --main-background-color-l: 10%;
+    --main-background-color-s: 0;
+    --main-background-color-l: 10;
 
-    --text-color-s: 0%;
-    --text-color-l: 80%;
+    --text-color-s: 0;
+    --text-color-l: 80;
 
-    --default-color-s: 0%;
-    --default-color-l: 22%;
+    --default-color-s: 0;
+    --default-color-l: 22;
 
-    --default-accent-s: 0%;
-    --default-accent-l: 96%;
+    --default-accent-s: 0;
+    --default-accent-l: 96;
 
-    --primary-color-l: 38%;
-    --primary-accent-l: 96%;
-    --secondary-color-l: 12%;
-    --secondary-accent-l: 100%;
+    --primary-color-l: 38;
+    --primary-accent-l: 96;
+    --secondary-color-l: 12;
+    --secondary-accent-l: 100;
 
-    --form-field-text-color-s: 0%;
-    --form-field-text-color-l: 96%;
+    --form-field-text-color-s: 0;
+    --form-field-text-color-l: 96;
 
-    --form-field-icon-color-s: 0%;
-    --form-field-icon-color-l: 46%;
+    --form-field-icon-color-s: 0;
+    --form-field-icon-color-l: 46;
 
-    --form-field-background-color-s: 0%;
-    --form-field-background-color-l: 12%;
+    --form-field-background-color-s: 0;
+    --form-field-background-color-l: 12;
 
-    --form-field-label-colorsl: 0%;
-    --form-field-label-color-l: 100%;
+    --form-field-label-colorsl: 0;
+    --form-field-label-color-l: 100;
 
-    --form-field-border-color-s: 0%;
-    --form-field-border-color-l: 36%;
+    --form-field-border-color-s: 0;
+    --form-field-border-color-l: 36;
 
-    --range-filled-color-l-modifier: -10%;
+    --range-filled-color-l-modifier: -10;
 
     --form-field-checkbox-icon-color-h: var(--primary-accent-h);
     --form-field-checkbox-icon-color-s: var(--main-background-color-s);
@@ -110,34 +110,34 @@ export const global = css`
         --form-field-font-weight: 400;
 
         --form-field-text-color-h: var(--primary-color-h);
-        --form-field-text-color-s: 10%;
-        --form-field-text-color-l: 16%;
+        --form-field-text-color-s: 10;
+        --form-field-text-color-l: 16;
         --form-field-text-color-a: 1;
 
         --form-field-icon-color-h: var(--primary-color-h);
-        --form-field-icon-color-s: 10%;
-        --form-field-icon-color-l: 46%;
+        --form-field-icon-color-s: 10;
+        --form-field-icon-color-l: 46;
         --form-field-icon-color-a: 1;
 
         --form-field-background-color-h: var(--primary-color-h);
-        --form-field-background-color-s: 10%;
-        --form-field-background-color-l: 100%;
+        --form-field-background-color-s: 10;
+        --form-field-background-color-l: 100;
         --form-field-background-color-a: 1;
 
         --form-field-placeholder-color-h: var(--primary-color-h);
-        --form-field-placeholder-color-s: 10%;
-        --form-field-placeholder-color-l: 46%;
+        --form-field-placeholder-color-s: 10;
+        --form-field-placeholder-color-l: 46;
         --form-field-placeholder-color-a: 0.75;
         --form-field-placeholder-weight: 350;
 
         --form-field-label-color-h: var(--primary-color-h);
-        --form-field-label-color-s: 10%;
-        --form-field-label-color-l: 4%;
+        --form-field-label-color-s: 10;
+        --form-field-label-color-l: 4;
         --form-field-label-color-a: 1;
 
         --form-field-border-color-h: var(--primary-color-h);
-        --form-field-border-color-s: 10%;
-        --form-field-border-color-l: 82%;
+        --form-field-border-color-s: 10;
+        --form-field-border-color-l: 82;
         --form-field-border-color-a: 1;
 
         --form-field-validation-message-font-weight: 350;
@@ -170,7 +170,7 @@ export const global = css`
         --range-padding-x: 0;
         --range-padding-y: 4;
         --range-outline-offset: 3;
-        --range-filled-color-l-modifier: 15%;
+        --range-filled-color-l-modifier: 15;
 
         /* ---- Form toggle ---- */
         --form-toggle-size: 22;
@@ -184,10 +184,6 @@ export const global = css`
         --form-toggle-card-border-radius: var(--global-border-radius);
 
         /* ---- Checkbox ---- */
-        --checkbox-icon-color-h: var(--primary-accent-h);
-        --checkbox-icon-color-s: var(--primary-accent-s);
-        --checkbox-icon-color-l: var(--primary-accent-l);
-        --checkbox-icon-color-a: var(--primary-accent-a);
         --checkbox-icon-size: 22;
 
         /* ---- Radio ---- */
@@ -262,57 +258,16 @@ export const global = css`
         --alert-padding-y: 12;
         --alert-padding-y: 12;
         --alert-row-gap: 2;
-        --alert-content-opacity: 0.75;
-
-        --alert-info-accent-h: 206;
-        --alert-info-accent-s: 84%;
-        --alert-info-accent-l: 15%;
-        --alert-info-accent-a: 1;
-
-        --alert-info-color-h: 206;
-        --alert-info-color-s: 84%;
-        --alert-info-color-l: 90%;
-        --alert-info-color-a: 1;
-
-        --alert-success-accent-h: 106;
-        --alert-success-accent-s: 45%;
-        --alert-success-accent-l: 15%;
-        --alert-success-accent-a: 1;
-
-        --alert-success-color-h: 106;
-        --alert-success-color-s: 45%;
-        --alert-success-color-l: 85%;
-        --alert-success-color-a: 1;
-
-        --alert-warning-accent-h: 36;
-        --alert-warning-accent-s: 70%;
-        --alert-warning-accent-l: 20%;
-        --alert-warning-accent-a: 1;
-
-        --alert-warning-color-h: 36;
-        --alert-warning-color-s: 70%;
-        --alert-warning-color-l: 87%;
-        --alert-warning-color-a: 1;
-
-        --alert-error-accent-h: 0;
-        --alert-error-accent-s: 55%;
-        --alert-error-accent-l: 20%;
-        --alert-error-accent-a: 1;
-
-        --alert-error-color-h: 0;
-        --alert-error-color-s: 55%;
-        --alert-error-color-l: 87%;
-        --alert-error-color-a: 1;
 
         --main-background-color-h: 0;
-        --main-background-color-s: 50%;
-        --main-background-color-l: 100%;
+        --main-background-color-s: 50;
+        --main-background-color-l: 100;
 
         --element-font-weight: 550;
 
         --text-color-h: 0;
-        --text-color-s: 10%;
-        --text-color-l: 25%;
+        --text-color-s: 10;
+        --text-color-l: 25;
         --text-color-a: 1;
 
         --text-line-height: 1.5;
@@ -327,45 +282,35 @@ export const global = css`
         --default-color-a: 1;
         --default-color-c: 0.75;
 
-        --default-accent-h: var(--primary-color-h);
-        --default-accent-s: 10%;
-        --default-accent-l: 15%;
-        --default-accent-a: 1;
-
         --primary-color-h: 206;
-        --primary-color-s: 84%;
-        --primary-color-l: 51%;
+        --primary-color-s: 84;
+        --primary-color-l: 48;
         --primary-color-a: 1;
-
-        --primary-accent-h: var(--primary-color-h);
-        --primary-accent-s: 84%;
-        --primary-accent-l: 100%;
-        --primary-accent-a: 1;
+        --primary-color-c: 1;
 
         --secondary-color-h: 220;
-        --secondary-color-s: 10%;
-        --secondary-color-l: 32%;
+        --secondary-color-s: 10;
+        --secondary-color-l: 32;
         --secondary-color-a: 1;
-
-        --secondary-accent-h: var(--secondary-color-h);
-        --secondary-accent-s: 10%;
-        --secondary-accent-l: 100%;
-        --secondary-accent-a: 1;
+        --secondary-color-c: 1;
 
         --error-color-h: 0;
-        --error-color-s: 71%;
-        --error-color-l: 55%;
+        --error-color-s: 71;
+        --error-color-l: 48;
         --error-color-a: 1;
+        --error-color-c: 1;
 
         --warning-color-h: 36;
-        --warning-color-s: 70%;
-        --warning-color-l: 55%;
+        --warning-color-s: 70;
+        --warning-color-l: 48;
         --warning-color-a: 1;
+        --warning-color-c: 1;
 
         --success-color-h: 106;
-        --success-color-s: 45%;
-        --success-color-l: 55%;
+        --success-color-s: 45;
+        --success-color-l: 48;
         --success-color-a: 1;
+        --success-color-c: 1;
 
         --form-label-font-size: ${size(14)};
 
@@ -375,14 +320,14 @@ export const global = css`
     ds-app {
         background-color: hsl(
             var(--main-background-color-h),
-            var(--main-background-color-s),
-            var(--main-background-color-l)
+            ${varPercent("main-background-color-s")},
+            ${varPercent("main-background-color-l")}
         );
 
         color: hsla(
             var(--text-color-h),
-            var(--text-color-s),
-            var(--text-color-l),
+            ${varPercent("text-color-s")},
+            ${varPercent("text-color-l")},
             var(--text-color-a)
         );
 
@@ -392,22 +337,22 @@ export const global = css`
     ds-app a {
         color: hsla(
             var(--primary-color-h),
-            var(--primary-color-s),
-            var(--primary-color-l),
+            ${varPercent("primary-color-s")},
+            ${varPercent("primary-color-l")},
             var(--primary-color-a)
         );
     }
 
     ds-app hr {
         margin: ${size(24)} 0;
-        width: 100%;
+        width: 100;
         height: 1px;
         border: none;
 
         background-color: hsla(
             var(--form-field-border-color-h),
-            var(--form-field-border-color-s),
-            var(--form-field-border-color-l),
+            ${varPercent("form-field-border-color-s")},
+            ${varPercent("form-field-border-color-l")},
             var(--form-field-border-color-a)
         );
     }
